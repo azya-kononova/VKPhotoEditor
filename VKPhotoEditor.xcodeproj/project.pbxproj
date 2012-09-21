@@ -1,0 +1,305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
+		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
+		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
+		22D7BF62160CCC33008B5BFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF60160CCC33008B5BFA /* InfoPlist.strings */; };
+		22D7BF64160CCC33008B5BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF63160CCC33008B5BFA /* main.m */; };
+		22D7BF6A160CCC33008B5BFA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF69160CCC33008B5BFA /* Default.png */; };
+		22D7BF6C160CCC33008B5BFA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF6B160CCC33008B5BFA /* Default@2x.png */; };
+		22D7BF6E160CCC33008B5BFA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF6D160CCC33008B5BFA /* Default-568h@2x.png */; };
+		22D7BF86160CCCAD008B5BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */; };
+		22D7BF92160CCD2B008B5BFA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF91160CCD2B008B5BFA /* MainWindow.xib */; };
+		22D7BF96160CCDD5008B5BFA /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF94160CCDD5008B5BFA /* StartViewController.m */; };
+		22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF95160CCDD5008B5BFA /* StartViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		22D7BF5F160CCC33008B5BFA /* VKPhotoEditor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VKPhotoEditor-Info.plist"; sourceTree = "<group>"; };
+		22D7BF61160CCC33008B5BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		22D7BF63160CCC33008B5BFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		22D7BF65160CCC33008B5BFA /* VKPhotoEditor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKPhotoEditor-Prefix.pch"; sourceTree = "<group>"; };
+		22D7BF69160CCC33008B5BFA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		22D7BF6B160CCC33008B5BFA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		22D7BF6D160CCC33008B5BFA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		22D7BF7C160CCCAD008B5BFA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		22D7BF91160CCD2B008B5BFA /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		22D7BF93160CCDD5008B5BFA /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		22D7BF94160CCDD5008B5BFA /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+		22D7BF95160CCDD5008B5BFA /* StartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		22D7BF50160CCC33008B5BFA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */,
+				22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */,
+				22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		22D7BF48160CCC33008B5BFA = {
+			isa = PBXGroup;
+			children = (
+				22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */,
+				22D7BF56160CCC33008B5BFA /* Frameworks */,
+				22D7BF54160CCC33008B5BFA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		22D7BF54160CCC33008B5BFA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		22D7BF56160CCC33008B5BFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				22D7BF57160CCC33008B5BFA /* UIKit.framework */,
+				22D7BF59160CCC33008B5BFA /* Foundation.framework */,
+				22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */ = {
+			isa = PBXGroup;
+			children = (
+				22D7BF98160CCDDD008B5BFA /* Controller */,
+				22D7BF7C160CCCAD008B5BFA /* AppDelegate.h */,
+				22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */,
+				22D7BF5E160CCC33008B5BFA /* Supporting Files */,
+			);
+			path = VKPhotoEditor;
+			sourceTree = "<group>";
+		};
+		22D7BF5E160CCC33008B5BFA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				22D7BF5F160CCC33008B5BFA /* VKPhotoEditor-Info.plist */,
+				22D7BF60160CCC33008B5BFA /* InfoPlist.strings */,
+				22D7BF63160CCC33008B5BFA /* main.m */,
+				22D7BF65160CCC33008B5BFA /* VKPhotoEditor-Prefix.pch */,
+				22D7BF69160CCC33008B5BFA /* Default.png */,
+				22D7BF6B160CCC33008B5BFA /* Default@2x.png */,
+				22D7BF6D160CCC33008B5BFA /* Default-568h@2x.png */,
+				22D7BF91160CCD2B008B5BFA /* MainWindow.xib */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		22D7BF98160CCDDD008B5BFA /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				22D7BF93160CCDD5008B5BFA /* StartViewController.h */,
+				22D7BF94160CCDD5008B5BFA /* StartViewController.m */,
+				22D7BF95160CCDD5008B5BFA /* StartViewController.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		22D7BF52160CCC33008B5BFA /* VKPhotoEditor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "VKPhotoEditor" */;
+			buildPhases = (
+				22D7BF4F160CCC33008B5BFA /* Sources */,
+				22D7BF50160CCC33008B5BFA /* Frameworks */,
+				22D7BF51160CCC33008B5BFA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VKPhotoEditor;
+			productName = VKPhotoEditor;
+			productReference = 22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		22D7BF4A160CCC33008B5BFA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = GirlsWhoDeveloping;
+			};
+			buildConfigurationList = 22D7BF4D160CCC33008B5BFA /* Build configuration list for PBXProject "VKPhotoEditor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 22D7BF48160CCC33008B5BFA;
+			productRefGroup = 22D7BF54160CCC33008B5BFA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				22D7BF52160CCC33008B5BFA /* VKPhotoEditor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		22D7BF51160CCC33008B5BFA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D7BF62160CCC33008B5BFA /* InfoPlist.strings in Resources */,
+				22D7BF6A160CCC33008B5BFA /* Default.png in Resources */,
+				22D7BF6C160CCC33008B5BFA /* Default@2x.png in Resources */,
+				22D7BF6E160CCC33008B5BFA /* Default-568h@2x.png in Resources */,
+				22D7BF92160CCD2B008B5BFA /* MainWindow.xib in Resources */,
+				22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		22D7BF4F160CCC33008B5BFA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22D7BF64160CCC33008B5BFA /* main.m in Sources */,
+				22D7BF86160CCCAD008B5BFA /* AppDelegate.m in Sources */,
+				22D7BF96160CCDD5008B5BFA /* StartViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		22D7BF60160CCC33008B5BFA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22D7BF61160CCC33008B5BFA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		22D7BF6F160CCC34008B5BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		22D7BF70160CCC34008B5BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		22D7BF72160CCC34008B5BFA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VKPhotoEditor/VKPhotoEditor-Prefix.pch";
+				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		22D7BF73160CCC34008B5BFA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "VKPhotoEditor/VKPhotoEditor-Prefix.pch";
+				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		22D7BF4D160CCC33008B5BFA /* Build configuration list for PBXProject "VKPhotoEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D7BF6F160CCC34008B5BFA /* Debug */,
+				22D7BF70160CCC34008B5BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "VKPhotoEditor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				22D7BF72160CCC34008B5BFA /* Debug */,
+				22D7BF73160CCC34008B5BFA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 22D7BF4A160CCC33008B5BFA /* Project object */;
+}
