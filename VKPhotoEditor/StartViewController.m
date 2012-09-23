@@ -33,6 +33,7 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBar.hidden = YES;
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackGround.png"]];
     
     takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
     cameraRollBtn.bgImagecaps = CGSizeMake(20, 20);
