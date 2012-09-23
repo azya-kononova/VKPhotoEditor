@@ -1,9 +1,9 @@
 //
 //  ThumbnailView.m
-//  FeedReader
+//  VKPhotoEditor
 //
-//  Created by Sergey Martynov on 29.11.11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Created by Ekaterina Petrova on 9/23/12.
+//  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
 #import "ThumbnailsView.h"
@@ -11,16 +11,10 @@
 
 @interface ThumbnailsView () <UIScrollViewDelegate>
 @property (nonatomic, strong, readonly) UIScrollView *scroll;
-
-- (void)centerizeContent:(BOOL)centerize contentWidth:(CGFloat)contentWidth;
 @end
 
 @implementation ThumbnailsView {
     NSMutableArray *views;
-    struct {
-        unsigned int delegateRespondsToDidScroll : 1;
-        unsigned int delegateRespondsToDidTap : 1;
-    } flags;
     UITapGestureRecognizer *tapRecognizer;
     CGFloat thumbnailHeight;
     CGFloat thumbnailWidth;
@@ -29,38 +23,33 @@
 @synthesize dataSource;
 @synthesize margin;
 @synthesize displayedItemIndex;
-@synthesize enablePaging;
-@synthesize clip;
-@synthesize useManualScroll;
 @synthesize delegate;
-@synthesize shouldCenterizeContent;
-@synthesize borderColor;
-@synthesize borderWidth;
+@synthesize highlightBorderColor;
+@synthesize highlightBorderWidth;
+@synthesize highlightShadowColor;
+@synthesize highlightShadowRadius;
+@synthesize highlightShadowOffset;
+@synthesize thumbConrnerRadius;
 
 - (void)_init
 {
     margin = 10;
-    borderColor = [UIColor whiteColor];
-    borderWidth = 4.0f;
-    enablePaging = NO;
-    clip = YES;
+    highlightBorderColor = [UIColor whiteColor];
+    highlightBorderWidth = 3.0f;
+    highlightShadowColor = [UIColor colorWithRed:230./255 green:230./255 blue:230./255 alpha:1];
+    highlightShadowRadius = 3.0;
+    highlightShadowOffset = CGSizeMake(0,0);
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
-}
-
-- (void)setDelegate:(id<ThumbnailsViewDelegate>)_delegate
-{
-    delegate = _delegate;
-    flags.delegateRespondsToDidScroll = [delegate respondsToSelector:@selector(thumbnailsView:didScrollToItemWithIndex:)];
-    flags.delegateRespondsToDidTap = [delegate respondsToSelector:@selector(thumbnailsView:didTapOnItemWithIndex:)];
 }
 
 - (void)didTapOnView
 {
-    if (flags.delegateRespondsToDidTap) {
-        NSInteger index = [tapRecognizer locationInView:_scroll].x / (thumbnailWidth + margin);
-        if (index > views.count - 1) return;
-        [delegate thumbnailsView:self didTapOnItemWithIndex:index];
-    }
+    NSInteger index = [tapRecognizer locationInView:_scroll].x / (thumbnailWidth + margin);
+    if (index > views.count - 1) return;
+    [delegate thumbnailsView:self didTapOnItemWithIndex:index];
+    [self setView:[views objectAtIndex:displayedItemIndex] highlighted:NO];
+    displayedItemIndex = index;
+    [self setView:[views objectAtIndex:displayedItemIndex] highlighted:YES];
 }
 
 - (UIScrollView*)scroll
@@ -72,8 +61,8 @@
         _scroll.frame = self.bounds;
         _scroll.showsHorizontalScrollIndicator = NO;
         _scroll.showsVerticalScrollIndicator = NO;
-        _scroll.pagingEnabled = enablePaging;
-        _scroll.clipsToBounds = clip;
+        _scroll.pagingEnabled = NO;
+        _scroll.clipsToBounds = YES;
         _scroll.delegate = self;
         [_scroll addGestureRecognizer:tapRecognizer];
         [self addSubview:_scroll];
@@ -94,75 +83,42 @@
     self.scroll.contentOffset = CGPointZero;
     
     NSMutableArray *arr = [NSMutableArray new];
-    
     for (NSUInteger i = 0; i < count; ++i) {
-        UIView *thumb = [dataSource thumbnailsView:self viewForItemWithIndex:i];
-        
         CGRect frame = CGRectMake(margin + (thumbnailWidth + margin) * i, margin, thumbnailWidth, thumbnailHeight);
-        thumb.frame = frame;
-       
-        thumb.layer.masksToBounds = NO;
-        thumb.layer.borderColor = borderColor.CGColor;
-        thumb.layer.borderWidth = borderWidth;
-        thumb.layer.shadowColor = [UIColor colorWithRed:230./255 green:230./255 blue:230./255 alpha:1].CGColor;
-        thumb.layer.ShadowOpacity = 1;
-        thumb.layer.ShadowRadius = 4.0;
-        thumb.layer.ShadowOffset = CGSizeMake(0,0);
-
-        [self.scroll addSubview:thumb];        
+        UIView *thumb = [dataSource thumbnailsView:self viewForItemWithIndex:i];
+        thumb.layer.masksToBounds = YES;
+        thumb.layer.cornerRadius = thumbConrnerRadius;
         
-        [arr addObject:thumb];
+        UIView* containerView = [[UIView alloc] initWithFrame:frame];
+        thumb.frame = containerView.bounds;
+        [containerView addSubview:thumb];
+        
+        if (i ==  displayedItemIndex) [self setView:containerView highlighted:YES];
+
+        [self.scroll addSubview:containerView];
+        [arr addObject:containerView];
     }
-    
-    views = [arr copy];
+    views = arr.copy;
     
     CGFloat contentWidth = margin + (thumbnailWidth + margin) * count;
-    [self centerizeContent:shouldCenterizeContent contentWidth:contentWidth];
-    
-    [self displayItemAtIndex:displayedItemIndex animated:NO];
+    self.scroll.frame = self.bounds;
+    self.scroll.contentSize = CGSizeMake(fmaxf(self.bounds.size.width + 1, contentWidth), self.bounds.size.height);
 }
 
-- (void)displayItemAtIndex:(NSUInteger)index animated:(BOOL)animated
+- (void)setView:(UIView*)containerView highlighted:(BOOL)highlighted
 {
-    if (index >= views.count) return;
-    
-    CGRect scrollFrame = self.scroll.frame;
-    CGRect itemFrame = [[views objectAtIndex:index] frame];
-    
-    CGFloat contentOffsetX = CGRectGetMidX(itemFrame) - CGRectGetMidX(scrollFrame);
-    CGFloat maxOffset = self.scroll.contentSize.width - scrollFrame.size.width;
-    contentOffsetX = fmaxf(0, fminf(maxOffset, contentOffsetX));
-    
-    [self.scroll setContentOffset:CGPointMake(contentOffsetX, 0) animated:animated];
-    displayedItemIndex = index;
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    if (useManualScroll) {
-        NSUInteger index = scrollView.contentOffset.x / CGRectGetWidth(scrollView.frame);
-        [self displayItemAtIndex:index animated:NO];
-        if (flags.delegateRespondsToDidScroll) {
-            [delegate thumbnailsView:self didScrollToItemWithIndex:displayedItemIndex];
-        }
-    }
-}
-
-- (void)centerizeContent:(BOOL)centerize contentWidth:(CGFloat)contentWidth
-{
-    if (centerize && CGRectGetWidth(self.frame) > contentWidth) {
-        CGRect scrollFrame = self.scroll.frame;
-        scrollFrame.size.width = contentWidth;
-        scrollFrame.origin.x = (CGRectGetWidth(self.frame) - CGRectGetWidth(scrollFrame)) / 2.0;
-        self.scroll.frame = scrollFrame;
+    UIView *contentView = [containerView.subviews objectAtIndex:0];
+    if (highlighted) {
+        contentView.layer.borderColor = highlightBorderColor.CGColor;
+        contentView.layer.borderWidth = highlightBorderWidth;
+        containerView.layer.shadowColor = highlightShadowColor.CGColor;
+        containerView.layer.shadowRadius = highlightShadowRadius;
+        containerView.layer.shadowOffset = highlightShadowOffset;
+        containerView.layer.shadowOpacity = 1;
         
-        self.scroll.contentSize = CGSizeMake(self.scroll.bounds.size.width + 1, self.bounds.size.height);
-        self.scroll.clipsToBounds = NO;
-    }
-    else {
-        self.scroll.frame = self.bounds;
-        self.scroll.contentSize = CGSizeMake(fmaxf(self.bounds.size.width + 1, contentWidth), self.bounds.size.height);
-        self.scroll.clipsToBounds = clip;
+    } else {
+        contentView.layer.borderWidth = 0;
+        containerView.layer.shadowRadius = 0;
     }
 }
 
