@@ -16,7 +16,7 @@
 @end
 
 @implementation StartViewController {
-    NSMutableArray *albumImages;
+    NSMutableArray *assets;
     IBOutlet ThumbnailsView *gallery;
     IBOutlet UIActivityIndicatorView *activityIndicator;
 }
@@ -35,21 +35,19 @@
     [activityIndicator startAnimating];
     
     ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-    albumImages = [NSMutableArray array];
+    assets = [NSMutableArray array];
     
-    [library enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
+    [library enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stopGroup) {
          [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
              if (asset) {
-                 UIImage *image = [UIImage imageWithCGImage:[asset thumbnail]];
-                 [albumImages addObject:[[UIImageView alloc] initWithImage:image]];
+                 [assets addObject:asset];
              }
              
-             if (*stop) {
-                 albumImages = [NSMutableArray arrayWithArray:[[albumImages reverseObjectEnumerator] allObjects]];
+             if (*stop || index == NSNotFound) {
+                 assets = [NSMutableArray arrayWithArray:[[assets reverseObjectEnumerator] allObjects]];
                  [gallery reloadData];
                  [activityIndicator stopAnimating];
              }
-             
           }];
      } failureBlock:^(NSError *error) {
          NSLog(@"Can not get images from Photo Library.");
@@ -74,12 +72,14 @@
 
 - (NSUInteger)numberOfItemsInThumbnailsView:(ThumbnailsView*)view
 {
-    return albumImages.count;
+    return assets.count;
 }
 
 - (UIView*)thumbnailsView:(ThumbnailsView*)view viewForItemWithIndex:(NSUInteger)index
 {
-    return [albumImages objectAtIndex:index];
+    UIImage *image = [UIImage imageWithCGImage:[[assets objectAtIndex:index] thumbnail]];
+    
+    return [[UIImageView alloc] initWithImage:image];
 }
 
 - (CGFloat)thumbnailsView:(ThumbnailsView*)view thumbnailWidthForHeight:(CGFloat)height
