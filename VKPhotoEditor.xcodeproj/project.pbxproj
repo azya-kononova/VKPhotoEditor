@@ -109,6 +109,9 @@
 		22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */; };
 		8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */; };
 		8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */; };
+		8B9B4E51160F5055000BE08F /* PhotoEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4D160F5055000BE08F /* PhotoEditController.m */; };
+		8B9B4E52160F5055000BE08F /* PhotoEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */; };
+		8B9B4E53160F5055000BE08F /* UIColor+VKPhotoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -223,6 +226,11 @@
 		8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Creation.m"; sourceTree = "<group>"; };
 		8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleButton.h; sourceTree = "<group>"; };
 		8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleButton.m; sourceTree = "<group>"; };
+		8B9B4E4C160F5055000BE08F /* PhotoEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEditController.h; sourceTree = "<group>"; };
+		8B9B4E4D160F5055000BE08F /* PhotoEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoEditController.m; sourceTree = "<group>"; };
+		8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditController.xib; sourceTree = "<group>"; };
+		8B9B4E4F160F5055000BE08F /* UIColor+VKPhotoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+VKPhotoEditor.h"; sourceTree = "<group>"; };
+		8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+VKPhotoEditor.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +255,8 @@
 				8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */,
 				220B399E160EFE5A0010F257 /* Filters.h */,
 				220B399F160EFE5A0010F257 /* Filters.m */,
+				8B9B4E4F160F5055000BE08F /* UIColor+VKPhotoEditor.h */,
+				8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -403,6 +413,9 @@
 		22D7BF98160CCDDD008B5BFA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8B9B4E4C160F5055000BE08F /* PhotoEditController.h */,
+				8B9B4E4D160F5055000BE08F /* PhotoEditController.m */,
+				8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */,
 				22D7BF93160CCDD5008B5BFA /* StartViewController.h */,
 				22D7BF94160CCDD5008B5BFA /* StartViewController.m */,
 				22D7BF95160CCDD5008B5BFA /* StartViewController.xib */,
@@ -563,6 +576,7 @@
 				226E75B4160F012D00531350 /* ShootBtn@2x.png in Resources */,
 				226E75BF160F02FA00531350 /* Main_screen_separator.png in Resources */,
 				226E75C0160F02FA00531350 /* Main_screen_separator@2x.png in Resources */,
+				8B9B4E52160F5055000BE08F /* PhotoEditController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,6 +594,8 @@
 				220B39A0160EFE5A0010F257 /* Filters.m in Sources */,
 				8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */,
 				8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */,
+				8B9B4E51160F5055000BE08F /* PhotoEditController.m in Sources */,
+				8B9B4E53160F5055000BE08F /* UIColor+VKPhotoEditor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
