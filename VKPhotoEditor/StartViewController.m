@@ -10,9 +10,10 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ThumbnailsView.h"
 #import "FlexibleButton.h"
+#import "CameraOverlayView.h"
+#import "UIView+NIB.h"
 
-
-@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate>
+@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)cameraRoll:(id)sender;
 @end
@@ -35,6 +36,8 @@
     
     takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
     cameraRollBtn.bgImagecaps = CGSizeMake(20, 20);
+    
+    takePhotoBtn.hidden = ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
     
     [self loadAlbumImages];
 }
@@ -68,12 +71,29 @@
 
 - (IBAction)takePhoto:(id)sender
 {
+    UIImagePickerController *imagePicker = [UIImagePickerController new];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.showsCameraControls = NO;
+    imagePicker.wantsFullScreenLayout = YES;
+    imagePicker.allowsEditing = NO;
+    imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
     
+    CameraOverlayView *overlayView = [CameraOverlayView loadFromNIB];
+    overlayView.picker = imagePicker;
+    imagePicker.cameraOverlayView = overlayView;
+    
+    CGFloat cameraTransformX = 1.25;
+    CGFloat cameraTransformY = 1.25;
+    
+    imagePicker.cameraViewTransform = CGAffineTransformScale(imagePicker.cameraViewTransform, cameraTransformX, cameraTransformY);
+    
+    [self presentModalViewController:imagePicker animated:NO];
 }
 
 - (IBAction)cameraRoll:(id)sender
 {        
-    
+    //TODO: open Edit Photo screen
 }
 
 
@@ -101,7 +121,21 @@
 
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    NSLog(@"Tap on image num.%d", index);
+    //TODO: open Edit Photo screen
+}
+
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        //TODO: open Edit Photo screen
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissModalViewControllerAnimated:NO];
 }
 
 @end
