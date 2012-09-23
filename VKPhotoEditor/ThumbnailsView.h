@@ -16,6 +16,10 @@
 @property (nonatomic, assign) IBOutlet id<ThumbnailsViewDataSource> dataSource;
 @property (nonatomic, assign) CGFloat margin;
 
+@property (nonatomic, strong) UIColor *shadowColor;
+@property (nonatomic, assign) CGFloat shadowRadius;
+@property (nonatomic, assign) CGSize shadowOffset;
+
 @property (nonatomic, strong) UIColor *highlightBorderColor;
 @property (nonatomic, assign) CGFloat highlightBorderWidth;
 @property (nonatomic, strong) UIColor *highlightShadowColor;

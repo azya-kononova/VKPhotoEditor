@@ -21,9 +21,13 @@
 }
 @synthesize scroll = _scroll;
 @synthesize dataSource;
+@synthesize delegate;
 @synthesize margin;
 @synthesize displayedItemIndex;
-@synthesize delegate;
+
+@synthesize shadowColor;
+@synthesize shadowRadius;
+@synthesize shadowOffset;
 @synthesize highlightBorderColor;
 @synthesize highlightBorderWidth;
 @synthesize highlightShadowColor;
@@ -35,10 +39,11 @@
 {
     margin = 10;
     highlightBorderColor = [UIColor whiteColor];
-    highlightBorderWidth = 3.0f;
+    highlightBorderWidth = 2.75f;
     highlightShadowColor = [UIColor colorWithRed:230./255 green:230./255 blue:230./255 alpha:1];
     highlightShadowRadius = 3.0;
-    highlightShadowOffset = CGSizeMake(0,0);
+    shadowColor = [UIColor blackColor];
+    shadowRadius = 2.0;
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
 }
 
@@ -92,8 +97,9 @@
         UIView* containerView = [[UIView alloc] initWithFrame:frame];
         thumb.frame = containerView.bounds;
         [containerView addSubview:thumb];
+        containerView.layer.shadowOpacity = 1;
         
-        if (i ==  displayedItemIndex) [self setView:containerView highlighted:YES];
+        [self setView:containerView highlighted:(i ==  displayedItemIndex)];
 
         [self.scroll addSubview:containerView];
         [arr addObject:containerView];
@@ -114,11 +120,12 @@
         containerView.layer.shadowColor = highlightShadowColor.CGColor;
         containerView.layer.shadowRadius = highlightShadowRadius;
         containerView.layer.shadowOffset = highlightShadowOffset;
-        containerView.layer.shadowOpacity = 1;
         
     } else {
         contentView.layer.borderWidth = 0;
-        containerView.layer.shadowRadius = 0;
+        containerView.layer.shadowColor = shadowColor.CGColor;
+        containerView.layer.shadowRadius = shadowRadius;
+        containerView.layer.shadowOffset = shadowOffset;
     }
 }
 
