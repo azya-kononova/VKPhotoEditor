@@ -9,16 +9,22 @@
 #import "StartViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ThumbnailsView.h"
+#import "FlexibleButton.h"
+
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate>
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)cameraRoll:(id)sender;
 @end
 
+
 @implementation StartViewController {
     NSMutableArray *assets;
+    
     IBOutlet ThumbnailsView *gallery;
     IBOutlet UIActivityIndicatorView *activityIndicator;
+    IBOutlet FlexibleButton *takePhotoBtn;
+    IBOutlet FlexibleButton *cameraRollBtn;
 }
 
 - (void)viewDidLoad
@@ -26,6 +32,9 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBar.hidden = YES;
+    
+    takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
+    cameraRollBtn.bgImagecaps = CGSizeMake(20, 20);
     
     [self loadAlbumImages];
 }
