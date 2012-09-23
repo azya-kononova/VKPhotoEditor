@@ -19,6 +19,7 @@
 		22D7BF92160CCD2B008B5BFA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF91160CCD2B008B5BFA /* MainWindow.xib */; };
 		22D7BF96160CCDD5008B5BFA /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF94160CCDD5008B5BFA /* StartViewController.m */; };
 		22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF95160CCDD5008B5BFA /* StartViewController.xib */; };
+		22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,8 @@
 		22D7BF93160CCDD5008B5BFA /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		22D7BF94160CCDD5008B5BFA /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		22D7BF95160CCDD5008B5BFA /* StartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
+		22D7BFA3160EF652008B5BFA /* ThumbnailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailsView.h; sourceTree = "<group>"; };
+		22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailsView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,7 @@
 		22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				22D7BFA1160EF628008B5BFA /* View */,
 				22D7BF98160CCDDD008B5BFA /* Controller */,
 				22D7BF7C160CCCAD008B5BFA /* AppDelegate.h */,
 				22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */,
@@ -116,6 +120,15 @@
 				22D7BF95160CCDD5008B5BFA /* StartViewController.xib */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		22D7BFA1160EF628008B5BFA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				22D7BFA3160EF652008B5BFA /* ThumbnailsView.h */,
+				22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +201,7 @@
 				22D7BF64160CCC33008B5BFA /* main.m in Sources */,
 				22D7BF86160CCCAD008B5BFA /* AppDelegate.m in Sources */,
 				22D7BF96160CCDD5008B5BFA /* StartViewController.m in Sources */,
+				22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
