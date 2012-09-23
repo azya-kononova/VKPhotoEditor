@@ -105,6 +105,7 @@
 		22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF95160CCDD5008B5BFA /* StartViewController.xib */; };
 		22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */; };
 		8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */; };
+		8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -214,6 +215,8 @@
 		22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailsView.m; sourceTree = "<group>"; };
 		8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Creation.h"; sourceTree = "<group>"; };
 		8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Creation.m"; sourceTree = "<group>"; };
+		8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleButton.h; sourceTree = "<group>"; };
+		8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -400,6 +403,8 @@
 		22D7BFA1160EF628008B5BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */,
+				8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */,
 				22D7BFA3160EF652008B5BFA /* ThumbnailsView.h */,
 				22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */,
 			);
@@ -562,6 +567,7 @@
 				22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */,
 				220B39A0160EFE5A0010F257 /* Filters.m in Sources */,
 				8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */,
+				8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
