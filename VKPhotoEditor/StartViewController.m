@@ -86,15 +86,18 @@
     
     CGFloat cameraTransformX = 1.25;
     CGFloat cameraTransformY = 1.25;
-    
     imagePicker.cameraViewTransform = CGAffineTransformScale(imagePicker.cameraViewTransform, cameraTransformX, cameraTransformY);
     
-    [self presentModalViewController:imagePicker animated:NO];
+    [self presentModalViewController:imagePicker animated:YES];
 }
 
 - (IBAction)cameraRoll:(id)sender
 {        
-    //TODO: open Edit Photo screen
+    UIImagePickerController *imagePicker = [UIImagePickerController new];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentModalViewController:imagePicker animated:NO];
 }
 
 
@@ -130,13 +133,14 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self dismissModalViewControllerAnimated:NO];
+        //UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
         //TODO: open Edit Photo screen
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissModalViewControllerAnimated:NO];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
