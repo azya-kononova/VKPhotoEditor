@@ -91,6 +91,9 @@
 		226E75B2160F012D00531350 /* SaveBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E758C160F012D00531350 /* SaveBtn@2x.png */; };
 		226E75B3160F012D00531350 /* ShootBtn_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E758D160F012D00531350 /* ShootBtn_Pressed@2x.png */; };
 		226E75B4160F012D00531350 /* ShootBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E758E160F012D00531350 /* ShootBtn@2x.png */; };
+		226E75BF160F02FA00531350 /* Main_screen_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E75BD160F02FA00531350 /* Main_screen_separator.png */; };
+		226E75C0160F02FA00531350 /* Main_screen_separator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */; };
+		226E75EE160F1DC700531350 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226E75ED160F1DC700531350 /* AssetsLibrary.framework */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -194,6 +197,9 @@
 		226E758C160F012D00531350 /* SaveBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SaveBtn@2x.png"; sourceTree = "<group>"; };
 		226E758D160F012D00531350 /* ShootBtn_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShootBtn_Pressed@2x.png"; sourceTree = "<group>"; };
 		226E758E160F012D00531350 /* ShootBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShootBtn@2x.png"; sourceTree = "<group>"; };
+		226E75BD160F02FA00531350 /* Main_screen_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Main_screen_separator.png; sourceTree = "<group>"; };
+		226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Main_screen_separator@2x.png"; sourceTree = "<group>"; };
+		226E75ED160F1DC700531350 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -224,6 +230,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				226E75EE160F1DC700531350 /* AssetsLibrary.framework in Frameworks */,
 				22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */,
 				22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */,
 				22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */,
@@ -247,6 +254,8 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				226E75BD160F02FA00531350 /* Main_screen_separator.png */,
+				226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */,
 				226E7569160F012D00531350 /* ActionBtn_Active@2x.png */,
 				226E756A160F012D00531350 /* ActionBtn_Pressed@2x.png */,
 				226E756B160F012D00531350 /* ActionBtn@2x.png */,
@@ -337,6 +346,7 @@
 		22D7BF48160CCC33008B5BFA = {
 			isa = PBXGroup;
 			children = (
+				226E75ED160F1DC700531350 /* AssetsLibrary.framework */,
 				22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */,
 				22D7BF56160CCC33008B5BFA /* Frameworks */,
 				22D7BF54160CCC33008B5BFA /* Products */,
@@ -551,6 +561,8 @@
 				226E75B2160F012D00531350 /* SaveBtn@2x.png in Resources */,
 				226E75B3160F012D00531350 /* ShootBtn_Pressed@2x.png in Resources */,
 				226E75B4160F012D00531350 /* ShootBtn@2x.png in Resources */,
+				226E75BF160F02FA00531350 /* Main_screen_separator.png in Resources */,
+				226E75C0160F02FA00531350 /* Main_screen_separator@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
