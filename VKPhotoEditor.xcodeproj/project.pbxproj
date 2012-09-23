@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220B39A0160EFE5A0010F257 /* Filters.m in Sources */ = {isa = PBXBuildFile; fileRef = 220B399F160EFE5A0010F257 /* Filters.m */; };
+		226E750E160EFF0F00531350 /* Basic.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7505160EFF0F00531350 /* Basic.png */; };
+		226E750F160EFF0F00531350 /* Filter1.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7506160EFF0F00531350 /* Filter1.png */; };
+		226E7510160EFF0F00531350 /* Filter2.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7507160EFF0F00531350 /* Filter2.png */; };
+		226E7511160EFF0F00531350 /* Filter3.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7508160EFF0F00531350 /* Filter3.png */; };
+		226E7512160EFF0F00531350 /* Filter4.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7509160EFF0F00531350 /* Filter4.png */; };
+		226E7513160EFF0F00531350 /* Filter5.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E750A160EFF0F00531350 /* Filter5.png */; };
+		226E7514160EFF0F00531350 /* Filter6.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E750B160EFF0F00531350 /* Filter6.png */; };
+		226E7515160EFF0F00531350 /* Filter7.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E750C160EFF0F00531350 /* Filter7.png */; };
+		226E7516160EFF0F00531350 /* Filter8.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E750D160EFF0F00531350 /* Filter8.png */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -23,6 +33,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		220B399E160EFE5A0010F257 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
+		220B399F160EFE5A0010F257 /* Filters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filters.m; sourceTree = "<group>"; };
+		226E7505160EFF0F00531350 /* Basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Basic.png; sourceTree = "<group>"; };
+		226E7506160EFF0F00531350 /* Filter1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter1.png; sourceTree = "<group>"; };
+		226E7507160EFF0F00531350 /* Filter2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter2.png; sourceTree = "<group>"; };
+		226E7508160EFF0F00531350 /* Filter3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter3.png; sourceTree = "<group>"; };
+		226E7509160EFF0F00531350 /* Filter4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter4.png; sourceTree = "<group>"; };
+		226E750A160EFF0F00531350 /* Filter5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter5.png; sourceTree = "<group>"; };
+		226E750B160EFF0F00531350 /* Filter6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter6.png; sourceTree = "<group>"; };
+		226E750C160EFF0F00531350 /* Filter7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter7.png; sourceTree = "<group>"; };
+		226E750D160EFF0F00531350 /* Filter8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter8.png; sourceTree = "<group>"; };
 		22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -58,6 +79,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		220B399C160EFE480010F257 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				220B399E160EFE5A0010F257 /* Filters.h */,
+				220B399F160EFE5A0010F257 /* Filters.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		226E7504160EFF0F00531350 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				226E7505160EFF0F00531350 /* Basic.png */,
+				226E7506160EFF0F00531350 /* Filter1.png */,
+				226E7507160EFF0F00531350 /* Filter2.png */,
+				226E7508160EFF0F00531350 /* Filter3.png */,
+				226E7509160EFF0F00531350 /* Filter4.png */,
+				226E750A160EFF0F00531350 /* Filter5.png */,
+				226E750B160EFF0F00531350 /* Filter6.png */,
+				226E750C160EFF0F00531350 /* Filter7.png */,
+				226E750D160EFF0F00531350 /* Filter8.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		22D7BF48160CCC33008B5BFA = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +134,8 @@
 		22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				226E7504160EFF0F00531350 /* Resources */,
+				220B399C160EFE480010F257 /* Model */,
 				22D7BFA1160EF628008B5BFA /* View */,
 				22D7BF98160CCDDD008B5BFA /* Controller */,
 				22D7BF7C160CCCAD008B5BFA /* AppDelegate.h */,
@@ -188,6 +236,15 @@
 				22D7BF6E160CCC33008B5BFA /* Default-568h@2x.png in Resources */,
 				22D7BF92160CCD2B008B5BFA /* MainWindow.xib in Resources */,
 				22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */,
+				226E750E160EFF0F00531350 /* Basic.png in Resources */,
+				226E750F160EFF0F00531350 /* Filter1.png in Resources */,
+				226E7510160EFF0F00531350 /* Filter2.png in Resources */,
+				226E7511160EFF0F00531350 /* Filter3.png in Resources */,
+				226E7512160EFF0F00531350 /* Filter4.png in Resources */,
+				226E7513160EFF0F00531350 /* Filter5.png in Resources */,
+				226E7514160EFF0F00531350 /* Filter6.png in Resources */,
+				226E7515160EFF0F00531350 /* Filter7.png in Resources */,
+				226E7516160EFF0F00531350 /* Filter8.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +259,7 @@
 				22D7BF86160CCCAD008B5BFA /* AppDelegate.m in Sources */,
 				22D7BF96160CCDD5008B5BFA /* StartViewController.m in Sources */,
 				22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */,
+				220B39A0160EFE5A0010F257 /* Filters.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
