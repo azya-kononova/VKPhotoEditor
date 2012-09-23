@@ -12,5 +12,6 @@ build/*
 !default.xcworkspace
 xcuserdata
 profile
+DerivedData/
 *.moved-aside
 *.DS_Store
