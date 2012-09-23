@@ -12,6 +12,7 @@
 #import "FlexibleButton.h"
 #import "CameraOverlayView.h"
 #import "UIView+NIB.h"
+#import "UIColor+VKPhotoEditor.h"
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 - (IBAction)takePhoto:(id)sender;
@@ -33,7 +34,7 @@
     [super viewDidLoad];
     
     self.navigationController.navigationBar.hidden = YES;
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"BackGround.png"]];
+    self.view.backgroundColor = [UIColor defaultBgColor];
     
     takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
     cameraRollBtn.bgImagecaps = CGSizeMake(20, 20);
