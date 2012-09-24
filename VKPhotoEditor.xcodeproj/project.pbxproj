@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		220B39A0160EFE5A0010F257 /* Filters.m in Sources */ = {isa = PBXBuildFile; fileRef = 220B399F160EFE5A0010F257 /* Filters.m */; };
+		221C31C516103E2C005974C8 /* TableViewPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31C316103E2C005974C8 /* TableViewPopover.m */; };
+		221C31C616103E2C005974C8 /* TableViewPopover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C31C416103E2C005974C8 /* TableViewPopover.xib */; };
+		221C31CC16103E59005974C8 /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31CA16103E59005974C8 /* UIView+Helpers.m */; };
+		221C31CF16104243005974C8 /* UITableViewCell+NIB.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31CE16104243005974C8 /* UITableViewCell+NIB.m */; };
+		221C31D1161045C2005974C8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 221C31D0161045C2005974C8 /* QuartzCore.framework */; };
+		221C31D516104640005974C8 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31D416104640005974C8 /* TriangleView.m */; };
+		221C31D816104711005974C8 /* TablePopoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31D716104710005974C8 /* TablePopoverCell.m */; };
+		221C31DB16104754005974C8 /* TablePopoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C31DA16104754005974C8 /* TablePopoverCell.xib */; };
 		226E750E160EFF0F00531350 /* Basic.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7505160EFF0F00531350 /* Basic.png */; };
 		226E750F160EFF0F00531350 /* Filter1.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7506160EFF0F00531350 /* Filter1.png */; };
 		226E7510160EFF0F00531350 /* Filter2.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7507160EFF0F00531350 /* Filter2.png */; };
@@ -120,6 +128,19 @@
 /* Begin PBXFileReference section */
 		220B399E160EFE5A0010F257 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		220B399F160EFE5A0010F257 /* Filters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filters.m; sourceTree = "<group>"; };
+		221C31C216103E2C005974C8 /* TableViewPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewPopover.h; sourceTree = "<group>"; };
+		221C31C316103E2C005974C8 /* TableViewPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewPopover.m; sourceTree = "<group>"; };
+		221C31C416103E2C005974C8 /* TableViewPopover.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewPopover.xib; sourceTree = "<group>"; };
+		221C31C916103E59005974C8 /* UIView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helpers.h"; sourceTree = "<group>"; };
+		221C31CA16103E59005974C8 /* UIView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helpers.m"; sourceTree = "<group>"; };
+		221C31CD16104243005974C8 /* UITableViewCell+NIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+NIB.h"; sourceTree = "<group>"; };
+		221C31CE16104243005974C8 /* UITableViewCell+NIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+NIB.m"; sourceTree = "<group>"; };
+		221C31D0161045C2005974C8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		221C31D316104640005974C8 /* TriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TriangleView.h; sourceTree = "<group>"; };
+		221C31D416104640005974C8 /* TriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TriangleView.m; sourceTree = "<group>"; };
+		221C31D616104710005974C8 /* TablePopoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TablePopoverCell.h; sourceTree = "<group>"; };
+		221C31D716104710005974C8 /* TablePopoverCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TablePopoverCell.m; sourceTree = "<group>"; };
+		221C31DA16104754005974C8 /* TablePopoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TablePopoverCell.xib; sourceTree = "<group>"; };
 		226E7505160EFF0F00531350 /* Basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Basic.png; sourceTree = "<group>"; };
 		226E7506160EFF0F00531350 /* Filter1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter1.png; sourceTree = "<group>"; };
 		226E7507160EFF0F00531350 /* Filter2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter2.png; sourceTree = "<group>"; };
@@ -246,6 +267,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				221C31D1161045C2005974C8 /* QuartzCore.framework in Frameworks */,
 				226E75EE160F1DC700531350 /* AssetsLibrary.framework in Frameworks */,
 				22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */,
 				22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */,
@@ -259,14 +281,37 @@
 		220B399C160EFE480010F257 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */,
-				8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */,
 				220B399E160EFE5A0010F257 /* Filters.h */,
 				220B399F160EFE5A0010F257 /* Filters.m */,
-				8B9B4E4F160F5055000BE08F /* UIColor+VKPhotoEditor.h */,
-				8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		221C31D2161045DC005974C8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */,
+				8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */,
+				8B9B4E4F160F5055000BE08F /* UIColor+VKPhotoEditor.h */,
+				8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */,
+				221C31CD16104243005974C8 /* UITableViewCell+NIB.h */,
+				221C31CE16104243005974C8 /* UITableViewCell+NIB.m */,
+				221C31C916103E59005974C8 /* UIView+Helpers.h */,
+				221C31CA16103E59005974C8 /* UIView+Helpers.m */,
+				22E51F13160F4E8E00299D42 /* UIView+NIB.h */,
+				22E51F14160F4E8E00299D42 /* UIView+NIB.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		221C31D916104732005974C8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				221C31D616104710005974C8 /* TablePopoverCell.h */,
+				221C31D716104710005974C8 /* TablePopoverCell.m */,
+				221C31DA16104754005974C8 /* TablePopoverCell.xib */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		226E7504160EFF0F00531350 /* Resources */ = {
@@ -364,7 +409,6 @@
 		22D7BF48160CCC33008B5BFA = {
 			isa = PBXGroup;
 			children = (
-				226E75ED160F1DC700531350 /* AssetsLibrary.framework */,
 				22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */,
 				22D7BF56160CCC33008B5BFA /* Frameworks */,
 				22D7BF54160CCC33008B5BFA /* Products */,
@@ -382,6 +426,8 @@
 		22D7BF56160CCC33008B5BFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				221C31D0161045C2005974C8 /* QuartzCore.framework */,
+				226E75ED160F1DC700531350 /* AssetsLibrary.framework */,
 				22D7BF57160CCC33008B5BFA /* UIKit.framework */,
 				22D7BF59160CCC33008B5BFA /* Foundation.framework */,
 				22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */,
@@ -392,6 +438,7 @@
 		22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */ = {
 			isa = PBXGroup;
 			children = (
+				221C31D2161045DC005974C8 /* Utils */,
 				226E7504160EFF0F00531350 /* Resources */,
 				220B399C160EFE480010F257 /* Model */,
 				22D7BFA1160EF628008B5BFA /* View */,
@@ -434,8 +481,12 @@
 		22D7BFA1160EF628008B5BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				22E51F13160F4E8E00299D42 /* UIView+NIB.h */,
-				22E51F14160F4E8E00299D42 /* UIView+NIB.m */,
+				221C31D916104732005974C8 /* Cell */,
+				221C31D316104640005974C8 /* TriangleView.h */,
+				221C31D416104640005974C8 /* TriangleView.m */,
+				221C31C216103E2C005974C8 /* TableViewPopover.h */,
+				221C31C316103E2C005974C8 /* TableViewPopover.m */,
+				221C31C416103E2C005974C8 /* TableViewPopover.xib */,
 				8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */,
 				8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */,
 				22D7BFA3160EF652008B5BFA /* ThumbnailsView.h */,
@@ -591,6 +642,8 @@
 				226E75C0160F02FA00531350 /* Main_screen_separator@2x.png in Resources */,
 				8B9B4E52160F5055000BE08F /* PhotoEditController.xib in Resources */,
 				22E51F12160F4A6C00299D42 /* CameraOverlayView.xib in Resources */,
+				221C31C616103E2C005974C8 /* TableViewPopover.xib in Resources */,
+				221C31DB16104754005974C8 /* TablePopoverCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -612,6 +665,11 @@
 				8B9B4E53160F5055000BE08F /* UIColor+VKPhotoEditor.m in Sources */,
 				22E51F08160F3A8700299D42 /* CameraOverlayView.m in Sources */,
 				22E51F15160F4E8E00299D42 /* UIView+NIB.m in Sources */,
+				221C31C516103E2C005974C8 /* TableViewPopover.m in Sources */,
+				221C31CC16103E59005974C8 /* UIView+Helpers.m in Sources */,
+				221C31CF16104243005974C8 /* UITableViewCell+NIB.m in Sources */,
+				221C31D516104640005974C8 /* TriangleView.m in Sources */,
+				221C31D816104711005974C8 /* TablePopoverCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
