@@ -14,4 +14,5 @@
 @property (nonatomic, strong) IBOutlet FlexibleButton *retakeButton;
 @property (nonatomic, strong) IBOutlet FlexibleButton *captionButton;
 @property (nonatomic, strong) IBOutlet ThumbnailsView *filterView;
+- (IBAction)addCaption;
 @end
