@@ -29,6 +29,13 @@
     fontSegmentView.bgImageSelected = [[UIImage imageNamed:@"FontTab_Active"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
 
     [fontSegmentView addItems:[NSArray arrayWithObjects:@"Aa", @"Aa", @"Aa", @"Aa",  @"Aa",  @"Aa", nil]];
+    [fontSegmentView setFont:[UIFont fontWithName:@"Freehand521 BT" size:17.0] forSegmentAtIndex:0];
+    [fontSegmentView setFont:[UIFont fontWithName:@"Ballpark" size:17.0] forSegmentAtIndex:1];
+    [fontSegmentView setFont:[UIFont fontWithName:@"Lobster 1.4" size:17.0] forSegmentAtIndex:2];
+    [fontSegmentView setFont:[UIFont fontWithName:@"CollegiateHeavyOutline" size:17.0] forSegmentAtIndex:3];
+    [fontSegmentView setFont:[UIFont fontWithName:@"Complete in Him" size:20.0] forSegmentAtIndex:4];
+    [fontSegmentView setFont:[UIFont fontWithName:@"Helvetica" size:17.0] forSegmentAtIndex:5];
+    
     fontSegmentView.selectedSegmentIndex = 0;
 }
 

@@ -128,6 +128,12 @@
 		8B9B4E84160F6342000BE08F /* CustomSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E83160F6341000BE08F /* CustomSegmentView.m */; };
 		8B9B4E8B160F6428000BE08F /* CustomSegmentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */; };
 		8BDF18741610C6AB00507B5F /* FlexibleTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF18731610C6AB00507B5F /* FlexibleTextField.m */; };
+		8BDF18A41611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */; };
+		8BDF18A51611A67B00507B5F /* Complete_in_Him.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189F1611A67B00507B5F /* Complete_in_Him.ttf */; };
+		8BDF18A61611A67B00507B5F /* Helvetica.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF18A01611A67B00507B5F /* Helvetica.ttf */; };
+		8BDF18A71611A67B00507B5F /* Lobster_1.4.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF18A11611A67B00507B5F /* Lobster_1.4.otf */; };
+		8BDF18A81611A67B00507B5F /* tt1018m_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF18A21611A67B00507B5F /* tt1018m_.ttf */; };
+		8BDF18AC1611AAD400507B5F /* ballw_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF18AB1611AAD400507B5F /* ballw_.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -274,6 +280,12 @@
 		8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentButton.m; sourceTree = "<group>"; };
 		8BDF18721610C6AB00507B5F /* FlexibleTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleTextField.h; sourceTree = "<group>"; };
 		8BDF18731610C6AB00507B5F /* FlexibleTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleTextField.m; sourceTree = "<group>"; };
+		8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = collegiateHeavyOutline_Medium.ttf; sourceTree = "<group>"; };
+		8BDF189F1611A67B00507B5F /* Complete_in_Him.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Complete_in_Him.ttf; sourceTree = "<group>"; };
+		8BDF18A01611A67B00507B5F /* Helvetica.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Helvetica.ttf; sourceTree = "<group>"; };
+		8BDF18A11611A67B00507B5F /* Lobster_1.4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster_1.4.otf; sourceTree = "<group>"; };
+		8BDF18A21611A67B00507B5F /* tt1018m_.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tt1018m_.ttf; sourceTree = "<group>"; };
+		8BDF18AB1611AAD400507B5F /* ballw_.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ballw_.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -331,6 +343,7 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8BDF189C1611A67B00507B5F /* fonts */,
 				226E75BD160F02FA00531350 /* Main_screen_separator.png */,
 				226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */,
 				226E7569160F012D00531350 /* ActionBtn_Active@2x.png */,
@@ -521,6 +534,19 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		8BDF189C1611A67B00507B5F /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8BDF18AB1611AAD400507B5F /* ballw_.ttf */,
+				8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */,
+				8BDF189F1611A67B00507B5F /* Complete_in_Him.ttf */,
+				8BDF18A01611A67B00507B5F /* Helvetica.ttf */,
+				8BDF18A11611A67B00507B5F /* Lobster_1.4.otf */,
+				8BDF18A21611A67B00507B5F /* tt1018m_.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -668,6 +694,12 @@
 				221C31C616103E2C005974C8 /* TableViewPopover.xib in Resources */,
 				221C31DB16104754005974C8 /* TablePopoverCell.xib in Resources */,
 				8B9B4E5F160F5B31000BE08F /* CaptionView.xib in Resources */,
+				8BDF18A41611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf in Resources */,
+				8BDF18A51611A67B00507B5F /* Complete_in_Him.ttf in Resources */,
+				8BDF18A61611A67B00507B5F /* Helvetica.ttf in Resources */,
+				8BDF18A71611A67B00507B5F /* Lobster_1.4.otf in Resources */,
+				8BDF18A81611A67B00507B5F /* tt1018m_.ttf in Resources */,
+				8BDF18AC1611AAD400507B5F /* ballw_.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

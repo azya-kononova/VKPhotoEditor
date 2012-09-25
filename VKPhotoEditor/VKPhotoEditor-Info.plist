@@ -36,6 +36,14 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Lobster_1.4.otf</string>
+		<string>collegiateHeavyOutline_Medium.ttf</string>
+		<string>Complete_in_Him.ttf</string>
+		<string>tt1018m_.ttf</string>
+		<string>ballw_.ttf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
