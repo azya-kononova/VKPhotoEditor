@@ -24,7 +24,7 @@
 {
     if (!CGSizeEqualToSize(bgImagecaps, CGSizeZero)) {
         if (!images) images = [NSMutableDictionary new];
-        UIControlState states[] = { UIControlStateNormal, UIControlStateHighlighted, UIControlStateDisabled };
+        UIControlState states[] = { UIControlStateNormal, UIControlStateHighlighted, UIControlStateSelected, UIControlStateDisabled, UIControlStateHighlighted|UIControlStateSelected };
         for (int i = 0; i < sizeof(states) / sizeof(states[0]); ++i) {
             UIControlState state = states[i];
             UIImage *image = [self backgroundImageForState:state];
