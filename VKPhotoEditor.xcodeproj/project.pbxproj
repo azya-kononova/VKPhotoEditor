@@ -123,6 +123,8 @@
 		8B9B4E51160F5055000BE08F /* PhotoEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4D160F5055000BE08F /* PhotoEditController.m */; };
 		8B9B4E52160F5055000BE08F /* PhotoEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */; };
 		8B9B4E53160F5055000BE08F /* UIColor+VKPhotoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */; };
+		8B9B4E84160F6342000BE08F /* CustomSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E83160F6341000BE08F /* CustomSegmentView.m */; };
+		8B9B4E8B160F6428000BE08F /* CustomSegmentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -260,6 +262,10 @@
 		8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditController.xib; sourceTree = "<group>"; };
 		8B9B4E4F160F5055000BE08F /* UIColor+VKPhotoEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+VKPhotoEditor.h"; sourceTree = "<group>"; };
 		8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+VKPhotoEditor.m"; sourceTree = "<group>"; };
+		8B9B4E82160F6340000BE08F /* CustomSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentView.h; sourceTree = "<group>"; };
+		8B9B4E83160F6341000BE08F /* CustomSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentView.m; sourceTree = "<group>"; };
+		8B9B4E89160F6426000BE08F /* CustomSegmentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentButton.h; sourceTree = "<group>"; };
+		8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -494,6 +500,10 @@
 				22E51F06160F3A8700299D42 /* CameraOverlayView.h */,
 				22E51F07160F3A8700299D42 /* CameraOverlayView.m */,
 				22E51F11160F4A6C00299D42 /* CameraOverlayView.xib */,
+				8B9B4E89160F6426000BE08F /* CustomSegmentButton.h */,
+				8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */,
+				8B9B4E82160F6340000BE08F /* CustomSegmentView.h */,
+				8B9B4E83160F6341000BE08F /* CustomSegmentView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -670,6 +680,8 @@
 				221C31CF16104243005974C8 /* UITableViewCell+NIB.m in Sources */,
 				221C31D516104640005974C8 /* TriangleView.m in Sources */,
 				221C31D816104711005974C8 /* TablePopoverCell.m in Sources */,
+				8B9B4E84160F6342000BE08F /* CustomSegmentView.m in Sources */,
+				8B9B4E8B160F6428000BE08F /* CustomSegmentButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
