@@ -14,5 +14,10 @@
 @property (nonatomic, strong) IBOutlet FlexibleButton *retakeButton;
 @property (nonatomic, strong) IBOutlet FlexibleButton *captionButton;
 @property (nonatomic, strong) IBOutlet ThumbnailsView *filterView;
+@property (nonatomic, strong) IBOutlet UIView *contentView;
+@property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet UIView *topView;
+
 - (IBAction)addCaption;
 @end
