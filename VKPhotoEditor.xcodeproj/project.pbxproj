@@ -102,6 +102,10 @@
 		226E75BF160F02FA00531350 /* Main_screen_separator.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E75BD160F02FA00531350 /* Main_screen_separator.png */; };
 		226E75C0160F02FA00531350 /* Main_screen_separator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */; };
 		226E75EE160F1DC700531350 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226E75ED160F1DC700531350 /* AssetsLibrary.framework */; };
+		22855AD316119973007333D8 /* CroppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22855AD116119973007333D8 /* CroppingViewController.m */; };
+		22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */; };
+		22D1FF0E1612047C00E66FEE /* CroppingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */; };
+		22D1FF241612053D00E66FEE /* ZoomingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1FF231612053D00E66FEE /* ZoomingView.m */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -238,6 +242,13 @@
 		226E75BD160F02FA00531350 /* Main_screen_separator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Main_screen_separator.png; sourceTree = "<group>"; };
 		226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Main_screen_separator@2x.png"; sourceTree = "<group>"; };
 		226E75ED160F1DC700531350 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		22855AD016119973007333D8 /* CroppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CroppingViewController.h; sourceTree = "<group>"; };
+		22855AD116119973007333D8 /* CroppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CroppingViewController.m; sourceTree = "<group>"; };
+		22D1FEE71611FC6600E66FEE /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
+		22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
+		22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CroppingViewController.xib; sourceTree = "<group>"; };
+		22D1FF221612053D00E66FEE /* ZoomingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomingView.h; sourceTree = "<group>"; };
+		22D1FF231612053D00E66FEE /* ZoomingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomingView.m; sourceTree = "<group>"; };
 		22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -326,6 +337,8 @@
 				221C31CA16103E59005974C8 /* UIView+Helpers.m */,
 				22E51F13160F4E8E00299D42 /* UIView+NIB.h */,
 				22E51F14160F4E8E00299D42 /* UIView+NIB.m */,
+				22D1FEE71611FC6600E66FEE /* UIImage+Resize.h */,
+				22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -501,6 +514,9 @@
 				22D7BF93160CCDD5008B5BFA /* StartViewController.h */,
 				22D7BF94160CCDD5008B5BFA /* StartViewController.m */,
 				22D7BF95160CCDD5008B5BFA /* StartViewController.xib */,
+				22855AD016119973007333D8 /* CroppingViewController.h */,
+				22855AD116119973007333D8 /* CroppingViewController.m */,
+				22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -530,6 +546,8 @@
 				8B9B4E83160F6341000BE08F /* CustomSegmentView.m */,
 				8BDF18721610C6AB00507B5F /* FlexibleTextField.h */,
 				8BDF18731610C6AB00507B5F /* FlexibleTextField.m */,
+				22D1FF221612053D00E66FEE /* ZoomingView.h */,
+				22D1FF231612053D00E66FEE /* ZoomingView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -700,6 +718,7 @@
 				8BDF18A71611A67B00507B5F /* Lobster_1.4.otf in Resources */,
 				8BDF18A81611A67B00507B5F /* tt1018m_.ttf in Resources */,
 				8BDF18AC1611AAD400507B5F /* ballw_.ttf in Resources */,
+				22D1FF0E1612047C00E66FEE /* CroppingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -730,6 +749,9 @@
 				8B9B4E84160F6342000BE08F /* CustomSegmentView.m in Sources */,
 				8B9B4E8B160F6428000BE08F /* CustomSegmentButton.m in Sources */,
 				8BDF18741610C6AB00507B5F /* FlexibleTextField.m in Sources */,
+				22855AD316119973007333D8 /* CroppingViewController.m in Sources */,
+				22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */,
+				22D1FF241612053D00E66FEE /* ZoomingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

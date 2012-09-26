@@ -13,8 +13,9 @@
 #import "CameraOverlayView.h"
 #import "UIView+NIB.h"
 #import "UIColor+VKPhotoEditor.h"
+#import "CroppingViewController.h"
 
-@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CroppingViewControllerDelegate>
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)cameraRoll:(id)sender;
 @end
@@ -22,6 +23,7 @@
 
 @implementation StartViewController {
     NSMutableArray *assets;
+    ALAssetsLibrary *library;
     
     IBOutlet ThumbnailsView *gallery;
     IBOutlet UIActivityIndicatorView *activityIndicator;
@@ -39,16 +41,18 @@
     takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
     cameraRollBtn.bgImagecaps = CGSizeMake(20, 20);
     
+    gallery.highlight = NO;
+    
     takePhotoBtn.hidden = ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
     
+    library = [[ALAssetsLibrary alloc] init];
     [self loadAlbumImages];
 }
 
 - (void)loadAlbumImages
 {
     [activityIndicator startAnimating];
-    
-    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+
     assets = [NSMutableArray array];
     
     [library enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stopGroup) {
@@ -68,6 +72,13 @@
      }];
 }
 
+- (void)moveAndScaleImage:(UIImage *)image
+{
+    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image];
+    controller.delegate = self;
+    
+    [self presentModalViewController:controller animated:NO];
+}
 
 #pragma mark - Actions
 
@@ -78,8 +89,8 @@
     imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
     imagePicker.showsCameraControls = NO;
     imagePicker.wantsFullScreenLayout = YES;
-    imagePicker.allowsEditing = NO;
     imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
+    imagePicker.allowsEditing = YES;
     
     CameraOverlayView *overlayView = [CameraOverlayView loadFromNIB];
     overlayView.picker = imagePicker;
@@ -126,7 +137,7 @@
 
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    //TODO: open Edit Photo screen
+    [self moveAndScaleImage:[UIImage imageWithCGImage:[[[assets objectAtIndex:index] defaultRepresentation] fullResolutionImage]]];
 }
 
 
@@ -135,13 +146,28 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissModalViewControllerAnimated:NO];
-        //UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-        //TODO: open Edit Photo screen
+    
+    [self moveAndScaleImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+
+#pragma mark - CroppingViewControllerDelegate
+
+- (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image
+{
+    [self dismissModalViewControllerAnimated:NO];
+    
+    //TODO: open Edit Photo screen
+}
+
+- (void)croppingViewControllerDidCancel:(CroppingViewController *)controller
+{
+    [self dismissModalViewControllerAnimated:NO];
 }
 
 @end

@@ -26,6 +26,7 @@
 @property (nonatomic, assign) CGFloat highlightShadowRadius;
 @property (nonatomic, assign) CGSize highlightShadowOffset;
 @property (nonatomic, assign) CGFloat thumbConrnerRadius;
+@property (nonatomic, assign) BOOL highlight;
 
 @property (nonatomic, assign, readonly) NSUInteger displayedItemIndex;
 - (void)reloadData;

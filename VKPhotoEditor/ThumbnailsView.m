@@ -34,6 +34,7 @@
 @synthesize highlightShadowRadius;
 @synthesize highlightShadowOffset;
 @synthesize thumbConrnerRadius;
+@synthesize highlight;
 
 - (void)_init
 {
@@ -54,7 +55,7 @@
     [delegate thumbnailsView:self didTapOnItemWithIndex:index];
     [self setView:[views objectAtIndex:displayedItemIndex] highlighted:NO];
     displayedItemIndex = index;
-    [self setView:[views objectAtIndex:displayedItemIndex] highlighted:YES];
+    [self setView:[views objectAtIndex:displayedItemIndex] highlighted:highlight];
 }
 
 - (UIScrollView*)scroll
@@ -99,7 +100,7 @@
         [containerView addSubview:thumb];
         containerView.layer.shadowOpacity = 1;
         
-        [self setView:containerView highlighted:(i ==  displayedItemIndex)];
+        [self setView:containerView highlighted: highlight ? (i ==  displayedItemIndex) : NO];
 
         [self.scroll addSubview:containerView];
         [arr addObject:containerView];
