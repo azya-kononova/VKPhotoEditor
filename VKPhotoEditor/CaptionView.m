@@ -22,9 +22,9 @@
     fontSegmentView.segmentSize = CGSizeMake(50, 30);
     
     fontSegmentView.leftBgImage = [[UIImage imageNamed:@"FontTabLeft"] stretchableImageWithLeftCapWidth:20 topCapHeight:0];
-    fontSegmentView.leftBgImageSelected = [[UIImage imageNamed:@"FontTabLeft_active"] stretchableImageWithLeftCapWidth:20 topCapHeight:5];
+    fontSegmentView.leftBgImageSelected = [[UIImage imageNamed:@"FontTabLeft_Active"] stretchableImageWithLeftCapWidth:20 topCapHeight:5];
     fontSegmentView.rightBgImage = [[UIImage imageNamed:@"FontTabRight"] stretchableImageWithLeftCapWidth:20 topCapHeight:5];
-    fontSegmentView.rightBgImageSelected = [[UIImage imageNamed:@"FontTabRight_active"] stretchableImageWithLeftCapWidth:20 topCapHeight:5];
+    fontSegmentView.rightBgImageSelected = [[UIImage imageNamed:@"FontTabRight_Active"] stretchableImageWithLeftCapWidth:20 topCapHeight:5];
     fontSegmentView.bgImage = [[UIImage imageNamed:@"FontTab"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
     fontSegmentView.bgImageSelected = [[UIImage imageNamed:@"FontTab_Active"] stretchableImageWithLeftCapWidth:10 topCapHeight:5];
 
