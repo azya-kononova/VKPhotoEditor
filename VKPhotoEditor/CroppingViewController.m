@@ -19,21 +19,20 @@
     IBOutlet FlexibleButton *chooseBtn;
     
     ZoomingView *zoomingView;
+    UIImage *image;
 }
 
 @end
 
-@implementation CroppingViewController {
-    UIImage *image;
-    BOOL isPhoto;
-}
+@implementation CroppingViewController 
 
-- (id)initWithImage:(UIImage *)_image isPhoto:(BOOL)_isPhoto
+@synthesize delegate;
+
+- (id)initWithImage:(UIImage *)_image
 {
     self = [super init];
     if (self) {
         image = _image;
-        isPhoto = _isPhoto;
     }
     return self;
 }
@@ -44,6 +43,7 @@
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:self.view.bounds];
+    zoomingView.captureViewInsets = UIEdgeInsetsMake(CGRectGetMinY(captureView.frame), 0, CGRectGetMaxY(captureView.frame), 0);
     
     [zoomingPlaceholder addSubview:zoomingView];
     
@@ -59,7 +59,7 @@
 
 - (IBAction)cancel:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:NO];
+    [delegate croppingViewControllerDidCancel:self];
 }
 
 - (IBAction)choose:(id)sender
@@ -70,8 +70,7 @@
     CGFloat height = CGRectGetHeight(captureView.frame)/zoomingView.zoomScale;
     UIImage *cropImage = [image croppedImage:CGRectMake(x, y, width, height)];
     
-    PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:cropImage isPhoto:isPhoto];
-    [self.navigationController pushViewController:photoEditController animated:NO];
+    [delegate croppingViewController:self didFinishWithImage:cropImage];
 }
 
 @end

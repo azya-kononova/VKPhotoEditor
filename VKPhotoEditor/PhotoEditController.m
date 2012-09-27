@@ -34,6 +34,7 @@
 @synthesize scrollView;
 @synthesize imageView;
 @synthesize topView;
+@synthesize delegate;
 
 - (id)initWithImage:(UIImage *)_image isPhoto:(BOOL)_isPhoto
 {
@@ -128,15 +129,15 @@
 
 - (IBAction)save:(id)sender
 {
-    [self.navigationController popToRootViewControllerAnimated:NO];
+    [delegate photoEditControllerDidCancel:self];
 }
 
 - (IBAction)cancel:(id)sender
 {
     if (isPhoto) {
-            //
+        [delegate photoEditControllerDidRetake:self];
     } else {
-        [self.navigationController popToRootViewControllerAnimated:NO];
+        [delegate photoEditControllerDidCancel:self];
     }
 }
 
