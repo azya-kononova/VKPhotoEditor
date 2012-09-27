@@ -138,6 +138,8 @@
 
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
+    isPhoto = NO;
+    
     UIImage *image = [UIImage imageWithCGImage:[[[assets objectAtIndex:index] defaultRepresentation] fullResolutionImage]];
     CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image];
     controller.delegate = self;
