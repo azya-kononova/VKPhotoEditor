@@ -105,7 +105,6 @@
 		22855AD316119973007333D8 /* CroppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22855AD116119973007333D8 /* CroppingViewController.m */; };
 		22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */; };
 		22D1FF0E1612047C00E66FEE /* CroppingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */; };
-		22D1FF241612053D00E66FEE /* ZoomingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1FF231612053D00E66FEE /* ZoomingView.m */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -119,6 +118,7 @@
 		22D7BF96160CCDD5008B5BFA /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF94160CCDD5008B5BFA /* StartViewController.m */; };
 		22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF95160CCDD5008B5BFA /* StartViewController.xib */; };
 		22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */; };
+		22E1EB6116143E9500B0E656 /* ZoomingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1EB6016143E9500B0E656 /* ZoomingView.m */; };
 		22E51F08160F3A8700299D42 /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F07160F3A8700299D42 /* CameraOverlayView.m */; };
 		22E51F12160F4A6C00299D42 /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E51F11160F4A6C00299D42 /* CameraOverlayView.xib */; };
 		22E51F15160F4E8E00299D42 /* UIView+NIB.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F14160F4E8E00299D42 /* UIView+NIB.m */; };
@@ -247,8 +247,6 @@
 		22D1FEE71611FC6600E66FEE /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CroppingViewController.xib; sourceTree = "<group>"; };
-		22D1FF221612053D00E66FEE /* ZoomingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomingView.h; sourceTree = "<group>"; };
-		22D1FF231612053D00E66FEE /* ZoomingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomingView.m; sourceTree = "<group>"; };
 		22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -268,6 +266,8 @@
 		22D7BF95160CCDD5008B5BFA /* StartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
 		22D7BFA3160EF652008B5BFA /* ThumbnailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailsView.h; sourceTree = "<group>"; };
 		22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailsView.m; sourceTree = "<group>"; };
+		22E1EB5F16143E9500B0E656 /* ZoomingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomingView.h; sourceTree = "<group>"; };
+		22E1EB6016143E9500B0E656 /* ZoomingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomingView.m; sourceTree = "<group>"; };
 		22E51F06160F3A8700299D42 /* CameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayView.h; sourceTree = "<group>"; };
 		22E51F07160F3A8700299D42 /* CameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayView.m; sourceTree = "<group>"; };
 		22E51F11160F4A6C00299D42 /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView.xib; sourceTree = "<group>"; };
@@ -546,8 +546,8 @@
 				8B9B4E83160F6341000BE08F /* CustomSegmentView.m */,
 				8BDF18721610C6AB00507B5F /* FlexibleTextField.h */,
 				8BDF18731610C6AB00507B5F /* FlexibleTextField.m */,
-				22D1FF221612053D00E66FEE /* ZoomingView.h */,
-				22D1FF231612053D00E66FEE /* ZoomingView.m */,
+				22E1EB5F16143E9500B0E656 /* ZoomingView.h */,
+				22E1EB6016143E9500B0E656 /* ZoomingView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -751,7 +751,7 @@
 				8BDF18741610C6AB00507B5F /* FlexibleTextField.m in Sources */,
 				22855AD316119973007333D8 /* CroppingViewController.m in Sources */,
 				22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */,
-				22D1FF241612053D00E66FEE /* ZoomingView.m in Sources */,
+				22E1EB6116143E9500B0E656 /* ZoomingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,11 +12,24 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
     UIView *contentView;
     UIScrollView *scroll;
     CGFloat initialZoomScale;
+    BOOL reallyNeedsLayout_;
 }
 
 @synthesize minZoomScale;
 @synthesize maxZoomScale;
 @synthesize shouldCenterizeContent;
+
+- (void)setNeedsLayout
+{
+    [super setNeedsLayout];
+    reallyNeedsLayout_ = YES;
+}
+
+- (void)setFrame:(CGRect)rect
+{
+    [super setFrame:rect];
+    reallyNeedsLayout_ = YES;
+}
 
 - (void)centerContent:(BOOL)animated
 {
@@ -28,7 +41,7 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
 
 - (CGFloat)zoomScaleToFitOrFill:(BOOL)fit
 {
-    CGPoint scale = CGFrameScale(self.bounds, contentView.frame);
+    CGPoint scale = CGFrameScale(self.bounds, contentView.bounds);
     return fit ? fminf(scale.x, scale.y) : fmaxf(scale.x, scale.y);
 }
 
@@ -37,8 +50,8 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
     BOOL fit = self.contentMode == UIViewContentModeScaleAspectFit;
     scroll.minimumZoomScale = (minZoomScale) ? minZoomScale : fminf(1, [self zoomScaleToFitOrFill:YES]);
     scroll.maximumZoomScale = (maxZoomScale) ? maxZoomScale : 1;
-
-    scroll.zoomScale = [self zoomScaleToFitOrFill:fit];
+    
+    [scroll setZoomScale:[self zoomScaleToFitOrFill:fit] animated:NO];
     initialZoomScale = scroll.zoomScale;
     
     if (fit && shouldCenterizeContent) {
@@ -65,15 +78,19 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
 
 - (void) resetZoom
 {
+    [self setupInsetsAndZoom];
     scroll.zoomScale = initialZoomScale;
-    [self centerContent:NO];
+    [self centerContent:NO];   
 }
 
 - (id)initWithContentView:(UIView *)view frame:(CGRect)frame
 {
-    if ((self = [super initWithFrame:frame])) {
+    self = [super initWithFrame:frame];
+    
+    if (self) {
         shouldCenterizeContent = YES;
         self.contentMode = UIViewContentModeScaleAspectFit;
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         contentView = view;
         contentView.frame = view.bounds;
         scroll = [[UIScrollView alloc] initWithFrame:self.bounds];
@@ -88,13 +105,10 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
     return self;
 }
 
-- (id)initWithContentView:(UIView *)view
-{
-    return [self initWithContentView:view frame:view.frame];
-}
-
 - (void) layoutSubviews
 {
+    if (!reallyNeedsLayout_) return;
+    reallyNeedsLayout_ = NO;
     [super layoutSubviews];
     [self setupInsetsAndZoom];
 }
@@ -118,9 +132,12 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
 {
-    CGFloat offsetX = (scroll.bounds.size.width > scroll.contentSize.width) ? (scroll.bounds.size.width - scroll.contentSize.width) * 0.5 : 0.0;
-    CGFloat offsetY = (scroll.bounds.size.height > scroll.contentSize.height) ? (scroll.bounds.size.height - scroll.contentSize.height) * 0.5 : 0.0;
-    contentView.center = CGPointMake(scroll.contentSize.width * 0.5 + offsetX, scroll.contentSize.height * 0.5 + offsetY);
+   [self setupInsets];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    NSLog(@"scrollViewWillBeginDragging");
 }
 
 @end

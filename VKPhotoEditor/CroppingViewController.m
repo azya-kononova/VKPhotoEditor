@@ -12,12 +12,12 @@
 #import "FlexibleButton.h"
 
 @interface CroppingViewController () {
+    IBOutlet UIView *captureView;
     IBOutlet UIView *zoomingPlaceholder;
     IBOutlet FlexibleButton *cancelBtn;
     IBOutlet FlexibleButton *chooseBtn;
     
     ZoomingView *zoomingView;
-    UIView *captureView;
 }
 
 @end
@@ -49,7 +49,8 @@
     cancelBtn.bgImagecaps = CGSizeMake(20, 20);
     chooseBtn.bgImagecaps = CGSizeMake(20, 20);
     
-    captureView = [[UIView alloc] initWithFrame:CGRectMake(0, 67, 323, 323)];
+    captureView.layer.borderWidth = 2;
+    captureView.layer.borderColor = [[UIColor whiteColor] CGColor];
 }
 
 
