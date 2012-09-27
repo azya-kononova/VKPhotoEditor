@@ -5,6 +5,7 @@
 @property (nonatomic, assign) BOOL shouldCenterizeContent;
 @property (nonatomic, assign, readonly) CGFloat zoomScale;
 @property (nonatomic, assign, readonly) CGPoint contentOffset;
+@property (nonatomic, assign) UIEdgeInsets scrollInsets;
 
 - (id)initWithContentView:(UIView *)view frame:(CGRect)frame;
 - (void)resetZoom;

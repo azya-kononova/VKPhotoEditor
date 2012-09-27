@@ -43,7 +43,7 @@
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:self.view.bounds];
-    zoomingView.captureViewInsets = UIEdgeInsetsMake(CGRectGetMinY(captureView.frame), 0, CGRectGetMaxY(captureView.frame), 0);
+    zoomingView.scrollInsets = UIEdgeInsetsMake(CGRectGetMinY(captureView.frame), 0, self.view.frame.size.height - CGRectGetMaxY(captureView.frame), 0);
     
     [zoomingPlaceholder addSubview:zoomingView];
     
