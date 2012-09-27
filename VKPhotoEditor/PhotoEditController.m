@@ -22,7 +22,10 @@
     NSArray *filters;
     CaptionView *captionView;
     CGPoint oldContentOffset;
+    UIImage *image;
+    BOOL isPhoto;
 }
+
 @synthesize saveButton;
 @synthesize retakeButton;
 @synthesize captionButton;
@@ -31,6 +34,16 @@
 @synthesize scrollView;
 @synthesize imageView;
 @synthesize topView;
+
+- (id)initWithImage:(UIImage *)_image isPhoto:(BOOL)_isPhoto
+{
+    self = [super init];
+    if (self) {
+        image = _image;
+        isPhoto = _isPhoto;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -46,6 +59,7 @@
     retakeButton.bgImagecaps = CGSizeMake(23, 20);
     captionButton.bgImagecaps = CGSizeMake(23, 20);
     [captionButton setBackgroundImage:[UIImage imageNamed:@"RollBtn_Prsssed"] forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    [retakeButton setTitle:isPhoto ? @"Retake" : @"Cancel" forState:UIControlStateNormal];
     
     filters = Filters.filters;
     filterView.margin = 7;
@@ -59,6 +73,8 @@
     
     [scrollView addSubview:contentView];
     scrollView.contentSize = contentView.frame.size;
+    
+    imageView.image = image;
 }
 
 - (void)resizeScrollView:(BOOL)show notification:(NSNotification *)n
@@ -108,6 +124,20 @@
     }];
     CGPoint bottomOffset = show ? CGPointMake(0, scrollView.contentSize.height - self.scrollView.bounds.size.height) : CGPointZero;
     [scrollView setContentOffset:bottomOffset animated:NO];
+}
+
+- (IBAction)save:(id)sender
+{
+    [self.navigationController popToRootViewControllerAnimated:NO];
+}
+
+- (IBAction)cancel:(id)sender
+{
+    if (isPhoto) {
+            //
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:NO];
+    }
 }
 
 #pragma mark ThumbnailView datasourse

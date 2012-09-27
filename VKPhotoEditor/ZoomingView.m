@@ -135,9 +135,4 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
    [self setupInsets];
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    NSLog(@"scrollViewWillBeginDragging");
-}
-
 @end

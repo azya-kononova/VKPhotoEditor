@@ -14,8 +14,9 @@
 #import "UIView+NIB.h"
 #import "UIColor+VKPhotoEditor.h"
 #import "CroppingViewController.h"
+#import "PhotoEditController.h"
 
-@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CroppingViewControllerDelegate>
+@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)cameraRoll:(id)sender;
 @end
@@ -72,14 +73,6 @@
      }];
 }
 
-- (void)moveAndScaleImage:(UIImage *)image
-{
-    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image];
-    controller.delegate = self;
-    
-    [self presentModalViewController:controller animated:NO];
-}
-
 #pragma mark - Actions
 
 - (IBAction)takePhoto:(id)sender
@@ -100,7 +93,7 @@
     CGFloat cameraTransformY = 1.25;
     imagePicker.cameraViewTransform = CGAffineTransformScale(imagePicker.cameraViewTransform, cameraTransformX, cameraTransformY);
     
-    [self presentModalViewController:imagePicker animated:YES];
+    [self presentModalViewController:imagePicker animated:NO];
 }
 
 - (IBAction)cameraRoll:(id)sender
@@ -137,7 +130,10 @@
 
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    [self moveAndScaleImage:[UIImage imageWithCGImage:[[[assets objectAtIndex:index] defaultRepresentation] fullResolutionImage]]];
+    UIImage *image = [UIImage imageWithCGImage:[[[assets objectAtIndex:index] defaultRepresentation] fullResolutionImage]];
+    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image isPhoto:NO];
+    
+    [self.navigationController pushViewController:controller animated:NO];
 }
 
 
@@ -147,25 +143,13 @@
 {
     [self dismissModalViewControllerAnimated:NO];
     
-    [self moveAndScaleImage:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image isPhoto:picker.sourceType == UIImagePickerControllerSourceTypeCamera];
+    
+    [self.navigationController pushViewController:controller animated:NO];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-
-#pragma mark - CroppingViewControllerDelegate
-
-- (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image
-{
-    [self dismissModalViewControllerAnimated:NO];
-    
-    //TODO: open Edit Photo screen
-}
-
-- (void)croppingViewControllerDidCancel:(CroppingViewController *)controller
 {
     [self dismissModalViewControllerAnimated:NO];
 }

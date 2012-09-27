@@ -10,6 +10,7 @@
 #import "UIImage+Resize.h"
 #import "ZoomingView.h"
 #import "FlexibleButton.h"
+#import "PhotoEditController.h"
 
 @interface CroppingViewController () {
     IBOutlet UIView *captureView;
@@ -24,15 +25,15 @@
 
 @implementation CroppingViewController {
     UIImage *image;
+    BOOL isPhoto;
 }
 
-@synthesize delegate;
-
-- (id)initWithImage:(UIImage *)_image
+- (id)initWithImage:(UIImage *)_image isPhoto:(BOOL)_isPhoto
 {
     self = [super init];
     if (self) {
         image = _image;
+        isPhoto = _isPhoto;
     }
     return self;
 }
@@ -58,7 +59,7 @@
 
 - (IBAction)cancel:(id)sender
 {
-    [delegate croppingViewControllerDidCancel:self];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (IBAction)choose:(id)sender
@@ -69,7 +70,8 @@
     CGFloat height = CGRectGetHeight(captureView.frame)/zoomingView.zoomScale;
     UIImage *cropImage = [image croppedImage:CGRectMake(x, y, width, height)];
     
-    [delegate croppingViewController:self didFinishWithImage:cropImage];
+    PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:cropImage isPhoto:isPhoto];
+    [self.navigationController pushViewController:photoEditController animated:NO];
 }
 
 @end

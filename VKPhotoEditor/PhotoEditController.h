@@ -19,5 +19,6 @@
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) IBOutlet UIView *topView;
 
+- (id)initWithImage:(UIImage *)image isPhoto:(BOOL)isPhoto;
 - (IBAction)addCaption;
 @end

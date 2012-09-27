@@ -8,17 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol CroppingViewControllerDelegate;
-
 @interface CroppingViewController : UIViewController
 
-@property (nonatomic, unsafe_unretained) id<CroppingViewControllerDelegate> delegate;
+- (id)initWithImage:(UIImage *)image isPhoto:(BOOL)isPhoto;
 
-- (id)initWithImage:(UIImage *)image;
-
-@end
-
-@protocol CroppingViewControllerDelegate
-- (void)croppingViewControllerDidCancel:(CroppingViewController *)controller;
-- (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image;
 @end
