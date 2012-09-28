@@ -119,6 +119,7 @@
 		22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF95160CCDD5008B5BFA /* StartViewController.xib */; };
 		22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */; };
 		22E1EB6116143E9500B0E656 /* ZoomingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1EB6016143E9500B0E656 /* ZoomingView.m */; };
+		22E1EB791615B12000B0E656 /* UIImage+Rect.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1EB781615B12000B0E656 /* UIImage+Rect.m */; };
 		22E51F08160F3A8700299D42 /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F07160F3A8700299D42 /* CameraOverlayView.m */; };
 		22E51F12160F4A6C00299D42 /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E51F11160F4A6C00299D42 /* CameraOverlayView.xib */; };
 		22E51F15160F4E8E00299D42 /* UIView+NIB.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F14160F4E8E00299D42 /* UIView+NIB.m */; };
@@ -268,6 +269,8 @@
 		22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailsView.m; sourceTree = "<group>"; };
 		22E1EB5F16143E9500B0E656 /* ZoomingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZoomingView.h; sourceTree = "<group>"; };
 		22E1EB6016143E9500B0E656 /* ZoomingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomingView.m; sourceTree = "<group>"; };
+		22E1EB771615B12000B0E656 /* UIImage+Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rect.h"; sourceTree = "<group>"; };
+		22E1EB781615B12000B0E656 /* UIImage+Rect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rect.m"; sourceTree = "<group>"; };
 		22E51F06160F3A8700299D42 /* CameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayView.h; sourceTree = "<group>"; };
 		22E51F07160F3A8700299D42 /* CameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayView.m; sourceTree = "<group>"; };
 		22E51F11160F4A6C00299D42 /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView.xib; sourceTree = "<group>"; };
@@ -339,6 +342,8 @@
 				22E51F14160F4E8E00299D42 /* UIView+NIB.m */,
 				22D1FEE71611FC6600E66FEE /* UIImage+Resize.h */,
 				22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */,
+				22E1EB771615B12000B0E656 /* UIImage+Rect.h */,
+				22E1EB781615B12000B0E656 /* UIImage+Rect.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -752,6 +757,7 @@
 				22855AD316119973007333D8 /* CroppingViewController.m in Sources */,
 				22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */,
 				22E1EB6116143E9500B0E656 /* ZoomingView.m in Sources */,
+				22E1EB791615B12000B0E656 /* UIImage+Rect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
