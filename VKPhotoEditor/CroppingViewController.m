@@ -44,7 +44,7 @@
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
     zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:captureView.frame];
     zoomingView.shouldClip = NO;
-    zoomingView.contentMode = UIViewContentModeScaleAspectFill;
+    zoomingView.contentMode = image.size.width > image.size.height ? UIViewContentModeScaleAspectFit : UIViewContentModeScaleAspectFill;
     [zoomingPlaceholder addSubview:zoomingView];
     
     cancelBtn.bgImagecaps = CGSizeMake(20, 20);
