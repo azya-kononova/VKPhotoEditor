@@ -19,6 +19,7 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
 @synthesize maxZoomScale;
 @synthesize shouldCenterizeContent;
 @synthesize scrollInsets;
+@synthesize shouldClip;
 
 - (void)setNeedsLayout
 {
@@ -55,7 +56,7 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
     [scroll setZoomScale:[self zoomScaleToFitOrFill:fit] animated:NO];
     initialZoomScale = scroll.zoomScale;
     
-    if (fit && shouldCenterizeContent) {
+    if (shouldCenterizeContent) {
         [self centerContent:NO];
     }
 }
@@ -66,11 +67,7 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
     CGFloat dy = scroll.frame.size.height - contentView.frame.size.height;
     UIEdgeInsets insets = UIEdgeInsetsZero;
     if (dx > 0) insets.left = dx/2;
-    if (dy > 0) insets.top = dy/2; else {
-        insets.top = scrollInsets.top;
-        insets.bottom = scrollInsets.bottom;
-    }
-    
+    if (dy > 0) insets.top = dy/2;
     scroll.contentInset = insets;
 }
 
@@ -105,6 +102,7 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
         scroll.alwaysBounceHorizontal = YES;
         scroll.alwaysBounceVertical = YES;
         [scroll addSubview:contentView];
+        scroll.clipsToBounds = shouldClip;
         [self addSubview:scroll];
     }
     

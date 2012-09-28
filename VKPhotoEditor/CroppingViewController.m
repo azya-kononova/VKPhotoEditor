@@ -42,9 +42,9 @@
     [super viewDidLoad];
 
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:self.view.bounds];
-    zoomingView.scrollInsets = UIEdgeInsetsMake(CGRectGetMinY(captureView.frame), 0, self.view.frame.size.height - CGRectGetMaxY(captureView.frame), 0);
-    
+    zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:captureView.frame];
+    zoomingView.shouldClip = NO;
+    zoomingView.contentMode = UIViewContentModeScaleAspectFill;
     [zoomingPlaceholder addSubview:zoomingView];
     
     cancelBtn.bgImagecaps = CGSizeMake(20, 20);
@@ -65,7 +65,7 @@
 - (IBAction)choose:(id)sender
 {
     CGFloat x = zoomingView.contentOffset.x/zoomingView.zoomScale;
-    CGFloat y = (zoomingView.contentOffset.y + CGRectGetMinY(captureView.frame))/zoomingView.zoomScale;
+    CGFloat y = (zoomingView.contentOffset.y)/zoomingView.zoomScale;
     CGFloat width = CGRectGetWidth(captureView.frame)/zoomingView.zoomScale;
     CGFloat height = CGRectGetHeight(captureView.frame)/zoomingView.zoomScale;
     UIImage *cropImage = [image croppedImage:CGRectMake(x, y, width, height)];
