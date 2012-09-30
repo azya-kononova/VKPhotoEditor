@@ -10,13 +10,13 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ThumbnailsView.h"
 #import "FlexibleButton.h"
-#import "CameraOverlayView.h"
 #import "UIView+NIB.h"
 #import "UIColor+VKPhotoEditor.h"
 #import "CroppingViewController.h"
 #import "PhotoEditController.h"
+#import "TakePhotoController.h"
 
-@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CroppingViewControllerDelegate, PhotoEditControllerDelegate>
+@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CroppingViewControllerDelegate, PhotoEditControllerDelegate, TakePhotoControllerDelegate>
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)cameraRoll:(id)sender;
 @end
@@ -75,23 +75,37 @@
 }
 
 
-- (void)openImagePicker
+#pragma mark - Photos
+
+- (void)editPhoto:(UIImage *)image
+{
+    PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:image isPhoto:isPhoto];
+    photoEditController.delegate = self;
+    
+    [self.navigationController pushViewController:photoEditController animated:NO];
+}
+
+- (void)cropPhoto:(UIImage *)image
+{
+    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image];
+    controller.delegate = self;
+    
+    [self presentModalViewController:controller animated:NO];
+}
+
+- (void)takePhoto
+{
+    TakePhotoController *controller = [TakePhotoController new];
+    controller.delegate = self;
+    
+    [self presentModalViewController:controller animated:NO];
+}
+
+- (void)choosePhoto
 {
     UIImagePickerController *imagePicker = [UIImagePickerController new];
     imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.showsCameraControls = NO;
-    imagePicker.wantsFullScreenLayout = YES;
-    imagePicker.cameraFlashMode = UIImagePickerControllerCameraFlashModeOff;
-    imagePicker.allowsEditing = YES;
-    
-    CameraOverlayView *overlayView = [CameraOverlayView loadFromNIB];
-    overlayView.picker = imagePicker;
-    imagePicker.cameraOverlayView = overlayView;
-    
-    CGFloat cameraTransformX = 1.25;
-    CGFloat cameraTransformY = 1.25;
-    imagePicker.cameraViewTransform = CGAffineTransformScale(imagePicker.cameraViewTransform, cameraTransformX, cameraTransformY);
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
     [self presentModalViewController:imagePicker animated:NO];
 }
@@ -101,16 +115,12 @@
 
 - (IBAction)takePhoto:(id)sender
 {
-    [self openImagePicker];
+    [self takePhoto];
 }
 
 - (IBAction)cameraRoll:(id)sender
 {        
-    UIImagePickerController *imagePicker = [UIImagePickerController new];
-    imagePicker.delegate = self;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    
-    [self presentModalViewController:imagePicker animated:NO];
+    [self choosePhoto];
 }
 
 
@@ -141,10 +151,7 @@
     isPhoto = NO;
     
     UIImage *image = [UIImage imageWithCGImage:[[[assets objectAtIndex:index] defaultRepresentation] fullResolutionImage]];
-    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image];
-    controller.delegate = self;
-    
-    [self presentModalViewController:controller animated:NO];
+    [self cropPhoto:image];
 }
 
 
@@ -156,10 +163,7 @@
     [self dismissModalViewControllerAnimated:NO];
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image];
-    controller.delegate = self;
-    
-    [self presentModalViewController:controller animated:NO];
+    [self cropPhoto:image];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -177,12 +181,11 @@
 
 - (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image
 {
-    PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:image isPhoto:isPhoto];
-    photoEditController.delegate = self;
-    [self.navigationController pushViewController:photoEditController animated:NO];
-    
     [self dismissModalViewControllerAnimated:NO];
+    
+    [self editPhoto:image];
 }
+
 
 #pragma  mark - PhotoEditControllerDelegate
 
@@ -191,9 +194,27 @@
     [self.navigationController popViewControllerAnimated:NO];
 }
 
-- (void)photoEditControllerDidRetake:(PhotoEditController *)controller
+- (void)photoEditControllerDidRetake:(PhotoEditController *)_controller
 {
     [self.navigationController popViewControllerAnimated:NO];
-    [self openImagePicker];
+    
+    [self takePhoto];
 }
+
+
+#pragma mark - TakePhotoControllerDelegate
+
+- (void)takePhotoControllerDidCancel:(TakePhotoController *)controller
+{
+    [self dismissModalViewControllerAnimated:NO];
+}
+
+- (void)takePhotoController:(TakePhotoController *)_controller didFinishWithImage:(UIImage *)image
+{
+    [self dismissModalViewControllerAnimated:NO];
+    
+    isPhoto = YES;
+    [self cropPhoto:image];
+}
+
 @end

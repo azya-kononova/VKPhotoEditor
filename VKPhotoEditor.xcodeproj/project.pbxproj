@@ -113,6 +113,9 @@
 		2288803516187437008083EB /* XBFilteredCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2288802916187436008083EB /* XBFilteredCameraView.m */; };
 		2288803616187437008083EB /* XBFilteredImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2288802B16187436008083EB /* XBFilteredImageView.m */; };
 		2288803716187437008083EB /* XBFilteredView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2288802D16187436008083EB /* XBFilteredView.m */; };
+		22D1772C1618752D00B8093D /* TakePhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1772A1618752D00B8093D /* TakePhotoController.m */; };
+		22D1772D1618752D00B8093D /* TakePhotoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D1772B1618752D00B8093D /* TakePhotoController.xib */; };
+		22D177311618753D00B8093D /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D177301618753D00B8093D /* StartViewController.m */; };
 		22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */; };
 		22D1FF0E1612047C00E66FEE /* CroppingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
@@ -125,13 +128,10 @@
 		22D7BF6E160CCC33008B5BFA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF6D160CCC33008B5BFA /* Default-568h@2x.png */; };
 		22D7BF86160CCCAD008B5BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */; };
 		22D7BF92160CCD2B008B5BFA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF91160CCD2B008B5BFA /* MainWindow.xib */; };
-		22D7BF96160CCDD5008B5BFA /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF94160CCDD5008B5BFA /* StartViewController.m */; };
 		22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF95160CCDD5008B5BFA /* StartViewController.xib */; };
 		22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */; };
 		22E1EB6116143E9500B0E656 /* ZoomingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1EB6016143E9500B0E656 /* ZoomingView.m */; };
 		22E1EB791615B12000B0E656 /* UIImage+Rect.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1EB781615B12000B0E656 /* UIImage+Rect.m */; };
-		22E51F08160F3A8700299D42 /* CameraOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F07160F3A8700299D42 /* CameraOverlayView.m */; };
-		22E51F12160F4A6C00299D42 /* CameraOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22E51F11160F4A6C00299D42 /* CameraOverlayView.xib */; };
 		22E51F15160F4E8E00299D42 /* UIView+NIB.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F14160F4E8E00299D42 /* UIView+NIB.m */; };
 		8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */; };
 		8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */; };
@@ -293,6 +293,11 @@
 		2288802B16187436008083EB /* XBFilteredImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBFilteredImageView.m; sourceTree = "<group>"; };
 		2288802C16187436008083EB /* XBFilteredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBFilteredView.h; sourceTree = "<group>"; };
 		2288802D16187436008083EB /* XBFilteredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBFilteredView.m; sourceTree = "<group>"; };
+		22D177291618752D00B8093D /* TakePhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoController.h; sourceTree = "<group>"; };
+		22D1772A1618752D00B8093D /* TakePhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoController.m; sourceTree = "<group>"; };
+		22D1772B1618752D00B8093D /* TakePhotoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TakePhotoController.xib; sourceTree = "<group>"; };
+		22D1772F1618753D00B8093D /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		22D177301618753D00B8093D /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		22D1FEE71611FC6600E66FEE /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CroppingViewController.xib; sourceTree = "<group>"; };
@@ -310,8 +315,6 @@
 		22D7BF7C160CCCAD008B5BFA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		22D7BF91160CCD2B008B5BFA /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		22D7BF93160CCDD5008B5BFA /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
-		22D7BF94160CCDD5008B5BFA /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		22D7BF95160CCDD5008B5BFA /* StartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StartViewController.xib; sourceTree = "<group>"; };
 		22D7BFA3160EF652008B5BFA /* ThumbnailsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailsView.h; sourceTree = "<group>"; };
 		22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailsView.m; sourceTree = "<group>"; };
@@ -319,9 +322,6 @@
 		22E1EB6016143E9500B0E656 /* ZoomingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZoomingView.m; sourceTree = "<group>"; };
 		22E1EB771615B12000B0E656 /* UIImage+Rect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rect.h"; sourceTree = "<group>"; };
 		22E1EB781615B12000B0E656 /* UIImage+Rect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rect.m"; sourceTree = "<group>"; };
-		22E51F06160F3A8700299D42 /* CameraOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraOverlayView.h; sourceTree = "<group>"; };
-		22E51F07160F3A8700299D42 /* CameraOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraOverlayView.m; sourceTree = "<group>"; };
-		22E51F11160F4A6C00299D42 /* CameraOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CameraOverlayView.xib; sourceTree = "<group>"; };
 		22E51F13160F4E8E00299D42 /* UIView+NIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NIB.h"; sourceTree = "<group>"; };
 		22E51F14160F4E8E00299D42 /* UIView+NIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NIB.m"; sourceTree = "<group>"; };
 		8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Creation.h"; sourceTree = "<group>"; };
@@ -582,7 +582,6 @@
 			isa = PBXGroup;
 			children = (
 				2288801816187436008083EB /* XBFilteredImage */,
-				8BDD882416186D18008FFC24 /* XBImageFilters */,
 				8BDD882216186C9C008FFC24 /* OpenGLES.framework */,
 				8BDD882016186C91008FFC24 /* GLKit.framework */,
 				8BDD881E16186C84008FFC24 /* AVFoundation.framework */,
@@ -630,11 +629,14 @@
 		22D7BF98160CCDDD008B5BFA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				22D177291618752D00B8093D /* TakePhotoController.h */,
+				22D1772A1618752D00B8093D /* TakePhotoController.m */,
+				22D1772B1618752D00B8093D /* TakePhotoController.xib */,
 				8B9B4E4C160F5055000BE08F /* PhotoEditController.h */,
 				8B9B4E4D160F5055000BE08F /* PhotoEditController.m */,
 				8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */,
-				22D7BF93160CCDD5008B5BFA /* StartViewController.h */,
-				22D7BF94160CCDD5008B5BFA /* StartViewController.m */,
+				22D1772F1618753D00B8093D /* StartViewController.h */,
+				22D177301618753D00B8093D /* StartViewController.m */,
 				22D7BF95160CCDD5008B5BFA /* StartViewController.xib */,
 				22855AD016119973007333D8 /* CroppingViewController.h */,
 				22855AD116119973007333D8 /* CroppingViewController.m */,
@@ -656,9 +658,6 @@
 				8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */,
 				22D7BFA3160EF652008B5BFA /* ThumbnailsView.h */,
 				22D7BFA4160EF652008B5BFA /* ThumbnailsView.m */,
-				22E51F06160F3A8700299D42 /* CameraOverlayView.h */,
-				22E51F07160F3A8700299D42 /* CameraOverlayView.m */,
-				22E51F11160F4A6C00299D42 /* CameraOverlayView.xib */,
 				8B9B4E60160F5B7C000BE08F /* CaptionView.h */,
 				8B9B4E61160F5B7D000BE08F /* CaptionView.m */,
 				8B9B4E5E160F5B31000BE08F /* CaptionView.xib */,
@@ -672,41 +671,6 @@
 				22E1EB6016143E9500B0E656 /* ZoomingView.m */,
 			);
 			name = View;
-			sourceTree = "<group>";
-		};
-		8BDD882416186D18008FFC24 /* XBImageFilters */ = {
-			isa = PBXGroup;
-			children = (
-				8BDD882516186D32008FFC24 /* XBFilteredView.h */,
-				8BDD882616186D32008FFC24 /* XBFilteredCameraView.h */,
-				8BDD882716186D32008FFC24 /* CameraTargetView.h */,
-				8BDD882816186D32008FFC24 /* CameraTargetView.m */,
-				8BDD882916186D32008FFC24 /* GLKitAdditions */,
-				8BDD883616186D32008FFC24 /* XBFilteredCameraView.m */,
-				8BDD883716186D32008FFC24 /* XBFilteredImageView.h */,
-				8BDD883816186D32008FFC24 /* XBFilteredImageView.m */,
-				8BDD883916186D32008FFC24 /* XBFilteredView.m */,
-			);
-			name = XBImageFilters;
-			sourceTree = "<group>";
-		};
-		8BDD882916186D32008FFC24 /* GLKitAdditions */ = {
-			isa = PBXGroup;
-			children = (
-				8BDD882A16186D32008FFC24 /* GLKAttribute.h */,
-				8BDD882B16186D32008FFC24 /* GLKAttribute.m */,
-				8BDD882C16186D32008FFC24 /* GLKProgram.h */,
-				8BDD882D16186D32008FFC24 /* GLKProgram.m */,
-				8BDD882E16186D32008FFC24 /* GLKShaderVariable.h */,
-				8BDD882F16186D32008FFC24 /* GLKShaderVariable.m */,
-				8BDD883016186D32008FFC24 /* GLKUniform.h */,
-				8BDD883116186D32008FFC24 /* GLKUniform.m */,
-				8BDD883216186D32008FFC24 /* XBTexture.h */,
-				8BDD883316186D32008FFC24 /* XBTexture.m */,
-				8BDD883416186D32008FFC24 /* XBTextureInfo.h */,
-				8BDD883516186D32008FFC24 /* XBTextureInfo.m */,
-			);
-			path = GLKitAdditions;
 			sourceTree = "<group>";
 		};
 		8BDD884F16186DBD008FFC24 /* Shaders */ = {
@@ -884,7 +848,6 @@
 				226E75BF160F02FA00531350 /* Main_screen_separator.png in Resources */,
 				226E75C0160F02FA00531350 /* Main_screen_separator@2x.png in Resources */,
 				8B9B4E52160F5055000BE08F /* PhotoEditController.xib in Resources */,
-				22E51F12160F4A6C00299D42 /* CameraOverlayView.xib in Resources */,
 				221C31C616103E2C005974C8 /* TableViewPopover.xib in Resources */,
 				221C31DB16104754005974C8 /* TablePopoverCell.xib in Resources */,
 				8B9B4E5F160F5B31000BE08F /* CaptionView.xib in Resources */,
@@ -907,6 +870,7 @@
 				8BDD88661618702E008FFC24 /* SuckShader.glsl in Resources */,
 				8BDD88671618702E008FFC24 /* UnsharpMaskFragmentShader.glsl in Resources */,
 				8BDD88681618702E008FFC24 /* VBlurVertexShader.glsl in Resources */,
+				22D1772D1618752D00B8093D /* TakePhotoController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,14 +883,12 @@
 			files = (
 				22D7BF64160CCC33008B5BFA /* main.m in Sources */,
 				22D7BF86160CCCAD008B5BFA /* AppDelegate.m in Sources */,
-				22D7BF96160CCDD5008B5BFA /* StartViewController.m in Sources */,
 				22D7BFA5160EF652008B5BFA /* ThumbnailsView.m in Sources */,
 				220B39A0160EFE5A0010F257 /* Filters.m in Sources */,
 				8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */,
 				8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */,
 				8B9B4E51160F5055000BE08F /* PhotoEditController.m in Sources */,
 				8B9B4E53160F5055000BE08F /* UIColor+VKPhotoEditor.m in Sources */,
-				22E51F08160F3A8700299D42 /* CameraOverlayView.m in Sources */,
 				22E51F15160F4E8E00299D42 /* UIView+NIB.m in Sources */,
 				221C31C516103E2C005974C8 /* TableViewPopover.m in Sources */,
 				221C31CC16103E59005974C8 /* UIView+Helpers.m in Sources */,
@@ -952,6 +914,8 @@
 				2288803516187437008083EB /* XBFilteredCameraView.m in Sources */,
 				2288803616187437008083EB /* XBFilteredImageView.m in Sources */,
 				2288803716187437008083EB /* XBFilteredView.m in Sources */,
+				22D1772C1618752D00B8093D /* TakePhotoController.m in Sources */,
+				22D177311618753D00B8093D /* StartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
