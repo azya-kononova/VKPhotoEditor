@@ -559,6 +559,10 @@ float pagesToMB(int pages);
 
 - (BOOL)setFilterFragmentShaderPaths:(NSArray *)fsPaths vertexShaderPaths:(NSArray *)vsPaths error:(NSError *__autoreleasing *)error
 {
+    if (!vsPaths) {
+        return [self setFilterFragmentShaderPaths:fsPaths error:error];
+    }
+    
     NSMutableArray *fsSources = [[NSMutableArray alloc] initWithCapacity:fsPaths.count];
     NSMutableArray *vsSources = [[NSMutableArray alloc] initWithCapacity:vsPaths.count];
     for (int i = 0; i < fsPaths.count; ++i) {
