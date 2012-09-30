@@ -160,6 +160,7 @@
 		8BDD88661618702E008FFC24 /* SuckShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885A1618702E008FFC24 /* SuckShader.glsl */; };
 		8BDD88671618702E008FFC24 /* UnsharpMaskFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885B1618702E008FFC24 /* UnsharpMaskFragmentShader.glsl */; };
 		8BDD88681618702E008FFC24 /* VBlurVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885C1618702E008FFC24 /* VBlurVertexShader.glsl */; };
+		8BDD886C161878E8008FFC24 /* ImageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD886B161878E8008FFC24 /* ImageFilter.m */; };
 		8BDF18741610C6AB00507B5F /* FlexibleTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF18731610C6AB00507B5F /* FlexibleTextField.m */; };
 		8BDF18A41611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */; };
 		8BDF18A51611A67B00507B5F /* Complete_in_Him.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189F1611A67B00507B5F /* Complete_in_Him.ttf */; };
@@ -359,6 +360,8 @@
 		8BDD885A1618702E008FFC24 /* SuckShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SuckShader.glsl; sourceTree = "<group>"; };
 		8BDD885B1618702E008FFC24 /* UnsharpMaskFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnsharpMaskFragmentShader.glsl; sourceTree = "<group>"; };
 		8BDD885C1618702E008FFC24 /* VBlurVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VBlurVertexShader.glsl; sourceTree = "<group>"; };
+		8BDD886A161878E8008FFC24 /* ImageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFilter.h; sourceTree = "<group>"; };
+		8BDD886B161878E8008FFC24 /* ImageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFilter.m; sourceTree = "<group>"; };
 		8BDF18721610C6AB00507B5F /* FlexibleTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleTextField.h; sourceTree = "<group>"; };
 		8BDF18731610C6AB00507B5F /* FlexibleTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleTextField.m; sourceTree = "<group>"; };
 		8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = collegiateHeavyOutline_Medium.ttf; sourceTree = "<group>"; };
@@ -395,6 +398,8 @@
 			children = (
 				220B399E160EFE5A0010F257 /* Filters.h */,
 				220B399F160EFE5A0010F257 /* Filters.m */,
+				8BDD886A161878E8008FFC24 /* ImageFilter.h */,
+				8BDD886B161878E8008FFC24 /* ImageFilter.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -916,6 +921,7 @@
 				2288803716187437008083EB /* XBFilteredView.m in Sources */,
 				22D1772C1618752D00B8093D /* TakePhotoController.m in Sources */,
 				22D177311618753D00B8093D /* StartViewController.m in Sources */,
+				8BDD886C161878E8008FFC24 /* ImageFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

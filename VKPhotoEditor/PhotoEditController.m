@@ -15,6 +15,7 @@
 #import "UIView+Helpers.h"
 #import "UIView+NIB.h"
 #import "XBFilteredImageView.h"
+#import "ImageFilter.h"
 
 @interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource>
 @end
@@ -75,9 +76,14 @@
     
     [scrollView addSubview:contentView];
     scrollView.contentSize = contentView.frame.size;
-    XBFilteredImageView* view = [XBFilteredImageView new];
     
-    imageView.image = image;
+    XBFilteredImageView *filteredImageView = [[XBFilteredImageView alloc] initWithFrame:CGRectMake(0, 70, 320, 320)];
+    filteredImageView.image = image;
+    ImageFilter *defaultFilter = [filters objectAtIndex:0];
+    NSError *error = nil;
+    [filteredImageView setFilterFragmentShaderPaths:defaultFilter.fragmentShaderPaths vertexShaderPaths:defaultFilter.vertexShaderPaths error:&error];
+    [topView addSubview:filteredImageView];
+    
 }
 
 - (void)resizeScrollView:(BOOL)show notification:(NSNotification *)n
@@ -151,7 +157,8 @@
 }
 - (UIView*)thumbnailsView:(ThumbnailsView*)view viewForItemWithIndex:(NSUInteger)index
 {
-    return [filters objectAtIndex:index];
+    ImageFilter *filter = [filters objectAtIndex:index];
+    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:filter.previewPath]];
 }
 - (CGFloat)thumbnailsView:(ThumbnailsView*)view thumbnailWidthForHeight:(CGFloat)height
 {

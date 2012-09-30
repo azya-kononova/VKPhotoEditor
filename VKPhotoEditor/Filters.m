@@ -7,25 +7,43 @@
 //
 
 #import "Filters.h"
+#import "ImageFilter.h"
 
 @implementation Filters
 
 + (NSArray *)filters
 {
-    return [NSArray arrayWithObjects:[self image:@"Basic.png"],
-            [self image:@"Filter1.png"],
-            [self image:@"Filter2.png"],
-            [self image:@"Filter3.png"],
-            [self image:@"Filter4.png"],
-            [self image:@"Filter5.png"],
-            [self image:@"Filter6.png"],
-            [self image:@"Filter7.png"],
-            [self image:@"Filter8.png"],nil];
+    NSString *defaultVSPath = [self shaderAt:@"DefaultVertexShader"];
+    NSString *defaultFSPath = [self shaderAt:@"DefaultFragmentShader"];
+    NSString *overlayFSPath = [self shaderAt:@"OverlayFragmentShader"];
+    NSString *overlayVSPath = [self shaderAt:@"OverlayVertexShader"];
+    NSString *luminancePath = [self shaderAt:@"LuminanceFragmentShader"];
+    NSString *blurFSPath = [self shaderAt:@"BlurFragmentShader"];
+    NSString *hBlurVSPath = [self shaderAt:@"HBlurVertexShader"];
+    NSString *vBlurVSPath = [self shaderAt:@"VBlurVertexShader"];
+    NSString *discretizePath = [self shaderAt:@"DiscretizeShader"];
+    NSString *pixelatePath = [self shaderAt:@"PixelateShader"];
+    NSString *suckPath = [self shaderAt:@"SuckShader"];
+    
+    return [NSArray arrayWithObjects: [self filterWithPreview:@"Basic.png" fsPaths:[NSArray arrayWithObject:defaultFSPath] vsPaths:nil],
+            [self filterWithPreview:@"Filter1.png" fsPaths:[NSArray arrayWithObject:overlayFSPath] vsPaths:[NSArray arrayWithObject:overlayVSPath]],
+            [self filterWithPreview:@"Filter2.png" fsPaths:[NSArray arrayWithObject:suckPath] vsPaths:nil],
+            [self filterWithPreview:@"Filter3.png" fsPaths:[NSArray arrayWithObject:pixelatePath] vsPaths:nil],
+            [self filterWithPreview:@"Filter4.png" fsPaths:[NSArray arrayWithObject:discretizePath] vsPaths:nil],
+            [self filterWithPreview:@"Filter5.png" fsPaths:[NSArray arrayWithObject:luminancePath] vsPaths:nil],
+            [self filterWithPreview:@"Filter6.png" fsPaths:[NSArray arrayWithObject:blurFSPath] vsPaths:[NSArray arrayWithObject:hBlurVSPath]],
+            [self filterWithPreview:@"Filter7.png" fsPaths:[NSArray arrayWithObjects:blurFSPath, hBlurVSPath, nil] vsPaths:[NSArray arrayWithObjects:vBlurVSPath, hBlurVSPath, nil]],
+            [self filterWithPreview:@"Filter8.png" fsPaths:[NSArray arrayWithObjects:luminancePath, blurFSPath, blurFSPath, nil] vsPaths:[NSArray arrayWithObjects:defaultVSPath, vBlurVSPath, hBlurVSPath, nil]], nil];
 }
 
-+ (UIImageView *)image:(NSString *)name
++ (ImageFilter*)filterWithPreview:(NSString*)preview fsPaths:(NSArray*)fsPaths vsPaths:(NSArray*)vsPaths
 {
-    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:name]];
+    return [[ImageFilter alloc] initWithPreviewPath:preview fragmentShaderPaths:fsPaths vertexShaderPaths:vsPaths];
+}
+
++ (NSString*)shaderAt:(NSString*)path
+{
+    return [[NSBundle mainBundle] pathForResource:path ofType:@"glsl"];
 }
 
 @end
