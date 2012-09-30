@@ -148,6 +148,18 @@
 		8BDD882116186C91008FFC24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD882016186C91008FFC24 /* GLKit.framework */; };
 		8BDD882316186C9C008FFC24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD882216186C9C008FFC24 /* OpenGLES.framework */; };
 		8BDD884616186D48008FFC24 /* UIImage+XBImageFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */; };
+		8BDD885D1618702E008FFC24 /* BlurFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88511618702E008FFC24 /* BlurFragmentShader.glsl */; };
+		8BDD885E1618702E008FFC24 /* DefaultFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88521618702E008FFC24 /* DefaultFragmentShader.glsl */; };
+		8BDD885F1618702E008FFC24 /* DefaultVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88531618702E008FFC24 /* DefaultVertexShader.glsl */; };
+		8BDD88601618702E008FFC24 /* DiscretizeShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88541618702E008FFC24 /* DiscretizeShader.glsl */; };
+		8BDD88611618702E008FFC24 /* HBlurVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88551618702E008FFC24 /* HBlurVertexShader.glsl */; };
+		8BDD88621618702E008FFC24 /* LuminanceFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88561618702E008FFC24 /* LuminanceFragmentShader.glsl */; };
+		8BDD88631618702E008FFC24 /* OverlayFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88571618702E008FFC24 /* OverlayFragmentShader.glsl */; };
+		8BDD88641618702E008FFC24 /* OverlayVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88581618702E008FFC24 /* OverlayVertexShader.glsl */; };
+		8BDD88651618702E008FFC24 /* PixelateShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88591618702E008FFC24 /* PixelateShader.glsl */; };
+		8BDD88661618702E008FFC24 /* SuckShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885A1618702E008FFC24 /* SuckShader.glsl */; };
+		8BDD88671618702E008FFC24 /* UnsharpMaskFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885B1618702E008FFC24 /* UnsharpMaskFragmentShader.glsl */; };
+		8BDD88681618702E008FFC24 /* VBlurVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885C1618702E008FFC24 /* VBlurVertexShader.glsl */; };
 		8BDF18741610C6AB00507B5F /* FlexibleTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF18731610C6AB00507B5F /* FlexibleTextField.m */; };
 		8BDF18A41611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */; };
 		8BDF18A51611A67B00507B5F /* Complete_in_Him.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189F1611A67B00507B5F /* Complete_in_Him.ttf */; };
@@ -335,6 +347,18 @@
 		8BDD882216186C9C008FFC24 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		8BDD884416186D48008FFC24 /* UIImage+XBImageFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XBImageFilters.h"; sourceTree = "<group>"; };
 		8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XBImageFilters.m"; sourceTree = "<group>"; };
+		8BDD88511618702E008FFC24 /* BlurFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlurFragmentShader.glsl; sourceTree = "<group>"; };
+		8BDD88521618702E008FFC24 /* DefaultFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultFragmentShader.glsl; sourceTree = "<group>"; };
+		8BDD88531618702E008FFC24 /* DefaultVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultVertexShader.glsl; sourceTree = "<group>"; };
+		8BDD88541618702E008FFC24 /* DiscretizeShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DiscretizeShader.glsl; sourceTree = "<group>"; };
+		8BDD88551618702E008FFC24 /* HBlurVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HBlurVertexShader.glsl; sourceTree = "<group>"; };
+		8BDD88561618702E008FFC24 /* LuminanceFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LuminanceFragmentShader.glsl; sourceTree = "<group>"; };
+		8BDD88571618702E008FFC24 /* OverlayFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OverlayFragmentShader.glsl; sourceTree = "<group>"; };
+		8BDD88581618702E008FFC24 /* OverlayVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OverlayVertexShader.glsl; sourceTree = "<group>"; };
+		8BDD88591618702E008FFC24 /* PixelateShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelateShader.glsl; sourceTree = "<group>"; };
+		8BDD885A1618702E008FFC24 /* SuckShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SuckShader.glsl; sourceTree = "<group>"; };
+		8BDD885B1618702E008FFC24 /* UnsharpMaskFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnsharpMaskFragmentShader.glsl; sourceTree = "<group>"; };
+		8BDD885C1618702E008FFC24 /* VBlurVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VBlurVertexShader.glsl; sourceTree = "<group>"; };
 		8BDF18721610C6AB00507B5F /* FlexibleTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleTextField.h; sourceTree = "<group>"; };
 		8BDF18731610C6AB00507B5F /* FlexibleTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleTextField.m; sourceTree = "<group>"; };
 		8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = collegiateHeavyOutline_Medium.ttf; sourceTree = "<group>"; };
@@ -411,6 +435,7 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8BDD884F16186DBD008FFC24 /* Shaders */,
 				8BDF189C1611A67B00507B5F /* fonts */,
 				226E75BD160F02FA00531350 /* Main_screen_separator.png */,
 				226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */,
@@ -539,11 +564,6 @@
 		22D7BF48160CCC33008B5BFA = {
 			isa = PBXGroup;
 			children = (
-				8BDD882216186C9C008FFC24 /* OpenGLES.framework */,
-				8BDD882016186C91008FFC24 /* GLKit.framework */,
-				8BDD881E16186C84008FFC24 /* AVFoundation.framework */,
-				8BDD881C16186C79008FFC24 /* CoreVideo.framework */,
-				8BDD881A16186C71008FFC24 /* CoreMedia.framework */,
 				22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */,
 				22D7BF56160CCC33008B5BFA /* Frameworks */,
 				22D7BF54160CCC33008B5BFA /* Products */,
@@ -562,6 +582,12 @@
 			isa = PBXGroup;
 			children = (
 				2288801816187436008083EB /* XBFilteredImage */,
+				8BDD882416186D18008FFC24 /* XBImageFilters */,
+				8BDD882216186C9C008FFC24 /* OpenGLES.framework */,
+				8BDD882016186C91008FFC24 /* GLKit.framework */,
+				8BDD881E16186C84008FFC24 /* AVFoundation.framework */,
+				8BDD881C16186C79008FFC24 /* CoreVideo.framework */,
+				8BDD881A16186C71008FFC24 /* CoreMedia.framework */,
 				221C31D0161045C2005974C8 /* QuartzCore.framework */,
 				226E75ED160F1DC700531350 /* AssetsLibrary.framework */,
 				22D7BF57160CCC33008B5BFA /* UIKit.framework */,
@@ -646,6 +672,60 @@
 				22E1EB6016143E9500B0E656 /* ZoomingView.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		8BDD882416186D18008FFC24 /* XBImageFilters */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD882516186D32008FFC24 /* XBFilteredView.h */,
+				8BDD882616186D32008FFC24 /* XBFilteredCameraView.h */,
+				8BDD882716186D32008FFC24 /* CameraTargetView.h */,
+				8BDD882816186D32008FFC24 /* CameraTargetView.m */,
+				8BDD882916186D32008FFC24 /* GLKitAdditions */,
+				8BDD883616186D32008FFC24 /* XBFilteredCameraView.m */,
+				8BDD883716186D32008FFC24 /* XBFilteredImageView.h */,
+				8BDD883816186D32008FFC24 /* XBFilteredImageView.m */,
+				8BDD883916186D32008FFC24 /* XBFilteredView.m */,
+			);
+			name = XBImageFilters;
+			sourceTree = "<group>";
+		};
+		8BDD882916186D32008FFC24 /* GLKitAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD882A16186D32008FFC24 /* GLKAttribute.h */,
+				8BDD882B16186D32008FFC24 /* GLKAttribute.m */,
+				8BDD882C16186D32008FFC24 /* GLKProgram.h */,
+				8BDD882D16186D32008FFC24 /* GLKProgram.m */,
+				8BDD882E16186D32008FFC24 /* GLKShaderVariable.h */,
+				8BDD882F16186D32008FFC24 /* GLKShaderVariable.m */,
+				8BDD883016186D32008FFC24 /* GLKUniform.h */,
+				8BDD883116186D32008FFC24 /* GLKUniform.m */,
+				8BDD883216186D32008FFC24 /* XBTexture.h */,
+				8BDD883316186D32008FFC24 /* XBTexture.m */,
+				8BDD883416186D32008FFC24 /* XBTextureInfo.h */,
+				8BDD883516186D32008FFC24 /* XBTextureInfo.m */,
+			);
+			path = GLKitAdditions;
+			sourceTree = "<group>";
+		};
+		8BDD884F16186DBD008FFC24 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD88511618702E008FFC24 /* BlurFragmentShader.glsl */,
+				8BDD88521618702E008FFC24 /* DefaultFragmentShader.glsl */,
+				8BDD88531618702E008FFC24 /* DefaultVertexShader.glsl */,
+				8BDD88541618702E008FFC24 /* DiscretizeShader.glsl */,
+				8BDD88551618702E008FFC24 /* HBlurVertexShader.glsl */,
+				8BDD88561618702E008FFC24 /* LuminanceFragmentShader.glsl */,
+				8BDD88571618702E008FFC24 /* OverlayFragmentShader.glsl */,
+				8BDD88581618702E008FFC24 /* OverlayVertexShader.glsl */,
+				8BDD88591618702E008FFC24 /* PixelateShader.glsl */,
+				8BDD885A1618702E008FFC24 /* SuckShader.glsl */,
+				8BDD885B1618702E008FFC24 /* UnsharpMaskFragmentShader.glsl */,
+				8BDD885C1618702E008FFC24 /* VBlurVertexShader.glsl */,
+			);
+			name = Shaders;
 			sourceTree = "<group>";
 		};
 		8BDF189C1611A67B00507B5F /* fonts */ = {
@@ -815,6 +895,18 @@
 				8BDF18A81611A67B00507B5F /* tt1018m_.ttf in Resources */,
 				8BDF18AC1611AAD400507B5F /* ballw_.ttf in Resources */,
 				22D1FF0E1612047C00E66FEE /* CroppingViewController.xib in Resources */,
+				8BDD885D1618702E008FFC24 /* BlurFragmentShader.glsl in Resources */,
+				8BDD885E1618702E008FFC24 /* DefaultFragmentShader.glsl in Resources */,
+				8BDD885F1618702E008FFC24 /* DefaultVertexShader.glsl in Resources */,
+				8BDD88601618702E008FFC24 /* DiscretizeShader.glsl in Resources */,
+				8BDD88611618702E008FFC24 /* HBlurVertexShader.glsl in Resources */,
+				8BDD88621618702E008FFC24 /* LuminanceFragmentShader.glsl in Resources */,
+				8BDD88631618702E008FFC24 /* OverlayFragmentShader.glsl in Resources */,
+				8BDD88641618702E008FFC24 /* OverlayVertexShader.glsl in Resources */,
+				8BDD88651618702E008FFC24 /* PixelateShader.glsl in Resources */,
+				8BDD88661618702E008FFC24 /* SuckShader.glsl in Resources */,
+				8BDD88671618702E008FFC24 /* UnsharpMaskFragmentShader.glsl in Resources */,
+				8BDD88681618702E008FFC24 /* VBlurVertexShader.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
