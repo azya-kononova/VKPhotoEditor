@@ -26,6 +26,7 @@
     CGPoint oldContentOffset;
     UIImage *image;
     BOOL isPhoto;
+    XBFilteredImageView *filteredImageView;
 }
 
 @synthesize saveButton;
@@ -77,11 +78,11 @@
     [scrollView addSubview:contentView];
     scrollView.contentSize = contentView.frame.size;
     
-    XBFilteredImageView *filteredImageView = [[XBFilteredImageView alloc] initWithFrame:CGRectMake(0, 70, 320, 320)];
+    filteredImageView = [[XBFilteredImageView alloc] initWithFrame:CGRectMake(0, 70, 320, 320)];
     filteredImageView.image = image;
+    
     ImageFilter *defaultFilter = [filters objectAtIndex:0];
-    NSError *error = nil;
-    [filteredImageView setFilterFragmentShaderPaths:defaultFilter.fragmentShaderPaths vertexShaderPaths:defaultFilter.vertexShaderPaths error:&error];
+    [filteredImageView setFilterFragmentShaderPaths:defaultFilter.fragmentShaderPaths vertexShaderPaths:defaultFilter.vertexShaderPaths error:nil];
     [topView addSubview:filteredImageView];
     
 }
@@ -173,7 +174,9 @@
 }
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    
+    ImageFilter *filter = [filters objectAtIndex:index];
+    [filteredImageView setFilterFragmentShaderPaths:filter.fragmentShaderPaths vertexShaderPaths:filter.vertexShaderPaths error:nil];
+    [filteredImageView setNeedsLayout];
 }
 
 @end
