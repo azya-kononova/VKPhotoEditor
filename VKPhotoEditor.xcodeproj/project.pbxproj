@@ -141,16 +141,6 @@
 		8BDF18AC1611AAD400507B5F /* ballw_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF18AB1611AAD400507B5F /* ballw_.ttf */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		8B9657C1161858A200D2539E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8B9657B9161858A200D2539E /* XBImageFilters.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1BE16EBF14EB4BE600570A64;
-			remoteInfo = XBImageFilters;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		220B399E160EFE5A0010F257 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
 		220B399F160EFE5A0010F257 /* Filters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Filters.m; sourceTree = "<group>"; };
@@ -290,7 +280,6 @@
 		8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Creation.m"; sourceTree = "<group>"; };
 		8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleButton.h; sourceTree = "<group>"; };
 		8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleButton.m; sourceTree = "<group>"; };
-		8B9657B9161858A200D2539E /* XBImageFilters.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XBImageFilters.xcodeproj; path = XBImageFilters/XBImageFilters.xcodeproj; sourceTree = "<group>"; };
 		8B9B4E4C160F5055000BE08F /* PhotoEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEditController.h; sourceTree = "<group>"; };
 		8B9B4E4D160F5055000BE08F /* PhotoEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoEditController.m; sourceTree = "<group>"; };
 		8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditController.xib; sourceTree = "<group>"; };
@@ -482,7 +471,6 @@
 		22D7BF56160CCC33008B5BFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8B9657B9161858A200D2539E /* XBImageFilters.xcodeproj */,
 				221C31D0161045C2005974C8 /* QuartzCore.framework */,
 				226E75ED160F1DC700531350 /* AssetsLibrary.framework */,
 				22D7BF57160CCC33008B5BFA /* UIKit.framework */,
@@ -569,14 +557,6 @@
 			name = View;
 			sourceTree = "<group>";
 		};
-		8B9657BA161858A200D2539E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8B9657C2161858A200D2539E /* XBImageFilters.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		8BDF189C1611A67B00507B5F /* fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,28 +609,12 @@
 			mainGroup = 22D7BF48160CCC33008B5BFA;
 			productRefGroup = 22D7BF54160CCC33008B5BFA /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 8B9657BA161858A200D2539E /* Products */;
-					ProjectRef = 8B9657B9161858A200D2539E /* XBImageFilters.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				22D7BF52160CCC33008B5BFA /* VKPhotoEditor */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		8B9657C2161858A200D2539E /* XBImageFilters.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = XBImageFilters.app;
-			remoteRef = 8B9657C1161858A200D2539E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		22D7BF51160CCC33008B5BFA /* Resources */ = {
@@ -868,10 +832,8 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKPhotoEditor/VKPhotoEditor-Prefix.pch";
-				HEADER_SEARCH_PATHS = "XBImageFilters/**";
 				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "XBImageFilters/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -881,10 +843,8 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKPhotoEditor/VKPhotoEditor-Prefix.pch";
-				HEADER_SEARCH_PATHS = "XBImageFilters/**";
 				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "XBImageFilters/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
