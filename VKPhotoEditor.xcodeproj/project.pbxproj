@@ -132,6 +132,22 @@
 		8B9B4E62160F5B7D000BE08F /* CaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E61160F5B7D000BE08F /* CaptionView.m */; };
 		8B9B4E84160F6342000BE08F /* CustomSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E83160F6341000BE08F /* CustomSegmentView.m */; };
 		8B9B4E8B160F6428000BE08F /* CustomSegmentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */; };
+		8BDD881B16186C71008FFC24 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881A16186C71008FFC24 /* CoreMedia.framework */; };
+		8BDD881D16186C79008FFC24 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881C16186C79008FFC24 /* CoreVideo.framework */; };
+		8BDD881F16186C84008FFC24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881E16186C84008FFC24 /* AVFoundation.framework */; };
+		8BDD882116186C91008FFC24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD882016186C91008FFC24 /* GLKit.framework */; };
+		8BDD882316186C9C008FFC24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD882216186C9C008FFC24 /* OpenGLES.framework */; };
+		8BDD883A16186D32008FFC24 /* CameraTargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD882816186D32008FFC24 /* CameraTargetView.m */; };
+		8BDD883B16186D32008FFC24 /* GLKAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD882B16186D32008FFC24 /* GLKAttribute.m */; };
+		8BDD883C16186D32008FFC24 /* GLKProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD882D16186D32008FFC24 /* GLKProgram.m */; };
+		8BDD883D16186D32008FFC24 /* GLKShaderVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD882F16186D32008FFC24 /* GLKShaderVariable.m */; };
+		8BDD883E16186D32008FFC24 /* GLKUniform.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD883116186D32008FFC24 /* GLKUniform.m */; };
+		8BDD883F16186D32008FFC24 /* XBTexture.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD883316186D32008FFC24 /* XBTexture.m */; };
+		8BDD884016186D32008FFC24 /* XBTextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD883516186D32008FFC24 /* XBTextureInfo.m */; };
+		8BDD884116186D32008FFC24 /* XBFilteredCameraView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD883616186D32008FFC24 /* XBFilteredCameraView.m */; };
+		8BDD884216186D32008FFC24 /* XBFilteredImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD883816186D32008FFC24 /* XBFilteredImageView.m */; };
+		8BDD884316186D32008FFC24 /* XBFilteredView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD883916186D32008FFC24 /* XBFilteredView.m */; };
+		8BDD884616186D48008FFC24 /* UIImage+XBImageFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */; };
 		8BDF18741610C6AB00507B5F /* FlexibleTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF18731610C6AB00507B5F /* FlexibleTextField.m */; };
 		8BDF18A41611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */; };
 		8BDF18A51611A67B00507B5F /* Complete_in_Him.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189F1611A67B00507B5F /* Complete_in_Him.ttf */; };
@@ -292,6 +308,33 @@
 		8B9B4E83160F6341000BE08F /* CustomSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentView.m; sourceTree = "<group>"; };
 		8B9B4E89160F6426000BE08F /* CustomSegmentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentButton.h; sourceTree = "<group>"; };
 		8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentButton.m; sourceTree = "<group>"; };
+		8BDD881A16186C71008FFC24 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		8BDD881C16186C79008FFC24 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		8BDD881E16186C84008FFC24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		8BDD882016186C91008FFC24 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		8BDD882216186C9C008FFC24 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		8BDD882516186D32008FFC24 /* XBFilteredView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBFilteredView.h; sourceTree = "<group>"; };
+		8BDD882616186D32008FFC24 /* XBFilteredCameraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBFilteredCameraView.h; sourceTree = "<group>"; };
+		8BDD882716186D32008FFC24 /* CameraTargetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraTargetView.h; sourceTree = "<group>"; };
+		8BDD882816186D32008FFC24 /* CameraTargetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraTargetView.m; sourceTree = "<group>"; };
+		8BDD882A16186D32008FFC24 /* GLKAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKAttribute.h; sourceTree = "<group>"; };
+		8BDD882B16186D32008FFC24 /* GLKAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKAttribute.m; sourceTree = "<group>"; };
+		8BDD882C16186D32008FFC24 /* GLKProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKProgram.h; sourceTree = "<group>"; };
+		8BDD882D16186D32008FFC24 /* GLKProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKProgram.m; sourceTree = "<group>"; };
+		8BDD882E16186D32008FFC24 /* GLKShaderVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKShaderVariable.h; sourceTree = "<group>"; };
+		8BDD882F16186D32008FFC24 /* GLKShaderVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKShaderVariable.m; sourceTree = "<group>"; };
+		8BDD883016186D32008FFC24 /* GLKUniform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLKUniform.h; sourceTree = "<group>"; };
+		8BDD883116186D32008FFC24 /* GLKUniform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLKUniform.m; sourceTree = "<group>"; };
+		8BDD883216186D32008FFC24 /* XBTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBTexture.h; sourceTree = "<group>"; };
+		8BDD883316186D32008FFC24 /* XBTexture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBTexture.m; sourceTree = "<group>"; };
+		8BDD883416186D32008FFC24 /* XBTextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBTextureInfo.h; sourceTree = "<group>"; };
+		8BDD883516186D32008FFC24 /* XBTextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBTextureInfo.m; sourceTree = "<group>"; };
+		8BDD883616186D32008FFC24 /* XBFilteredCameraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBFilteredCameraView.m; sourceTree = "<group>"; };
+		8BDD883716186D32008FFC24 /* XBFilteredImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBFilteredImageView.h; sourceTree = "<group>"; };
+		8BDD883816186D32008FFC24 /* XBFilteredImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBFilteredImageView.m; sourceTree = "<group>"; };
+		8BDD883916186D32008FFC24 /* XBFilteredView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBFilteredView.m; sourceTree = "<group>"; };
+		8BDD884416186D48008FFC24 /* UIImage+XBImageFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XBImageFilters.h"; sourceTree = "<group>"; };
+		8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XBImageFilters.m"; sourceTree = "<group>"; };
 		8BDF18721610C6AB00507B5F /* FlexibleTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleTextField.h; sourceTree = "<group>"; };
 		8BDF18731610C6AB00507B5F /* FlexibleTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleTextField.m; sourceTree = "<group>"; };
 		8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = collegiateHeavyOutline_Medium.ttf; sourceTree = "<group>"; };
@@ -307,6 +350,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BDD882316186C9C008FFC24 /* OpenGLES.framework in Frameworks */,
+				8BDD882116186C91008FFC24 /* GLKit.framework in Frameworks */,
+				8BDD881F16186C84008FFC24 /* AVFoundation.framework in Frameworks */,
+				8BDD881D16186C79008FFC24 /* CoreVideo.framework in Frameworks */,
+				8BDD881B16186C71008FFC24 /* CoreMedia.framework in Frameworks */,
 				221C31D1161045C2005974C8 /* QuartzCore.framework in Frameworks */,
 				226E75EE160F1DC700531350 /* AssetsLibrary.framework in Frameworks */,
 				22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */,
@@ -330,6 +378,8 @@
 		221C31D2161045DC005974C8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8BDD884416186D48008FFC24 /* UIImage+XBImageFilters.h */,
+				8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */,
 				8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */,
 				8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */,
 				8B9B4E4F160F5055000BE08F /* UIColor+VKPhotoEditor.h */,
@@ -454,6 +504,11 @@
 		22D7BF48160CCC33008B5BFA = {
 			isa = PBXGroup;
 			children = (
+				8BDD882216186C9C008FFC24 /* OpenGLES.framework */,
+				8BDD882016186C91008FFC24 /* GLKit.framework */,
+				8BDD881E16186C84008FFC24 /* AVFoundation.framework */,
+				8BDD881C16186C79008FFC24 /* CoreVideo.framework */,
+				8BDD881A16186C71008FFC24 /* CoreMedia.framework */,
 				22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */,
 				22D7BF56160CCC33008B5BFA /* Frameworks */,
 				22D7BF54160CCC33008B5BFA /* Products */,
@@ -471,6 +526,7 @@
 		22D7BF56160CCC33008B5BFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8BDD882416186D18008FFC24 /* XBImageFilters */,
 				221C31D0161045C2005974C8 /* QuartzCore.framework */,
 				226E75ED160F1DC700531350 /* AssetsLibrary.framework */,
 				22D7BF57160CCC33008B5BFA /* UIKit.framework */,
@@ -555,6 +611,41 @@
 				22E1EB6016143E9500B0E656 /* ZoomingView.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		8BDD882416186D18008FFC24 /* XBImageFilters */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD882516186D32008FFC24 /* XBFilteredView.h */,
+				8BDD882616186D32008FFC24 /* XBFilteredCameraView.h */,
+				8BDD882716186D32008FFC24 /* CameraTargetView.h */,
+				8BDD882816186D32008FFC24 /* CameraTargetView.m */,
+				8BDD882916186D32008FFC24 /* GLKitAdditions */,
+				8BDD883616186D32008FFC24 /* XBFilteredCameraView.m */,
+				8BDD883716186D32008FFC24 /* XBFilteredImageView.h */,
+				8BDD883816186D32008FFC24 /* XBFilteredImageView.m */,
+				8BDD883916186D32008FFC24 /* XBFilteredView.m */,
+			);
+			name = XBImageFilters;
+			sourceTree = "<group>";
+		};
+		8BDD882916186D32008FFC24 /* GLKitAdditions */ = {
+			isa = PBXGroup;
+			children = (
+				8BDD882A16186D32008FFC24 /* GLKAttribute.h */,
+				8BDD882B16186D32008FFC24 /* GLKAttribute.m */,
+				8BDD882C16186D32008FFC24 /* GLKProgram.h */,
+				8BDD882D16186D32008FFC24 /* GLKProgram.m */,
+				8BDD882E16186D32008FFC24 /* GLKShaderVariable.h */,
+				8BDD882F16186D32008FFC24 /* GLKShaderVariable.m */,
+				8BDD883016186D32008FFC24 /* GLKUniform.h */,
+				8BDD883116186D32008FFC24 /* GLKUniform.m */,
+				8BDD883216186D32008FFC24 /* XBTexture.h */,
+				8BDD883316186D32008FFC24 /* XBTexture.m */,
+				8BDD883416186D32008FFC24 /* XBTextureInfo.h */,
+				8BDD883516186D32008FFC24 /* XBTextureInfo.m */,
+			);
+			path = GLKitAdditions;
 			sourceTree = "<group>";
 		};
 		8BDF189C1611A67B00507B5F /* fonts */ = {
@@ -758,6 +849,17 @@
 				22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */,
 				22E1EB6116143E9500B0E656 /* ZoomingView.m in Sources */,
 				22E1EB791615B12000B0E656 /* UIImage+Rect.m in Sources */,
+				8BDD883A16186D32008FFC24 /* CameraTargetView.m in Sources */,
+				8BDD883B16186D32008FFC24 /* GLKAttribute.m in Sources */,
+				8BDD883C16186D32008FFC24 /* GLKProgram.m in Sources */,
+				8BDD883D16186D32008FFC24 /* GLKShaderVariable.m in Sources */,
+				8BDD883E16186D32008FFC24 /* GLKUniform.m in Sources */,
+				8BDD883F16186D32008FFC24 /* XBTexture.m in Sources */,
+				8BDD884016186D32008FFC24 /* XBTextureInfo.m in Sources */,
+				8BDD884116186D32008FFC24 /* XBFilteredCameraView.m in Sources */,
+				8BDD884216186D32008FFC24 /* XBFilteredImageView.m in Sources */,
+				8BDD884316186D32008FFC24 /* XBFilteredView.m in Sources */,
+				8BDD884616186D48008FFC24 /* UIImage+XBImageFilters.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

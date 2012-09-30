@@ -14,6 +14,7 @@
 #import "CaptionView.h"
 #import "UIView+Helpers.h"
 #import "UIView+NIB.h"
+#import "XBFilteredImageView.h"
 
 @interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource>
 @end
@@ -74,6 +75,7 @@
     
     [scrollView addSubview:contentView];
     scrollView.contentSize = contentView.frame.size;
+    XBFilteredImageView* view = [XBFilteredImageView new];
     
     imageView.image = image;
 }
