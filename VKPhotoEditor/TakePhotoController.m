@@ -223,7 +223,7 @@
     }
     
     [cameraView takeAPhotoWithCompletion:^(UIImage *filteredImage) {
-        [delegate takePhotoController:self didFinishWithInitImage:initImage filteredImage:filteredImage filterIndex:self.filterIndex frameIndex:0];
+        [delegate takePhotoController:self didFinishWithBasicImage:nil filteredImage:filteredImage filterIndex:self.filterIndex];
         
             // Restore filter-specific state
         NSString *filterName = [filtersName objectAtIndex:self.filterIndex];
