@@ -12,4 +12,6 @@
 
 + (NSArray*)filters;
 
++ (NSArray*)filtersName;
+
 @end

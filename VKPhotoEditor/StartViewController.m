@@ -209,12 +209,12 @@
     [self dismissModalViewControllerAnimated:NO];
 }
 
-- (void)takePhotoController:(TakePhotoController *)_controller didFinishWithImage:(UIImage *)image
+- (void)takePhotoController:(TakePhotoController *)_controller didFinishWithInitImage:(UIImage *)initImage filteredImage:(UIImage *)filteredImage filterIndex:(NSInteger)fltIndex frameIndex:(NSInteger)frmIndex
 {
     [self dismissModalViewControllerAnimated:NO];
     
     isPhoto = YES;
-    [self cropPhoto:image];
+    [self cropPhoto:filteredImage];
 }
 
 @end

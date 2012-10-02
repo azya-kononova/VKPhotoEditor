@@ -16,7 +16,7 @@
 
 @protocol TakePhotoControllerDelegate
 - (void)takePhotoControllerDidCancel:(TakePhotoController *)controller;
-- (void)takePhotoController:(TakePhotoController *)controller didFinishWithImage:(UIImage *)image;
+- (void)takePhotoController:(TakePhotoController *)controller didFinishWithInitImage:(UIImage *)initImage filteredImage:(UIImage *)filteredImage filterIndex:(NSInteger)fltIndex frameIndex:(NSInteger)frmIndex;
 @end
 
 

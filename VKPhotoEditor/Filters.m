@@ -46,4 +46,11 @@
     return [[NSBundle mainBundle] pathForResource:path ofType:@"glsl"];
 }
 
+
++ (NSArray*)filtersName
+{
+        //TODO: reanme filters
+    return [[NSArray alloc] initWithObjects:@"No Filter", @"Spread", @"Pixelate", @"Discretize", @"Luminance", @"Horizontal Blur", @"Vertical Blur", @"Blur", @"Blur B&W", @"Sharpen", @"Discrete Blur", nil];
+}
+
 @end
