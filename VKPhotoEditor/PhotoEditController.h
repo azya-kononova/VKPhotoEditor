@@ -25,6 +25,7 @@
 
 - (id)initWithImage:(UIImage *)image isPhoto:(BOOL)isPhoto;
 - (IBAction)addCaption;
+- (IBAction)save;
 @end
 
 @protocol PhotoEditControllerDelegate

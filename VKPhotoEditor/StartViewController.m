@@ -197,6 +197,8 @@
 - (void)photoEditControllerDidCancel:(PhotoEditController *)controller
 {
     [self.navigationController popViewControllerAnimated:NO];
+    
+    [self loadAlbumImages];
 }
 
 - (void)photoEditControllerDidRetake:(PhotoEditController *)_controller

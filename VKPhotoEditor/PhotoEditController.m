@@ -136,15 +136,25 @@
     [scrollView setContentOffset:bottomOffset animated:NO];
 }
 
-- (IBAction)save:(id)sender
+- (IBAction)save
 {
-    [delegate photoEditControllerDidCancel:self];
+    UIImageWriteToSavedPhotosAlbum([filteredImageView takeScreenshotWithImageOrientation:image.imageOrientation], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
-- (IBAction)cancel:(id)sender
+- (IBAction)cancel
 {
     if (isPhoto) {
         [delegate photoEditControllerDidRetake:self];
+    } else {
+        [delegate photoEditControllerDidCancel:self];
+    }
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
+  contextInfo:(void *)contextInfo
+{
+    if (error) {
+        NSLog(@"Erorr saving photo: %@",error);
     } else {
         [delegate photoEditControllerDidCancel:self];
     }
