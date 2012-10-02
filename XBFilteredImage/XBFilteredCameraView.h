@@ -89,7 +89,7 @@ extern NSString *const XBCaptureQuality352x288;
 - (BOOL)hasCameraAtPosition:(XBCameraPosition)cameraPosition;
 - (void)toggleTorch;
 
-- (void)takeAPhotoWithCompletion:(void (^)(UIImage *image))completion;
+- (void)takeAPhotoWithCompletion:(void (^)(UIImage *, UIImage *))completion;
 
 - (GLKMatrix2)rawTexCoordTransformForPhotoOrientation:(XBPhotoOrientation)photoOrientation cameraPosition:(XBCameraPosition)cameraPosition;
 

@@ -40,8 +40,6 @@
     NSArray *flashLableNames;
     NSArray *flashImageNames;
     NSArray *blurImageNames;
-    
-    UIImage *initImage;
 }
 
 @property (nonatomic, assign) NSUInteger filterIndex;
@@ -222,8 +220,8 @@
         [program setValue:(void *)&rawTexCoordTransform forUniformNamed:@"u_rawTexCoordTransform"];
     }
     
-    [cameraView takeAPhotoWithCompletion:^(UIImage *filteredImage) {
-        [delegate takePhotoController:self didFinishWithBasicImage:nil filteredImage:filteredImage filterIndex:self.filterIndex];
+    [cameraView takeAPhotoWithCompletion:^(UIImage *filteredImage, UIImage *basicImage) {
+        [delegate takePhotoController:self didFinishWithBasicImage:basicImage filteredImage:filteredImage filterIndex:self.filterIndex];
         
             // Restore filter-specific state
         NSString *filterName = [filtersName objectAtIndex:self.filterIndex];
