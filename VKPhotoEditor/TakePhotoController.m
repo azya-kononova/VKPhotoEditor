@@ -239,7 +239,7 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
 - (IBAction)takePhoto:(id)sender
 {
     [stillCamera capturePhotoAsOriginalImageWithCompletionHandler:^(UIImage *processedImage, NSError *error) {
-        [delegate takePhotoController:self didFinishWithBasicImage:processedImage filterIndex:_filterIndex];
+        [delegate takePhotoController:self didFinishWithBasicImage:processedImage filterIndex:filterIndex];
     }];
 }
 
