@@ -31,6 +31,8 @@
     IBOutlet UIActivityIndicatorView *activityIndicator;
     IBOutlet FlexibleButton *takePhotoBtn;
     IBOutlet FlexibleButton *cameraRollBtn;
+    IBOutlet UILabel *choosePhotoLabel;
+    IBOutlet UILabel *noPhotoLabel;
 }
 
 - (void)viewDidLoad
@@ -67,6 +69,9 @@
                  assets = [NSMutableArray arrayWithArray:[[assets reverseObjectEnumerator] allObjects]];
                  [gallery reloadData];
                  [activityIndicator stopAnimating];
+                 
+                 noPhotoLabel.hidden = assets.count;
+                 choosePhotoLabel.hidden = !noPhotoLabel.hidden;
              }
           }];
      } failureBlock:^(NSError *error) {
