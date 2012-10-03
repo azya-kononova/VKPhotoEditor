@@ -10,8 +10,7 @@
 
 @interface ImageFilter : NSObject
 @property (nonatomic, strong, readonly) NSString *previewPath;
-@property (nonatomic, strong, readonly) NSArray *fragmentShaderPaths;
-@property (nonatomic, strong, readonly) NSArray *vertexShaderPaths;
+@property (nonatomic, strong, readonly) NSString *name;
 
-- (id)initWithPreviewPath:(NSString*)previewPath fragmentShaderPaths:(NSArray*)fsPaths vertexShaderPaths:(NSArray*)vsPaths;
+- (id)initWithPreviewPath:(NSString*)previewPath name:(NSString*)name;
 @end

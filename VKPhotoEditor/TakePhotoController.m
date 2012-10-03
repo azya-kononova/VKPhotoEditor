@@ -39,7 +39,6 @@
     TableViewPopover *blurPopover;
     
     NSArray *filters;
-    NSArray *filtersName;
     NSArray *movingButtons;
     
     NSArray *flashLableNames;
@@ -47,7 +46,6 @@
     NSArray *blurImageNames;
     GPUImageStillCamera *stillCamera;
     GPUImageOutput<GPUImageInput> *filter;
-    GPUImageOutput<GPUImageInput> *defaultFilter;
 }
 
 @property (nonatomic, assign) NSUInteger filterIndex;
@@ -64,7 +62,6 @@
     [super viewDidLoad];
     
     filters = Filters.filters;
-    filtersName = Filters.filtersName;
     movingButtons = [NSArray arrayWithObjects:cancelBtn, photoBtn, filterBtn, nil];
     
     flashPopover = [self loadPopoverWithOriginPoint:CGPointMake(44, 70)];
@@ -74,16 +71,7 @@
     
     stillCamera = [[GPUImageStillCamera alloc] init];
     stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
-    
     cameraView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
-    
-    filter = [[GPUImageSepiaFilter alloc] init];
-	[filter prepareForImageCapture];
-    
-    
-    [stillCamera addTarget:filter];
-    GPUImageView *filterView = cameraView;
-    [filter addTarget:filterView];
     
     self.filterIndex = 0;
 }
@@ -125,6 +113,14 @@
 - (void)setFilterIndex:(NSUInteger)filterIndex
 {
     _filterIndex = filterIndex;
+    ImageFilter *imageFilter = [filters objectAtIndex:filterIndex];
+    
+    [stillCamera removeAllTargets];
+    [filter removeAllTargets];
+    filter = [Filters GPUFilterWithName:imageFilter.name];
+    [stillCamera addTarget:filter];
+    [filter addTarget: cameraView];
+    [filter prepareForImageCapture];
 }
 
 

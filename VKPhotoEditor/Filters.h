@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GPUImageEmptyFilter.h"
+
+extern NSString *SepiaFilterName;
+extern NSString *DefaultFilterName;
+extern NSString *GrayscaleFilterName;
 
 @interface Filters : NSObject
 
 + (NSArray*)filters;
-
-+ (NSArray*)filtersName;
-
++ (GPUImageFilter*)GPUFilterWithName:(NSString*)name;
 @end

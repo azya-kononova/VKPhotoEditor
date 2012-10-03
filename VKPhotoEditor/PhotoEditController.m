@@ -161,11 +161,13 @@
 {
     return filters.count;
 }
+
 - (UIView*)thumbnailsView:(ThumbnailsView*)view viewForItemWithIndex:(NSUInteger)index
 {
     ImageFilter *filter = [filters objectAtIndex:index];
     return [[UIImageView alloc] initWithImage:[UIImage imageNamed:filter.previewPath]];
 }
+
 - (CGFloat)thumbnailsView:(ThumbnailsView*)view thumbnailWidthForHeight:(CGFloat)height
 {
     return height;
@@ -180,7 +182,7 @@
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
     ImageFilter *filter = [filters objectAtIndex:index];
-    [filteredImageView setFilterFragmentShaderPaths:filter.fragmentShaderPaths vertexShaderPaths:filter.vertexShaderPaths error:nil];
+//    [filteredImageView setFilterFragmentShaderPaths:filter.fragmentShaderPaths vertexShaderPaths:filter.vertexShaderPaths error:nil];
     [filteredImageView setNeedsLayout];
 }
 

@@ -10,15 +10,13 @@
 
 @implementation ImageFilter
 @synthesize previewPath;
-@synthesize fragmentShaderPaths;
-@synthesize vertexShaderPaths;
+@synthesize name;
 
-- (id)initWithPreviewPath:(NSString*)_previewPath fragmentShaderPaths:(NSArray*)_fsPaths vertexShaderPaths:(NSArray*)_vsPaths
+- (id)initWithPreviewPath:(NSString*)_previewPath name:(NSString *)_name
 {
     if (self = [super init]) {
         previewPath = _previewPath;
-        fragmentShaderPaths = _fsPaths;
-        vertexShaderPaths = _vsPaths;
+        name = _name;
     }
     return self;
 }
