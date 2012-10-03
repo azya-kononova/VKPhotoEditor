@@ -17,11 +17,16 @@
 #import "UIView+NIB.h"
 #import "UITableViewCell+NIB.h"
 
+#import "GPUImageView.h"
+#import "GPUImageStillCamera.h"
+#import "GPUImageSketchFilter.h"
+#import "GPUImageSepiaFilter.h"
+
 #define kVSPathsKey @"vsPaths"
 #define kFSPathsKey @"fsPaths"
 
 @interface TakePhotoController ()<XBFilteredCameraViewDelegate, ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate> {
-    IBOutlet XBFilteredCameraView *cameraView;
+    IBOutlet GPUImageView *cameraView;
     
     IBOutlet UILabel *flashLabel;
     IBOutlet ThumbnailsView *filtersView;
@@ -40,6 +45,9 @@
     NSArray *flashLableNames;
     NSArray *flashImageNames;
     NSArray *blurImageNames;
+    GPUImageStillCamera *stillCamera;
+    GPUImageOutput<GPUImageInput> *filter;
+    GPUImageOutput<GPUImageInput> *defaultFilter;
 }
 
 @property (nonatomic, assign) NSUInteger filterIndex;
@@ -64,30 +72,36 @@
     
     [self loadPopoversData];
     
-    cameraView.updateSecondsPerFrame = YES;
-
+    stillCamera = [[GPUImageStillCamera alloc] init];
+    stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
+    
+    cameraView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+    
+    filter = [[GPUImageSepiaFilter alloc] init];
+	[filter prepareForImageCapture];
+    
+    
+    [stillCamera addTarget:filter];
+    GPUImageView *filterView = cameraView;
+    [filter addTarget:filterView];
+    
     self.filterIndex = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [cameraView startCapturing];
+    [stillCamera startCameraCapture];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [cameraView stopCapturing];
+    [stillCamera stopCameraCapture];
 }
 
 
 #pragma mark - Internals
-
-- (GLKMatrix2)rawTextureCoordinatesTransform
-{
-    return (GLKMatrix2){cameraView.cameraPosition == XBCameraPositionBack? 1: -1, 0, 0, -0.976};
-}
 
 - (TableViewPopover *)loadPopoverWithOriginPoint:(CGPoint)point
 {
@@ -111,38 +125,6 @@
 - (void)setFilterIndex:(NSUInteger)filterIndex
 {
     _filterIndex = filterIndex;
-    
-    ImageFilter *filter = [filters objectAtIndex:self.filterIndex];
-    NSArray *fsPaths = filter.fragmentShaderPaths;
-    NSArray *vsPaths = filter.vertexShaderPaths;
-    NSError *error = nil;
-    
-    if (vsPaths) {
-        [cameraView setFilterFragmentShaderPaths:fsPaths vertexShaderPaths:vsPaths error:&error];
-    }
-    else {
-        [cameraView setFilterFragmentShaderPaths:fsPaths error:&error];
-    }
-    
-    if (error != nil) {
-        NSLog(@"Error setting shader: %@", [error localizedDescription]);
-    }
-    
-        // Perform a few filter-specific initialization steps, like setting additional textures and uniforms
-    NSString *filterName = [filtersName objectAtIndex:self.filterIndex];
-    if ([filterName isEqualToString:@"Overlay"]) {
-        NSString *path = [[NSBundle mainBundle] pathForResource:@"LucasCorrea" ofType:@"png"];
-        XBTexture *texture = [[XBTexture alloc] initWithContentsOfFile:path options:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], GLKTextureLoaderOriginBottomLeft, nil] error:NULL];
-        GLKProgram *program = [cameraView.programs objectAtIndex:0];
-        [program bindSamplerNamed:@"s_overlay" toXBTexture:texture unit:1];
-        [program setValue:(void *)&GLKMatrix2Identity forUniformNamed:@"u_rawTexCoordTransform"];
-    }
-    else if ([filterName isEqualToString:@"Sharpen"]) {
-        GLKMatrix2 rawTexCoordTransform = [self rawTextureCoordinatesTransform];
-        GLKProgram *program = [cameraView.programs objectAtIndex:1];
-        [program bindSamplerNamed:@"s_mainTexture" toTexture:cameraView.mainTexture unit:1];
-        [program setValue:(void *)&rawTexCoordTransform forUniformNamed:@"u_rawTexCoordTransform"];
-    }
 }
 
 
@@ -155,8 +137,8 @@
 
 - (UIView*)thumbnailsView:(ThumbnailsView*)view viewForItemWithIndex:(NSUInteger)index
 {
-    ImageFilter *filter = [filters objectAtIndex:index];
-    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:filter.previewPath]];
+    ImageFilter *_filter = [filters objectAtIndex:index];
+    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:_filter.previewPath]];
 }
 
 - (CGFloat)thumbnailsView:(ThumbnailsView*)view thumbnailWidthForHeight:(CGFloat)height
@@ -198,7 +180,7 @@
 {
     if ([view isEqual:flashPopover]) {
         flashLabel.text = [flashLableNames objectAtIndex:index];
-        cameraView.flashMode = index;
+        [stillCamera.inputCamera setFlashMode:index];
     }
     [view show:NO];
 }
@@ -208,32 +190,8 @@
 
 - (IBAction)takePhoto:(id)sender
 {
-    NSString *filterName = [filtersName objectAtIndex:self.filterIndex];
-    if ([filterName isEqualToString:@"Overlay"]) {
-        GLKMatrix2 rawTexCoordTransform = cameraView.rawTexCoordTransform;
-        GLKProgram *program = [cameraView.programs objectAtIndex:0];
-        [program setValue:(void *)&rawTexCoordTransform forUniformNamed:@"u_rawTexCoordTransform"];
-    }
-    else if ([filterName isEqualToString:@"Sharpen"]) {
-        GLKMatrix2 rawTexCoordTransform = [self rawTextureCoordinatesTransform];
-        GLKProgram *program = [cameraView.programs objectAtIndex:1];
-        [program setValue:(void *)&rawTexCoordTransform forUniformNamed:@"u_rawTexCoordTransform"];
-    }
-    
-    [cameraView takeAPhotoWithCompletion:^(UIImage *filteredImage, UIImage *basicImage) {
-        [delegate takePhotoController:self didFinishWithBasicImage:basicImage filteredImage:filteredImage filterIndex:self.filterIndex];
-        
-            // Restore filter-specific state
-        NSString *filterName = [filtersName objectAtIndex:self.filterIndex];
-        if ([filterName isEqualToString:@"Overlay"]) {
-            GLKProgram *program = [cameraView.programs objectAtIndex:0];
-            [program setValue:(void *)&GLKMatrix2Identity forUniformNamed:@"u_rawTexCoordTransform"];
-        }
-        else if ([filterName isEqualToString:@"Sharpen"]) {
-            GLKMatrix2 rawTexCoordTransform = [self rawTextureCoordinatesTransform];
-            GLKProgram *program = [cameraView.programs objectAtIndex:1];
-            [program setValue:(void *)&rawTexCoordTransform forUniformNamed:@"u_rawTexCoordTransform"];
-        }
+    [stillCamera capturePhotoAsSampleBufferWithCompletionHandler:^(UIImage *processedImage, NSError *error) {
+        [delegate takePhotoController:self didFinishWithBasicImage:processedImage filteredImage:processedImage filterIndex:1];
     }];
 }
 
@@ -276,13 +234,7 @@
 
 - (IBAction)rotateCamera:(id)sender
 {
-    cameraView.cameraPosition = cameraView.cameraPosition == XBCameraPositionBack ? XBCameraPositionFront : XBCameraPositionBack;
-    
-    if ([[filtersName objectAtIndex:self.filterIndex] isEqualToString:@"Sharpen"]) {
-        GLKMatrix2 rawTexCoordTransform = [self rawTextureCoordinatesTransform];
-        GLKProgram *program = [cameraView.programs objectAtIndex:1];
-        [program setValue:(void *)&rawTexCoordTransform forUniformNamed:@"u_rawTexCoordTransform"];
-    }
+    [stillCamera rotateCamera];
 }
 
 @end

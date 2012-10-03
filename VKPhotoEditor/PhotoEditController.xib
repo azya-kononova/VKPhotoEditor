@@ -177,6 +177,16 @@
 									<string key="NSResourceName">PhotoShadows.png</string>
 								</object>
 							</object>
+							<object class="IBUIImageView" id="675790145">
+								<reference key="NSNextResponder" ref="635559761"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{0, 70}, {320, 320}}</string>
+								<reference key="NSSuperview" ref="635559761"/>
+								<reference key="NSWindow"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
 						</array>
 						<string key="NSFrameSize">{320, 397}</string>
 						<reference key="NSSuperview" ref="191373211"/>
@@ -347,6 +357,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageView</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="675790145"/>
+					</object>
+					<int key="connectionID">47</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="698668678"/>
 						<reference key="destination" ref="372490531"/>
@@ -466,6 +484,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="613514827"/>
 							<reference ref="698668678"/>
+							<reference ref="675790145"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -477,6 +496,11 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">12</int>
 						<reference key="object" ref="698668678"/>
+						<reference key="parent" ref="635559761"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">46</int>
+						<reference key="object" ref="675790145"/>
 						<reference key="parent" ref="635559761"/>
 					</object>
 				</array>
@@ -507,12 +531,13 @@
 				<string key="33.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="34.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="46.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">45</int>
+			<int key="maxID">47</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

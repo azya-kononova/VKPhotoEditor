@@ -135,6 +135,7 @@
 		22E51F15160F4E8E00299D42 /* UIView+NIB.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F14160F4E8E00299D42 /* UIView+NIB.m */; };
 		8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */; };
 		8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */; };
+		8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61EC1C161C627F009A2B9B /* libGPUImage.a */; };
 		8B9B4E51160F5055000BE08F /* PhotoEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4D160F5055000BE08F /* PhotoEditController.m */; };
 		8B9B4E52160F5055000BE08F /* PhotoEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */; };
 		8B9B4E53160F5055000BE08F /* UIColor+VKPhotoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */; };
@@ -169,6 +170,30 @@
 		8BDF18A81611A67B00507B5F /* tt1018m_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF18A21611A67B00507B5F /* tt1018m_.ttf */; };
 		8BDF18AC1611AAD400507B5F /* ballw_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF18AB1611AAD400507B5F /* ballw_.ttf */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8B61EC1B161C627F009A2B9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A33414DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+		8B61EC1D161C627F009A2B9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BCF1A34414DDB1EC00852800;
+			remoteInfo = GPUImageTests;
+		};
+		8B61EC33161C631E009A2B9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCF1A33314DDB1EC00852800;
+			remoteInfo = GPUImage;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		220B399E160EFE5A0010F257 /* Filters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filters.h; sourceTree = "<group>"; };
@@ -329,6 +354,7 @@
 		8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Creation.m"; sourceTree = "<group>"; };
 		8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleButton.h; sourceTree = "<group>"; };
 		8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleButton.m; sourceTree = "<group>"; };
+		8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		8B9B4E4C160F5055000BE08F /* PhotoEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEditController.h; sourceTree = "<group>"; };
 		8B9B4E4D160F5055000BE08F /* PhotoEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoEditController.m; sourceTree = "<group>"; };
 		8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditController.xib; sourceTree = "<group>"; };
@@ -387,6 +413,7 @@
 				22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */,
 				22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */,
 				22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */,
+				8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,6 +613,7 @@
 		22D7BF56160CCC33008B5BFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */,
 				2288801816187436008083EB /* XBFilteredImage */,
 				8BDD882216186C9C008FFC24 /* OpenGLES.framework */,
 				8BDD882016186C91008FFC24 /* GLKit.framework */,
@@ -678,6 +706,15 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		8B61EC13161C627E009A2B9B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8B61EC1C161C627F009A2B9B /* libGPUImage.a */,
+				8B61EC1E161C627F009A2B9B /* GPUImageTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		8BDD884F16186DBD008FFC24 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -724,6 +761,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				8B61EC34161C631E009A2B9B /* PBXTargetDependency */,
 			);
 			name = VKPhotoEditor;
 			productName = VKPhotoEditor;
@@ -749,12 +787,35 @@
 			mainGroup = 22D7BF48160CCC33008B5BFA;
 			productRefGroup = 22D7BF54160CCC33008B5BFA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 8B61EC13161C627E009A2B9B /* Products */;
+					ProjectRef = 8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				22D7BF52160CCC33008B5BFA /* VKPhotoEditor */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8B61EC1C161C627F009A2B9B /* libGPUImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGPUImage.a;
+			remoteRef = 8B61EC1B161C627F009A2B9B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8B61EC1E161C627F009A2B9B /* GPUImageTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = GPUImageTests.octest;
+			remoteRef = 8B61EC1D161C627F009A2B9B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		22D7BF51160CCC33008B5BFA /* Resources */ = {
@@ -927,6 +988,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8B61EC34161C631E009A2B9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = GPUImage;
+			targetProxy = 8B61EC33161C631E009A2B9B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		22D7BF60160CCC33008B5BFA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -1001,9 +1070,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKPhotoEditor/VKPhotoEditor-Prefix.pch";
+				HEADER_SEARCH_PATHS = "GPUImage/**";
 				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "GPUImage/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1013,8 +1085,11 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VKPhotoEditor/VKPhotoEditor-Prefix.pch";
+				HEADER_SEARCH_PATHS = "GPUImage/**";
 				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "GPUImage/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

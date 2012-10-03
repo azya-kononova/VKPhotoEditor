@@ -78,12 +78,7 @@
     [scrollView addSubview:contentView];
     scrollView.contentSize = contentView.frame.size;
     
-    filteredImageView = [[XBFilteredImageView alloc] initWithFrame:CGRectMake(0, 70, 320, 320)];
-    filteredImageView.image = image;
-    
-    ImageFilter *defaultFilter = [filters objectAtIndex:0];
-    [filteredImageView setFilterFragmentShaderPaths:defaultFilter.fragmentShaderPaths vertexShaderPaths:defaultFilter.vertexShaderPaths error:nil];
-    [topView addSubview:filteredImageView];
+    imageView.image = image;
     
 }
 
