@@ -190,7 +190,7 @@
 
 - (IBAction)takePhoto:(id)sender
 {
-    [stillCamera capturePhotoAsSampleBufferWithCompletionHandler:^(UIImage *processedImage, NSError *error) {
+    [stillCamera capturePhotoAsOriginalImageWithCompletionHandler:^(UIImage *processedImage, NSError *error) {
         [delegate takePhotoController:self didFinishWithBasicImage:processedImage filteredImage:processedImage filterIndex:1];
     }];
 }
