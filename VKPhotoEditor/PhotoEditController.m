@@ -16,6 +16,8 @@
 #import "UIView+NIB.h"
 #import "XBFilteredImageView.h"
 #import "ImageFilter.h"
+#import "GPUImageView.h"
+#import "GPUImagePicture.h"
 
 @interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource>
 @end
@@ -27,6 +29,9 @@
     UIImage *image;
     BOOL isPhoto;
     XBFilteredImageView *filteredImageView;
+    NSInteger filterIndex;
+    GPUImagePicture *sourcePicture;
+    GPUImageFilter *filter;
 }
 
 @synthesize saveButton;
@@ -39,12 +44,12 @@
 @synthesize topView;
 @synthesize delegate;
 
-- (id)initWithImage:(UIImage *)_image isPhoto:(BOOL)_isPhoto
+- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex
 {
     self = [super init];
     if (self) {
         image = _image;
-        isPhoto = _isPhoto;
+        filterIndex = _filterIndex;
     }
     return self;
 }
@@ -69,6 +74,7 @@
     filterView.margin = 7;
     filterView.thumbConrnerRadius = 7.0;
     [filterView reloadData];
+    filterView.displayedItemIndex = filterIndex;
     
     captionView = [CaptionView loadFromNIB];
     [captionView moveTo:CGPointMake(0, 390)];
@@ -78,8 +84,20 @@
     [scrollView addSubview:contentView];
     scrollView.contentSize = contentView.frame.size;
     
-    imageView.image = image;
+    sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
     
+    [self setImageFilter:[filters objectAtIndex:filterIndex]];
+    
+}
+
+- (void)setImageFilter:(ImageFilter*)imageFilter
+{ 
+    [sourcePicture removeAllTargets];
+    [filter removeAllTargets];
+    filter = [Filters GPUFilterWithName:imageFilter.name];
+    [sourcePicture addTarget:filter];
+    [filter addTarget:imageView];
+    [sourcePicture processImage];
 }
 
 - (void)resizeScrollView:(BOOL)show notification:(NSNotification *)n
@@ -164,8 +182,8 @@
 
 - (UIView*)thumbnailsView:(ThumbnailsView*)view viewForItemWithIndex:(NSUInteger)index
 {
-    ImageFilter *filter = [filters objectAtIndex:index];
-    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:filter.previewPath]];
+    ImageFilter *imageFilter = [filters objectAtIndex:index];
+    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageFilter.previewPath]];
 }
 
 - (CGFloat)thumbnailsView:(ThumbnailsView*)view thumbnailWidthForHeight:(CGFloat)height
@@ -181,9 +199,7 @@
 }
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    ImageFilter *filter = [filters objectAtIndex:index];
-//    [filteredImageView setFilterFragmentShaderPaths:filter.fragmentShaderPaths vertexShaderPaths:filter.vertexShaderPaths error:nil];
-    [filteredImageView setNeedsLayout];
+    [self setImageFilter:[filters objectAtIndex:index]];
 }
 
 @end

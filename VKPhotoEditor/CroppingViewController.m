@@ -20,6 +20,7 @@
     
     ZoomingView *zoomingView;
     UIImage *image;
+    NSInteger filterIndex;
 }
 
 @end
@@ -28,11 +29,12 @@
 
 @synthesize delegate;
 
-- (id)initWithImage:(UIImage *)_image
+- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex
 {
     self = [super init];
     if (self) {
         image = _image;
+        filterIndex = _filterIndex;
     }
     return self;
 }
@@ -69,8 +71,8 @@
     CGFloat width = CGRectGetWidth(captureView.frame)/zoomingView.zoomScale;
     CGFloat height = CGRectGetHeight(captureView.frame)/zoomingView.zoomScale;
     UIImage *cropImage = [image croppedImage:CGRectMake(x, y, width, height)];
-    
-    [delegate croppingViewController:self didFinishWithImage:cropImage];
+
+    [delegate croppingViewController:self didFinishWithImage:cropImage filterIndex:filterIndex];
 }
 
 @end

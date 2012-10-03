@@ -8,6 +8,7 @@
 
 @class FlexibleButton;
 @class ThumbnailsView;
+@class GPUImageView;
 
 @protocol PhotoEditControllerDelegate;
 
@@ -18,12 +19,12 @@
 @property (nonatomic, strong) IBOutlet ThumbnailsView *filterView;
 @property (nonatomic, strong) IBOutlet UIView *contentView;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, strong) IBOutlet UIImageView *imageView;
+@property (nonatomic, strong) IBOutlet GPUImageView *imageView;
 @property (nonatomic, strong) IBOutlet UIView *topView;
 
 @property (nonatomic, unsafe_unretained) id<PhotoEditControllerDelegate> delegate;
 
-- (id)initWithImage:(UIImage *)image isPhoto:(BOOL)isPhoto;
+- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex;
 - (IBAction)addCaption;
 - (IBAction)save;
 @end

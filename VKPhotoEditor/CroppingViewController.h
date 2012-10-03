@@ -14,11 +14,11 @@
 
 @property (nonatomic, unsafe_unretained) id<CroppingViewControllerDelegate> delegate;
 
-- (id)initWithImage:(UIImage *)image;
+- (id)initWithImage:(UIImage *)image filterIndex:(NSInteger)filterIndex;
 
 @end
 
 @protocol CroppingViewControllerDelegate
 - (void)croppingViewControllerDidCancel:(CroppingViewController *)controller;
-- (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image;
+- (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image filterIndex:(NSInteger)index;
 @end
