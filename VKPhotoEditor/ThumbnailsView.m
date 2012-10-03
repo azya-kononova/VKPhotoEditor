@@ -49,14 +49,19 @@
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
 }
 
+- (void)setDisplayedItemIndex:(NSUInteger)index
+{
+    [self setView:[views objectAtIndex:displayedItemIndex] highlighted:NO];
+    displayedItemIndex = index;
+    [self setView:[views objectAtIndex:displayedItemIndex] highlighted:highlight];
+}
+
 - (void)didTapOnView
 {
     NSInteger index = [tapRecognizer locationInView:_scroll].x / (thumbnailWidth + margin);
     if (index > views.count - 1) return;
     [delegate thumbnailsView:self didTapOnItemWithIndex:index];
-    [self setView:[views objectAtIndex:displayedItemIndex] highlighted:NO];
-    displayedItemIndex = index;
-    [self setView:[views objectAtIndex:displayedItemIndex] highlighted:highlight];
+    self.displayedItemIndex = index;
 }
 
 - (UIScrollView*)scroll

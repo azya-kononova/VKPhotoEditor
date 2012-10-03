@@ -28,7 +28,7 @@
 @property (nonatomic, assign) CGFloat thumbConrnerRadius;
 @property (nonatomic, assign) BOOL highlight;
 
-@property (nonatomic, assign, readonly) NSUInteger displayedItemIndex;
+@property (nonatomic, assign) NSUInteger displayedItemIndex;
 - (void)reloadData;
 @end
 
