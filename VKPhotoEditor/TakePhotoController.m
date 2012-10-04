@@ -13,6 +13,8 @@
 #import "TablePopoverCell.h"
 #import "Filters.h"
 #import "ImageFilter.h"
+#import "FlashMode.h"
+#import "BlurMode.h"
 
 #import "UIView+NIB.h"
 #import "UITableViewCell+NIB.h"
@@ -24,44 +26,22 @@
 #import "GPUImageTiltShiftFilter.h"
 #import "GPUImagePixellateFilter.h"
 
-@interface FlashMode : NSObject
-@property (nonatomic, strong, readonly) NSString *imageName;
-@property (nonatomic, strong, readonly) NSString *name;
-@property (nonatomic, assign, readonly) NSInteger mode;
-FlashMode *MakeFlashMode(NSInteger mode, NSString *name, NSString *imageName);
-@end
-
-@implementation FlashMode
-
-@synthesize imageName, name, mode;
-
-- (id)initWithMode:(NSInteger)_mode name:(NSString *)_name imageName:(NSString *)_imageName
-{
-    self = [super init];
-    if (self) {
-        mode = _mode;
-        name = _name;
-        imageName = _imageName;
-    }
-    return self;
-}
-
-FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
-{
-    return [[FlashMode alloc] initWithMode:_mode name:_name imageName:_imageName];
-}
-@end
-
+enum {
+    CameraBlurModeOff = 0,
+    CameraBlurModeLine = 1,
+    CameraBlurModeRound = 2
+};
+typedef NSInteger CameraBlurMode;
 
 @interface TakePhotoController ()<XBFilteredCameraViewDelegate, ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate> {
     IBOutlet GPUImageView *cameraView;
-    
+    IBOutlet UIImageView *blurImageView;
+    IBOutlet UIImageView *flashImageView;
     IBOutlet UILabel *flashLabel;
-    IBOutlet ThumbnailsView *filtersView;
-    
     IBOutlet UIButton *cancelBtn;
     IBOutlet UIButton *photoBtn;
     IBOutlet UIButton *filterBtn;
+    IBOutlet ThumbnailsView *filtersView;
     
     TableViewPopover *flashPopover;
     TableViewPopover *blurPopover;
@@ -105,12 +85,14 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
     flashModes = [self availabelFlashMode];
     
     blurPopover = [self loadPopoverWithOriginPoint:CGPointMake(235, 70)];
-    blurModes = [NSArray arrayWithObjects:@"Camera_Blur.png", @"Camera_Blur.png", @"Camera_Blur.png", nil];
-    
-        //self.filterIndex = 0;
+    blurModes = [self setBlurModes];
     
     if (flashModes.count) {
-        [self setCameraFlashMode:[flashModes objectAtIndex:0]];
+        [self setCameraFlashMode:[flashModes objectAtIndex:1]];
+    }
+    
+    if (blurModes.count) {
+        [self setBlurFilter:[blurModes objectAtIndex:2]];
     }
 }
 
@@ -144,31 +126,45 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
 {
     NSMutableArray *modes = [NSMutableArray array];
     
-    if ([stillCamera.inputCamera isFlashModeSupported:AVCaptureFlashModeOff]) {
-        [modes addObject:MakeFlashMode(AVCaptureFlashModeOff, @"Off", @"Camera_Flash.png")];
-    }
     if ([stillCamera.inputCamera isFlashModeSupported:AVCaptureFlashModeOn]) {
-        [modes addObject:MakeFlashMode(AVCaptureFlashModeOn, @"On", @"Camera_Flash.png")];
+        [modes addObject:MakeFlashMode(AVCaptureFlashModeOn, @"On", @"flash_on.png")];
+    }
+    if ([stillCamera.inputCamera isFlashModeSupported:AVCaptureFlashModeOff]) {
+        [modes addObject:MakeFlashMode(AVCaptureFlashModeOff, @"Off", @"flash_off.png")];
     }
     if ([stillCamera.inputCamera isFlashModeSupported:AVCaptureFlashModeAuto]) {
-        [modes addObject:MakeFlashMode(AVCaptureFlashModeAuto, @"Auto", @"Camera_Flash.png")];
+        [modes addObject:MakeFlashMode(AVCaptureFlashModeAuto, @"Auto", @"flash_auto.png")];
     }
     
     return modes;
 }
 
+- (NSArray *)setBlurModes
+{
+    NSMutableArray *modes = [NSMutableArray array];
+    
+    [modes addObject:MakeBlurMode(CameraBlurModeLine, @"blur_line.png", @"blur_line_icon.png")];
+    [modes addObject:MakeBlurMode(CameraBlurModeRound, @"blur_round.png", @"blur_round_icon.png")];
+    [modes addObject:MakeBlurMode(CameraBlurModeOff, @"blur_off.png", @"blur_off_icon.png")];
+    
+    return modes;
+}
 - (void)setCameraFlashMode:(FlashMode *)mode
 {
-    [stillCamera.inputCamera lockForConfiguration:nil];
+    flashImageView.image = mode.image;
     flashLabel.text = mode.name;
+    
+    [stillCamera.inputCamera lockForConfiguration:nil];
     [stillCamera.inputCamera setFlashMode:mode.mode];
     [stillCamera.inputCamera unlockForConfiguration];
 }
 
-- (void)setBlurFilter:(NSInteger)index
+- (void)setBlurFilter:(BlurMode *)mode
 {
+    blurImageView.image = mode.iconImage;
+    
     //TODO: take new blur filter
-    basicFilter = [GPUImagePixellateFilter new];
+    basicFilter = mode.mode ? [GPUImagePixellateFilter new] : [GPUImageEmptyFilter new];
     
     GPUImageOutput<GPUImageInput> *replacedTarget = [stillCamera.targets objectAtIndex:0];
     
@@ -225,8 +221,7 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
 - (UITableViewCell*)tableViewPopover:(TableViewPopover*)view cellForRowAtIndex:(NSInteger)index inTableView:(UITableView*)tableView
 {
     TablePopoverCell *cell = [TablePopoverCell dequeOrCreateInTable:tableView];
-    NSString *imageName = [view isEqual:flashPopover] ? [[flashModes objectAtIndex:index] imageName] : [blurModes objectAtIndex:index];
-    cell.imageView.image = [UIImage imageNamed:imageName];
+    cell.imageView.image = [view isEqual:flashPopover] ? [[flashModes objectAtIndex:index] image] : [[blurModes objectAtIndex:index] image];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -244,7 +239,7 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
     if ([view isEqual:flashPopover]) {
         [self setCameraFlashMode:[flashModes objectAtIndex:index]];
     } else if ([view isEqual:blurPopover]) {
-        [self setBlurFilter:index];
+        [self setBlurFilter:[blurModes objectAtIndex:index]];
     }
     
     [view show:NO];
