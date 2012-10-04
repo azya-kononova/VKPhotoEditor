@@ -21,6 +21,8 @@
 #import "GPUImageStillCamera.h"
 #import "GPUImageSketchFilter.h"
 #import "GPUImageSepiaFilter.h"
+#import "GPUImageTiltShiftFilter.h"
+#import "GPUImagePixellateFilter.h"
 
 @interface FlashMode : NSObject
 @property (nonatomic, strong, readonly) NSString *imageName;
@@ -70,7 +72,7 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
     NSArray *flashModes;
     NSArray *blurModes;
     GPUImageStillCamera *stillCamera;
-    GPUImageOutput<GPUImageInput> *filter;
+    GPUImageOutput<GPUImageInput> *basicFilter;
 }
 
 @property (nonatomic, assign) NSUInteger filterIndex;
@@ -92,13 +94,12 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
     stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
     cameraView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
     
-    filter = [GPUImageSepiaFilter new];
-	[filter prepareForImageCapture];
+    basicFilter = [Filters GPUFilterWithName:DefaultFilterName];
+    [basicFilter prepareForImageCapture];
     
-    
-    [stillCamera addTarget:filter];
+    [stillCamera addTarget:basicFilter];
     GPUImageView *filterView = cameraView;
-    [filter addTarget:filterView];
+    [basicFilter addTarget:filterView];
     
     flashPopover = [self loadPopoverWithOriginPoint:CGPointMake(44, 70)];
     flashModes = [self availabelFlashMode];
@@ -106,7 +107,7 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
     blurPopover = [self loadPopoverWithOriginPoint:CGPointMake(235, 70)];
     blurModes = [NSArray arrayWithObjects:@"Camera_Blur.png", @"Camera_Blur.png", @"Camera_Blur.png", nil];
     
-    self.filterIndex = 0;
+        //self.filterIndex = 0;
     
     if (flashModes.count) {
         [self setCameraFlashMode:[flashModes objectAtIndex:0]];
@@ -164,15 +165,28 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
     [stillCamera.inputCamera unlockForConfiguration];
 }
 
+- (void)setBlurFilter:(NSInteger)index
+{
+    //TODO: take new blur filter
+    basicFilter = [GPUImagePixellateFilter new];
+    
+    GPUImageOutput<GPUImageInput> *replacedTarget = [stillCamera.targets objectAtIndex:0];
+    
+    for (GPUImageOutput<GPUImageInput> *target in replacedTarget.targets) {
+        [basicFilter addTarget:target];
+    }
+    [basicFilter prepareForImageCapture];
+    
+    [stillCamera replaceFirstTargetWithTarget:basicFilter];
+}
+
 - (void)setFilterIndex:(NSUInteger)_filterIndex
 {
     filterIndex = _filterIndex;
     ImageFilter *imageFilter = [filters objectAtIndex:filterIndex];
-    
-    [stillCamera removeAllTargets];
-    [filter removeAllTargets];
-    filter = [Filters GPUFilterWithName:imageFilter.name];
-    [stillCamera addTarget:filter];
+    GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:imageFilter.name];
+
+    [basicFilter replaceLastTargetWithTarget:filter];
     [filter addTarget: cameraView];
     [filter prepareForImageCapture];
 }
@@ -229,7 +243,10 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
 {
     if ([view isEqual:flashPopover]) {
         [self setCameraFlashMode:[flashModes objectAtIndex:index]];
+    } else if ([view isEqual:blurPopover]) {
+        [self setBlurFilter:index];
     }
+    
     [view show:NO];
 }
 
@@ -238,7 +255,7 @@ FlashMode *MakeFlashMode(NSInteger _mode, NSString *_name, NSString *_imageName)
 
 - (IBAction)takePhoto:(id)sender
 {
-    [stillCamera capturePhotoAsOriginalImageWithCompletionHandler:^(UIImage *processedImage, NSError *error) {
+    [stillCamera capturePhotoAsImageProcessedUpToFilter:basicFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
         [delegate takePhotoController:self didFinishWithBasicImage:processedImage filterIndex:filterIndex];
     }];
 }
