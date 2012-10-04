@@ -11,6 +11,8 @@
 #import "ZoomingView.h"
 #import "FlexibleButton.h"
 #import "PhotoEditController.h"
+#import "Filters.h"
+#import "GPUImageFilter.h"
 
 @interface CroppingViewController () {
     IBOutlet UIView *captureView;
@@ -42,8 +44,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+    
+    NSArray *filters = Filters.filters;
+    GPUImageFilter *filter = [Filters GPUFilterWithName:[[filters objectAtIndex:filterIndex] name]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[filter imageByFilteringImage:image]];
+    
     zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:captureView.frame];
     zoomingView.shouldClip = NO;
     zoomingView.contentMode = image.size.width > image.size.height ? UIViewContentModeScaleAspectFit : UIViewContentModeScaleAspectFill;
