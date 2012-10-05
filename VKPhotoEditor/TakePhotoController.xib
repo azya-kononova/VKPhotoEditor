@@ -112,6 +112,7 @@
 						<string key="NSFrame">{{222, 416}, {78, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -323,7 +324,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Camera_Blur.png</string>
+							<string key="NSResourceName">blur_off_icon.png</string>
 						</object>
 					</object>
 				</array>
@@ -732,11 +733,11 @@
 			<string key="CameraBtn.png">{84, 38}</string>
 			<string key="CameraBtn_Pressed.png">{84, 38}</string>
 			<string key="Camera_Background.png">{320, 480}</string>
-			<string key="Camera_Blur.png">{20, 25}</string>
 			<string key="Camera_Flash.png">{20, 25}</string>
 			<string key="Camera_ReverseFill.png">{64, 35}</string>
 			<string key="PhotoBtn.png">{98, 46}</string>
 			<string key="PhotoBtn_Pressed.png">{98, 46}</string>
+			<string key="blur_off_icon.png">{20, 25}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>

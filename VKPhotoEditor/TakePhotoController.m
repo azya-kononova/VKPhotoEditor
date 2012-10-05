@@ -23,7 +23,6 @@
 #import "GPUImageStillCamera.h"
 #import "GPUImageSketchFilter.h"
 #import "GPUImageSepiaFilter.h"
-#import "GPUImageTiltShiftFilter.h"
 #import "GPUImagePixellateFilter.h"
 
 enum {
@@ -74,12 +73,11 @@ typedef NSInteger CameraBlurMode;
     stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
     cameraView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
     
-    basicFilter = [Filters GPUFilterWithName:DefaultFilterName];
+    basicFilter = [GPUImageEmptyFilter new];
     [basicFilter prepareForImageCapture];
+    [basicFilter addTarget:cameraView];
     
     [stillCamera addTarget:basicFilter];
-    GPUImageView *filterView = cameraView;
-    [basicFilter addTarget:filterView];
     
     flashPopover = [self loadPopoverWithOriginPoint:CGPointMake(44, 70)];
     flashModes = [self availabelFlashMode];
@@ -89,10 +87,6 @@ typedef NSInteger CameraBlurMode;
     
     if (flashModes.count) {
         [self setCameraFlashMode:[flashModes objectAtIndex:1]];
-    }
-    
-    if (blurModes.count) {
-        [self setBlurFilter:[blurModes objectAtIndex:2]];
     }
 }
 
@@ -122,6 +116,17 @@ typedef NSInteger CameraBlurMode;
     return popover;
 }
 
+- (void)setFilterIndex:(NSUInteger)_filterIndex
+{
+    filterIndex = _filterIndex;
+    ImageFilter *imageFilter = [filters objectAtIndex:filterIndex];
+    GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:imageFilter.name];
+    
+    [basicFilter replaceLastTargetWithTarget:filter];
+    [filter addTarget: cameraView];
+    [filter prepareForImageCapture];
+}
+
 - (NSArray *)availabelFlashMode
 {
     NSMutableArray *modes = [NSMutableArray array];
@@ -143,9 +148,9 @@ typedef NSInteger CameraBlurMode;
 {
     NSMutableArray *modes = [NSMutableArray array];
     
-    [modes addObject:MakeBlurMode(CameraBlurModeLine, @"blur_line.png", @"blur_line_icon.png")];
-    [modes addObject:MakeBlurMode(CameraBlurModeRound, @"blur_round.png", @"blur_round_icon.png")];
-    [modes addObject:MakeBlurMode(CameraBlurModeOff, @"blur_off.png", @"blur_off_icon.png")];
+    [modes addObject:MakeBlurMode([GPUImageSepiaFilter new], @"blur_line.png", @"blur_line_icon.png")];
+    [modes addObject:MakeBlurMode([GPUImagePixellateFilter new], @"blur_round.png", @"blur_round_icon.png")];
+    [modes addObject:MakeBlurMode([GPUImageEmptyFilter new], @"blur_off.png", @"blur_off_icon.png")];
     
     return modes;
 }
@@ -159,13 +164,11 @@ typedef NSInteger CameraBlurMode;
     [stillCamera.inputCamera unlockForConfiguration];
 }
 
-- (void)setBlurFilter:(BlurMode *)mode
+- (void)setCameraBlurMode:(BlurMode *)mode
 {
     blurImageView.image = mode.iconImage;
     
-    //TODO: take new blur filter
-    basicFilter = mode.mode ? [GPUImagePixellateFilter new] : [GPUImageEmptyFilter new];
-    
+    basicFilter = mode.filter;
     GPUImageOutput<GPUImageInput> *replacedTarget = [stillCamera.targets objectAtIndex:0];
     
     for (GPUImageOutput<GPUImageInput> *target in replacedTarget.targets) {
@@ -174,17 +177,6 @@ typedef NSInteger CameraBlurMode;
     [basicFilter prepareForImageCapture];
     
     [stillCamera replaceFirstTargetWithTarget:basicFilter];
-}
-
-- (void)setFilterIndex:(NSUInteger)_filterIndex
-{
-    filterIndex = _filterIndex;
-    ImageFilter *imageFilter = [filters objectAtIndex:filterIndex];
-    GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:imageFilter.name];
-
-    [basicFilter replaceLastTargetWithTarget:filter];
-    [filter addTarget: cameraView];
-    [filter prepareForImageCapture];
 }
 
 #pragma mark ThumbnailView datasourse
@@ -239,7 +231,7 @@ typedef NSInteger CameraBlurMode;
     if ([view isEqual:flashPopover]) {
         [self setCameraFlashMode:[flashModes objectAtIndex:index]];
     } else if ([view isEqual:blurPopover]) {
-        [self setBlurFilter:[blurModes objectAtIndex:index]];
+        [self setCameraBlurMode:[blurModes objectAtIndex:index]];
     }
     
     [view show:NO];

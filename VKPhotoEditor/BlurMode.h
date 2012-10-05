@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GPUImageFilter.h"
+
 
 @interface BlurMode : NSObject
 
 @property (nonatomic, strong, readonly) UIImage *image;
 @property (nonatomic, strong, readonly) UIImage *iconImage;
-@property (nonatomic, assign, readonly) NSInteger mode;
+@property (nonatomic, strong, readonly) GPUImageOutput <GPUImageInput> *filter;
 
-BlurMode *MakeBlurMode(NSInteger mode, NSString *imageName, NSString *iconImageName);
+BlurMode *MakeBlurMode(GPUImageOutput <GPUImageInput> *filter, NSString *imageName, NSString *iconImageName);
 
 @end
