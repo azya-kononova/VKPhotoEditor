@@ -151,7 +151,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrameSize">{320, 70}</string>
 								<reference key="NSSuperview" ref="635559761"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="668648019">
 									<int key="NSColorSpace">3</int>
@@ -216,7 +215,6 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{0, 476}, {320, 4}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -245,7 +243,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="315574409"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -543,13 +540,13 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="BlackCorners_Bottom.png">{320, 4}</string>
-			<string key="BlackCorners_Top.png">{320, 4}</string>
-			<string key="PhotoShadows.png">{320, 333}</string>
-			<string key="RollBtn.png">{46, 41}</string>
-			<string key="RollBtn_Prsssed.png">{46, 41}</string>
-			<string key="SaveBtn.png">{45, 41}</string>
-			<string key="SaveBtn_Pressed.png">{45, 41}</string>
+			<string key="BlackCorners_Bottom.png">{16, 16}</string>
+			<string key="BlackCorners_Top.png">{16, 16}</string>
+			<string key="PhotoShadows.png">{16, 16}</string>
+			<string key="RollBtn.png">{16, 16}</string>
+			<string key="RollBtn_Prsssed.png">{16, 16}</string>
+			<string key="SaveBtn.png">{16, 16}</string>
+			<string key="SaveBtn_Pressed.png">{16, 16}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>

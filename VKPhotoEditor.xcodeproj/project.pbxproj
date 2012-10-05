@@ -163,6 +163,7 @@
 		8B9B4E62160F5B7D000BE08F /* CaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E61160F5B7D000BE08F /* CaptionView.m */; };
 		8B9B4E84160F6342000BE08F /* CustomSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E83160F6341000BE08F /* CustomSegmentView.m */; };
 		8B9B4E8B160F6428000BE08F /* CustomSegmentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */; };
+		8B9D963C161E1829004F0AF6 /* SPUserResizableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */; };
 		8BDD881B16186C71008FFC24 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881A16186C71008FFC24 /* CoreMedia.framework */; };
 		8BDD881D16186C79008FFC24 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881C16186C79008FFC24 /* CoreVideo.framework */; };
 		8BDD881F16186C84008FFC24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881E16186C84008FFC24 /* AVFoundation.framework */; };
@@ -409,6 +410,8 @@
 		8B9B4E83160F6341000BE08F /* CustomSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentView.m; sourceTree = "<group>"; };
 		8B9B4E89160F6426000BE08F /* CustomSegmentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegmentButton.h; sourceTree = "<group>"; };
 		8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentButton.m; sourceTree = "<group>"; };
+		8B9D963A161E1829004F0AF6 /* SPUserResizableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUserResizableView.h; sourceTree = "<group>"; };
+		8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUserResizableView.m; sourceTree = "<group>"; };
 		8BDD881A16186C71008FFC24 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		8BDD881C16186C79008FFC24 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		8BDD881E16186C84008FFC24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -766,6 +769,8 @@
 				8BDF18731610C6AB00507B5F /* FlexibleTextField.m */,
 				22E1EB5F16143E9500B0E656 /* ZoomingView.h */,
 				22E1EB6016143E9500B0E656 /* ZoomingView.m */,
+				8B9D963A161E1829004F0AF6 /* SPUserResizableView.h */,
+				8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1067,6 +1072,7 @@
 				8BDD886C161878E8008FFC24 /* ImageFilter.m in Sources */,
 				220E6BC8161E06ED00AB89B5 /* BlurMode.m in Sources */,
 				220E6BCB161E071500AB89B5 /* FlashMode.m in Sources */,
+				8B9D963C161E1829004F0AF6 /* SPUserResizableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
