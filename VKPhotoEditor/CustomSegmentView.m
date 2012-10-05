@@ -95,15 +95,15 @@
     [[items objectAtIndex:selectedSegmentIndex] setSelected:YES];
 	
     if (previousIndex != -1) [[items objectAtIndex:previousIndex] setSelected:NO];
+    
+    if ([self.delegate respondsToSelector:@selector(segmentView:selectSegmentAtIndex:)]) {
+		[self.delegate segmentView:self selectSegmentAtIndex:selectedSegmentIndex];
+	}
 }
 
 - (void)onCellClicked:(CustomSegmentButton*)cell
 {
 	self.selectedSegmentIndex = [items indexOfObject:cell];
-	
-	if ([self.delegate respondsToSelector:@selector(segmentView:selectSegmentAtIndex:)]) {
-		[self.delegate segmentView:self selectSegmentAtIndex:selectedSegmentIndex];
-	}
 }
 
 @end

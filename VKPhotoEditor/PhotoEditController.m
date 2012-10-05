@@ -9,17 +9,17 @@
 #import "PhotoEditController.h"
 #import "FlexibleButton.h"
 #import "Filters.h"
-#import "ThumbnailsView.h"
 #import "UIColor+VKPhotoEditor.h"
 #import "CaptionView.h"
 #import "UIView+Helpers.h"
 #import "UIView+NIB.h"
-#import "XBFilteredImageView.h"
 #import "ImageFilter.h"
-#import "GPUImageView.h"
 #import "GPUImagePicture.h"
+#import "SPUserResizableView.h"
 
-@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource>
+#define MAX_FONT_SIZE 100
+
+@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, CaptionViewDelegate, UIGestureRecognizerDelegate, SPUserResizableViewDelegate>
 @end
 
 @implementation PhotoEditController {
@@ -28,7 +28,6 @@
     CGPoint oldContentOffset;
     UIImage *image;
     BOOL isPhoto;
-    XBFilteredImageView *filteredImageView;
     NSInteger filterIndex;
     GPUImagePicture *sourcePicture;
     GPUImageFilter *filter;
@@ -43,6 +42,8 @@
 @synthesize imageView;
 @synthesize topView;
 @synthesize delegate;
+@synthesize captionLabel;
+@synthesize labelView;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex
 {
@@ -79,6 +80,9 @@
     captionView = [CaptionView loadFromNIB];
     [captionView moveTo:CGPointMake(0, 390)];
     captionView.hidden = YES;
+    captionView.delegate = self;
+    [self setCaptionFont:captionView.selectedFont];
+    
     [contentView addSubview:captionView];
     
     [scrollView addSubview:contentView];
@@ -88,6 +92,8 @@
     
     [self setImageFilter:[filters objectAtIndex:filterIndex]];
     
+    labelView.contentView = captionLabel;
+    labelView.delegate = self;
 }
 
 - (void)setImageFilter:(ImageFilter*)imageFilter
@@ -98,6 +104,12 @@
     [sourcePicture addTarget:filter];
     [filter addTarget:imageView];
     [sourcePicture processImage];
+}
+
+- (void)setCaptionFont:(UIFont*)font
+{
+    captionLabel.font = [UIFont fontWithName:font.fontName size:captionLabel.font.pointSize];
+//    [captionLabel sizeToFit];
 }
 
 - (void)resizeScrollView:(BOOL)show notification:(NSNotification *)n
@@ -134,6 +146,18 @@
 
 #pragma mark actions
 
+- (void)userResizableViewDidBeginEditing:(SPUserResizableView *)userResizableView
+{
+    scrollView.scrollEnabled = NO;
+    [labelView showEditingHandles];
+}
+
+- (void)userResizableViewDidEndEditing:(SPUserResizableView *)userResizableView
+{
+    scrollView.scrollEnabled = YES;
+    [labelView hideEditingHandles];
+}
+
 - (IBAction)addCaption
 {
     BOOL show = captionView.hidden;
@@ -151,7 +175,8 @@
 
 - (IBAction)save
 {
-    UIImageWriteToSavedPhotosAlbum([filteredImageView takeScreenshotWithImageOrientation:image.imageOrientation], self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    CGFloat scaleFactor = 2.0f;
+    captionLabel.transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
 }
 
 - (IBAction)cancel
@@ -163,14 +188,29 @@
     }
 }
 
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error
-  contextInfo:(void *)contextInfo
+- (IBAction)editLabel
+{
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
         NSLog(@"Erorr saving photo: %@",error);
     } else {
         [delegate photoEditControllerDidCancel:self];
     }
+}
+
+#pragma mar CaptionView delegate
+
+- (void)captionViewdidChange:(CaptionView *)_captionView
+{
+    captionLabel.text = captionView.caption;
+}
+
+- (void)captionView:(CaptionView *)captionView didSetFont:(UIFont *)font
+{
+    [self setCaptionFont:font];
 }
 
 #pragma mark ThumbnailView datasourse
