@@ -1165,6 +1165,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "GPUImage/**";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1179,6 +1180,7 @@
 				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "GPUImage/**";
 				WRAPPER_EXTENSION = app;
 			};
