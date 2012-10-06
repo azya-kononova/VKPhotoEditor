@@ -10,8 +10,7 @@
 
 @implementation UIImage (Rect)
 
-
-- (CGRect)rectInImage:(CGRect)bounds
+- (CGRect)rotateRectInImage:(CGRect)bounds
 {
     CGRect rect = CGRectZero;
     
@@ -31,6 +30,25 @@
     }
     
     return rect;
+}
+
+- (CGRect)orientedRect:(CGRect)rect
+{
+    if ([self hasLandscapeOrientation]) {
+        CGRect landscapeRect = rect;
+        landscapeRect.size.width = rect.size.height;
+        landscapeRect.size.height = rect.size.width;
+        
+        return landscapeRect;
+    }
+    
+    return rect;
+}
+
+- (BOOL)hasLandscapeOrientation
+{
+    return self.imageOrientation == UIImageOrientationRight || self.imageOrientation == UIImageOrientationRightMirrored ||
+            self.imageOrientation == UIImageOrientationLeft || self.imageOrientation == UIImageOrientationLeftMirrored;
 }
 
 @end

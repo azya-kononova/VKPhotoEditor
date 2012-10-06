@@ -13,7 +13,7 @@
 
 - (UIImage *)croppedImage:(CGRect)bounds
 {
-    CGRect rect = [self rectInImage:bounds];
+    CGRect rect = [self rotateRectInImage:bounds];
     CGRect absRect = CGRectMake(fmaxf(0, rect.origin.x), fmaxf(0, rect.origin.y), rect.size.width, rect.size.height);
     
     if (self.size.height < bounds.size.height || self.size.width < bounds.size.width) {
@@ -27,8 +27,9 @@
 {
     CGFloat width = fminf(bounds.size.width, self.size.width);
     CGFloat height = fminf(bounds.size.height, self.size.height);
-    CGRect rect = CGRectMake(bounds.origin.x, bounds.origin.y, width, height);
-    UIImage *croppedImage = [self croppedSquareImage:rect];
+    CGRect rect = rect = CGRectMake(bounds.origin.x, bounds.origin.y, width, height);
+    
+    UIImage *croppedImage = [self croppedSquareImage:[self orientedRect:rect]];
     
     UIGraphicsBeginImageContext(bounds.size);
     
@@ -49,7 +50,7 @@
     CGImageRef imageRef = CGImageCreateWithImageInRect([self CGImage], rect);
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef scale:1.0 orientation:self.imageOrientation];
     CGImageRelease(imageRef);
-    
+
     return croppedImage;
 }
 

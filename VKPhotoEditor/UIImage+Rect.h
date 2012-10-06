@@ -10,6 +10,7 @@
 
 @interface UIImage (Rect)
 
-- (CGRect)rectInImage:(CGRect)rect;
+- (CGRect)rotateRectInImage:(CGRect)rect;
+- (CGRect)orientedRect:(CGRect)rect;
 
 @end
