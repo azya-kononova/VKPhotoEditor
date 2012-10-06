@@ -36,6 +36,8 @@
 		221C31D516104640005974C8 /* TriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31D416104640005974C8 /* TriangleView.m */; };
 		221C31D816104711005974C8 /* TablePopoverCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31D716104710005974C8 /* TablePopoverCell.m */; };
 		221C31DB16104754005974C8 /* TablePopoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C31DA16104754005974C8 /* TablePopoverCell.xib */; };
+		2237EC261620CAC300E57113 /* Default.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 2237EC241620CAC300E57113 /* Default.PNG */; };
+		2237EC271620CAC300E57113 /* Default@2x.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 2237EC251620CAC300E57113 /* Default@2x.PNG */; };
 		224C084D1620832300F10A85 /* UIImage+GPUOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */; };
 		226E750E160EFF0F00531350 /* Basic.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7505160EFF0F00531350 /* Basic.png */; };
 		226E750F160EFF0F00531350 /* Filter1.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7506160EFF0F00531350 /* Filter1.png */; };
@@ -144,8 +146,6 @@
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
 		22D7BF62160CCC33008B5BFA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF60160CCC33008B5BFA /* InfoPlist.strings */; };
 		22D7BF64160CCC33008B5BFA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF63160CCC33008B5BFA /* main.m */; };
-		22D7BF6A160CCC33008B5BFA /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF69160CCC33008B5BFA /* Default.png */; };
-		22D7BF6C160CCC33008B5BFA /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF6B160CCC33008B5BFA /* Default@2x.png */; };
 		22D7BF6E160CCC33008B5BFA /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF6D160CCC33008B5BFA /* Default-568h@2x.png */; };
 		22D7BF86160CCCAD008B5BFA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */; };
 		22D7BF92160CCD2B008B5BFA /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D7BF91160CCD2B008B5BFA /* MainWindow.xib */; };
@@ -255,6 +255,8 @@
 		221C31D616104710005974C8 /* TablePopoverCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TablePopoverCell.h; sourceTree = "<group>"; };
 		221C31D716104710005974C8 /* TablePopoverCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TablePopoverCell.m; sourceTree = "<group>"; };
 		221C31DA16104754005974C8 /* TablePopoverCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TablePopoverCell.xib; sourceTree = "<group>"; };
+		2237EC241620CAC300E57113 /* Default.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.PNG; sourceTree = "<group>"; };
+		2237EC251620CAC300E57113 /* Default@2x.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.PNG"; sourceTree = "<group>"; };
 		224C084B1620832200F10A85 /* UIImage+GPUOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GPUOrientation.h"; sourceTree = "<group>"; };
 		224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GPUOrientation.m"; sourceTree = "<group>"; };
 		226E7505160EFF0F00531350 /* Basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Basic.png; sourceTree = "<group>"; };
@@ -381,8 +383,6 @@
 		22D7BF61160CCC33008B5BFA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		22D7BF63160CCC33008B5BFA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		22D7BF65160CCC33008B5BFA /* VKPhotoEditor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKPhotoEditor-Prefix.pch"; sourceTree = "<group>"; };
-		22D7BF69160CCC33008B5BFA /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
-		22D7BF6B160CCC33008B5BFA /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		22D7BF6D160CCC33008B5BFA /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		22D7BF7C160CCCAD008B5BFA /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -719,12 +719,12 @@
 		22D7BF5E160CCC33008B5BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2237EC241620CAC300E57113 /* Default.PNG */,
+				2237EC251620CAC300E57113 /* Default@2x.PNG */,
 				22D7BF5F160CCC33008B5BFA /* VKPhotoEditor-Info.plist */,
 				22D7BF60160CCC33008B5BFA /* InfoPlist.strings */,
 				22D7BF63160CCC33008B5BFA /* main.m */,
 				22D7BF65160CCC33008B5BFA /* VKPhotoEditor-Prefix.pch */,
-				22D7BF69160CCC33008B5BFA /* Default.png */,
-				22D7BF6B160CCC33008B5BFA /* Default@2x.png */,
 				22D7BF6D160CCC33008B5BFA /* Default-568h@2x.png */,
 				22D7BF91160CCD2B008B5BFA /* MainWindow.xib */,
 			);
@@ -897,8 +897,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				22D7BF62160CCC33008B5BFA /* InfoPlist.strings in Resources */,
-				22D7BF6A160CCC33008B5BFA /* Default.png in Resources */,
-				22D7BF6C160CCC33008B5BFA /* Default@2x.png in Resources */,
 				22D7BF6E160CCC33008B5BFA /* Default-568h@2x.png in Resources */,
 				22D7BF92160CCD2B008B5BFA /* MainWindow.xib in Resources */,
 				22D7BF97160CCDD5008B5BFA /* StartViewController.xib in Resources */,
@@ -1029,6 +1027,8 @@
 				220E6BC3161E040A00AB89B5 /* flash_off@2x.png in Resources */,
 				220E6BC4161E040A00AB89B5 /* flash_on.png in Resources */,
 				220E6BC5161E040A00AB89B5 /* flash_on@2x.png in Resources */,
+				2237EC261620CAC300E57113 /* Default.PNG in Resources */,
+				2237EC271620CAC300E57113 /* Default@2x.PNG in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
