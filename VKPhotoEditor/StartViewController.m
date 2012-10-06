@@ -182,7 +182,9 @@
 {
     isPhoto = NO;
     
-    UIImage *image = [UIImage imageWithCGImage:[[[assets objectAtIndex:index] defaultRepresentation] fullResolutionImage]];
+    ALAssetRepresentation *representation = [[assets objectAtIndex:index] defaultRepresentation];
+    UIImage *image = [UIImage imageWithCGImage:[representation fullResolutionImage] scale:1.0 orientation:representation.orientation];
+
     [self cropPhoto:image];
 }
 
@@ -223,8 +225,6 @@
 - (void)photoEditControllerDidCancel:(PhotoEditController *)controller
 {
     [self.navigationController popViewControllerAnimated:NO];
-    
-    [self loadAlbumImages];
 }
 
 - (void)photoEditControllerDidRetake:(PhotoEditController *)_controller
