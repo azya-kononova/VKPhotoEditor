@@ -33,7 +33,7 @@
     IBOutlet FlexibleButton *cameraRollBtn;
     IBOutlet UILabel *choosePhotoLabel;
     IBOutlet UILabel *noPhotoLabel;
-    
+    IBOutlet UILabel *appNameLabel;
 }
 
 - (void)viewDidLoad
@@ -52,6 +52,8 @@
     gallery.highlight = NO;
     
     takePhotoBtn.hidden = ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    
+    [appNameLabel setFont:[UIFont fontWithName:@"Lobster 1.4" size:36.0]];
 }
 
 - (void)dealloc
