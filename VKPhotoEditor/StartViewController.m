@@ -43,43 +43,62 @@
     self.navigationController.navigationBar.hidden = YES;
     self.view.backgroundColor = [UIColor defaultBgColor];
     
+    library = [[ALAssetsLibrary alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAlbumImages) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
     takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
     cameraRollBtn.bgImagecaps = CGSizeMake(20, 20);
     
     gallery.highlight = NO;
     
     takePhotoBtn.hidden = ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-    
-    library = [[ALAssetsLibrary alloc] init];
-    [self loadAlbumImages];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)loadAlbumImages
 {
-    [activityIndicator startAnimating];
-
+    if (assets) {
+        [assets removeAllObjects];
+        assets = nil;
+        [gallery reloadData];
+    }
+    
     assets = [NSMutableArray array];
     
-    [library enumerateGroupsWithTypes:ALAssetsGroupAll usingBlock:^(ALAssetsGroup *group, BOOL *stopGroup) {
-         [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-             if (asset) {
-                 [assets addObject:asset];
-             }
-             
-             if (*stop || index == NSNotFound) {
-                 assets = [NSMutableArray arrayWithArray:[[assets reverseObjectEnumerator] allObjects]];
-                 [gallery reloadData];
-                 [activityIndicator stopAnimating];
-                 
-                 noPhotoLabel.hidden = assets.count;
-                 choosePhotoLabel.hidden = !noPhotoLabel.hidden;
-             }
-          }];
-     } failureBlock:^(NSError *error) {
-         NSLog(@"Can not get images from Photo Library.");
-     }];
+    [activityIndicator startAnimating];
+    
+    [self performSelector:@selector(loadAlbumImagesAfterDelay) withObject:nil afterDelay:0.5];
 }
 
+- (void)loadAlbumImagesAfterDelay
+{
+    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stopGroup) {
+        [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+            if (asset) {
+                [assets addObject:asset];
+            }
+            if (*stop || index == NSNotFound) {
+                [assets sortUsingComparator:^NSComparisonResult(ALAsset *obj1, ALAsset *obj2) {
+                    NSDate *first = [obj1 valueForProperty:ALAssetPropertyDate];
+                    NSDate *second = [obj2 valueForProperty:ALAssetPropertyDate];
+                    return -[first compare:second];
+                }];
+                
+                [gallery reloadData];
+                [activityIndicator stopAnimating];
+                
+                noPhotoLabel.hidden = assets.count;
+                choosePhotoLabel.hidden = !noPhotoLabel.hidden;
+            }
+        }];
+    } failureBlock:^(NSError *error) {
+        NSLog(@"Can not get images from Photo Library.");
+    }];
+}
 
 #pragma mark - Photos
 
@@ -213,6 +232,12 @@
     [self takePhoto];
 }
 
+- (void)photoEditControllerDidSave:(PhotoEditController *)controller
+{
+    [self.navigationController popViewControllerAnimated:NO];
+    
+    [self loadAlbumImages];
+}
 
 #pragma mark - TakePhotoControllerDelegate
 

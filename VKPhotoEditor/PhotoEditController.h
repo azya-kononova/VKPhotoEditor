@@ -36,4 +36,5 @@
 @protocol PhotoEditControllerDelegate
 - (void)photoEditControllerDidCancel:(PhotoEditController *)controller;
 - (void)photoEditControllerDidRetake:(PhotoEditController *)controller;
+- (void)photoEditControllerDidSave:(PhotoEditController *)controller;
 @end
