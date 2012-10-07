@@ -16,7 +16,7 @@ extern NSString *GrayscaleFilterName;
 @interface Filters : NSObject
 
 + (NSArray*)filters;
-<<<<<<< HEAD
+
 + (NSArray*)captionViewTemplates;
 + (GPUImageOutput<GPUImageInput>*)GPUFilterWithName:(NSString*)name;
 + (NSString *)nameWithGPUFilter:(GPUImageOutput<GPUImageInput>*)filter;
