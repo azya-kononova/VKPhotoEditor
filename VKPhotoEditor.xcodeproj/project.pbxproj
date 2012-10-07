@@ -180,6 +180,10 @@
 		8BA0CBE31621CC8900EA0768 /* AppIcon-57x57.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA0CBE21621CC8900EA0768 /* AppIcon-57x57.png */; };
 		8BA0CBFC1621CFCD00EA0768 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA0CBF71621CF1800EA0768 /* Default.png */; };
 		8BA0CBFD1621CFD200EA0768 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA0CBF91621CF3600EA0768 /* Default@2x.png */; };
+		8BA0CC161621D24800EA0768 /* comics.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA0CC141621D24800EA0768 /* comics.png */; };
+		8BA0CC171621D24800EA0768 /* comics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA0CC151621D24800EA0768 /* comics@2x.png */; };
+		8BA0CC1B1621D2AE00EA0768 /* ComicsCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0CC191621D2AE00EA0768 /* ComicsCaptionView.m */; };
+		8BA0CC1C1621D2AE00EA0768 /* ComicsCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA0CC1A1621D2AE00EA0768 /* ComicsCaptionView.xib */; };
 		8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB70616208F2300A33DEF /* UIImage+Blend.m */; };
 		8BCDB74816219B8B00A33DEF /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB74716219B8B00A33DEF /* ActivityView.m */; };
 		8BCDB74A16219B9900A33DEF /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BCDB74916219B9900A33DEF /* ActivityView.xib */; };
@@ -457,6 +461,11 @@
 		8BA0CBE21621CC8900EA0768 /* AppIcon-57x57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "AppIcon-57x57.png"; path = "../../AppIcon-57x57.png"; sourceTree = "<group>"; };
 		8BA0CBF71621CF1800EA0768 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		8BA0CBF91621CF3600EA0768 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
+		8BA0CC141621D24800EA0768 /* comics.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = comics.png; sourceTree = "<group>"; };
+		8BA0CC151621D24800EA0768 /* comics@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "comics@2x.png"; sourceTree = "<group>"; };
+		8BA0CC181621D2AE00EA0768 /* ComicsCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicsCaptionView.h; sourceTree = "<group>"; };
+		8BA0CC191621D2AE00EA0768 /* ComicsCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicsCaptionView.m; sourceTree = "<group>"; };
+		8BA0CC1A1621D2AE00EA0768 /* ComicsCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComicsCaptionView.xib; sourceTree = "<group>"; };
 		8BCDB70516208F2300A33DEF /* UIImage+Blend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blend.h"; sourceTree = "<group>"; };
 		8BCDB70616208F2300A33DEF /* UIImage+Blend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blend.m"; sourceTree = "<group>"; };
 		8BCDB74616219B8B00A33DEF /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
@@ -641,6 +650,8 @@
 				226E752B160F011500531350 /* CameraBtn_Pressed.png */,
 				226E752C160F011500531350 /* CameraBtn.png */,
 				226E752D160F011500531350 /* Demotivator.png */,
+				8BA0CC141621D24800EA0768 /* comics.png */,
+				8BA0CC151621D24800EA0768 /* comics@2x.png */,
 				226E752E160F011500531350 /* FilterMask_Active.png */,
 				226E752F160F011500531350 /* Filters_Menu.png */,
 				226E7530160F011500531350 /* FontTab_Active.png */,
@@ -863,6 +874,9 @@
 				8B121CDF1620274C00F166D8 /* DemotivatorCaptionView.h */,
 				8B121CE01620274C00F166D8 /* DemotivatorCaptionView.m */,
 				8B121CE21620275F00F166D8 /* DemotivatorCaptionView.xib */,
+				8BA0CC181621D2AE00EA0768 /* ComicsCaptionView.h */,
+				8BA0CC191621D2AE00EA0768 /* ComicsCaptionView.m */,
+				8BA0CC1A1621D2AE00EA0768 /* ComicsCaptionView.xib */,
 			);
 			name = CaptionTemplates;
 			sourceTree = "<group>";
@@ -1125,6 +1139,9 @@
 				8BA0CBE31621CC8900EA0768 /* AppIcon-57x57.png in Resources */,
 				8BA0CBFC1621CFCD00EA0768 /* Default.png in Resources */,
 				8BA0CBFD1621CFD200EA0768 /* Default@2x.png in Resources */,
+				8BA0CC161621D24800EA0768 /* comics.png in Resources */,
+				8BA0CC171621D24800EA0768 /* comics@2x.png in Resources */,
+				8BA0CC1C1621D2AE00EA0768 /* ComicsCaptionView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1185,6 +1202,7 @@
 				8BCDB74816219B8B00A33DEF /* ActivityView.m in Sources */,
 				8BCDB74D16219CB800A33DEF /* CALayer+Animations.m in Sources */,
 				22F682381621D3600082E914 /* BlurFilterParams.m in Sources */,
+				8BA0CC1B1621D2AE00EA0768 /* ComicsCaptionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,7 @@
 #import "PolaroidCaptionView.h"
 #import "CloudCaptionView.h"
 #import "UIView+NIB.h"
+#import "ComicsCaptionView.h"
 
 NSString *MonochromeFilterName = @"MonochromeFilter";
 NSString *DefaultFilterName = @"DefaulFilter";
@@ -49,7 +50,8 @@ NSString *TiltShiftFilterName = @"TiltShiftFilter";
     return [NSArray arrayWithObjects: [DefaultCaptionView loadFromNIB],
             [DemotivatorCaptionView loadFromNIB],
             [PolaroidCaptionView loadFromNIB],
-            [CloudCaptionView loadFromNIB], nil];
+            [CloudCaptionView loadFromNIB],
+            [ComicsCaptionView loadFromNIB], nil];
 }
 
 + (GPUImageOutput<GPUImageInput>*)GPUFilterWithName:(NSString*)name
