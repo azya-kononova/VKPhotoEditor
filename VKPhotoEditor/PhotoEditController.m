@@ -95,7 +95,7 @@
    
     captionView = [CaptionView loadFromNIB];
     [captionView moveTo:CGPointMake(0, 390)];
-    captionView.caption = @"Make me awesame ;)";
+    captionView.caption = @"Make me awesome ;)";
     captionView.hidden = YES;
     captionView.delegate = self;
     
