@@ -181,7 +181,6 @@
 		8BDD881F16186C84008FFC24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881E16186C84008FFC24 /* AVFoundation.framework */; };
 		8BDD882116186C91008FFC24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD882016186C91008FFC24 /* GLKit.framework */; };
 		8BDD882316186C9C008FFC24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD882216186C9C008FFC24 /* OpenGLES.framework */; };
-		8BDD884616186D48008FFC24 /* UIImage+XBImageFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */; };
 		8BDD886C161878E8008FFC24 /* ImageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD886B161878E8008FFC24 /* ImageFilter.m */; };
 		8BDF18741610C6AB00507B5F /* FlexibleTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF18731610C6AB00507B5F /* FlexibleTextField.m */; };
 		8BDF18A41611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */; };
@@ -432,8 +431,6 @@
 		8BDD881E16186C84008FFC24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		8BDD882016186C91008FFC24 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		8BDD882216186C9C008FFC24 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		8BDD884416186D48008FFC24 /* UIImage+XBImageFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XBImageFilters.h"; sourceTree = "<group>"; };
-		8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XBImageFilters.m"; sourceTree = "<group>"; };
 		8BDD886A161878E8008FFC24 /* ImageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFilter.h; sourceTree = "<group>"; };
 		8BDD886B161878E8008FFC24 /* ImageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFilter.m; sourceTree = "<group>"; };
 		8BDF18721610C6AB00507B5F /* FlexibleTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleTextField.h; sourceTree = "<group>"; };
@@ -491,8 +488,6 @@
 			children = (
 				8BCDB74B16219CB800A33DEF /* CALayer+Animations.h */,
 				8BCDB74C16219CB800A33DEF /* CALayer+Animations.m */,
-				8BDD884416186D48008FFC24 /* UIImage+XBImageFilters.h */,
-				8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */,
 				8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */,
 				8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */,
 				8B9B4E4F160F5055000BE08F /* UIColor+VKPhotoEditor.h */,
@@ -1044,7 +1039,6 @@
 				22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */,
 				22E1EB6116143E9500B0E656 /* ZoomingView.m in Sources */,
 				22E1EB791615B12000B0E656 /* UIImage+Rect.m in Sources */,
-				8BDD884616186D48008FFC24 /* UIImage+XBImageFilters.m in Sources */,
 				22D1772C1618752D00B8093D /* TakePhotoController.m in Sources */,
 				22D177311618753D00B8093D /* StartViewController.m in Sources */,
 				8BDD886C161878E8008FFC24 /* ImageFilter.m in Sources */,
