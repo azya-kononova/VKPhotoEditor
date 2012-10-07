@@ -900,9 +900,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22D7BF52160CCC33008B5BFA /* AwesameMaker */ = {
+		22D7BF52160CCC33008B5BFA /* BeautyMaker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "AwesameMaker" */;
+			buildConfigurationList = 22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "BeautyMaker" */;
 			buildPhases = (
 				22D7BF4F160CCC33008B5BFA /* Sources */,
 				22D7BF50160CCC33008B5BFA /* Frameworks */,
@@ -913,7 +913,7 @@
 			dependencies = (
 				8B61EC34161C631E009A2B9B /* PBXTargetDependency */,
 			);
-			name = AwesameMaker;
+			name = BeautyMaker;
 			productName = VKPhotoEditor;
 			productReference = 22D7BF53160CCC33008B5BFA /* AwesameMaker.app */;
 			productType = "com.apple.product-type.application";
@@ -945,7 +945,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				22D7BF52160CCC33008B5BFA /* AwesameMaker */,
+				22D7BF52160CCC33008B5BFA /* BeautyMaker */,
 			);
 		};
 /* End PBXProject section */
@@ -1296,7 +1296,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "AwesameMaker" */ = {
+		22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "BeautyMaker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22D7BF72160CCC34008B5BFA /* Debug */,
