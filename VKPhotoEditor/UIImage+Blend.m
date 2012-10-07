@@ -18,7 +18,7 @@
     CGFloat side = fmaxf(self.size.width, self.size.height);
 
     CGRect rect = CGRectMake(0, 0, side, side);
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 1.0);
     [[UIColor blackColor] set];
     UIRectFill(rect);
     [self drawInRect:CGRectMake((side - self.size.width)/2, (side - self.size.height)/2, self.size.width, self.size.height)];
