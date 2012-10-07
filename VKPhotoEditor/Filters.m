@@ -33,15 +33,15 @@ NSString *TiltShiftFilterName = @"TiltShiftFilter";
 + (NSArray *)filters
 {
     
-    return [NSArray arrayWithObjects: [[ImageFilter alloc] initWithPreviewPath:@"Basic.png" name:DefaultFilterName],
-            [[ImageFilter alloc] initWithPreviewPath:@"Filter1.png" name:MonochromeFilterName],
-            [[ImageFilter alloc] initWithPreviewPath:@"Filter2.png" name:GrayscaleFilterName],
+    return [NSArray arrayWithObjects: [[ImageFilter alloc] initWithPreviewPath:@"Filter1.png" name:DefaultFilterName],
+            [[ImageFilter alloc] initWithPreviewPath:@"Filter2.png" name:MonochromeFilterName],
+            [[ImageFilter alloc] initWithPreviewPath:@"Filter3.png" name:GrayscaleFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter4.png" name:HazeFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter5.png" name:SharpenFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter6.png" name:SaturationFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter7.png" name:ContrastFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter8.png" name:ToonFilterName],
-            [[ImageFilter alloc] initWithPreviewPath:@"Filter8.png" name:WhiteBalanceFilterName],nil];
+            [[ImageFilter alloc] initWithPreviewPath:@"Filter9.png" name:WhiteBalanceFilterName],nil];
 }
 
 
