@@ -9,6 +9,11 @@
 #import "Filters.h"
 #import "ImageFilter.h"
 #import "GPUImage.h"
+#import "DefaultCaptionView.h"
+#import "DemotivatorCaptionView.h"
+#import "PolaroidCaptionView.h"
+#import "CloudCaptionView.h"
+#import "UIView+NIB.h"
 
 NSString *MonochromeFilterName = @"MonochromeFilter";
 NSString *DefaultFilterName = @"DefaulFilter";
@@ -34,6 +39,14 @@ NSString *WhiteBalanceFilterName = @"WhiteBalanceFilter";
             [[ImageFilter alloc] initWithPreviewPath:@"Filter7.png" name:ContrastFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter8.png" name:ToonFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter8.png" name:WhiteBalanceFilterName],nil];
+}
+
++ (NSArray*)captionViewTemplates
+{
+    return [NSArray arrayWithObjects: [DefaultCaptionView loadFromNIB],
+            [DemotivatorCaptionView loadFromNIB],
+            [PolaroidCaptionView loadFromNIB],
+            [CloudCaptionView loadFromNIB], nil];
 }
 
 + (GPUImageFilter*)GPUFilterWithName:(NSString*)name

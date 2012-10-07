@@ -29,7 +29,7 @@ typedef struct SPUserResizableViewAnchorPoint {
     SPUserResizableViewAnchorPoint anchorPoint;
 }
 
-@property (nonatomic, assign) id <SPUserResizableViewDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id <SPUserResizableViewDelegate> delegate;
 
 // Will be retained as a subview.
 @property (nonatomic, assign) UIView *contentView;
@@ -40,9 +40,6 @@ typedef struct SPUserResizableViewAnchorPoint {
 
 // Defaults to YES. Disables the user from dragging the view outside the parent view's bounds.
 @property (nonatomic) BOOL preventsPositionOutsideSuperview;
-
-- (void)hideEditingHandles;
-- (void)showEditingHandles;
 
 @end
 

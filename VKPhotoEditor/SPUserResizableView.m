@@ -30,7 +30,7 @@ static SPUserResizableViewAnchorPoint SPUserResizableViewLowerMiddleAnchorPoint 
     CAShapeLayer *shapeLayer;
 }
 
-- (void)toggleMarching:(BOOL)animated;
+- (void)toggleMarching;
 @end
 
 @implementation SPGripViewBorderView
@@ -53,6 +53,7 @@ static SPUserResizableViewAnchorPoint SPUserResizableViewLowerMiddleAnchorPoint 
           nil]];
         
         [self.layer addSublayer:shapeLayer];
+        shapeLayer.hidden = YES;
     }
     return self;
 }
@@ -65,18 +66,19 @@ static SPUserResizableViewAnchorPoint SPUserResizableViewLowerMiddleAnchorPoint 
     CGPathRelease(path);
 }
 
-- (void)toggleMarching:(BOOL)animated
+- (void)toggleMarching;
 {
-    shapeLayer.hidden = !animated;
-    if (animated) {
+    if ([shapeLayer animationForKey:@"linePhase"]) {
+        shapeLayer.hidden = YES;
+        [shapeLayer removeAnimationForKey:@"linePhase"];
+    } else {
+        shapeLayer.hidden = NO;
         CABasicAnimation *dashAnimation = [CABasicAnimation animationWithKeyPath:@"lineDashPhase"];
         [dashAnimation setFromValue:[NSNumber numberWithFloat:0.0f]];
         [dashAnimation setToValue:[NSNumber numberWithFloat:15.0f]];
         [dashAnimation setDuration:0.75f];
         [dashAnimation setRepeatCount:10000];
         [shapeLayer addAnimation:dashAnimation forKey:@"linePhase"];
-    } else {
-        [shapeLayer removeAnimationForKey:@"linePhase"];
     }
 }
 @end
@@ -87,11 +89,14 @@ static SPUserResizableViewAnchorPoint SPUserResizableViewLowerMiddleAnchorPoint 
 
 - (void)setupDefaultAttributes {
     borderView = [[SPGripViewBorderView alloc] initWithFrame:CGRectInset(self.bounds, kSPUserResizableViewGlobalInset, kSPUserResizableViewGlobalInset)];
-    [borderView toggleMarching:NO];
     [self addSubview:borderView];
     self.minWidth = kSPUserResizableViewDefaultMinWidth;
     self.minHeight = kSPUserResizableViewDefaultMinHeight;
     self.preventsPositionOutsideSuperview = YES;
+    
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
+    [self addGestureRecognizer:tap];
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -162,11 +167,16 @@ typedef struct CGPointSPUserResizableViewAnchorPointPair {
     return closestPoint.anchorPoint;
 }
 
+- (void)didTap:(UITapGestureRecognizer *)recognizer {
+    [borderView toggleMarching];
+}
+
 - (BOOL)isResizing {
     return (anchorPoint.adjustsH || anchorPoint.adjustsW || anchorPoint.adjustsX || anchorPoint.adjustsY);
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
     // Notify the delegate we've begun our editing session.
     if (self.delegate && [self.delegate respondsToSelector:@selector(userResizableViewDidBeginEditing:)]) {
         [self.delegate userResizableViewDidBeginEditing:self];
@@ -197,13 +207,6 @@ typedef struct CGPointSPUserResizableViewAnchorPointPair {
     }
 }
 
-- (void)showEditingHandles {
-    [borderView toggleMarching:YES];
-}
-
-- (void)hideEditingHandles {
-    [borderView toggleMarching:NO];
-}
 
 - (void)resizeUsingTouchLocation:(CGPoint)touchPoint {
     // (1) Update the touch point if we're outside the superview.
