@@ -93,10 +93,6 @@ static SPUserResizableViewAnchorPoint SPUserResizableViewLowerMiddleAnchorPoint 
     self.minWidth = kSPUserResizableViewDefaultMinWidth;
     self.minHeight = kSPUserResizableViewDefaultMinHeight;
     self.preventsPositionOutsideSuperview = YES;
-    
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
-    [self addGestureRecognizer:tap];
 }
 
 - (id)initWithFrame:(CGRect)frame {
@@ -167,10 +163,6 @@ typedef struct CGPointSPUserResizableViewAnchorPointPair {
     return closestPoint.anchorPoint;
 }
 
-- (void)didTap:(UITapGestureRecognizer *)recognizer {
-    [borderView toggleMarching];
-}
-
 - (BOOL)isResizing {
     return (anchorPoint.adjustsH || anchorPoint.adjustsW || anchorPoint.adjustsX || anchorPoint.adjustsY);
 }
@@ -191,6 +183,8 @@ typedef struct CGPointSPUserResizableViewAnchorPointPair {
         // When translating, all calculations are done in the view's coordinate space.
         touchStart = [touch locationInView:self];
     }
+    
+    [borderView toggleMarching];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -198,6 +192,8 @@ typedef struct CGPointSPUserResizableViewAnchorPointPair {
     if (self.delegate && [self.delegate respondsToSelector:@selector(userResizableViewDidEndEditing:)]) {
         [self.delegate userResizableViewDidEndEditing:self];
     }
+    
+    [borderView toggleMarching];
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -205,6 +201,8 @@ typedef struct CGPointSPUserResizableViewAnchorPointPair {
     if (self.delegate && [self.delegate respondsToSelector:@selector(userResizableViewDidEndEditing:)]) {
         [self.delegate userResizableViewDidEndEditing:self];
     }
+    
+    [borderView toggleMarching];
 }
 
 
