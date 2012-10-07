@@ -21,6 +21,7 @@
 #import "CaptionTemplateProtocol.h"
 #import "UIImage+Blend.h"
 #import "GPUImageNormalBlendFilter.h"
+#import "ActivityView.h"
 
 #define MAX_FONT_SIZE 100
 
@@ -40,6 +41,7 @@
     NSArray *captionTemplates;
     NSInteger captionTemplateIndex;
     NSDate *time;
+    ActivityView *activityView;
 }
 
 @synthesize saveButton;
@@ -102,6 +104,9 @@
     [contentView addSubview:captionView];
     [scrollView addSubview:contentView];
     scrollView.contentSize = contentView.frame.size;
+    
+    activityView = [ActivityView loadFromNIB];
+    [self.view addSubview:activityView];
 }
 
 - (void)setImageFilter:(ImageFilter*)imageFilter
@@ -189,20 +194,25 @@
 
 - (IBAction)save
 {   
-    NSLog(@"%@", NSStringFromCGSize(image.size));
+    NSLog(@"%@ input", NSStringFromCGSize(image.size));
 
-    time = [NSDate new];
-    CGFloat side = fmaxf(image.size.width, image.size.height);
-    [captionViewTemplate removeFromSuperview];
-    [captionViewTemplate resizeTo:CGSizeMake(side, side)];
-    BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
-    UIImage *output = [[filter imageFromCurrentlyProcessedOutput] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
+    [activityView showSelf:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
+        time = [NSDate new];
+        CGFloat side = fmaxf(image.size.width, image.size.height);
+        [captionViewTemplate removeFromSuperview];
+        [captionViewTemplate resizeTo:CGSizeMake(side, side)];
+        BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
+        UIImage *output = [[filter imageFromCurrentlyProcessedOutput] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
+        NSLog(@" Output %@", NSStringFromCGSize(output.size));
+        NSLog(@"%f", -[time timeIntervalSinceNow]);
+        [activityView showSelf:NO];
+        [delegate photoEditController:self didEdit:output];
+    });
+
     
-    NSLog(@"Resize template and blend with image %f", -[time timeIntervalSinceNow]);
     
-    UIImageWriteToSavedPhotosAlbum( output , nil, nil, nil);
-    [delegate photoEditControllerDidCancel:self];
-}
+   }
 
 - (IBAction)cancel
 {

@@ -178,6 +178,9 @@
 		8B9B4E8B160F6428000BE08F /* CustomSegmentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */; };
 		8B9D963C161E1829004F0AF6 /* SPUserResizableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */; };
 		8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB70616208F2300A33DEF /* UIImage+Blend.m */; };
+		8BCDB74816219B8B00A33DEF /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB74716219B8B00A33DEF /* ActivityView.m */; };
+		8BCDB74A16219B9900A33DEF /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BCDB74916219B9900A33DEF /* ActivityView.xib */; };
+		8BCDB74D16219CB800A33DEF /* CALayer+Animations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB74C16219CB800A33DEF /* CALayer+Animations.m */; };
 		8BDD881B16186C71008FFC24 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881A16186C71008FFC24 /* CoreMedia.framework */; };
 		8BDD881D16186C79008FFC24 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881C16186C79008FFC24 /* CoreVideo.framework */; };
 		8BDD881F16186C84008FFC24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881E16186C84008FFC24 /* AVFoundation.framework */; };
@@ -449,6 +452,11 @@
 		8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUserResizableView.m; sourceTree = "<group>"; };
 		8BCDB70516208F2300A33DEF /* UIImage+Blend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blend.h"; sourceTree = "<group>"; };
 		8BCDB70616208F2300A33DEF /* UIImage+Blend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blend.m"; sourceTree = "<group>"; };
+		8BCDB74616219B8B00A33DEF /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
+		8BCDB74716219B8B00A33DEF /* ActivityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityView.m; sourceTree = "<group>"; };
+		8BCDB74916219B9900A33DEF /* ActivityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityView.xib; sourceTree = "<group>"; };
+		8BCDB74B16219CB800A33DEF /* CALayer+Animations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Animations.h"; sourceTree = "<group>"; };
+		8BCDB74C16219CB800A33DEF /* CALayer+Animations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+Animations.m"; sourceTree = "<group>"; };
 		8BDD881A16186C71008FFC24 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		8BDD881C16186C79008FFC24 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		8BDD881E16186C84008FFC24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -521,6 +529,8 @@
 		221C31D2161045DC005974C8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				8BCDB74B16219CB800A33DEF /* CALayer+Animations.h */,
+				8BCDB74C16219CB800A33DEF /* CALayer+Animations.m */,
 				8BDD884416186D48008FFC24 /* UIImage+XBImageFilters.h */,
 				8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */,
 				8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */,
@@ -820,6 +830,9 @@
 				22E1EB6016143E9500B0E656 /* ZoomingView.m */,
 				8B9D963A161E1829004F0AF6 /* SPUserResizableView.h */,
 				8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */,
+				8BCDB74616219B8B00A33DEF /* ActivityView.h */,
+				8BCDB74716219B8B00A33DEF /* ActivityView.m */,
+				8BCDB74916219B9900A33DEF /* ActivityView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1098,6 +1111,7 @@
 				8B121D351620734100F166D8 /* CloudCaptionView.xib in Resources */,
 				8B121D3B1620870B00F166D8 /* cloud.png in Resources */,
 				8B121D3C1620870B00F166D8 /* cloud@2x.png in Resources */,
+				8BCDB74A16219B9900A33DEF /* ActivityView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1155,6 +1169,8 @@
 				8B121D33162072CC00F166D8 /* CloudCaptionView.m in Sources */,
 				8B121D3816207DD300F166D8 /* UILabel+Multiline.m in Sources */,
 				8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */,
+				8BCDB74816219B8B00A33DEF /* ActivityView.m in Sources */,
+				8BCDB74D16219CB800A33DEF /* CALayer+Animations.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
