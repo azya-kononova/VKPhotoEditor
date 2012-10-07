@@ -13,13 +13,12 @@
 NSString *MonochromeFilterName = @"MonochromeFilter";
 NSString *DefaultFilterName = @"DefaulFilter";
 NSString *GrayscaleFilterName = @"GrayscaleFilter";
-NSString *VignetteFilterName = @"VignetteFilter";
-NSString *KuwaharaFilterName = @"KuwaharaFilter";
 NSString *HazeFilterName = @"HazeFilter";
 NSString *SharpenFilterName = @"SharpenFilter";
 NSString *SaturationFilterName = @"SaturationFilter";
 NSString *ContrastFilterName = @"ContrastFilter";
 NSString *ToonFilterName = @"ToonFilter";
+NSString *WhiteBalanceFilterName = @"WhiteBalanceFilter";
 
 @implementation Filters
 
@@ -29,12 +28,12 @@ NSString *ToonFilterName = @"ToonFilter";
     return [NSArray arrayWithObjects: [[ImageFilter alloc] initWithPreviewPath:@"Basic.png" name:DefaultFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter1.png" name:MonochromeFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter2.png" name:GrayscaleFilterName],
-            [[ImageFilter alloc] initWithPreviewPath:@"Filter3.png" name:VignetteFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter4.png" name:HazeFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter5.png" name:SharpenFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter6.png" name:SaturationFilterName],
             [[ImageFilter alloc] initWithPreviewPath:@"Filter7.png" name:ContrastFilterName],
-            [[ImageFilter alloc] initWithPreviewPath:@"Filter8.png" name:ToonFilterName], nil];
+            [[ImageFilter alloc] initWithPreviewPath:@"Filter8.png" name:ToonFilterName],
+            [[ImageFilter alloc] initWithPreviewPath:@"Filter8.png" name:WhiteBalanceFilterName],nil];
 }
 
 + (GPUImageFilter*)GPUFilterWithName:(NSString*)name
@@ -43,13 +42,6 @@ NSString *ToonFilterName = @"ToonFilter";
         return [GPUImageMonochromeFilter new];
     if (name == GrayscaleFilterName)
         return [GPUImageGrayscaleFilter new];
-    if (name == VignetteFilterName) {
-        GPUImageFilter *filter = [GPUImageVignetteFilter new];
-        [(GPUImageVignetteFilter *)filter setVignetteStart:0.1];
-        return filter;
-    }
-    if (name == KuwaharaFilterName)
-        return [GPUImageKuwaharaFilter new];
     if (name == HazeFilterName)
         return [GPUImageHazeFilter new];
     if (name == SharpenFilterName) {
@@ -70,6 +62,11 @@ NSString *ToonFilterName = @"ToonFilter";
     if (name == ToonFilterName) {
         GPUImageFilter *filter = [GPUImageToonFilter new];
         [(GPUImageToonFilter *)filter setQuantizationLevels:5];
+        return filter;
+    }
+    if (name == WhiteBalanceFilterName) {
+        GPUImageFilter *filter = [GPUImageWhiteBalanceFilter new];
+        [(GPUImageWhiteBalanceFilter *)filter setTemperature:3500];
         return filter;
     }
     else
