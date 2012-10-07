@@ -113,7 +113,7 @@
 { 
     [sourcePicture removeAllTargets];
     [filter removeAllTargets];
-    filter = [Filters GPUFilterWithName:imageFilter.name];
+    filter = (GPUImageFilter *)[Filters GPUFilterWithName:imageFilter.name];
     [filter setInputRotation:image.rotationMode atIndex:0];
     [sourcePicture addTarget:filter];
     [filter addTarget:imageView];

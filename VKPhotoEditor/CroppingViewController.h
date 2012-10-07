@@ -14,7 +14,7 @@
 
 @property (nonatomic, unsafe_unretained) id<CroppingViewControllerDelegate> delegate;
 
-- (id)initWithImage:(UIImage *)image filterIndex:(NSInteger)filterIndex;
+- (id)initWithImage:(UIImage *)image filterIndex:(NSInteger)filterIndex userInfo:(NSDictionary *)userInfo;
 
 @end
 

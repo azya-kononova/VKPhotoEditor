@@ -24,6 +24,8 @@ NSString *SaturationFilterName = @"SaturationFilter";
 NSString *ContrastFilterName = @"ContrastFilter";
 NSString *ToonFilterName = @"ToonFilter";
 NSString *WhiteBalanceFilterName = @"WhiteBalanceFilter";
+NSString *GaussianSelectiveBlurFilter = @"GaussianSelectiveBlurFilterName";
+NSString *TiltShiftFilterName = @"TiltShiftFilter";
 
 @implementation Filters
 
@@ -41,6 +43,7 @@ NSString *WhiteBalanceFilterName = @"WhiteBalanceFilter";
             [[ImageFilter alloc] initWithPreviewPath:@"Filter8.png" name:WhiteBalanceFilterName],nil];
 }
 
+
 + (NSArray*)captionViewTemplates
 {
     return [NSArray arrayWithObjects: [DefaultCaptionView loadFromNIB],
@@ -49,7 +52,7 @@ NSString *WhiteBalanceFilterName = @"WhiteBalanceFilter";
             [CloudCaptionView loadFromNIB], nil];
 }
 
-+ (GPUImageFilter*)GPUFilterWithName:(NSString*)name
++ (GPUImageOutput<GPUImageInput>*)GPUFilterWithName:(NSString*)name
 {
     if (name == MonochromeFilterName)
         return [GPUImageMonochromeFilter new];
@@ -82,8 +85,24 @@ NSString *WhiteBalanceFilterName = @"WhiteBalanceFilter";
         [(GPUImageWhiteBalanceFilter *)filter setTemperature:3500];
         return filter;
     }
+    if (name == GaussianSelectiveBlurFilter)
+        return [GPUImageGaussianSelectiveBlurFilter new];
+    if (name == TiltShiftFilterName)
+        return [GPUImageTiltShiftFilter new];
     else
         return [GPUImageEmptyFilter new];
+}
+
++ (NSString *)nameWithGPUFilter:(GPUImageOutput<GPUImageInput> *)filter
+{
+        //TODO
+    if ([filter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
+        return GaussianSelectiveBlurFilter;
+    }
+    if ([filter isKindOfClass:[GPUImageTiltShiftFilter class]]) {
+        return TiltShiftFilterName;
+    }
+    return nil;
 }
 
 @end

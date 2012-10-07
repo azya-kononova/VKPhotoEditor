@@ -164,6 +164,7 @@
 		8B121D3816207DD300F166D8 /* UILabel+Multiline.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B121D3716207DD200F166D8 /* UILabel+Multiline.m */; };
 		8B121D3B1620870B00F166D8 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B121D391620870900F166D8 /* cloud.png */; };
 		8B121D3C1620870B00F166D8 /* cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B121D3A1620870A00F166D8 /* cloud@2x.png */; };
+		22FB79B316218BEC00D57819 /* BlurFilterParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 22FB79B216218BEC00D57819 /* BlurFilterParams.m */; };
 		8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */; };
 		8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */; };
 		8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61EC1C161C627F009A2B9B /* libGPUImage.a */; };
@@ -412,6 +413,7 @@
 		22E1EB781615B12000B0E656 /* UIImage+Rect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rect.m"; sourceTree = "<group>"; };
 		22E51F13160F4E8E00299D42 /* UIView+NIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NIB.h"; sourceTree = "<group>"; };
 		22E51F14160F4E8E00299D42 /* UIView+NIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NIB.m"; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		8B121CDC1620264F00F166D8 /* UIView+Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Render.h"; sourceTree = "<group>"; };
 		8B121CDD1620264F00F166D8 /* UIView+Render.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Render.m"; sourceTree = "<group>"; };
 		8B121CDF1620274C00F166D8 /* DemotivatorCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemotivatorCaptionView.h; sourceTree = "<group>"; };
@@ -431,6 +433,8 @@
 		8B121D3716207DD200F166D8 /* UILabel+Multiline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Multiline.m"; sourceTree = "<group>"; };
 		8B121D391620870900F166D8 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloud.png; path = ../cloud.png; sourceTree = "<group>"; };
 		8B121D3A1620870A00F166D8 /* cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cloud@2x.png"; path = "../cloud@2x.png"; sourceTree = "<group>"; };
+		22FB79B116218BEC00D57819 /* BlurFilterParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurFilterParams.h; sourceTree = "<group>"; };
+		22FB79B216218BEC00D57819 /* BlurFilterParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurFilterParams.m; sourceTree = "<group>"; };
 		8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Creation.h"; sourceTree = "<group>"; };
 		8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Creation.m"; sourceTree = "<group>"; };
 		8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleButton.h; sourceTree = "<group>"; };
@@ -526,6 +530,8 @@
 				220E6BC7161E06ED00AB89B5 /* BlurMode.m */,
 				220E6BC9161E071500AB89B5 /* FlashMode.h */,
 				220E6BCA161E071500AB89B5 /* FlashMode.m */,
+				22FB79B116218BEC00D57819 /* BlurFilterParams.h */,
+				22FB79B216218BEC00D57819 /* BlurFilterParams.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1179,6 +1185,7 @@
 				8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */,
 				8BCDB74816219B8B00A33DEF /* ActivityView.m in Sources */,
 				8BCDB74D16219CB800A33DEF /* CALayer+Animations.m in Sources */,
+				22FB79B316218BEC00D57819 /* BlurFilterParams.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

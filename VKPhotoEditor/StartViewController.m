@@ -116,9 +116,9 @@
     [self.navigationController pushViewController:photoEditController animated:NO];
 }
 
-- (void)cropPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex
+- (void)cropPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex userInfo:(NSDictionary *)userInfo
 {
-    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image filterIndex:filterIndex];
+    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image filterIndex:filterIndex userInfo:userInfo];
     controller.delegate = self;
     
     [self presentModalViewController:controller animated:NO];
@@ -126,7 +126,7 @@
 
 - (void)cropPhoto:(UIImage *)image
 {
-    [self cropPhoto:image filterIndex:0];
+    [self cropPhoto:image filterIndex:0 userInfo:nil];
 }
 
 - (void)takePhoto
@@ -258,12 +258,12 @@
     [self dismissModalViewControllerAnimated:NO];
 }
 
-- (void)takePhotoController:(TakePhotoController *)controller didFinishWithBasicImage:(UIImage *)basic filterIndex:(NSInteger)index
+- (void)takePhotoController:(TakePhotoController *)controller didFinishWithBasicImage:(UIImage *)basic filterIndex:(NSInteger)index userInfo:(NSDictionary *)userInfo
 {
     [self dismissModalViewControllerAnimated:NO];
     
     isPhoto = YES;
-    [self cropPhoto:basic filterIndex:index];
+    [self cropPhoto:basic filterIndex:index userInfo:userInfo];
 }
 
 @end

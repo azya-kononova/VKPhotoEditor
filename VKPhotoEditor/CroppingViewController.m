@@ -13,6 +13,7 @@
 #import "PhotoEditController.h"
 #import "Filters.h"
 #import "GPUImageFilter.h"
+#import "BlurFilterParams.h"
 
 @interface CroppingViewController () {
     IBOutlet UIView *captureView;
@@ -31,12 +32,17 @@
 
 @synthesize delegate;
 
-- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex
+- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex userInfo:(NSDictionary *)userInfo
 {
     self = [super init];
     if (self) {
         image = _image;
         filterIndex = _filterIndex;
+        
+        GPUImageOutput<GPUImageInput> *blurFilter = [BlurFilterParams filterWithParams:userInfo];
+        if (blurFilter) {
+            image = [blurFilter imageByFilteringImage:_image];
+        }
     }
     return self;
 }
@@ -46,7 +52,7 @@
     [super viewDidLoad];
     
     NSArray *filters = Filters.filters;
-    GPUImageFilter *filter = [Filters GPUFilterWithName:[[filters objectAtIndex:filterIndex] name]];
+    GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:[[filters objectAtIndex:filterIndex] name]];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[filter imageByFilteringImage:image]];
     
     zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:captureView.frame];
