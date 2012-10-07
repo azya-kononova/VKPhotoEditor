@@ -7,7 +7,6 @@
     //
 
 #import "TakePhotoController.h"
-#import "XBFilteredCameraView.h"
 #import "ThumbnailsView.h"
 #import "TableViewPopover.h"
 #import "TablePopoverCell.h"
@@ -35,7 +34,7 @@ enum {
 };
 typedef NSInteger CameraBlurMode;
 
-@interface TakePhotoController ()<XBFilteredCameraViewDelegate, ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate> {
+@interface TakePhotoController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate> {
     IBOutlet GPUImageView *cameraView;
     IBOutlet UIImageView *blurImageView;
     IBOutlet UIImageView *flashImageView;
