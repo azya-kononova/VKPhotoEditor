@@ -180,6 +180,7 @@
 - (IBAction)addCaption
 {
     BOOL show = captionView.hidden;
+    if (!show) [captionView resignFirstResponder];
     captionButton.selected = show;
     captionView.hidden = !show;
     CGFloat adjustHeight = captionView.frame.size.height - 15;

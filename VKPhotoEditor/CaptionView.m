@@ -84,4 +84,9 @@
     [delegate captionView:self didSetFont:[fonts objectAtIndex:index]];
 }
 
+- (BOOL)resignFirstResponder
+{
+    return [textField resignFirstResponder];
+}
+
 @end
