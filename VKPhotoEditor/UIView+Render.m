@@ -13,7 +13,7 @@
 
 - (UIImage*) renderToImage
 {
-    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 0.0);
+    UIGraphicsBeginImageContextWithOptions(self.frame.size, NO, 1.0);
     [self.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
