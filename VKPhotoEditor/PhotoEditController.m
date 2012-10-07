@@ -22,6 +22,7 @@
 #import "UIImage+Blend.h"
 #import "GPUImageNormalBlendFilter.h"
 #import "ActivityView.h"
+#import "ArrowView.h"
 
 #define MAX_FONT_SIZE 100
 
@@ -42,6 +43,7 @@
     NSInteger captionTemplateIndex;
     NSDate *time;
     ActivityView *activityView;
+    ArrowView *arrowView;
 }
 
 @synthesize saveButton;
@@ -107,6 +109,10 @@
     
     activityView = [ActivityView loadFromNIB];
     [self.view addSubview:activityView];
+    
+    arrowView = [ArrowView loadFromNIB];
+    [topView addSubview:arrowView];
+    [arrowView moveTo:CGPointMake(0, 200)];
 }
 
 - (void)setImageFilter:(ImageFilter*)imageFilter
@@ -179,6 +185,7 @@
 
 - (IBAction)addCaption
 {
+    [arrowView showArrows];
     BOOL show = captionView.hidden;
     if (!show) [captionView resignFirstResponder];
     captionButton.selected = show;

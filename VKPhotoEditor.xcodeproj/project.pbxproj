@@ -156,6 +156,12 @@
 		8B121D3C1620870B00F166D8 /* cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B121D3A1620870A00F166D8 /* cloud@2x.png */; };
 		8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */; };
 		8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */; };
+		8B435AA31621E1030060A403 /* ArrowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B435AA21621E1030060A403 /* ArrowView.xib */; };
+		8B435AA61621E1170060A403 /* ArrowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B435AA51621E1170060A403 /* ArrowView.m */; };
+		8B435AAF1621E33C0060A403 /* left_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B435AAB1621E33C0060A403 /* left_arrow.png */; };
+		8B435AB01621E33C0060A403 /* left_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B435AAC1621E33C0060A403 /* left_arrow@2x.png */; };
+		8B435AB11621E33C0060A403 /* right_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B435AAD1621E33C0060A403 /* right_arrow.png */; };
+		8B435AB21621E33C0060A403 /* right_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B435AAE1621E33C0060A403 /* right_arrow@2x.png */; };
 		8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61EC1C161C627F009A2B9B /* libGPUImage.a */; };
 		8B9B4E51160F5055000BE08F /* PhotoEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4D160F5055000BE08F /* PhotoEditController.m */; };
 		8B9B4E52160F5055000BE08F /* PhotoEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */; };
@@ -397,6 +403,13 @@
 		8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Creation.m"; sourceTree = "<group>"; };
 		8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleButton.h; sourceTree = "<group>"; };
 		8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlexibleButton.m; sourceTree = "<group>"; };
+		8B435AA21621E1030060A403 /* ArrowView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArrowView.xib; sourceTree = "<group>"; };
+		8B435AA41621E1170060A403 /* ArrowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrowView.h; sourceTree = "<group>"; };
+		8B435AA51621E1170060A403 /* ArrowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrowView.m; sourceTree = "<group>"; };
+		8B435AAB1621E33C0060A403 /* left_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = left_arrow.png; sourceTree = "<group>"; };
+		8B435AAC1621E33C0060A403 /* left_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "left_arrow@2x.png"; sourceTree = "<group>"; };
+		8B435AAD1621E33C0060A403 /* right_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = right_arrow.png; sourceTree = "<group>"; };
+		8B435AAE1621E33C0060A403 /* right_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "right_arrow@2x.png"; sourceTree = "<group>"; };
 		8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		8B9B4E4C160F5055000BE08F /* PhotoEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEditController.h; sourceTree = "<group>"; };
 		8B9B4E4D160F5055000BE08F /* PhotoEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoEditController.m; sourceTree = "<group>"; };
@@ -534,6 +547,10 @@
 				8BA0CBE01621CC7500EA0768 /* AppIcon-114x114.png */,
 				8BDF189C1611A67B00507B5F /* fonts */,
 				8B121D391620870900F166D8 /* cloud.png */,
+				8B435AAB1621E33C0060A403 /* left_arrow.png */,
+				8B435AAC1621E33C0060A403 /* left_arrow@2x.png */,
+				8B435AAD1621E33C0060A403 /* right_arrow.png */,
+				8B435AAE1621E33C0060A403 /* right_arrow@2x.png */,
 				8B121D3A1620870A00F166D8 /* cloud@2x.png */,
 				226E75BD160F02FA00531350 /* Main_screen_separator.png */,
 				226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */,
@@ -756,6 +773,9 @@
 				8BCDB74616219B8B00A33DEF /* ActivityView.h */,
 				8BCDB74716219B8B00A33DEF /* ActivityView.m */,
 				8BCDB74916219B9900A33DEF /* ActivityView.xib */,
+				8B435AA41621E1170060A403 /* ArrowView.h */,
+				8B435AA51621E1170060A403 /* ArrowView.m */,
+				8B435AA21621E1030060A403 /* ArrowView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1011,6 +1031,11 @@
 				8BA0CC171621D24800EA0768 /* comics@2x.png in Resources */,
 				8BA0CC1C1621D2AE00EA0768 /* ComicsCaptionView.xib in Resources */,
 				22B4E3EE1621DF13008ECFA3 /* Filter9.png in Resources */,
+				8B435AA31621E1030060A403 /* ArrowView.xib in Resources */,
+				8B435AAF1621E33C0060A403 /* left_arrow.png in Resources */,
+				8B435AB01621E33C0060A403 /* left_arrow@2x.png in Resources */,
+				8B435AB11621E33C0060A403 /* right_arrow.png in Resources */,
+				8B435AB21621E33C0060A403 /* right_arrow@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1061,6 +1086,7 @@
 				8BCDB74D16219CB800A33DEF /* CALayer+Animations.m in Sources */,
 				22F682381621D3600082E914 /* BlurFilterParams.m in Sources */,
 				8BA0CC1B1621D2AE00EA0768 /* ComicsCaptionView.m in Sources */,
+				8B435AA61621E1170060A403 /* ArrowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
