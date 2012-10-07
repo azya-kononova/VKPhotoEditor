@@ -7,25 +7,33 @@
 //
 
 #import "BlurMode.h"
+#import "Filters.h"
 
-@implementation BlurMode
+@implementation BlurMode {
+    NSString *filterName;
+}
 
 @synthesize iconImage, image, filter;
 
-- (id)initWithFilter:(GPUImageOutput <GPUImageInput> *)_filter imageName:(NSString *)_imageName iconImageName:(NSString *)_iconImageName
+- (id)initWithFilter:(NSString *)_filterName imageName:(NSString *)_imageName iconImageName:(NSString *)_iconImageName
 {
     self = [super init];
     if (self) {
-        filter = _filter;
+        filterName = _filterName;
         image = [UIImage imageNamed:_imageName];
         iconImage = [UIImage imageNamed:_iconImageName];
     }
     return self;
 }
 
-BlurMode *MakeBlurMode(GPUImageOutput <GPUImageInput> *_filter, NSString *_imageName, NSString *_iconImageName)
+BlurMode *MakeBlurMode(NSString *_filterName, NSString *_imageName, NSString *_iconImageName)
 {
-    return [[BlurMode alloc] initWithFilter:_filter imageName:_imageName iconImageName:_iconImageName];
+    return [[BlurMode alloc] initWithFilter:_filterName imageName:_imageName iconImageName:_iconImageName];
+}
+
+- (GPUImageOutput <GPUImageInput> *)filter
+{
+    return filterName ? [Filters GPUFilterWithName:filterName] : nil;
 }
 
 @end

@@ -22,6 +22,8 @@
 
 #import "GPUImageView.h"
 #import "GPUImageStillCamera.h"
+#import "GPUImageGaussianSelectiveBlurFilter.h"
+#import "GPUImageTiltShiftFilter.h"
 
 
 #define BLUR_SIZE_PROPORTION 320
@@ -42,6 +44,7 @@ typedef NSInteger CameraBlurMode;
     IBOutlet UIButton *photoBtn;
     IBOutlet UIButton *filterBtn;
     IBOutlet ThumbnailsView *filtersView;
+    IBOutlet UISlider *blurSlider;
     
     TableViewPopover *flashPopover;
     TableViewPopover *blurPopover;
@@ -51,14 +54,14 @@ typedef NSInteger CameraBlurMode;
     
     NSArray *flashModes;
     NSArray *blurModes;
+    NSArray *blurTargets;
     GPUImageStillCamera *stillCamera;
     GPUImageOutput<GPUImageInput> *basicFilter;
     GPUImageOutput<GPUImageInput> *blurFilter;
-    NSArray *blurTargets;
 }
 
 @property (nonatomic, assign) NSUInteger filterIndex;
-
+- (IBAction)updateFilter:(id)sender;
 @end
 
 @implementation TakePhotoController
@@ -68,6 +71,8 @@ typedef NSInteger CameraBlurMode;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    blurSlider.transform = CGAffineTransformRotate(blurSlider.transform, -M_PI_2);
     
     filters = Filters.filters;
     movingButtons = [NSArray arrayWithObjects:cancelBtn, photoBtn, filterBtn, nil];
@@ -141,8 +146,8 @@ typedef NSInteger CameraBlurMode;
 {
     NSMutableArray *modes = [NSMutableArray array];
     
-    [modes addObject:MakeBlurMode([Filters GPUFilterWithName:@"TiltShiftFilter"], @"blur_line.png", @"blur_line_icon.png")];
-    [modes addObject:MakeBlurMode([Filters GPUFilterWithName:@"GaussianSelectiveBlurFilterName"], @"blur_round.png", @"blur_round_icon.png")];
+    [modes addObject:MakeBlurMode(@"TiltShiftFilter", @"blur_line.png", @"blur_line_icon.png")];
+    [modes addObject:MakeBlurMode(@"GaussianSelectiveBlurFilterName", @"blur_round.png", @"blur_round_icon.png")];
     [modes addObject:MakeBlurMode(nil, @"blur_off.png", @"blur_off_icon.png")];
     
     return modes;
@@ -195,11 +200,40 @@ typedef NSInteger CameraBlurMode;
             [basicFilter addTarget:target];
         }
     }
+    
+    [self resetSlider];
+    blurSlider.hidden = !blurFilter;
 }
 
 - (NSNumber *)setBlurSizeForImage:(UIImage *)image
 {
     return [NSNumber numberWithFloat:fmaxf(image.size.width, image.size.height)/BLUR_SIZE_PROPORTION];
+}
+
+- (IBAction)updateFilter:(id)sender
+{
+    CGFloat midpoint = [(UISlider *)sender value];
+    if ([blurFilter isKindOfClass:[GPUImageTiltShiftFilter class]]) {
+        [(GPUImageTiltShiftFilter *)blurFilter setTopFocusLevel:midpoint - 0.1];
+        [(GPUImageTiltShiftFilter *)blurFilter setBottomFocusLevel:midpoint + 0.1];
+    }
+    if ([blurFilter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
+        [(GPUImageGaussianSelectiveBlurFilter *)blurFilter setExcludeCircleRadius:midpoint];
+    }
+}
+
+- (void)resetSlider
+{
+    if ([blurFilter isKindOfClass:[GPUImageTiltShiftFilter class]]) {
+        [blurSlider setMinimumValue:0.2];
+        [blurSlider setMaximumValue:0.8];
+        [blurSlider setValue:0.5];
+    }
+    if ([blurFilter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
+        [blurSlider setMinimumValue:0.0];
+        [blurSlider setMaximumValue:.75f];
+        [blurSlider setValue:40.0/320.0];
+    }
 }
 
 #pragma mark ThumbnailView datasourse

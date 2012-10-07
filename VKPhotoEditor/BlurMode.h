@@ -16,6 +16,6 @@
 @property (nonatomic, strong, readonly) UIImage *iconImage;
 @property (nonatomic, strong, readonly) GPUImageOutput <GPUImageInput> *filter;
 
-BlurMode *MakeBlurMode(GPUImageOutput <GPUImageInput> *filter, NSString *imageName, NSString *iconImageName);
+BlurMode *MakeBlurMode(NSString *filterName, NSString *imageName, NSString *iconImageName);
 
 @end
