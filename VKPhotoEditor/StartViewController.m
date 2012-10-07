@@ -61,16 +61,20 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)loadAlbumImages
+- (void)clearThumbnailsImages
 {
     if (assets) {
         [assets removeAllObjects];
         assets = nil;
         [gallery reloadData];
     }
+}
+
+- (void)loadAlbumImages
+{
+    [self clearThumbnailsImages];
     
     assets = [NSMutableArray array];
-    
     [activityIndicator startAnimating];
     
     [self performSelector:@selector(loadAlbumImagesAfterDelay) withObject:nil afterDelay:0.5];
@@ -234,10 +238,16 @@
     [self takePhoto];
 }
 
-- (void)photoEditControllerDidSave:(PhotoEditController *)controller
+- (void)photoEditController:(PhotoEditController *)controller didEdit:(UIImage *)image
 {
-    [self.navigationController popViewControllerAnimated:NO];
-    
+    [self.navigationController popViewControllerAnimated:YES];
+    [self clearThumbnailsImages];
+    [activityIndicator startAnimating];
+    UIImageWriteToSavedPhotosAlbum( image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
     [self loadAlbumImages];
 }
 
