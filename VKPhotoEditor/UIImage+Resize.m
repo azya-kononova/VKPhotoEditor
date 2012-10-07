@@ -16,11 +16,7 @@
     CGRect rect = [self rotateRectInImage:bounds];
     CGRect absRect = CGRectMake(fmaxf(0, rect.origin.x), fmaxf(0, rect.origin.y), rect.size.width, rect.size.height);
     
-    if (self.size.height < bounds.size.height || self.size.width < bounds.size.width) {
-        return [self croppedRectImage:absRect];
-    } else {
-        return [self croppedSquareImage:absRect];
-    }  
+    return [self croppedSquareImage:absRect];
 }
 
 - (UIImage *)croppedRectImage:(CGRect)bounds
