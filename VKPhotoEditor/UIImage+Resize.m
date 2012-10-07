@@ -16,7 +16,6 @@
     CGRect rect = [self rotateRectInImage:bounds];
     CGRect absRect = CGRectMake(fmaxf(0, rect.origin.x), fmaxf(0, rect.origin.y), rect.size.width, rect.size.height);
     
-    NSLog(@"crop rect %@  bounds %@", NSStringFromCGRect(absRect), NSStringFromCGRect(bounds));
     return [self croppedSquareImage:absRect];
 }
 

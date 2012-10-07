@@ -188,8 +188,7 @@
     
     ALAssetRepresentation *representation = [[assets objectAtIndex:index] defaultRepresentation];
     UIImage *image = [UIImage imageWithCGImage:[representation fullResolutionImage] scale:1.0 orientation:representation.orientation];
-    
-    NSLog(@"From thumbnail %@", NSStringFromCGSize(image.size));
+
     [self cropPhoto:image];
 }
 
@@ -203,7 +202,6 @@
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     
-    NSLog(@"From picker %@", NSStringFromCGSize(image.size));
     [self cropPhoto:image];
 }
 

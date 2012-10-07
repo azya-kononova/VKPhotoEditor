@@ -41,7 +41,6 @@
     UIView<CaptionTemplateProtocol> *captionViewTemplate;
     NSArray *captionTemplates;
     NSInteger captionTemplateIndex;
-    NSDate *time;
     ActivityView *activityView;
     ArrowView *arrowView;
 }
@@ -202,18 +201,14 @@
 
 - (IBAction)save
 {   
-    NSLog(@"%@ input", NSStringFromCGSize(image.size));
 
     [activityView showSelf:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
-        time = [NSDate new];
         CGFloat side = fmaxf(image.size.width, image.size.height);
         [captionViewTemplate removeFromSuperview];
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
         BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
         UIImage *output = [[filter imageFromCurrentlyProcessedOutput] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
-        NSLog(@" Output %@", NSStringFromCGSize(output.size));
-        NSLog(@"%f", -[time timeIntervalSinceNow]);
         [activityView showSelf:NO];
         [delegate photoEditController:self didEdit:output];
     });
