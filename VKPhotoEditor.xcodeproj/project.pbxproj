@@ -97,8 +97,6 @@
 		226E759B160F012D00531350 /* CameraBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7575160F012D00531350 /* CameraBtn@2x.png */; };
 		226E759C160F012D00531350 /* Caption_Mask.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7576160F012D00531350 /* Caption_Mask.png */; };
 		226E759D160F012D00531350 /* Demotivator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7577160F012D00531350 /* Demotivator@2x.png */; };
-		226E759E160F012D00531350 /* FilterMask_Active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7578160F012D00531350 /* FilterMask_Active@2x.png */; };
-		226E759F160F012D00531350 /* FilterMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7579160F012D00531350 /* FilterMask.png */; };
 		226E75A0160F012D00531350 /* Filters_Menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E757A160F012D00531350 /* Filters_Menu@2x.png */; };
 		226E75A1160F012D00531350 /* FontTab_Active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E757B160F012D00531350 /* FontTab_Active@2x.png */; };
 		226E75A2160F012D00531350 /* FontTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E757C160F012D00531350 /* FontTab@2x.png */; };
@@ -194,18 +192,6 @@
 		8BDD882116186C91008FFC24 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD882016186C91008FFC24 /* GLKit.framework */; };
 		8BDD882316186C9C008FFC24 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD882216186C9C008FFC24 /* OpenGLES.framework */; };
 		8BDD884616186D48008FFC24 /* UIImage+XBImageFilters.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */; };
-		8BDD885D1618702E008FFC24 /* BlurFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88511618702E008FFC24 /* BlurFragmentShader.glsl */; };
-		8BDD885E1618702E008FFC24 /* DefaultFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88521618702E008FFC24 /* DefaultFragmentShader.glsl */; };
-		8BDD885F1618702E008FFC24 /* DefaultVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88531618702E008FFC24 /* DefaultVertexShader.glsl */; };
-		8BDD88601618702E008FFC24 /* DiscretizeShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88541618702E008FFC24 /* DiscretizeShader.glsl */; };
-		8BDD88611618702E008FFC24 /* HBlurVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88551618702E008FFC24 /* HBlurVertexShader.glsl */; };
-		8BDD88621618702E008FFC24 /* LuminanceFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88561618702E008FFC24 /* LuminanceFragmentShader.glsl */; };
-		8BDD88631618702E008FFC24 /* OverlayFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88571618702E008FFC24 /* OverlayFragmentShader.glsl */; };
-		8BDD88641618702E008FFC24 /* OverlayVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88581618702E008FFC24 /* OverlayVertexShader.glsl */; };
-		8BDD88651618702E008FFC24 /* PixelateShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD88591618702E008FFC24 /* PixelateShader.glsl */; };
-		8BDD88661618702E008FFC24 /* SuckShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885A1618702E008FFC24 /* SuckShader.glsl */; };
-		8BDD88671618702E008FFC24 /* UnsharpMaskFragmentShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885B1618702E008FFC24 /* UnsharpMaskFragmentShader.glsl */; };
-		8BDD88681618702E008FFC24 /* VBlurVertexShader.glsl in Resources */ = {isa = PBXBuildFile; fileRef = 8BDD885C1618702E008FFC24 /* VBlurVertexShader.glsl */; };
 		8BDD886C161878E8008FFC24 /* ImageFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDD886B161878E8008FFC24 /* ImageFilter.m */; };
 		8BDF18741610C6AB00507B5F /* FlexibleTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BDF18731610C6AB00507B5F /* FlexibleTextField.m */; };
 		8BDF18A41611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */; };
@@ -340,8 +326,6 @@
 		226E7575160F012D00531350 /* CameraBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CameraBtn@2x.png"; sourceTree = "<group>"; };
 		226E7576160F012D00531350 /* Caption_Mask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Caption_Mask.png; sourceTree = "<group>"; };
 		226E7577160F012D00531350 /* Demotivator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Demotivator@2x.png"; sourceTree = "<group>"; };
-		226E7578160F012D00531350 /* FilterMask_Active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FilterMask_Active@2x.png"; sourceTree = "<group>"; };
-		226E7579160F012D00531350 /* FilterMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FilterMask.png; sourceTree = "<group>"; };
 		226E757A160F012D00531350 /* Filters_Menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Filters_Menu@2x.png"; sourceTree = "<group>"; };
 		226E757B160F012D00531350 /* FontTab_Active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FontTab_Active@2x.png"; sourceTree = "<group>"; };
 		226E757C160F012D00531350 /* FontTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FontTab@2x.png"; sourceTree = "<group>"; };
@@ -480,18 +464,6 @@
 		8BDD882216186C9C008FFC24 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		8BDD884416186D48008FFC24 /* UIImage+XBImageFilters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+XBImageFilters.h"; sourceTree = "<group>"; };
 		8BDD884516186D48008FFC24 /* UIImage+XBImageFilters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+XBImageFilters.m"; sourceTree = "<group>"; };
-		8BDD88511618702E008FFC24 /* BlurFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = BlurFragmentShader.glsl; sourceTree = "<group>"; };
-		8BDD88521618702E008FFC24 /* DefaultFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultFragmentShader.glsl; sourceTree = "<group>"; };
-		8BDD88531618702E008FFC24 /* DefaultVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DefaultVertexShader.glsl; sourceTree = "<group>"; };
-		8BDD88541618702E008FFC24 /* DiscretizeShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DiscretizeShader.glsl; sourceTree = "<group>"; };
-		8BDD88551618702E008FFC24 /* HBlurVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HBlurVertexShader.glsl; sourceTree = "<group>"; };
-		8BDD88561618702E008FFC24 /* LuminanceFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LuminanceFragmentShader.glsl; sourceTree = "<group>"; };
-		8BDD88571618702E008FFC24 /* OverlayFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OverlayFragmentShader.glsl; sourceTree = "<group>"; };
-		8BDD88581618702E008FFC24 /* OverlayVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OverlayVertexShader.glsl; sourceTree = "<group>"; };
-		8BDD88591618702E008FFC24 /* PixelateShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PixelateShader.glsl; sourceTree = "<group>"; };
-		8BDD885A1618702E008FFC24 /* SuckShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = SuckShader.glsl; sourceTree = "<group>"; };
-		8BDD885B1618702E008FFC24 /* UnsharpMaskFragmentShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = UnsharpMaskFragmentShader.glsl; sourceTree = "<group>"; };
-		8BDD885C1618702E008FFC24 /* VBlurVertexShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VBlurVertexShader.glsl; sourceTree = "<group>"; };
 		8BDD886A161878E8008FFC24 /* ImageFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageFilter.h; sourceTree = "<group>"; };
 		8BDD886B161878E8008FFC24 /* ImageFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageFilter.m; sourceTree = "<group>"; };
 		8BDF18721610C6AB00507B5F /* FlexibleTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleTextField.h; sourceTree = "<group>"; };
@@ -592,7 +564,6 @@
 			children = (
 				8BA0CBE21621CC8900EA0768 /* AppIcon-57x57.png */,
 				8BA0CBE01621CC7500EA0768 /* AppIcon-114x114.png */,
-				8BDD884F16186DBD008FFC24 /* Shaders */,
 				8BDF189C1611A67B00507B5F /* fonts */,
 				8B121D391620870900F166D8 /* cloud.png */,
 				8B121D3A1620870A00F166D8 /* cloud@2x.png */,
@@ -613,8 +584,6 @@
 				226E7575160F012D00531350 /* CameraBtn@2x.png */,
 				226E7576160F012D00531350 /* Caption_Mask.png */,
 				226E7577160F012D00531350 /* Demotivator@2x.png */,
-				226E7578160F012D00531350 /* FilterMask_Active@2x.png */,
-				226E7579160F012D00531350 /* FilterMask.png */,
 				226E757A160F012D00531350 /* Filters_Menu@2x.png */,
 				226E757B160F012D00531350 /* FontTab_Active@2x.png */,
 				226E757C160F012D00531350 /* FontTab@2x.png */,
@@ -890,25 +859,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8BDD884F16186DBD008FFC24 /* Shaders */ = {
-			isa = PBXGroup;
-			children = (
-				8BDD88511618702E008FFC24 /* BlurFragmentShader.glsl */,
-				8BDD88521618702E008FFC24 /* DefaultFragmentShader.glsl */,
-				8BDD88531618702E008FFC24 /* DefaultVertexShader.glsl */,
-				8BDD88541618702E008FFC24 /* DiscretizeShader.glsl */,
-				8BDD88551618702E008FFC24 /* HBlurVertexShader.glsl */,
-				8BDD88561618702E008FFC24 /* LuminanceFragmentShader.glsl */,
-				8BDD88571618702E008FFC24 /* OverlayFragmentShader.glsl */,
-				8BDD88581618702E008FFC24 /* OverlayVertexShader.glsl */,
-				8BDD88591618702E008FFC24 /* PixelateShader.glsl */,
-				8BDD885A1618702E008FFC24 /* SuckShader.glsl */,
-				8BDD885B1618702E008FFC24 /* UnsharpMaskFragmentShader.glsl */,
-				8BDD885C1618702E008FFC24 /* VBlurVertexShader.glsl */,
-			);
-			name = Shaders;
-			sourceTree = "<group>";
-		};
 		8BDF189C1611A67B00507B5F /* fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1061,8 +1011,6 @@
 				226E759B160F012D00531350 /* CameraBtn@2x.png in Resources */,
 				226E759C160F012D00531350 /* Caption_Mask.png in Resources */,
 				226E759D160F012D00531350 /* Demotivator@2x.png in Resources */,
-				226E759E160F012D00531350 /* FilterMask_Active@2x.png in Resources */,
-				226E759F160F012D00531350 /* FilterMask.png in Resources */,
 				226E75A0160F012D00531350 /* Filters_Menu@2x.png in Resources */,
 				226E75A1160F012D00531350 /* FontTab_Active@2x.png in Resources */,
 				226E75A2160F012D00531350 /* FontTab@2x.png in Resources */,
@@ -1097,18 +1045,6 @@
 				8BDF18A81611A67B00507B5F /* tt1018m_.ttf in Resources */,
 				8BDF18AC1611AAD400507B5F /* ballw_.ttf in Resources */,
 				22D1FF0E1612047C00E66FEE /* CroppingViewController.xib in Resources */,
-				8BDD885D1618702E008FFC24 /* BlurFragmentShader.glsl in Resources */,
-				8BDD885E1618702E008FFC24 /* DefaultFragmentShader.glsl in Resources */,
-				8BDD885F1618702E008FFC24 /* DefaultVertexShader.glsl in Resources */,
-				8BDD88601618702E008FFC24 /* DiscretizeShader.glsl in Resources */,
-				8BDD88611618702E008FFC24 /* HBlurVertexShader.glsl in Resources */,
-				8BDD88621618702E008FFC24 /* LuminanceFragmentShader.glsl in Resources */,
-				8BDD88631618702E008FFC24 /* OverlayFragmentShader.glsl in Resources */,
-				8BDD88641618702E008FFC24 /* OverlayVertexShader.glsl in Resources */,
-				8BDD88651618702E008FFC24 /* PixelateShader.glsl in Resources */,
-				8BDD88661618702E008FFC24 /* SuckShader.glsl in Resources */,
-				8BDD88671618702E008FFC24 /* UnsharpMaskFragmentShader.glsl in Resources */,
-				8BDD88681618702E008FFC24 /* VBlurVertexShader.glsl in Resources */,
 				22D1772D1618752D00B8093D /* TakePhotoController.xib in Resources */,
 				220E6BB4161E040A00AB89B5 /* blur_line_icon.png in Resources */,
 				220E6BB5161E040A00AB89B5 /* blur_line_icon@2x.png in Resources */,
