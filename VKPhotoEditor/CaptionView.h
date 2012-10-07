@@ -13,10 +13,10 @@
 @class CustomSegmentView;
 
 @interface CaptionView : UIView
-@property (nonatomic, assign) IBOutlet id<CaptionViewDelegate> delegate;
+@property (nonatomic, assign) id<CaptionViewDelegate> delegate;
 @property (nonatomic, strong) IBOutlet CustomSegmentView *fontSegmentView;
 @property (nonatomic, strong) IBOutlet UITextField *textField;
-@property (nonatomic, strong, readonly) NSString *caption;
+@property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong, readonly) UIFont *selectedFont;
 
 - (IBAction)textFieldReturn:(id)sender;

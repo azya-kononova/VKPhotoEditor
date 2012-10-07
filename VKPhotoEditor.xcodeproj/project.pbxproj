@@ -154,6 +154,18 @@
 		22E1EB6116143E9500B0E656 /* ZoomingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1EB6016143E9500B0E656 /* ZoomingView.m */; };
 		22E1EB791615B12000B0E656 /* UIImage+Rect.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1EB781615B12000B0E656 /* UIImage+Rect.m */; };
 		22E51F15160F4E8E00299D42 /* UIView+NIB.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F14160F4E8E00299D42 /* UIView+NIB.m */; };
+		8B121CDE1620264F00F166D8 /* UIView+Render.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B121CDD1620264F00F166D8 /* UIView+Render.m */; };
+		8B121CE11620274C00F166D8 /* DemotivatorCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B121CE01620274C00F166D8 /* DemotivatorCaptionView.m */; };
+		8B121CE31620275F00F166D8 /* DemotivatorCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B121CE21620275F00F166D8 /* DemotivatorCaptionView.xib */; };
+		8B121CE7162042C600F166D8 /* PolaroidCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B121CE6162042C500F166D8 /* PolaroidCaptionView.m */; };
+		8B121CE9162042DF00F166D8 /* PolaroidCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B121CE8162042DF00F166D8 /* PolaroidCaptionView.xib */; };
+		8B121CF51620481100F166D8 /* DefaultCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B121CF41620481100F166D8 /* DefaultCaptionView.xib */; };
+		8B121CF81620482400F166D8 /* DefaultCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B121CF71620482400F166D8 /* DefaultCaptionView.m */; };
+		8B121D33162072CC00F166D8 /* CloudCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B121D32162072CC00F166D8 /* CloudCaptionView.m */; };
+		8B121D351620734100F166D8 /* CloudCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B121D341620734000F166D8 /* CloudCaptionView.xib */; };
+		8B121D3816207DD300F166D8 /* UILabel+Multiline.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B121D3716207DD200F166D8 /* UILabel+Multiline.m */; };
+		8B121D3B1620870B00F166D8 /* cloud.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B121D391620870900F166D8 /* cloud.png */; };
+		8B121D3C1620870B00F166D8 /* cloud@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B121D3A1620870A00F166D8 /* cloud@2x.png */; };
 		8B34EBF8160F07A200ECB4F2 /* NSArray+Creation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */; };
 		8B34EC26160F0DEF00ECB4F2 /* FlexibleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B34EC23160F0DEF00ECB4F2 /* FlexibleButton.m */; };
 		8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61EC1C161C627F009A2B9B /* libGPUImage.a */; };
@@ -165,6 +177,7 @@
 		8B9B4E84160F6342000BE08F /* CustomSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E83160F6341000BE08F /* CustomSegmentView.m */; };
 		8B9B4E8B160F6428000BE08F /* CustomSegmentButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */; };
 		8B9D963C161E1829004F0AF6 /* SPUserResizableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */; };
+		8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB70616208F2300A33DEF /* UIImage+Blend.m */; };
 		8BDD881B16186C71008FFC24 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881A16186C71008FFC24 /* CoreMedia.framework */; };
 		8BDD881D16186C79008FFC24 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881C16186C79008FFC24 /* CoreVideo.framework */; };
 		8BDD881F16186C84008FFC24 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BDD881E16186C84008FFC24 /* AVFoundation.framework */; };
@@ -375,7 +388,7 @@
 		22D1FEE71611FC6600E66FEE /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CroppingViewController.xib; sourceTree = "<group>"; };
-		22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VKPhotoEditor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		22D7BF53160CCC33008B5BFA /* AwesameMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesameMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -396,6 +409,25 @@
 		22E1EB781615B12000B0E656 /* UIImage+Rect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rect.m"; sourceTree = "<group>"; };
 		22E51F13160F4E8E00299D42 /* UIView+NIB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NIB.h"; sourceTree = "<group>"; };
 		22E51F14160F4E8E00299D42 /* UIView+NIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NIB.m"; sourceTree = "<group>"; };
+		8B121CDC1620264F00F166D8 /* UIView+Render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Render.h"; sourceTree = "<group>"; };
+		8B121CDD1620264F00F166D8 /* UIView+Render.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Render.m"; sourceTree = "<group>"; };
+		8B121CDF1620274C00F166D8 /* DemotivatorCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemotivatorCaptionView.h; sourceTree = "<group>"; };
+		8B121CE01620274C00F166D8 /* DemotivatorCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemotivatorCaptionView.m; sourceTree = "<group>"; };
+		8B121CE21620275F00F166D8 /* DemotivatorCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DemotivatorCaptionView.xib; sourceTree = "<group>"; };
+		8B121CE416202A7700F166D8 /* CaptionTemplateProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaptionTemplateProtocol.h; sourceTree = "<group>"; };
+		8B121CE5162042C500F166D8 /* PolaroidCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PolaroidCaptionView.h; sourceTree = "<group>"; };
+		8B121CE6162042C500F166D8 /* PolaroidCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PolaroidCaptionView.m; sourceTree = "<group>"; };
+		8B121CE8162042DF00F166D8 /* PolaroidCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PolaroidCaptionView.xib; sourceTree = "<group>"; };
+		8B121CF41620481100F166D8 /* DefaultCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultCaptionView.xib; sourceTree = "<group>"; };
+		8B121CF61620482300F166D8 /* DefaultCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultCaptionView.h; sourceTree = "<group>"; };
+		8B121CF71620482400F166D8 /* DefaultCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultCaptionView.m; sourceTree = "<group>"; };
+		8B121D31162072CC00F166D8 /* CloudCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudCaptionView.h; sourceTree = "<group>"; };
+		8B121D32162072CC00F166D8 /* CloudCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudCaptionView.m; sourceTree = "<group>"; };
+		8B121D341620734000F166D8 /* CloudCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CloudCaptionView.xib; sourceTree = "<group>"; };
+		8B121D3616207DD200F166D8 /* UILabel+Multiline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+Multiline.h"; sourceTree = "<group>"; };
+		8B121D3716207DD200F166D8 /* UILabel+Multiline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+Multiline.m"; sourceTree = "<group>"; };
+		8B121D391620870900F166D8 /* cloud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cloud.png; path = ../cloud.png; sourceTree = "<group>"; };
+		8B121D3A1620870A00F166D8 /* cloud@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cloud@2x.png"; path = "../cloud@2x.png"; sourceTree = "<group>"; };
 		8B34EBF6160F07A200ECB4F2 /* NSArray+Creation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Creation.h"; sourceTree = "<group>"; };
 		8B34EBF7160F07A200ECB4F2 /* NSArray+Creation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Creation.m"; sourceTree = "<group>"; };
 		8B34EC22160F0DEF00ECB4F2 /* FlexibleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlexibleButton.h; sourceTree = "<group>"; };
@@ -415,6 +447,8 @@
 		8B9B4E8A160F6427000BE08F /* CustomSegmentButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegmentButton.m; sourceTree = "<group>"; };
 		8B9D963A161E1829004F0AF6 /* SPUserResizableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPUserResizableView.h; sourceTree = "<group>"; };
 		8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPUserResizableView.m; sourceTree = "<group>"; };
+		8BCDB70516208F2300A33DEF /* UIImage+Blend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blend.h"; sourceTree = "<group>"; };
+		8BCDB70616208F2300A33DEF /* UIImage+Blend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blend.m"; sourceTree = "<group>"; };
 		8BDD881A16186C71008FFC24 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		8BDD881C16186C79008FFC24 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		8BDD881E16186C84008FFC24 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -471,6 +505,7 @@
 		220B399C160EFE480010F257 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8B121CE416202A7700F166D8 /* CaptionTemplateProtocol.h */,
 				220B399E160EFE5A0010F257 /* Filters.h */,
 				220B399F160EFE5A0010F257 /* Filters.m */,
 				8BDD886A161878E8008FFC24 /* ImageFilter.h */,
@@ -504,6 +539,12 @@
 				22E1EB781615B12000B0E656 /* UIImage+Rect.m */,
 				224C084B1620832200F10A85 /* UIImage+GPUOrientation.h */,
 				224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */,
+				8BCDB70516208F2300A33DEF /* UIImage+Blend.h */,
+				8BCDB70616208F2300A33DEF /* UIImage+Blend.m */,
+				8B121CDC1620264F00F166D8 /* UIView+Render.h */,
+				8B121CDD1620264F00F166D8 /* UIView+Render.m */,
+				8B121D3616207DD200F166D8 /* UILabel+Multiline.h */,
+				8B121D3716207DD200F166D8 /* UILabel+Multiline.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -523,6 +564,8 @@
 			children = (
 				8BDD884F16186DBD008FFC24 /* Shaders */,
 				8BDF189C1611A67B00507B5F /* fonts */,
+				8B121D391620870900F166D8 /* cloud.png */,
+				8B121D3A1620870A00F166D8 /* cloud@2x.png */,
 				226E75BD160F02FA00531350 /* Main_screen_separator.png */,
 				226E75BE160F02FA00531350 /* Main_screen_separator@2x.png */,
 				226E7569160F012D00531350 /* ActionBtn_Active@2x.png */,
@@ -677,7 +720,7 @@
 		22D7BF54160CCC33008B5BFA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */,
+				22D7BF53160CCC33008B5BFA /* AwesameMaker.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -753,6 +796,7 @@
 		22D7BFA1160EF628008B5BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8B121D3D16208A8B00F166D8 /* CaptionTemplates */,
 				221C31D916104732005974C8 /* Cell */,
 				221C31D316104640005974C8 /* TriangleView.h */,
 				221C31D416104640005974C8 /* TriangleView.m */,
@@ -778,6 +822,25 @@
 				8B9D963B161E1829004F0AF6 /* SPUserResizableView.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		8B121D3D16208A8B00F166D8 /* CaptionTemplates */ = {
+			isa = PBXGroup;
+			children = (
+				8B121CF61620482300F166D8 /* DefaultCaptionView.h */,
+				8B121CF71620482400F166D8 /* DefaultCaptionView.m */,
+				8B121CF41620481100F166D8 /* DefaultCaptionView.xib */,
+				8B121CE5162042C500F166D8 /* PolaroidCaptionView.h */,
+				8B121CE6162042C500F166D8 /* PolaroidCaptionView.m */,
+				8B121CE8162042DF00F166D8 /* PolaroidCaptionView.xib */,
+				8B121D31162072CC00F166D8 /* CloudCaptionView.h */,
+				8B121D32162072CC00F166D8 /* CloudCaptionView.m */,
+				8B121D341620734000F166D8 /* CloudCaptionView.xib */,
+				8B121CDF1620274C00F166D8 /* DemotivatorCaptionView.h */,
+				8B121CE01620274C00F166D8 /* DemotivatorCaptionView.m */,
+				8B121CE21620275F00F166D8 /* DemotivatorCaptionView.xib */,
+			);
+			name = CaptionTemplates;
 			sourceTree = "<group>";
 		};
 		8B61EC13161C627E009A2B9B /* Products */ = {
@@ -824,9 +887,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		22D7BF52160CCC33008B5BFA /* VKPhotoEditor */ = {
+		22D7BF52160CCC33008B5BFA /* AwesameMaker */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "VKPhotoEditor" */;
+			buildConfigurationList = 22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "AwesameMaker" */;
 			buildPhases = (
 				22D7BF4F160CCC33008B5BFA /* Sources */,
 				22D7BF50160CCC33008B5BFA /* Frameworks */,
@@ -837,9 +900,9 @@
 			dependencies = (
 				8B61EC34161C631E009A2B9B /* PBXTargetDependency */,
 			);
-			name = VKPhotoEditor;
+			name = AwesameMaker;
 			productName = VKPhotoEditor;
-			productReference = 22D7BF53160CCC33008B5BFA /* VKPhotoEditor.app */;
+			productReference = 22D7BF53160CCC33008B5BFA /* AwesameMaker.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -869,7 +932,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				22D7BF52160CCC33008B5BFA /* VKPhotoEditor */,
+				22D7BF52160CCC33008B5BFA /* AwesameMaker */,
 			);
 		};
 /* End PBXProject section */
@@ -1029,6 +1092,12 @@
 				220E6BC5161E040A00AB89B5 /* flash_on@2x.png in Resources */,
 				2237EC261620CAC300E57113 /* Default.PNG in Resources */,
 				2237EC271620CAC300E57113 /* Default@2x.PNG in Resources */,
+				8B121CE31620275F00F166D8 /* DemotivatorCaptionView.xib in Resources */,
+				8B121CE9162042DF00F166D8 /* PolaroidCaptionView.xib in Resources */,
+				8B121CF51620481100F166D8 /* DefaultCaptionView.xib in Resources */,
+				8B121D351620734100F166D8 /* CloudCaptionView.xib in Resources */,
+				8B121D3B1620870B00F166D8 /* cloud.png in Resources */,
+				8B121D3C1620870B00F166D8 /* cloud@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1079,6 +1148,13 @@
 				220E6BCB161E071500AB89B5 /* FlashMode.m in Sources */,
 				8B9D963C161E1829004F0AF6 /* SPUserResizableView.m in Sources */,
 				224C084D1620832300F10A85 /* UIImage+GPUOrientation.m in Sources */,
+				8B121CDE1620264F00F166D8 /* UIView+Render.m in Sources */,
+				8B121CE11620274C00F166D8 /* DemotivatorCaptionView.m in Sources */,
+				8B121CE7162042C600F166D8 /* PolaroidCaptionView.m in Sources */,
+				8B121CF81620482400F166D8 /* DefaultCaptionView.m in Sources */,
+				8B121D33162072CC00F166D8 /* CloudCaptionView.m in Sources */,
+				8B121D3816207DD300F166D8 /* UILabel+Multiline.m in Sources */,
+				8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,7 +1280,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "VKPhotoEditor" */ = {
+		22D7BF71160CCC34008B5BFA /* Build configuration list for PBXNativeTarget "AwesameMaker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				22D7BF72160CCC34008B5BFA /* Debug */,

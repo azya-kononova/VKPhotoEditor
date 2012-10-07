@@ -18,7 +18,6 @@
 }
 @synthesize fontSegmentView;
 @synthesize textField;
-@synthesize caption;
 @synthesize delegate;
 
 - (void)awakeFromNib
@@ -54,6 +53,11 @@
 - (NSString*)caption
 {
     return textField.text;
+}
+
+- (void)setCaption:(NSString *)_caption
+{
+    textField.text = _caption;
 }
 
 - (UIFont*)selectedFont

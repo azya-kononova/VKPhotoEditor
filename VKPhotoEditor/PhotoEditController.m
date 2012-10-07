@@ -17,10 +17,14 @@
 #import "GPUImagePicture.h"
 #import "SPUserResizableView.h"
 #import "UIImage+GPUOrientation.h"
+#import "DemotivatorCaptionView.h"
+#import "CaptionTemplateProtocol.h"
+#import "UIImage+Blend.h"
+#import "GPUImageNormalBlendFilter.h"
 
 #define MAX_FONT_SIZE 100
 
-@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, CaptionViewDelegate, UIGestureRecognizerDelegate, SPUserResizableViewDelegate>
+@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, CaptionViewDelegate, CaptionTemplateDelegate>
 @end
 
 @implementation PhotoEditController {
@@ -32,6 +36,10 @@
     NSInteger filterIndex;
     GPUImagePicture *sourcePicture;
     GPUImageFilter *filter;
+    UIView<CaptionTemplateProtocol> *captionViewTemplate;
+    NSArray *captionTemplates;
+    NSInteger captionTemplateIndex;
+    NSDate *time;
 }
 
 @synthesize saveButton;
@@ -43,8 +51,9 @@
 @synthesize imageView;
 @synthesize topView;
 @synthesize delegate;
-@synthesize captionLabel;
-@synthesize labelView;
+@synthesize captionOverlayView;
+@synthesize leftRecognizer;
+@synthesize rightRecognizer;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex
 {
@@ -72,29 +81,27 @@
     [captionButton setBackgroundImage:[UIImage imageNamed:@"RollBtn_Prsssed"] forState:(UIControlStateHighlighted|UIControlStateSelected)];
     [retakeButton setTitle:isPhoto ? @"Retake" : @"Cancel" forState:UIControlStateNormal];
     
+    sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
     filters = Filters.filters;
     filterView.margin = 7;
     filterView.thumbConrnerRadius = 7.0;
     [filterView reloadData];
     filterView.displayedItemIndex = filterIndex;
-    
+    [self setImageFilter:[filters objectAtIndex:filterIndex]];
+   
     captionView = [CaptionView loadFromNIB];
     [captionView moveTo:CGPointMake(0, 390)];
+    captionView.caption = @"Make me awesame ;)";
     captionView.hidden = YES;
     captionView.delegate = self;
-    [self setCaptionFont:captionView.selectedFont];
+    
+    captionTemplates = Filters.captionViewTemplates;
+    captionTemplateIndex = 0;
+    [self setCaptionViewTemplate:[captionTemplates objectAtIndex:captionTemplateIndex]];
     
     [contentView addSubview:captionView];
-    
     [scrollView addSubview:contentView];
     scrollView.contentSize = contentView.frame.size;
-    
-    sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
-    
-    [self setImageFilter:[filters objectAtIndex:filterIndex]];
-    
-    labelView.contentView = captionLabel;
-    labelView.delegate = self;
 }
 
 - (void)setImageFilter:(ImageFilter*)imageFilter
@@ -106,12 +113,6 @@
     [sourcePicture addTarget:filter];
     [filter addTarget:imageView];
     [sourcePicture processImage];
-}
-
-- (void)setCaptionFont:(UIFont*)font
-{
-    captionLabel.font = [UIFont fontWithName:font.fontName size:captionLabel.font.pointSize];
-//    [captionLabel sizeToFit];
 }
 
 - (void)resizeScrollView:(BOOL)show notification:(NSNotification *)n
@@ -148,16 +149,27 @@
 
 #pragma mark actions
 
-- (void)userResizableViewDidBeginEditing:(SPUserResizableView *)userResizableView
+- (void)setCaptionViewTemplate:(UIView<CaptionTemplateProtocol>*)_captionViewTemplate
 {
-    scrollView.scrollEnabled = NO;
-    [labelView showEditingHandles];
+    [captionViewTemplate removeFromSuperview];
+    captionViewTemplate.delegate = nil;
+    [captionOverlayView addSubview:_captionViewTemplate];
+    _captionViewTemplate.font = captionView.selectedFont;
+    _captionViewTemplate.text = captionView.caption;
+    captionViewTemplate = _captionViewTemplate;
+    captionViewTemplate.delegate = self;
 }
 
-- (void)userResizableViewDidEndEditing:(SPUserResizableView *)userResizableView
+- (IBAction)nextCaptionTemplate
 {
-    scrollView.scrollEnabled = YES;
-    [labelView hideEditingHandles];
+    captionTemplateIndex =  ( captionTemplateIndex == captionTemplates.count - 1 ? 0 : captionTemplateIndex + 1 );
+    [self setCaptionViewTemplate:[captionTemplates objectAtIndex:captionTemplateIndex]];
+}
+
+- (IBAction)prevCaptionTemplate
+{
+     captionTemplateIndex =  ( !captionTemplateIndex ?  captionTemplates.count - 1 : captionTemplateIndex - 1 );
+    [self setCaptionViewTemplate:[captionTemplates objectAtIndex:captionTemplateIndex]];
 }
 
 - (IBAction)addCaption
@@ -176,9 +188,20 @@
 }
 
 - (IBAction)save
-{
-    CGFloat scaleFactor = 2.0f;
-    captionLabel.transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
+{   
+    NSLog(@"%@", NSStringFromCGSize(image.size));
+
+    time = [NSDate new];
+    CGFloat side = fmaxf(image.size.width, image.size.height);
+    [captionViewTemplate removeFromSuperview];
+    [captionViewTemplate resizeTo:CGSizeMake(side, side)];
+    BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
+    UIImage *output = [[filter imageFromCurrentlyProcessedOutput] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
+    
+    NSLog(@"Resize template and blend with image %f", -[time timeIntervalSinceNow]);
+    
+    UIImageWriteToSavedPhotosAlbum( output , nil, nil, nil);
+    [delegate photoEditControllerDidCancel:self];
 }
 
 - (IBAction)cancel
@@ -190,10 +213,6 @@
     }
 }
 
-- (IBAction)editLabel
-{
-}
-
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
@@ -203,16 +222,28 @@
     }
 }
 
+#pragma mark - CaptionTemplateDelegate
+
+- (void)captionTemplateStartEditing:(UIView<CaptionTemplateProtocol> *)captionTemplate
+{
+    scrollView.scrollEnabled = leftRecognizer.enabled = rightRecognizer.enabled = NO;
+}
+
+- (void)captionTemplateEndEditing:(UIView<CaptionTemplateProtocol> *)captionTemplate
+{
+    scrollView.scrollEnabled = leftRecognizer.enabled = rightRecognizer.enabled = YES;
+}
+
 #pragma mar CaptionView delegate
 
 - (void)captionViewdidChange:(CaptionView *)_captionView
 {
-    captionLabel.text = captionView.caption;
+    captionViewTemplate.text = captionView.caption;
 }
 
 - (void)captionView:(CaptionView *)captionView didSetFont:(UIFont *)font
 {
-    [self setCaptionFont:font];
+    captionViewTemplate.font = font;
 }
 
 #pragma mark ThumbnailView datasourse
