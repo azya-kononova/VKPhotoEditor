@@ -98,7 +98,6 @@
     for (NSUInteger i = 0; i < count; ++i) {
         CGRect frame = CGRectMake(margin + (thumbnailWidth + margin) * i, margin, thumbnailWidth, thumbnailHeight);
         UIView *thumb = [dataSource thumbnailsView:self viewForItemWithIndex:i];
-        thumb.layer.masksToBounds = YES;
         thumb.layer.cornerRadius = thumbConrnerRadius;
         
         UIView* containerView = [[UIView alloc] initWithFrame:frame];

@@ -72,6 +72,7 @@ typedef NSInteger CameraBlurMode;
     [super viewDidLoad];
     
     blurSlider.transform = CGAffineTransformRotate(blurSlider.transform, -M_PI_2);
+    filtersView.thumbConrnerRadius = 7.0;
     
     filters = Filters.filters;
     movingButtons = [NSArray arrayWithObjects:cancelBtn, photoBtn, filterBtn, nil];
