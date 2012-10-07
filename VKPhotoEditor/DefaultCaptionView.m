@@ -35,7 +35,7 @@
 
 - (void)setFont:(UIFont *)_font
 {
-    captionLabel.font = [UIFont fontWithName:_font.fontName size:captionLabel.font.pointSize];
+    captionLabel.font = [_font fontWithSize:captionLabel.font.pointSize];
 }
 
 - (UIFont*)font

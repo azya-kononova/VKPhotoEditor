@@ -53,7 +53,7 @@
 					<object class="IBUILabel" id="739065491">
 						<reference key="NSNextResponder" ref="427562257"/>
 						<int key="NSvFlags">282</int>
-						<string key="NSFrame">{{10, 270}, {301, 49}}</string>
+						<string key="NSFrame">{{10, 275}, {301, 40}}</string>
 						<reference key="NSSuperview" ref="427562257"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
@@ -173,7 +173,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">Demotivator.png</string>
-			<string key="NS.object.0">{16, 16}</string>
+			<string key="NS.object.0">{320, 320}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
