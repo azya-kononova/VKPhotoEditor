@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FlexibleTextField : UITextField
-
+@property (nonatomic, assign) float verticalPadding;
+@property (nonatomic, assign) float horizontalPadding;
 @end

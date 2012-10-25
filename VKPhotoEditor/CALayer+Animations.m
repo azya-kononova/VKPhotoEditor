@@ -8,6 +8,8 @@
 
 #import "CALayer+Animations.h"
 
+#define DURATION 0.7
+
 @implementation CALayer (Animations)
 
 - (CATransition*)addTransitionWithType:(NSString*)type subtype:(NSString*)subtype
@@ -15,6 +17,7 @@
     CATransition *transition = [CATransition new];
     if (type) transition.type = type;
     if (subtype) transition.subtype = subtype;
+    transition.duration = DURATION;
     [self addAnimation:transition forKey:@"Transition"];
     return transition;
 }

@@ -15,6 +15,10 @@
 #import "CroppingViewController.h"
 #import "PhotoEditController.h"
 #import "TakePhotoController.h"
+#import "CALayer+Animations.h"
+#import "UIView+Helpers.h"
+#import "FlexibleTextField.h"
+#import "UIButton+StateImage.h"
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CroppingViewControllerDelegate, PhotoEditControllerDelegate, TakePhotoControllerDelegate>
 - (IBAction)takePhoto:(id)sender;
@@ -26,14 +30,20 @@
     BOOL isPhoto;
     NSMutableArray *assets;
     ALAssetsLibrary *library;
-    
+        
     IBOutlet ThumbnailsView *gallery;
     IBOutlet UIActivityIndicatorView *activityIndicator;
     IBOutlet FlexibleButton *takePhotoBtn;
-    IBOutlet FlexibleButton *cameraRollBtn;
-    IBOutlet UILabel *choosePhotoLabel;
+    IBOutlet FlexibleButton *postPhotoBtn;
     IBOutlet UILabel *noPhotoLabel;
     IBOutlet UILabel *appNameLabel;
+    IBOutlet UIView *postView;
+    IBOutlet FlexibleTextField *loginInputField;
+    IBOutlet UIButton *postHeaderBtn;
+    IBOutlet UIImageView *postImageView;
+    BOOL isPostPhotoMode;
+    
+    UIImage *savedImage;
 }
 
 - (void)viewDidLoad
@@ -43,14 +53,19 @@
     self.navigationController.navigationBar.hidden = YES;
     self.view.backgroundColor = [UIColor defaultBgColor];
     
+    postView.backgroundColor = [UIColor defaultBgColor];
+    [self.view addSubview:postView];
+    [postView moveTo:CGPointMake(0,self.view.frame.size.height)];
+    
     library = [[ALAssetsLibrary alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAlbumImages) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
-    cameraRollBtn.bgImagecaps = CGSizeMake(20, 20);
+    postPhotoBtn.bgImagecaps = CGSizeMake(20, 20);
+    loginInputField.verticalPadding = 10;
+    loginInputField.horizontalPadding = 95;
     
     gallery.highlight = NO;
-    
     takePhotoBtn.hidden = ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
     
     [appNameLabel setFont:[UIFont fontWithName:@"Lobster 1.4" size:36.0]];
@@ -98,7 +113,6 @@
                 [activityIndicator stopAnimating];
                 
                 noPhotoLabel.hidden = assets.count;
-                choosePhotoLabel.hidden = !noPhotoLabel.hidden;
             }
         }];
     } failureBlock:^(NSError *error) {
@@ -146,7 +160,6 @@
     [self presentModalViewController:imagePicker animated:NO];
 }
 
-
 #pragma mark - Actions
 
 - (IBAction)takePhoto:(id)sender
@@ -159,6 +172,37 @@
     [self choosePhoto];
 }
 
+- (IBAction)showPost
+{
+    [self showPost:!isPostPhotoMode];
+}
+
+#pragma mark - actions
+
+- (IBAction)textFieldReturn:(id)sender
+{
+    [sender resignFirstResponder];
+}
+
+- (void)showPostViewHeader:(BOOL)show
+{
+    [postView.layer push: show ? kCATransitionFromTop : kCATransitionFromBottom];
+    [postView moveTo:CGPointMake(0, self.view.frame.size.height - 45)];
+}
+
+- (void)showPost:(BOOL)show
+{
+    if (!show) [loginInputField resignFirstResponder];
+    [postHeaderBtn setDefaultImage:[UIImage imageNamed: show ? @"Cancel.png" : @"DownArrow.png" ]
+                       higthligted:[UIImage imageNamed:show ?  @"Cancel_Active.png" : @"DownArrow_Active.png"]];
+    [UIView animateWithDuration:1 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
+        [postView moveTo:CGPointMake(0, show ? 0 : self.view.frame.size.height - 45)];
+    } completion:^(BOOL finished) {
+        isPostPhotoMode = show;
+        if (show) [loginInputField becomeFirstResponder];
+    }];
+    
+}
 
 #pragma mark - ThumbnailsViewDataSource
 
@@ -244,6 +288,9 @@
     [self.navigationController popViewControllerAnimated:YES];
     [self clearThumbnailsImages];
     [activityIndicator startAnimating];
+    savedImage = image;
+    postImageView.image = savedImage;
+    [self showPostViewHeader:YES];
     UIImageWriteToSavedPhotosAlbum( image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 

@@ -11,6 +11,7 @@
 @implementation FlexibleTextField {
     BOOL backgroundReady;
 }
+@synthesize horizontalPadding, verticalPadding;
 
 - (void)layoutSubviews
 {
@@ -23,7 +24,7 @@
 
 - (CGRect)textRectForBounds:(CGRect)bounds
 {
-    return CGRectInset(bounds, 7, 2);
+    return CGRectMake(bounds.origin.x + horizontalPadding, bounds.origin.y + verticalPadding, bounds.size.width - horizontalPadding, bounds.size.height - verticalPadding*2);
 }
 
 - (CGRect)editingRectForBounds:(CGRect)bounds
