@@ -903,6 +903,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B50D74A16384867007515BF /* JSONKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1201,6 +1202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B50D74B16384871007515BF /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1290,6 +1292,7 @@
 				GCC_PREFIX_HEADER = "VKPhotoEditor/VKPhotoEditor-Prefix.pch";
 				HEADER_SEARCH_PATHS = "GPUImage/**";
 				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1306,6 +1309,7 @@
 				GCC_PREFIX_HEADER = "VKPhotoEditor/VKPhotoEditor-Prefix.pch";
 				HEADER_SEARCH_PATHS = "GPUImage/**";
 				INFOPLIST_FILE = "VKPhotoEditor/VKPhotoEditor-Info.plist";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)\"";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
