@@ -19,6 +19,7 @@
 #import "UIView+Helpers.h"
 #import "FlexibleTextField.h"
 #import "UIButton+StateImage.h"
+#import "UIViewController+Transitions.h"
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CroppingViewControllerDelegate, PhotoEditControllerDelegate, TakePhotoControllerDelegate>
 - (IBAction)takePhoto:(id)sender;
@@ -135,7 +136,7 @@
     CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image filterIndex:filterIndex userInfo:userInfo];
     controller.delegate = self;
     
-    [self presentModalViewController:controller animated:NO];
+    isPhoto ? [self presentModalViewController:controller animated:NO] : [self presentModalViewController:controller withPushDirection:kCATransitionFromRight];
 }
 
 - (void)cropPhoto:(UIImage *)image
@@ -157,7 +158,7 @@
     imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     
-    [self presentModalViewController:imagePicker animated:NO];
+    [self presentModalViewController:imagePicker withPushDirection:kCATransitionFromRight];
 }
 
 #pragma mark - Actions
@@ -245,13 +246,12 @@
     [self dismissModalViewControllerAnimated:NO];
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    
     [self cropPhoto:image];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissModalViewControllerAnimated:NO];
+    [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
 }
 
 
@@ -259,7 +259,7 @@
 
 - (void)croppingViewControllerDidCancel:(CroppingViewController *)controller
 {
-    [self dismissModalViewControllerAnimated:NO];
+    isPhoto ? [self dismissModalViewControllerAnimated:NO] : [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
 }
 
 - (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image filterIndex:(NSInteger)index
@@ -273,13 +273,12 @@
 
 - (void)photoEditControllerDidCancel:(PhotoEditController *)controller
 {
-    [self.navigationController popViewControllerAnimated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)photoEditControllerDidRetake:(PhotoEditController *)_controller
 {
     [self.navigationController popViewControllerAnimated:NO];
-    
     [self takePhoto];
 }
 

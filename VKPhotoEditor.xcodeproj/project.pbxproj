@@ -176,6 +176,7 @@
 		8B50D75216385435007515BF /* Cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B50D74E16385435007515BF /* Cancel.png */; };
 		8B50D75316385435007515BF /* Cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B50D74F16385435007515BF /* Cancel@2x.png */; };
 		8B50D75616385476007515BF /* UIButton+StateImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D75516385476007515BF /* UIButton+StateImage.m */; };
+		8B50D76C16395392007515BF /* UIViewController+Transitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D76B16395392007515BF /* UIViewController+Transitions.m */; };
 		8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61EC1C161C627F009A2B9B /* libGPUImage.a */; };
 		8B8AF734163831610053706D /* RightArrow_Active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF732163831610053706D /* RightArrow_Active@2x.png */; };
 		8B8AF735163831610053706D /* RightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF733163831610053706D /* RightArrow@2x.png */; };
@@ -463,6 +464,8 @@
 		8B50D74F16385435007515BF /* Cancel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel@2x.png"; sourceTree = "<group>"; };
 		8B50D75416385476007515BF /* UIButton+StateImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+StateImage.h"; sourceTree = "<group>"; };
 		8B50D75516385476007515BF /* UIButton+StateImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+StateImage.m"; sourceTree = "<group>"; };
+		8B50D76A16395392007515BF /* UIViewController+Transitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Transitions.h"; sourceTree = "<group>"; };
+		8B50D76B16395392007515BF /* UIViewController+Transitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Transitions.m"; sourceTree = "<group>"; };
 		8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
 		8B8AF732163831610053706D /* RightArrow_Active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow_Active@2x.png"; sourceTree = "<group>"; };
 		8B8AF733163831610053706D /* RightArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow@2x.png"; sourceTree = "<group>"; };
@@ -606,6 +609,8 @@
 				8B121D3716207DD200F166D8 /* UILabel+Multiline.m */,
 				8B50D75416385476007515BF /* UIButton+StateImage.h */,
 				8B50D75516385476007515BF /* UIButton+StateImage.m */,
+				8B50D76A16395392007515BF /* UIViewController+Transitions.h */,
+				8B50D76B16395392007515BF /* UIViewController+Transitions.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1275,6 +1280,7 @@
 				8B0FFE6B1636E2FA00714F70 /* VKRequestExecutor.m in Sources */,
 				8B1A563C1636EC2A0034B723 /* VKConnectionService.m in Sources */,
 				8B50D75616385476007515BF /* UIButton+StateImage.m in Sources */,
+				8B50D76C16395392007515BF /* UIViewController+Transitions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
