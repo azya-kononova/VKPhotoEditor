@@ -7,9 +7,9 @@
 @interface WebParams : NSObject
 @property (nonatomic, readonly) NSString *queryString;
 @property (nonatomic, readonly) BOOL multipart;
-#if defined (SBJSON)
+
 @property (nonatomic, readonly) NSData *jsonData;
-#endif
+
 @property (nonatomic, readonly) NSData *formData;
 @property (nonatomic, readonly) NSData *multipartData;
 

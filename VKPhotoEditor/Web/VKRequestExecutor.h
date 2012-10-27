@@ -17,6 +17,7 @@ extern const NSString* VKRequestExecutorErrorDomain;
 @interface VKRequestExecutor : NSObject
 @property (nonatomic, strong, readonly) NSURLRequest *request;
 @property (nonatomic, assign) id<VKRequestExecutorDelegate> delegate;
+@property (nonatomic, assign, readonly) BOOL isFinished;
 
 - (id)initWithRequest:(NSURLRequest*)request;
 

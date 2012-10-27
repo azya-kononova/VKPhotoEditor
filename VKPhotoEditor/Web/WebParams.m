@@ -6,9 +6,7 @@
 #import "WebParams.h"
 #import "NSString+Web.h"
 #import "Multipart.h"
-#if defined (SBJSON)
-#import "SBJson.h"
-#endif
+#import "JSONKit.h"
 
 #define IS_FILEUPLOAD(value) [value isKindOfClass:[FileUpload class]]
 
@@ -155,12 +153,10 @@ static void visit(Visitor visitor, NSString *name, id value) {
 	return [queryString dataUsingEncoding:NSUTF8StringEncoding];
 }
 
-#if defined (SBJSON)
 - (NSData*)jsonData
 {
-    return [[params JSONRepresentation] dataUsingEncoding:NSUTF8StringEncoding];
+    return [[params.copy JSONString] dataUsingEncoding:NSUTF8StringEncoding];
 }
-#endif
 
 - (NSURL*)appendToURL:(NSURL*)url
 {

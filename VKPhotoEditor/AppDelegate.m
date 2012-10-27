@@ -10,10 +10,18 @@
 
 @implementation AppDelegate
 
-@synthesize window, navigationController;
+@synthesize window, navigationController, connectionService, settings;
+
++ (AppDelegate*)shared
+{
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Settings" ofType:@"plist"]];
+    settings = [[Settings alloc] initWithDefaults:dict];
+    connectionService = [[VKConnectionService alloc] initWithURL:settings.serviceRootURL];
     [self.window makeKeyAndVisible];
     return YES;
 }

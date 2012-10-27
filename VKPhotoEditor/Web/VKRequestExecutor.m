@@ -30,6 +30,7 @@
 }
 @synthesize delegate;
 @synthesize request;
+@synthesize isFinished;
 
 - (id)initWithRequest:(NSURLRequest*)_request
 {
@@ -38,7 +39,7 @@
         NSAssert(request, @"VKRequestExecutor should be created with request");
         proxy = [NSURLConnectionHandlerProxy new];
         proxy.delegate = self;
-        connection = [[NSURLConnection alloc] initWithRequest:request delegate:proxy];
+        connection = [[NSURLConnection alloc] initWithRequest:request delegate:proxy startImmediately:NO];
         [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
     }
     return self;
@@ -46,8 +47,18 @@
 
 - (void)start
 {
-    [connection start];
+    if (isFinished) {
+        data = nil;
+        [connection cancel];
+        connection = nil;
+        connection = [[NSURLConnection alloc] initWithRequest:request delegate:proxy];
+        [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+        isFinished = NO;
+    } else {
+      [connection start];  
+    }
 }
+
 
 - (void)stop
 {
@@ -90,6 +101,7 @@
     if (!text.length) text = [[NSString alloc] initWithData:data encoding:NSWindowsCP1251StringEncoding];
     NSLog(@"Response for %@\n%@", request, text);
 #endif
+    isFinished = YES;
     JSONDecoder *jsonDecoder = [[JSONDecoder alloc] initWithParseOptions:JKParseOptionNone];
     id obj = [jsonDecoder objectWithData:data];
     if (!obj) {
@@ -100,11 +112,12 @@
         [self _notifyError:[self errorWithMessage:[obj objectForKey:@"error"] code:[obj integerForKey:@"code"] reason:@"Server error"]];
         return;
     }
-    [delegate VKRequestExecutor:self didFinishWithObject:obj];
+    [delegate VKRequestExecutor:self didFinishWithObject:[obj objectForKey:@"response"]];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    isFinished = YES;
     [self _notifyError:error];
 }
 

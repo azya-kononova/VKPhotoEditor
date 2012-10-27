@@ -20,8 +20,11 @@
 #import "FlexibleTextField.h"
 #import "UIButton+StateImage.h"
 #import "UIViewController+Transitions.h"
+#import "VKConnectionService.h"
+#import "VKRequestExecutor.h"
 
-@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CroppingViewControllerDelegate, PhotoEditControllerDelegate, TakePhotoControllerDelegate>
+@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, CroppingViewControllerDelegate, PhotoEditControllerDelegate, TakePhotoControllerDelegate, VKRequestExecutorDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)cameraRoll:(id)sender;
 @end
@@ -43,6 +46,7 @@
     IBOutlet UIButton *postHeaderBtn;
     IBOutlet UIImageView *postImageView;
     BOOL isPostPhotoMode;
+    VKRequestExecutor *exec;
     
     UIImage *savedImage;
 }
@@ -178,11 +182,16 @@
     [self showPost:!isPostPhotoMode];
 }
 
-#pragma mark - actions
-
 - (IBAction)textFieldReturn:(id)sender
 {
     [sender resignFirstResponder];
+}
+
+- (IBAction)postPhoto
+{
+    exec = [[VKConnectionService shared] login:loginInputField.text];
+    exec.delegate = self;
+    [exec start];
 }
 
 - (void)showPostViewHeader:(BOOL)show
@@ -311,6 +320,18 @@
     
     isPhoto = YES;
     [self cropPhoto:basic filterIndex:index userInfo:userInfo];
+}
+
+#pragma mark - VKRequestExecutorDelegate
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
+{
+    
+}
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
+{
+    
 }
 
 @end

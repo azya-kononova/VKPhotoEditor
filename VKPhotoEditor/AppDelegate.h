@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VKConnectionService.h"
+#import "Settings.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (strong, nonatomic) IBOutlet UINavigationController *navigationController;
+@property (nonatomic, strong) VKConnectionService *connectionService;
+@property (nonatomic, strong) Settings *settings;
 
++ (AppDelegate*)shared;
 @end
