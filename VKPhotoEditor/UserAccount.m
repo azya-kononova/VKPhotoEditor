@@ -13,6 +13,7 @@
 @synthesize accountId;
 @synthesize accessToken;
 @synthesize login;
+@synthesize lastPhotos;
 
 - (id)initWithID:(NSInteger)_id
 {
@@ -33,7 +34,7 @@
 
 - (NSString*)description
 {
-    return [NSString stringWithFormat:@"<%@:%d access_token:'%@' login:'%@'>", NSStringFromClass(self.class), accountId, accessToken, login];
+    return [NSString stringWithFormat:@"<%@:%d access_token:'%@' login:'%@' photos total:%d>", NSStringFromClass(self.class), accountId, accessToken, login, lastPhotos.count];
 }
 
 @end

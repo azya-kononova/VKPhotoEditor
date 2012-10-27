@@ -22,6 +22,7 @@
 #import "UIViewController+Transitions.h"
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
+#import "PhotosListController.h"
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, CroppingViewControllerDelegate, PhotoEditControllerDelegate, TakePhotoControllerDelegate, VKRequestExecutorDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
@@ -173,7 +174,7 @@
 }
 
 - (IBAction)cameraRoll:(id)sender
-{        
+{
     [self choosePhoto];
 }
 
@@ -299,7 +300,8 @@
     savedImage = image;
     postImageView.image = savedImage;
     [self showPostViewHeader:YES];
-    UIImageWriteToSavedPhotosAlbum( image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    
+//    UIImageWriteToSavedPhotosAlbum( image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -326,7 +328,8 @@
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
-    
+    PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:savedImage];
+    [self.navigationController pushViewController:ctrl animated:YES];
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
@@ -334,4 +337,10 @@
     
 }
 
+- (IBAction)test
+{
+    [self showPost];
+//    PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:nil];
+//    [self.navigationController pushViewController:ctrl animated:YES];
+}
 @end

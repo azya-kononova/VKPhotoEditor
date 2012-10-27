@@ -22,5 +22,6 @@ extern NSString *VKErrorDomain;
 - (id)initWithURL:(NSURL*)url;
 
 - (VKRequestExecutor*)login:(NSString*)login;
+- (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption;
 
 @end

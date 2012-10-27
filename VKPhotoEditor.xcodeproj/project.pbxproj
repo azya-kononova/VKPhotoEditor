@@ -186,6 +186,38 @@
 		8B50D7841639AB5E007515BF /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D7831639AB5E007515BF /* NSString+MD5.m */; };
 		8B50D792163AD8F9007515BF /* NSDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D791163AD8F9007515BF /* NSDictionary+Helpers.m */; };
 		8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61EC1C161C627F009A2B9B /* libGPUImage.a */; };
+		8B70963D163C330F004DA31B /* PhotosListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B70963B163C330F004DA31B /* PhotosListController.m */; };
+		8B70963E163C330F004DA31B /* PhotosListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B70963C163C330F004DA31B /* PhotosListController.xib */; };
+		8B709641163C347C004DA31B /* Bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70963F163C347C004DA31B /* Bottom@2x.png */; };
+		8B709642163C347C004DA31B /* Bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709640163C347C004DA31B /* Bottom.png */; };
+		8B70964B163C34FB004DA31B /* AllTab_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709643163C34FB004DA31B /* AllTab_Pressed.png */; };
+		8B70964C163C34FB004DA31B /* AllTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709644163C34FB004DA31B /* AllTab.png */; };
+		8B70964D163C34FB004DA31B /* ProfileTab_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709645163C34FB004DA31B /* ProfileTab_Pressed.png */; };
+		8B70964E163C34FB004DA31B /* ProfileTab.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709646163C34FB004DA31B /* ProfileTab.png */; };
+		8B70964F163C34FB004DA31B /* AllTab_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709647163C34FB004DA31B /* AllTab_Pressed@2x.png */; };
+		8B709650163C34FB004DA31B /* AllTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709648163C34FB004DA31B /* AllTab@2x.png */; };
+		8B709651163C34FB004DA31B /* ProfileTab_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709649163C34FB004DA31B /* ProfileTab_Pressed@2x.png */; };
+		8B709652163C34FB004DA31B /* ProfileTab@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70964A163C34FB004DA31B /* ProfileTab@2x.png */; };
+		8B709657163C363E004DA31B /* Camera_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709653163C363E004DA31B /* Camera_Pressed.png */; };
+		8B709658163C363E004DA31B /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709654163C363E004DA31B /* Camera.png */; };
+		8B709659163C363E004DA31B /* Camera_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709655163C363E004DA31B /* Camera_Pressed@2x.png */; };
+		8B70965A163C363E004DA31B /* Camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709656163C363E004DA31B /* Camera@2x.png */; };
+		8B70965D163C3747004DA31B /* MainHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70965B163C3747004DA31B /* MainHeader.png */; };
+		8B70965E163C3747004DA31B /* MainHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70965C163C3747004DA31B /* MainHeader@2x.png */; };
+		8B70968E163C59CD004DA31B /* VKTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B70968D163C59CD004DA31B /* VKTabBar.m */; };
+		8B709690163C5A29004DA31B /* VKTabBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B70968F163C5A29004DA31B /* VKTabBar.xib */; };
+		8B709697163C60BA004DA31B /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B709695163C60B9004DA31B /* ProfileController.m */; };
+		8B709698163C60BA004DA31B /* ProfileController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B709696163C60B9004DA31B /* ProfileController.xib */; };
+		8B70969D163C6589004DA31B /* AvatarPlace_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B709699163C6588004DA31B /* AvatarPlace_Pressed.png */; };
+		8B70969E163C6589004DA31B /* AvatarPlace.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70969A163C6588004DA31B /* AvatarPlace.png */; };
+		8B70969F163C6589004DA31B /* AvatarPlace_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70969B163C6588004DA31B /* AvatarPlace_Pressed@2x.png */; };
+		8B7096A0163C6589004DA31B /* AvatarPlace@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70969C163C6588004DA31B /* AvatarPlace@2x.png */; };
+		8B7096A8163C74D6004DA31B /* RemoteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096A6163C74D5004DA31B /* RemoteImageView.m */; };
+		8B7096A9163C74D6004DA31B /* RemoteImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7096A7163C74D6004DA31B /* RemoteImageView.xib */; };
+		8B7096AC163C7530004DA31B /* PhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096AB163C7530004DA31B /* PhotoCell.m */; };
+		8B7096AE163C7544004DA31B /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7096AD163C7544004DA31B /* PhotoCell.xib */; };
+		8B7096B1163C760A004DA31B /* VKPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096B0163C760A004DA31B /* VKPhoto.m */; };
+		8B7096B8163C7F64004DA31B /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096B7163C7F63004DA31B /* ImageCache.m */; };
 		8B8AF734163831610053706D /* RightArrow_Active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF732163831610053706D /* RightArrow_Active@2x.png */; };
 		8B8AF735163831610053706D /* RightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF733163831610053706D /* RightArrow@2x.png */; };
 		8B8AF738163831F50053706D /* DarkInner_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF736163831F50053706D /* DarkInner_Pressed@2x.png */; };
@@ -490,6 +522,45 @@
 		8B50D790163AD8F9007515BF /* NSDictionary+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Helpers.h"; sourceTree = "<group>"; };
 		8B50D791163AD8F9007515BF /* NSDictionary+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Helpers.m"; sourceTree = "<group>"; };
 		8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
+		8B70963A163C330F004DA31B /* PhotosListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosListController.h; sourceTree = "<group>"; };
+		8B70963B163C330F004DA31B /* PhotosListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosListController.m; sourceTree = "<group>"; };
+		8B70963C163C330F004DA31B /* PhotosListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosListController.xib; sourceTree = "<group>"; };
+		8B70963F163C347C004DA31B /* Bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bottom@2x.png"; sourceTree = "<group>"; };
+		8B709640163C347C004DA31B /* Bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bottom.png; sourceTree = "<group>"; };
+		8B709643163C34FB004DA31B /* AllTab_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AllTab_Pressed.png; sourceTree = "<group>"; };
+		8B709644163C34FB004DA31B /* AllTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AllTab.png; sourceTree = "<group>"; };
+		8B709645163C34FB004DA31B /* ProfileTab_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileTab_Pressed.png; sourceTree = "<group>"; };
+		8B709646163C34FB004DA31B /* ProfileTab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileTab.png; sourceTree = "<group>"; };
+		8B709647163C34FB004DA31B /* AllTab_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AllTab_Pressed@2x.png"; sourceTree = "<group>"; };
+		8B709648163C34FB004DA31B /* AllTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AllTab@2x.png"; sourceTree = "<group>"; };
+		8B709649163C34FB004DA31B /* ProfileTab_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileTab_Pressed@2x.png"; sourceTree = "<group>"; };
+		8B70964A163C34FB004DA31B /* ProfileTab@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileTab@2x.png"; sourceTree = "<group>"; };
+		8B709653163C363E004DA31B /* Camera_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera_Pressed.png; sourceTree = "<group>"; };
+		8B709654163C363E004DA31B /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
+		8B709655163C363E004DA31B /* Camera_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera_Pressed@2x.png"; sourceTree = "<group>"; };
+		8B709656163C363E004DA31B /* Camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Camera@2x.png"; sourceTree = "<group>"; };
+		8B70965B163C3747004DA31B /* MainHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MainHeader.png; path = fonts/MainHeader.png; sourceTree = "<group>"; };
+		8B70965C163C3747004DA31B /* MainHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "MainHeader@2x.png"; path = "fonts/MainHeader@2x.png"; sourceTree = "<group>"; };
+		8B70968C163C59CC004DA31B /* VKTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKTabBar.h; sourceTree = "<group>"; };
+		8B70968D163C59CD004DA31B /* VKTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKTabBar.m; sourceTree = "<group>"; };
+		8B70968F163C5A29004DA31B /* VKTabBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VKTabBar.xib; sourceTree = "<group>"; };
+		8B709694163C60B9004DA31B /* ProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileController.h; sourceTree = "<group>"; };
+		8B709695163C60B9004DA31B /* ProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileController.m; sourceTree = "<group>"; };
+		8B709696163C60B9004DA31B /* ProfileController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfileController.xib; sourceTree = "<group>"; };
+		8B709699163C6588004DA31B /* AvatarPlace_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AvatarPlace_Pressed.png; sourceTree = "<group>"; };
+		8B70969A163C6588004DA31B /* AvatarPlace.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AvatarPlace.png; sourceTree = "<group>"; };
+		8B70969B163C6588004DA31B /* AvatarPlace_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AvatarPlace_Pressed@2x.png"; sourceTree = "<group>"; };
+		8B70969C163C6588004DA31B /* AvatarPlace@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AvatarPlace@2x.png"; sourceTree = "<group>"; };
+		8B7096A5163C74D5004DA31B /* RemoteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteImageView.h; sourceTree = "<group>"; };
+		8B7096A6163C74D5004DA31B /* RemoteImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteImageView.m; sourceTree = "<group>"; };
+		8B7096A7163C74D6004DA31B /* RemoteImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemoteImageView.xib; sourceTree = "<group>"; };
+		8B7096AA163C7530004DA31B /* PhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoCell.h; sourceTree = "<group>"; };
+		8B7096AB163C7530004DA31B /* PhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoCell.m; sourceTree = "<group>"; };
+		8B7096AD163C7544004DA31B /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
+		8B7096AF163C760A004DA31B /* VKPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKPhoto.h; sourceTree = "<group>"; };
+		8B7096B0163C760A004DA31B /* VKPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKPhoto.m; sourceTree = "<group>"; };
+		8B7096B6163C7F63004DA31B /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
+		8B7096B7163C7F63004DA31B /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		8B8AF732163831610053706D /* RightArrow_Active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow_Active@2x.png"; sourceTree = "<group>"; };
 		8B8AF733163831610053706D /* RightArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow@2x.png"; sourceTree = "<group>"; };
 		8B8AF736163831F50053706D /* DarkInner_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkInner_Pressed@2x.png"; sourceTree = "<group>"; };
@@ -603,6 +674,10 @@
 				8B50D7721639A35B007515BF /* UserAccount.m */,
 				8B50D7741639A440007515BF /* Settings.h */,
 				8B50D7751639A440007515BF /* Settings.m */,
+				8B7096AF163C760A004DA31B /* VKPhoto.h */,
+				8B7096B0163C760A004DA31B /* VKPhoto.m */,
+				8B7096B6163C7F63004DA31B /* ImageCache.h */,
+				8B7096B7163C7F63004DA31B /* ImageCache.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -653,6 +728,9 @@
 		221C31D916104732005974C8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8B7096AA163C7530004DA31B /* PhotoCell.h */,
+				8B7096AB163C7530004DA31B /* PhotoCell.m */,
+				8B7096AD163C7544004DA31B /* PhotoCell.xib */,
 				221C31D616104710005974C8 /* TablePopoverCell.h */,
 				221C31D716104710005974C8 /* TablePopoverCell.m */,
 				221C31DA16104754005974C8 /* TablePopoverCell.xib */,
@@ -663,6 +741,10 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8B709699163C6588004DA31B /* AvatarPlace_Pressed.png */,
+				8B70969A163C6588004DA31B /* AvatarPlace.png */,
+				8B70969B163C6588004DA31B /* AvatarPlace_Pressed@2x.png */,
+				8B70969C163C6588004DA31B /* AvatarPlace@2x.png */,
 				8B50D74C16385435007515BF /* Cancel_Acitve.png */,
 				8B50D74D16385435007515BF /* Cancel_Acitve@2x.png */,
 				8B50D74E16385435007515BF /* Cancel.png */,
@@ -679,6 +761,9 @@
 				8BA0CBE21621CC8900EA0768 /* AppIcon-57x57.png */,
 				8BA0CBE01621CC7500EA0768 /* AppIcon-114x114.png */,
 				8BDF189C1611A67B00507B5F /* fonts */,
+				8B70965B163C3747004DA31B /* MainHeader.png */,
+				8B70965C163C3747004DA31B /* MainHeader@2x.png */,
+				8B709640163C347C004DA31B /* Bottom.png */,
 				8B121D391620870900F166D8 /* cloud.png */,
 				8B435AAB1621E33C0060A403 /* left_arrow.png */,
 				8B435AAC1621E33C0060A403 /* left_arrow@2x.png */,
@@ -693,6 +778,19 @@
 				226E756C160F012D00531350 /* BackGround@2x.png */,
 				226E756D160F012D00531350 /* BlackCorners_Bottom@2x.png */,
 				226E756E160F012D00531350 /* BlackCorners_Top@2x.png */,
+				8B70963F163C347C004DA31B /* Bottom@2x.png */,
+				8B709643163C34FB004DA31B /* AllTab_Pressed.png */,
+				8B709644163C34FB004DA31B /* AllTab.png */,
+				8B709645163C34FB004DA31B /* ProfileTab_Pressed.png */,
+				8B709646163C34FB004DA31B /* ProfileTab.png */,
+				8B709647163C34FB004DA31B /* AllTab_Pressed@2x.png */,
+				8B709648163C34FB004DA31B /* AllTab@2x.png */,
+				8B709649163C34FB004DA31B /* ProfileTab_Pressed@2x.png */,
+				8B70964A163C34FB004DA31B /* ProfileTab@2x.png */,
+				8B709653163C363E004DA31B /* Camera_Pressed.png */,
+				8B709654163C363E004DA31B /* Camera.png */,
+				8B709655163C363E004DA31B /* Camera_Pressed@2x.png */,
+				8B709656163C363E004DA31B /* Camera@2x.png */,
 				226E756F160F012D00531350 /* Camera_Background@2x.png */,
 				226E7570160F012D00531350 /* Camera_Blur@2x.png */,
 				226E7571160F012D00531350 /* Camera_Cancel@2x.png */,
@@ -843,8 +941,6 @@
 				220B399C160EFE480010F257 /* Model */,
 				22D7BFA1160EF628008B5BFA /* View */,
 				22D7BF98160CCDDD008B5BFA /* Controller */,
-				22D7BF7C160CCCAD008B5BFA /* AppDelegate.h */,
-				22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */,
 				22D7BF5E160CCC33008B5BFA /* Supporting Files */,
 			);
 			path = VKPhotoEditor;
@@ -853,6 +949,8 @@
 		22D7BF5E160CCC33008B5BFA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				22D7BF7C160CCCAD008B5BFA /* AppDelegate.h */,
+				22D7BF7D160CCCAD008B5BFA /* AppDelegate.m */,
 				22D7BF5F160CCC33008B5BFA /* VKPhotoEditor-Info.plist */,
 				22D7BF60160CCC33008B5BFA /* InfoPlist.strings */,
 				22D7BF63160CCC33008B5BFA /* main.m */,
@@ -881,6 +979,15 @@
 				22855AD016119973007333D8 /* CroppingViewController.h */,
 				22855AD116119973007333D8 /* CroppingViewController.m */,
 				22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */,
+				8B709694163C60B9004DA31B /* ProfileController.h */,
+				8B709695163C60B9004DA31B /* ProfileController.m */,
+				8B709696163C60B9004DA31B /* ProfileController.xib */,
+				8B70963A163C330F004DA31B /* PhotosListController.h */,
+				8B70963B163C330F004DA31B /* PhotosListController.m */,
+				8B70963C163C330F004DA31B /* PhotosListController.xib */,
+				8B70968C163C59CC004DA31B /* VKTabBar.h */,
+				8B70968D163C59CD004DA31B /* VKTabBar.m */,
+				8B70968F163C5A29004DA31B /* VKTabBar.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -935,6 +1042,9 @@
 				8B0FFE251636C3BA00714F70 /* NSString+Web.m */,
 				8B0FFE261636C3BA00714F70 /* RemoteImage.h */,
 				8B0FFE271636C3BA00714F70 /* RemoteImage.m */,
+				8B7096A5163C74D5004DA31B /* RemoteImageView.h */,
+				8B7096A6163C74D5004DA31B /* RemoteImageView.m */,
+				8B7096A7163C74D6004DA31B /* RemoteImageView.xib */,
 				8B0FFE2C1636C3BA00714F70 /* WebParams.h */,
 				8B0FFE2D1636C3BA00714F70 /* WebParams.m */,
 				8B0FFE691636E2F900714F70 /* VKRequestExecutor.h */,
@@ -1260,6 +1370,31 @@
 				8B50D75216385435007515BF /* Cancel.png in Resources */,
 				8B50D75316385435007515BF /* Cancel@2x.png in Resources */,
 				8B50D77B1639A573007515BF /* Settings.plist in Resources */,
+				8B70963E163C330F004DA31B /* PhotosListController.xib in Resources */,
+				8B709641163C347C004DA31B /* Bottom@2x.png in Resources */,
+				8B709642163C347C004DA31B /* Bottom.png in Resources */,
+				8B70964B163C34FB004DA31B /* AllTab_Pressed.png in Resources */,
+				8B70964C163C34FB004DA31B /* AllTab.png in Resources */,
+				8B70964D163C34FB004DA31B /* ProfileTab_Pressed.png in Resources */,
+				8B70964E163C34FB004DA31B /* ProfileTab.png in Resources */,
+				8B70964F163C34FB004DA31B /* AllTab_Pressed@2x.png in Resources */,
+				8B709650163C34FB004DA31B /* AllTab@2x.png in Resources */,
+				8B709651163C34FB004DA31B /* ProfileTab_Pressed@2x.png in Resources */,
+				8B709652163C34FB004DA31B /* ProfileTab@2x.png in Resources */,
+				8B709657163C363E004DA31B /* Camera_Pressed.png in Resources */,
+				8B709658163C363E004DA31B /* Camera.png in Resources */,
+				8B709659163C363E004DA31B /* Camera_Pressed@2x.png in Resources */,
+				8B70965A163C363E004DA31B /* Camera@2x.png in Resources */,
+				8B70965D163C3747004DA31B /* MainHeader.png in Resources */,
+				8B70965E163C3747004DA31B /* MainHeader@2x.png in Resources */,
+				8B709690163C5A29004DA31B /* VKTabBar.xib in Resources */,
+				8B709698163C60BA004DA31B /* ProfileController.xib in Resources */,
+				8B70969D163C6589004DA31B /* AvatarPlace_Pressed.png in Resources */,
+				8B70969E163C6589004DA31B /* AvatarPlace.png in Resources */,
+				8B70969F163C6589004DA31B /* AvatarPlace_Pressed@2x.png in Resources */,
+				8B7096A0163C6589004DA31B /* AvatarPlace@2x.png in Resources */,
+				8B7096A9163C74D6004DA31B /* RemoteImageView.xib in Resources */,
+				8B7096AE163C7544004DA31B /* PhotoCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1327,6 +1462,13 @@
 				8B50D7811639A78D007515BF /* NSObject+Invocation.m in Sources */,
 				8B50D7841639AB5E007515BF /* NSString+MD5.m in Sources */,
 				8B50D792163AD8F9007515BF /* NSDictionary+Helpers.m in Sources */,
+				8B70963D163C330F004DA31B /* PhotosListController.m in Sources */,
+				8B70968E163C59CD004DA31B /* VKTabBar.m in Sources */,
+				8B709697163C60BA004DA31B /* ProfileController.m in Sources */,
+				8B7096A8163C74D6004DA31B /* RemoteImageView.m in Sources */,
+				8B7096AC163C7530004DA31B /* PhotoCell.m in Sources */,
+				8B7096B1163C760A004DA31B /* VKPhoto.m in Sources */,
+				8B7096B8163C7F64004DA31B /* ImageCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

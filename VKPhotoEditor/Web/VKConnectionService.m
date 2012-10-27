@@ -11,6 +11,8 @@
 #import "WebParams.h"
 #import "RequestExecutorProxy.h"
 #import "NSString+MD5.h"
+#import "NSObject+Map.h"
+#import "VKPhoto.h"
 
 #import <sys/socket.h>
 #import <sys/sysctl.h>
@@ -99,11 +101,22 @@ NSString *VKErrorDomain = @"VKErrorDomain";
     return exec;
 }
 
+- (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            photo, @"file",
+                            caption, @"caption",
+                            account.accessToken, @"access_token", nil];
+    RequestExecutorProxy *exec = [self postToPath:@"uploadPhoto" params:[[WebParams alloc] initWithDictionary:params] json:NO];
+    return exec;
+}
+
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data
 {
     account = [UserAccount accountWithDict:[data objectForKey:@"credentials"]];
     NSDictionary *user = [[data objectForKey:@"users"] objectAtIndex:0];
     account.login = [user objectForKey:@"login"];
+    account.lastPhotos = [[data objectForKey:@"photos"] map:^id(NSDictionary *dict) { return [VKPhoto VKPhotoWithDict:dict]; }];
     NSLog(@"%@",account);
 }
 
