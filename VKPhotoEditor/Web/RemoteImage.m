@@ -56,10 +56,10 @@
 
 - (void)startLoading
 {
-	if (image || imageData || activeConnection) return;
+	if (image || imageData || activeConnection || !imageUrl) return;
 	NSURLRequest *request = [NSURLRequest requestWithURL:imageUrl];
-	activeConnection = [NSURLConnection connectionWithRequest:request delegate:self];
-	[activeConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
+    activeConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
+	[activeConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
 	[activeConnection start];
 }
 
