@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "PhotosListController.h"
 
 @implementation AppDelegate
 
@@ -52,6 +53,14 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - UINavigationControllerDelegate
+
+- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    BOOL needStatusBar =  [viewController isKindOfClass:PhotosListController.class];
+    [[UIApplication sharedApplication] setStatusBarHidden:!needStatusBar withAnimation: UIStatusBarAnimationFade];
 }
 
 @end

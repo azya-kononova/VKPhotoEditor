@@ -11,7 +11,7 @@
 #import "Settings.h"
 #import "ImageCache.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (strong, nonatomic) IBOutlet UINavigationController *navigationController;
