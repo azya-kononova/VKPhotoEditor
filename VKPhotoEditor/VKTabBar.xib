@@ -40,7 +40,7 @@
 					<object class="IBUIImageView" id="1056962780">
 						<reference key="NSNextResponder" ref="206369204"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrameSize">{320, 50}</string>
+						<string key="NSFrame">{{0, -1}, {320, 51}}</string>
 						<reference key="NSSuperview" ref="206369204"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="132137025"/>
@@ -129,7 +129,6 @@
 						<string key="NSFrame">{{233, 32}, {70, 16}}</string>
 						<reference key="NSSuperview" ref="206369204"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
