@@ -113,10 +113,12 @@ NSString *VKErrorDomain = @"VKErrorDomain";
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data
 {
-    account = [UserAccount accountWithDict:[data objectForKey:@"credentials"]];
-    NSDictionary *user = [[data objectForKey:@"users"] objectAtIndex:0];
-    account.login = [user objectForKey:@"login"];
-    account.lastPhotos = [[data objectForKey:@"photos"] map:^id(NSDictionary *dict) { return [VKPhoto VKPhotoWithDict:dict]; }];
+    account = [UserAccount accountWithDict:[[data objectForKey:@"users"] objectAtIndex:0]];
+    account.accessToken = [[data objectForKey:@"credentials"] objectForKey:@"access_token"];
+    account.lastPhotos = [[data objectForKey:@"photos"] map:^id(NSDictionary *dict) {
+        VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
+        photo.account = account.account;
+        return photo; }];
     NSLog(@"%@",account);
 }
 

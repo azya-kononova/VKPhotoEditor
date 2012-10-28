@@ -7,11 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Account.h"
 
 @interface UserAccount : NSObject
+@property (nonatomic, strong) Account *account;
 @property (nonatomic, strong) NSString *accessToken;
-@property (nonatomic, strong) NSString *login;
-@property (nonatomic, assign, readonly) NSInteger accountId;
 @property (nonatomic, strong) NSArray *lastPhotos;
 
 + (id)accountWithDict:(NSDictionary*)dict;

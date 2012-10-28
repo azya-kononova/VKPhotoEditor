@@ -8,12 +8,14 @@
 
 #import <Foundation/Foundation.h>
 #import "RemoteImage.h"
+#import "Account.h"
 
 @interface VKPhoto : NSObject
 @property (nonatomic, strong) NSString *photoId;
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSDate *date;
+@property (nonatomic, assign) Account *account;
 
 @property (nonatomic, strong, readonly) RemoteImage *photo;
 

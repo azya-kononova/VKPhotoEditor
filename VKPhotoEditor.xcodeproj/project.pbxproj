@@ -243,6 +243,12 @@
 		8BA0CC171621D24800EA0768 /* comics@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA0CC151621D24800EA0768 /* comics@2x.png */; };
 		8BA0CC1B1621D2AE00EA0768 /* ComicsCaptionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA0CC191621D2AE00EA0768 /* ComicsCaptionView.m */; };
 		8BA0CC1C1621D2AE00EA0768 /* ComicsCaptionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA0CC1A1621D2AE00EA0768 /* ComicsCaptionView.xib */; };
+		8BA3D6E3163C854E00CEA6AD /* PhotoHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3D6E2163C854E00CEA6AD /* PhotoHeaderView.m */; };
+		8BA3D6E5163C856200CEA6AD /* PhotoHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3D6E4163C856200CEA6AD /* PhotoHeaderView.xib */; };
+		8BA3D6E8163C884900CEA6AD /* DataFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3D6E7163C884900CEA6AD /* DataFormatter.m */; };
+		8BA3D6EB163C892E00CEA6AD /* Account.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BA3D6EA163C892E00CEA6AD /* Account.m */; };
+		8BA3D6EE163DB4DD00CEA6AD /* Avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3D6EC163DB4DD00CEA6AD /* Avatar.png */; };
+		8BA3D6EF163DB4DD00CEA6AD /* Avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3D6ED163DB4DD00CEA6AD /* Avatar@2x.png */; };
 		8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB70616208F2300A33DEF /* UIImage+Blend.m */; };
 		8BCDB74816219B8B00A33DEF /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB74716219B8B00A33DEF /* ActivityView.m */; };
 		8BCDB74A16219B9900A33DEF /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BCDB74916219B9900A33DEF /* ActivityView.xib */; };
@@ -593,6 +599,15 @@
 		8BA0CC181621D2AE00EA0768 /* ComicsCaptionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComicsCaptionView.h; sourceTree = "<group>"; };
 		8BA0CC191621D2AE00EA0768 /* ComicsCaptionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComicsCaptionView.m; sourceTree = "<group>"; };
 		8BA0CC1A1621D2AE00EA0768 /* ComicsCaptionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComicsCaptionView.xib; sourceTree = "<group>"; };
+		8BA3D6E1163C854E00CEA6AD /* PhotoHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoHeaderView.h; sourceTree = "<group>"; };
+		8BA3D6E2163C854E00CEA6AD /* PhotoHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoHeaderView.m; sourceTree = "<group>"; };
+		8BA3D6E4163C856200CEA6AD /* PhotoHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoHeaderView.xib; sourceTree = "<group>"; };
+		8BA3D6E6163C884900CEA6AD /* DataFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataFormatter.h; sourceTree = "<group>"; };
+		8BA3D6E7163C884900CEA6AD /* DataFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataFormatter.m; sourceTree = "<group>"; };
+		8BA3D6E9163C892E00CEA6AD /* Account.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Account.h; sourceTree = "<group>"; };
+		8BA3D6EA163C892E00CEA6AD /* Account.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Account.m; sourceTree = "<group>"; };
+		8BA3D6EC163DB4DD00CEA6AD /* Avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Avatar.png; sourceTree = "<group>"; };
+		8BA3D6ED163DB4DD00CEA6AD /* Avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Avatar@2x.png"; sourceTree = "<group>"; };
 		8BCDB70516208F2300A33DEF /* UIImage+Blend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blend.h"; sourceTree = "<group>"; };
 		8BCDB70616208F2300A33DEF /* UIImage+Blend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blend.m"; sourceTree = "<group>"; };
 		8BCDB74616219B8B00A33DEF /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
@@ -670,6 +685,8 @@
 				220E6BC7161E06ED00AB89B5 /* BlurMode.m */,
 				220E6BC9161E071500AB89B5 /* FlashMode.h */,
 				220E6BCA161E071500AB89B5 /* FlashMode.m */,
+				8BA3D6E9163C892E00CEA6AD /* Account.h */,
+				8BA3D6EA163C892E00CEA6AD /* Account.m */,
 				8B50D7711639A35B007515BF /* UserAccount.h */,
 				8B50D7721639A35B007515BF /* UserAccount.m */,
 				8B50D7741639A440007515BF /* Settings.h */,
@@ -678,6 +695,8 @@
 				8B7096B0163C760A004DA31B /* VKPhoto.m */,
 				8B7096B6163C7F63004DA31B /* ImageCache.h */,
 				8B7096B7163C7F63004DA31B /* ImageCache.m */,
+				8BA3D6E6163C884900CEA6AD /* DataFormatter.h */,
+				8BA3D6E7163C884900CEA6AD /* DataFormatter.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -760,6 +779,8 @@
 				22B4E3ED1621DF13008ECFA3 /* Filter9.png */,
 				8BA0CBE21621CC8900EA0768 /* AppIcon-57x57.png */,
 				8BA0CBE01621CC7500EA0768 /* AppIcon-114x114.png */,
+				8BA3D6EC163DB4DD00CEA6AD /* Avatar.png */,
+				8BA3D6ED163DB4DD00CEA6AD /* Avatar@2x.png */,
 				8BDF189C1611A67B00507B5F /* fonts */,
 				8B70965B163C3747004DA31B /* MainHeader.png */,
 				8B70965C163C3747004DA31B /* MainHeader@2x.png */,
@@ -1025,6 +1046,9 @@
 				8B435AA41621E1170060A403 /* ArrowView.h */,
 				8B435AA51621E1170060A403 /* ArrowView.m */,
 				8B435AA21621E1030060A403 /* ArrowView.xib */,
+				8BA3D6E1163C854E00CEA6AD /* PhotoHeaderView.h */,
+				8BA3D6E2163C854E00CEA6AD /* PhotoHeaderView.m */,
+				8BA3D6E4163C856200CEA6AD /* PhotoHeaderView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1395,6 +1419,9 @@
 				8B7096A0163C6589004DA31B /* AvatarPlace@2x.png in Resources */,
 				8B7096A9163C74D6004DA31B /* RemoteImageView.xib in Resources */,
 				8B7096AE163C7544004DA31B /* PhotoCell.xib in Resources */,
+				8BA3D6E5163C856200CEA6AD /* PhotoHeaderView.xib in Resources */,
+				8BA3D6EE163DB4DD00CEA6AD /* Avatar.png in Resources */,
+				8BA3D6EF163DB4DD00CEA6AD /* Avatar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1469,6 +1496,9 @@
 				8B7096AC163C7530004DA31B /* PhotoCell.m in Sources */,
 				8B7096B1163C760A004DA31B /* VKPhoto.m in Sources */,
 				8B7096B8163C7F64004DA31B /* ImageCache.m in Sources */,
+				8BA3D6E3163C854E00CEA6AD /* PhotoHeaderView.m in Sources */,
+				8BA3D6E8163C884900CEA6AD /* DataFormatter.m in Sources */,
+				8BA3D6EB163C892E00CEA6AD /* Account.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

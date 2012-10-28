@@ -14,8 +14,8 @@
 @synthesize photoId;
 @synthesize imageURL;
 @synthesize caption;
-@synthesize photo;
 @synthesize date;
+@synthesize account;
 
 - (id)initWithID:(NSString*)_id
 {
@@ -33,7 +33,7 @@
     
     VKPhoto *photo = [[VKPhoto alloc] initWithID:[dict objectForKey:@"id"]];
     photo.date = [NSDate dateWithTimeIntervalSince1970:[dict integerForKey:@"date"]];
-    photo.date = [dict objectForKey:@"caption"];
+    photo.caption = [dict objectForKey:@"caption"];
     // TODO: store all size info
     NSArray *sizes = [dict objectForKey:@"sizes"];
     // TODO: helpers for JK collections
