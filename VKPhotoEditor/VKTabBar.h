@@ -19,9 +19,11 @@
 @property (nonatomic, assign) NSInteger selectedIndex;
 
 - (IBAction)didSelect:(UIButton*)sender;
+- (IBAction)central;
 @end
 
 
 @protocol VKTabBarDelegate
 - (void)VKTabBar:(VKTabBar*)tabBar didSelectIndex:(NSInteger)index;
+- (void)VKTabBarDidTapCentral:(VKTabBar*)tabBar;
 @end

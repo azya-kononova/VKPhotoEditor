@@ -45,7 +45,6 @@
     highlightShadowRadius = 3.0;
     shadowColor = [UIColor blackColor];
     shadowRadius = 2.0;
-    highlight = YES;
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
 }
 

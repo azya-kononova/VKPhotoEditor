@@ -71,7 +71,6 @@
     loginInputField.verticalPadding = 10;
     loginInputField.horizontalPadding = 95;
     
-    gallery.highlight = NO;
     takePhotoBtn.hidden = ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
     
     [appNameLabel setFont:[UIFont fontWithName:@"Lobster 1.4" size:36.0]];
@@ -197,8 +196,9 @@
 
 - (void)showPostViewHeader:(BOOL)show
 {
-    [postView.layer push: show ? kCATransitionFromTop : kCATransitionFromBottom];
-    [postView moveTo:CGPointMake(0, self.view.frame.size.height - 45)];
+    [UIView animateWithDuration:0.4 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
+        [postView moveTo:CGPointMake(0, self.view.frame.size.height - 45)];
+    } completion:nil];
 }
 
 - (void)showPost:(BOOL)show
@@ -339,6 +339,7 @@
 
 - (IBAction)test
 {
+//    [self showPostViewHeader:YES];
     [self showPost];
 //    PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:nil];
 //    [self.navigationController pushViewController:ctrl animated:YES];

@@ -112,6 +112,8 @@
     arrowView = [ArrowView loadFromNIB];
     [topView addSubview:arrowView];
     [arrowView moveTo:CGPointMake(0, 200)];
+    
+    filterView.highlight = YES;
 }
 
 - (void)setImageFilter:(ImageFilter*)imageFilter

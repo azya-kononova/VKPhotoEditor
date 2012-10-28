@@ -97,6 +97,8 @@ typedef NSInteger CameraBlurMode;
         [self setCameraFlashMode:[flashModes objectAtIndex:1]];
     }
     blurTargets = basicFilter.targets;
+    
+    filtersView.highlight = YES;
 }
 
 - (void)viewWillAppear:(BOOL)animated

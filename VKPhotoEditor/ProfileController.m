@@ -22,6 +22,7 @@
     NSMutableArray *sectionHeaders;
 }
 @synthesize nameLabel;
+@synthesize delegate;
 
 - (id)initWithAccount:(UserAccount *)_account
 {
@@ -37,6 +38,13 @@
 {
     [super viewDidLoad];
     nameLabel.text = account.account.login;
+}
+
+#pragma mark - actions
+
+- (IBAction)openProfile
+{
+    [delegate profileControllerDidOpenProfile:self];
 }
 
 #pragma mark - UITableViewDataSource

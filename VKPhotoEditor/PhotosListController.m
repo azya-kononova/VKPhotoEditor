@@ -13,10 +13,11 @@
 #import "ProfileController.h"
 #import "VKRequestExecutor.h"
 #import "VKConnectionService.h"
+#import "ChoosePhotoView.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
-@interface PhotosListController () <VKTabBarDelegate, VKRequestExecutorDelegate>
+@interface PhotosListController () <VKTabBarDelegate, VKRequestExecutorDelegate, ChoosePhotoViewDelegate, ProfileControllerDelegate>
 @end
 
 @implementation PhotosListController {
@@ -24,6 +25,7 @@
     NSArray *controllers;
     VKRequestExecutor *exec;
     VKConnectionService *service;
+    ChoosePhotoView *choosePhotoView;
 }
 
 - (id)initWithImageToUpload:(UIImage *)image
@@ -43,6 +45,7 @@
     [super viewDidLoad];
     
     ProfileController *profileCtrl = [[ProfileController alloc] initWithAccount:service.account];
+    profileCtrl.delegate = self;
     controllers =  [NSArray arrayWithObjects:profileCtrl, [UIViewController new],nil];
     
     tabBar = [VKTabBar loadFromNIB];
@@ -51,6 +54,10 @@
     
     tabBar.delegate = self;
     tabBar.selectedIndex = 0;
+    
+    choosePhotoView = [ChoosePhotoView loadFromNIB];
+    [self.view addSubview:choosePhotoView];
+    choosePhotoView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,15 +73,16 @@
     UIView* currentView = [self.view viewWithTag:SELECTED_VIEW_CONTROLLER_TAG];
     [currentView removeFromSuperview];
     
-    // Get the right view controller
     UIViewController *ctrl = [controllers objectAtIndex:index];
     [ctrl.view resizeTo:CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height - (_tabBar.frame.size.height))];
-    
-    // Se the tag so we can find it later
     ctrl.view.tag = SELECTED_VIEW_CONTROLLER_TAG;
     
-    // Add the new view controller's view
     [self.view insertSubview:ctrl.view belowSubview:tabBar];
+}
+
+- (void)VKTabBarDidTapCentral:(VKTabBar *)tabBar
+{
+    [choosePhotoView show:YES withExitButton:NO animated:YES];
 }
 
 #pragma mark - VKRequestExecutorDelegate
@@ -85,6 +93,41 @@
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
+{
+    
+}
+
+#pragma mark - ProfileControllerDelegate
+
+- (void)profileControllerDidOpenProfile:(ProfileController *)ctrl
+{
+    [choosePhotoView show:YES withExitButton:YES animated:YES];
+}
+
+#pragma mark - ChoosePhotoViewDelegate
+
+
+- (void)choosePhotoViewDidChooseCameraRoll:(ChoosePhotoView*)view
+{
+    
+}
+
+- (void)choosePhotoViewDidChooseCamera:(ChoosePhotoView*)view
+{
+    
+}
+
+- (void)choosePhotoViewDidCancel:(ChoosePhotoView*)view
+{
+    [choosePhotoView show:NO animated:YES];
+}
+
+- (void)choosePhotoViewDidExit:(ChoosePhotoView*)view
+{
+    
+}
+
+- (void)choosePhotoView:(ChoosePhotoView *)view didChooseImage:(UIImage *)image
 {
     
 }
