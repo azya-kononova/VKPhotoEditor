@@ -37,7 +37,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    nameLabel.text = account.account.login;
+    nameLabel.text = account.login;
 }
 
 #pragma mark - actions

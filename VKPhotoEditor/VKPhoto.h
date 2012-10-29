@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSURL *imageURL;
 @property (nonatomic, strong) NSString *caption;
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic, assign) Account *account;
+@property (nonatomic, strong) Account *account;
 
 @property (nonatomic, strong, readonly) RemoteImage *photo;
 

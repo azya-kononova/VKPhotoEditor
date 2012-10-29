@@ -10,7 +10,11 @@
 
 @interface Settings : NSObject
 @property (nonatomic, strong, readonly) NSURL *serviceRootURL;
+
 @property (nonatomic, strong) NSString *login;
+@property (nonatomic, strong) NSNumber *userId;
+@property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSURL *avatarURL;
 
 - (id)initWithDefaults:(NSDictionary*)defs;
 

@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "PhotosListController.h"
+#import "StartViewController.h"
 
 @implementation AppDelegate
 
@@ -25,6 +26,9 @@
     settings = [[Settings alloc] initWithDefaults:dict];
     connectionService = [[VKConnectionService alloc] initWithURL:settings.serviceRootURL];
     imageCache = [ImageCache new];
+    
+    self.navigationController.navigationBar.hidden = YES;
+    navigationController.viewControllers = settings.accessToken ? [NSArray arrayWithObjects: [StartViewController new], [PhotosListController new], nil] : [NSArray arrayWithObject:[StartViewController new]];
     [self.window makeKeyAndVisible];
     return YES;
 }

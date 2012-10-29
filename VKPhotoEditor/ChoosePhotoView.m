@@ -31,7 +31,6 @@
     bgView.backgroundColor = [UIColor defaultBgColor];
     
     library = [[ALAssetsLibrary alloc] init];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAlbumImages) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     takePhotoButton.bgImagecaps = CGSizeMake(20, 20);
     cancelButton.bgImagecaps = CGSizeMake(20, 20);

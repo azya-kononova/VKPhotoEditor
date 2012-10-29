@@ -11,6 +11,9 @@
 #import "AppDelegate.h"
 
 #define LOGIN_KEY @"login"
+#define USER_ID_KEY @"userId"
+#define ACCESS_TOKEN_KEY @"accessToken"
+#define AVATAR_URL_KEY @"avatarURL"
 #define SERVICE_URL_KEY @"serviceRootURL"
 
 @interface NSUserDefaults (Def)
@@ -52,6 +55,39 @@
 - (void)setLogin:(NSString *)login
 {
     [user setObject:login forKey:LOGIN_KEY];
+    [self sync];
+}
+
+- (NSNumber*)user_id
+{
+    return [user objectForKey:USER_ID_KEY];
+}
+
+- (void)setUserId:(NSNumber *)userId
+{
+    [user setObject:userId forKey:USER_ID_KEY];
+    [self sync];
+}
+
+- (NSString*)accessToken
+{
+     return [user objectForKey:ACCESS_TOKEN_KEY];
+}
+
+- (void)setAccessToken:(NSString *)accessToken
+{
+    [user setObject:accessToken forKey:ACCESS_TOKEN_KEY];
+    [self sync];
+}
+
+- (NSURL*)avatarURL
+{
+     return [user objectForKey:AVATAR_URL_KEY];
+}
+
+- (void)setAvatarURL:(NSURL *)avatarURL
+{
+    [user setObject:avatarURL forKey:AVATAR_URL_KEY];
     [self sync];
 }
 

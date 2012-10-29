@@ -10,9 +10,13 @@
 #import "Account.h"
 
 @interface UserAccount : NSObject
-@property (nonatomic, strong) Account *account;
+@property (nonatomic, strong) NSString *login;
+@property (nonatomic, assign) NSInteger accountId;
+@property (nonatomic, strong) NSURL *avatarURL;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSArray *lastPhotos;
+
+@property (nonatomic, strong, readonly) RemoteImage *avatar;
 
 + (id)accountWithDict:(NSDictionary*)dict;
 @end

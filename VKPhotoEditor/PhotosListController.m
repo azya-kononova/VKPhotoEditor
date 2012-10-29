@@ -28,6 +28,11 @@
     ChoosePhotoView *choosePhotoView;
 }
 
+- (id)init
+{
+    return [self initWithImageToUpload:nil];
+}
+
 - (id)initWithImageToUpload:(UIImage *)image
 {
     if (self = [super init]) {
@@ -124,7 +129,8 @@
 
 - (void)choosePhotoViewDidExit:(ChoosePhotoView*)view
 {
-    
+    [service logout];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)choosePhotoView:(ChoosePhotoView *)view didChooseImage:(UIImage *)image

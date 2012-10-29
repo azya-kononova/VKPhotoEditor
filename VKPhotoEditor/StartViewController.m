@@ -56,7 +56,6 @@
 {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.hidden = YES;
     self.view.backgroundColor = [UIColor defaultBgColor];
     
     postView.backgroundColor = [UIColor defaultBgColor];
@@ -74,6 +73,8 @@
     takePhotoBtn.hidden = ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
     
     [appNameLabel setFont:[UIFont fontWithName:@"Lobster 1.4" size:36.0]];
+    
+    [self loadAlbumImages];
 }
 
 - (void)dealloc
@@ -337,11 +338,4 @@
     
 }
 
-- (IBAction)test
-{
-//    [self showPostViewHeader:YES];
-    [self showPost];
-//    PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:nil];
-//    [self.navigationController pushViewController:ctrl animated:YES];
-}
 @end

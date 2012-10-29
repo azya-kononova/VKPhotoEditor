@@ -34,6 +34,7 @@ NSString *VKErrorDomain = @"VKErrorDomain";
 {
     if (self = [super init]) {
         rootURL = url;
+        account = [UserAccount new];
     }
     return self;
 }
@@ -101,6 +102,11 @@ NSString *VKErrorDomain = @"VKErrorDomain";
     return exec;
 }
 
+- (void)logout
+{
+    account = nil;
+}
+
 - (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -115,10 +121,18 @@ NSString *VKErrorDomain = @"VKErrorDomain";
 {
     account = [UserAccount accountWithDict:[[data objectForKey:@"users"] objectAtIndex:0]];
     account.accessToken = [[data objectForKey:@"credentials"] objectForKey:@"access_token"];
+    
+    NSMutableDictionary *accounts = [NSMutableDictionary new];
+    for (NSDictionary *user in [data objectForKey:@"users"]) {
+        Account *acc = [Account accountWithDict:user];
+        [accounts setObject:acc forKey:[user objectForKey:@"id"]];
+    }    
+    
     account.lastPhotos = [[data objectForKey:@"photos"] map:^id(NSDictionary *dict) {
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
-        photo.account = account.account;
+        photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
         return photo; }];
+    
     NSLog(@"%@",account);
 }
 
