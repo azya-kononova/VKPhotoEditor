@@ -319,7 +319,7 @@ typedef NSInteger CameraBlurMode;
     		
     __block TakePhotoController *blockSelf = self;
     
-    [basicFilter removeTarget:blurFilter];
+    //[basicFilter removeTarget:blurFilter];
     [stillCamera capturePhotoAsImageProcessedUpToFilter:basicFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
         [blurFilter setValue:[blockSelf setBlurSizeForImage:processedImage] forKey:@"blurSize"];
         [delegate takePhotoController:blockSelf didFinishWithBasicImage:processedImage filterIndex:filterIndex userInfo:[BlurFilterParams paramsWithFilter:blurFilter]];
@@ -390,7 +390,12 @@ typedef NSInteger CameraBlurMode;
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)recognizer shouldReceiveTouch:(UITouch *)touch
 {
     CGPoint point = [touch locationInView:self.view];
-    return CGRectContainsPoint(focusAreaView.frame, point);
+    
+    BOOL onFlashPopover = !flashPopover.hidden && CGRectContainsPoint(flashPopover.frame, point);
+    BOOL onBlurPopover = !blurPopover.hidden && CGRectContainsPoint(blurPopover.frame, point);
+    BOOL onCamera = CGRectContainsPoint(focusAreaView.frame, point);
+    
+    return onCamera && !(onFlashPopover || onBlurPopover);
 }
 
 @end
