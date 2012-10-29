@@ -34,7 +34,7 @@ enum {
 };
 typedef NSInteger CameraBlurMode;
 
-@interface TakePhotoController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate> {
+@interface TakePhotoController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate, UIGestureRecognizerDelegate> {
     IBOutlet GPUImageView *cameraView;
     IBOutlet UIImageView *blurImageView;
     IBOutlet UIImageView *flashImageView;
@@ -44,6 +44,8 @@ typedef NSInteger CameraBlurMode;
     IBOutlet UIButton *filterBtn;
     IBOutlet ThumbnailsView *filtersView;
     IBOutlet UISlider *blurSlider;
+    IBOutlet UIView *focusAreaView;
+    IBOutlet UIView *focusView;
     
     TableViewPopover *flashPopover;
     TableViewPopover *blurPopover;
@@ -99,6 +101,10 @@ typedef NSInteger CameraBlurMode;
     blurTargets = basicFilter.targets;
     
     filtersView.highlight = YES;
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraFocus:)];
+    recognizer.delegate = self;
+    [self.view addGestureRecognizer:recognizer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -238,6 +244,13 @@ typedef NSInteger CameraBlurMode;
     }
 }
 
+- (void)showFocusViewInPoint:(CGPoint)point
+{
+    focusView.center = point;
+    focusView.hidden = NO;
+    [focusView performSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.8];
+}
+
 #pragma mark ThumbnailView datasourse
 
 - (NSUInteger)numberOfItemsInThumbnailsView:(ThumbnailsView*)view
@@ -353,6 +366,28 @@ typedef NSInteger CameraBlurMode;
 - (IBAction)rotateCamera:(id)sender
 {
     [stillCamera rotateCamera];
+}
+
+- (void)cameraFocus:(UITapGestureRecognizer *)recognizer
+{
+    CGPoint touch = [recognizer locationInView:self.view];
+    
+    if ([stillCamera.inputCamera isFocusPointOfInterestSupported]) {
+        [self showFocusViewInPoint:touch];
+        
+        [stillCamera.inputCamera lockForConfiguration:nil];
+        [stillCamera.inputCamera setFocusPointOfInterest:touch];
+        [stillCamera.inputCamera unlockForConfiguration];
+    }
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)recognizer shouldReceiveTouch:(UITouch *)touch
+{
+    CGPoint point = [touch locationInView:self.view];
+    return CGRectContainsPoint(focusAreaView.frame, point);
 }
 
 @end
