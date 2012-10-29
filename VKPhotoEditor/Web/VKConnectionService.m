@@ -95,6 +95,13 @@ NSString *VKErrorDomain = @"VKErrorDomain";
     return [self executorForRequest:req];
 }
 
+- (void)logout
+{
+    [account logout];
+}
+
+#pragma mark - api methods
+
 - (VKRequestExecutor*)login:(NSString*)login
 {
     RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"login?login=%@&password=%@", login, [[self getMacAddress] md5]]];
@@ -102,10 +109,6 @@ NSString *VKErrorDomain = @"VKErrorDomain";
     return exec;
 }
 
-- (void)logout
-{
-    account = nil;
-}
 
 - (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption
 {
@@ -116,6 +119,14 @@ NSString *VKErrorDomain = @"VKErrorDomain";
     RequestExecutorProxy *exec = [self postToPath:@"uploadPhoto" params:[[WebParams alloc] initWithDictionary:params] json:NO];
     return exec;
 }
+
+- (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset
+{
+    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"getPhotos?user_id=%d&offset=%d", userId, offset]];
+    return exec;
+}
+
+#pragma mark - executors handlers
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data
 {

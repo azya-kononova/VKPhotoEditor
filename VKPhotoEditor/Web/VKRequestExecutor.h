@@ -10,8 +10,6 @@
 
 extern const NSString* VKRequestExecutorErrorDomain;
 
-@class VKRequestExecutor;
-
 @protocol VKRequestExecutorDelegate;
 
 @interface VKRequestExecutor : NSObject

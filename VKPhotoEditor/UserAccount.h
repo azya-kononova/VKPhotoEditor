@@ -19,4 +19,5 @@
 @property (nonatomic, strong, readonly) RemoteImage *avatar;
 
 + (id)accountWithDict:(NSDictionary*)dict;
+- (void)logout;
 @end

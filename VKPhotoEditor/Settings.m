@@ -58,7 +58,7 @@
     [self sync];
 }
 
-- (NSNumber*)user_id
+- (NSNumber*)userId
 {
     return [user objectForKey:USER_ID_KEY];
 }

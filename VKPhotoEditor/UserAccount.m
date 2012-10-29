@@ -86,8 +86,9 @@
     return [NSString stringWithFormat:@"<%@:account:'%@', token: '%@', photos total:%d>", NSStringFromClass(self.class), self.login, self.accessToken, lastPhotos.count];
 }
 
-- (void)dealloc
+- (void)logout
 {
+    self.accountId = 0;
     self.avatarURL = nil;
     self.login = nil;
     self.accessToken = nil;

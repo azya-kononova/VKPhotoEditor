@@ -14,6 +14,7 @@
 @interface ProfileController : UIViewController
 @property (nonatomic, assign) id<ProfileControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 - (id)initWithAccount:(UserAccount*)account;
 

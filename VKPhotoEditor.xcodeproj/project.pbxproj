@@ -256,6 +256,10 @@
 		8BA3D711163DCF2A00CEA6AD /* Logout.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3D70D163DCF2A00CEA6AD /* Logout.png */; };
 		8BA3D712163DCF2A00CEA6AD /* Logout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3D70E163DCF2A00CEA6AD /* Logout@2x.png */; };
 		8BA3D713163DCF2A00CEA6AD /* Logout_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BA3D70F163DCF2A00CEA6AD /* Logout_Pressed@2x.png */; };
+		8BC0BC63163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0BC62163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m */; };
+		8BC0BC66163EF5170048CAB7 /* PhotosList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0BC65163EF5170048CAB7 /* PhotosList.m */; };
+		8BC0BC6A163F174C0048CAB7 /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0BC68163F174C0048CAB7 /* LoadingCell.m */; };
+		8BC0BC6B163F174C0048CAB7 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BC0BC69163F174C0048CAB7 /* LoadingCell.xib */; };
 		8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB70616208F2300A33DEF /* UIImage+Blend.m */; };
 		8BCDB74816219B8B00A33DEF /* ActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB74716219B8B00A33DEF /* ActivityView.m */; };
 		8BCDB74A16219B9900A33DEF /* ActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BCDB74916219B9900A33DEF /* ActivityView.xib */; };
@@ -624,6 +628,13 @@
 		8BA3D70D163DCF2A00CEA6AD /* Logout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Logout.png; sourceTree = "<group>"; };
 		8BA3D70E163DCF2A00CEA6AD /* Logout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logout@2x.png"; sourceTree = "<group>"; };
 		8BA3D70F163DCF2A00CEA6AD /* Logout_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Logout_Pressed@2x.png"; sourceTree = "<group>"; };
+		8BC0BC61163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestExecutorDelegateAdapter.h; sourceTree = "<group>"; };
+		8BC0BC62163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestExecutorDelegateAdapter.m; sourceTree = "<group>"; };
+		8BC0BC64163EF5160048CAB7 /* PhotosList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosList.h; sourceTree = "<group>"; };
+		8BC0BC65163EF5170048CAB7 /* PhotosList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosList.m; sourceTree = "<group>"; };
+		8BC0BC67163F174C0048CAB7 /* LoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingCell.h; sourceTree = "<group>"; };
+		8BC0BC68163F174C0048CAB7 /* LoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingCell.m; sourceTree = "<group>"; };
+		8BC0BC69163F174C0048CAB7 /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
 		8BCDB70516208F2300A33DEF /* UIImage+Blend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blend.h"; sourceTree = "<group>"; };
 		8BCDB70616208F2300A33DEF /* UIImage+Blend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blend.m"; sourceTree = "<group>"; };
 		8BCDB74616219B8B00A33DEF /* ActivityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityView.h; sourceTree = "<group>"; };
@@ -713,6 +724,8 @@
 				8B7096B7163C7F63004DA31B /* ImageCache.m */,
 				8BA3D6E6163C884900CEA6AD /* DataFormatter.h */,
 				8BA3D6E7163C884900CEA6AD /* DataFormatter.m */,
+				8BC0BC64163EF5160048CAB7 /* PhotosList.h */,
+				8BC0BC65163EF5170048CAB7 /* PhotosList.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -763,6 +776,9 @@
 		221C31D916104732005974C8 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				8BC0BC67163F174C0048CAB7 /* LoadingCell.h */,
+				8BC0BC68163F174C0048CAB7 /* LoadingCell.m */,
+				8BC0BC69163F174C0048CAB7 /* LoadingCell.xib */,
 				8B7096AA163C7530004DA31B /* PhotoCell.h */,
 				8B7096AB163C7530004DA31B /* PhotoCell.m */,
 				8B7096AD163C7544004DA31B /* PhotoCell.xib */,
@@ -1100,6 +1116,8 @@
 				8B0FFE6A1636E2F900714F70 /* VKRequestExecutor.m */,
 				8B1A563A1636EC2A0034B723 /* VKConnectionService.h */,
 				8B1A563B1636EC2A0034B723 /* VKConnectionService.m */,
+				8BC0BC61163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.h */,
+				8BC0BC62163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m */,
 			);
 			path = Web;
 			sourceTree = "<group>";
@@ -1452,6 +1470,7 @@
 				8BA3D711163DCF2A00CEA6AD /* Logout.png in Resources */,
 				8BA3D712163DCF2A00CEA6AD /* Logout@2x.png in Resources */,
 				8BA3D713163DCF2A00CEA6AD /* Logout_Pressed@2x.png in Resources */,
+				8BC0BC6B163F174C0048CAB7 /* LoadingCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1531,6 +1550,9 @@
 				8BA3D6EB163C892E00CEA6AD /* Account.m in Sources */,
 				8BA3D709163DC80F00CEA6AD /* ChoosePhotoView.m in Sources */,
 				22843694163ED940009D75C8 /* FocusSquareView.m in Sources */,
+				8BC0BC63163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m in Sources */,
+				8BC0BC66163EF5170048CAB7 /* PhotosList.m in Sources */,
+				8BC0BC6A163F174C0048CAB7 /* LoadingCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

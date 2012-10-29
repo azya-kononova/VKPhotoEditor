@@ -23,5 +23,6 @@ extern NSString *VKErrorDomain;
 
 - (VKRequestExecutor*)login:(NSString*)login;
 - (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption;
+- (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset;
 - (void)logout;
 @end

@@ -12,23 +12,31 @@
 #import "UITableViewCell+NIB.h"
 #import "VKPhoto.h"
 #import "UIView+NIB.h"
+#import "RequestExecutorDelegateAdapter.h"
+#import "PhotosList.h"
+#import "LoadingCell.h"
 
-@interface ProfileController () <UITableViewDataSource, UITableViewDelegate>
+@interface ProfileController () <UITableViewDataSource, UITableViewDelegate, PhotosListDelegate>
 @end
 
 @implementation ProfileController {
     UserAccount *account;
-    NSMutableArray *photos;
+    PhotosList *photosList;
     NSMutableArray *sectionHeaders;
+    RequestExecutorDelegateAdapter *adapter;
+    NSInteger offset;
 }
+
 @synthesize nameLabel;
 @synthesize delegate;
+@synthesize tableView;
 
 - (id)initWithAccount:(UserAccount *)_account
 {
     if (self = [super init]) {
         account = _account;
-        photos = account.lastPhotos.mutableCopy;
+        photosList = [[PhotosList alloc] initWithPhotos:account.lastPhotos];
+        photosList.delegate = self;
         sectionHeaders = [NSMutableArray new];
     }
     return self;
@@ -47,24 +55,50 @@
     [delegate profileControllerDidOpenProfile:self];
 }
 
-#pragma mark - UITableViewDataSource
+#pragma mark - PhotosListDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)photosList:(PhotosList *)photosList didUpdatePhotos:(NSArray *)photos
 {
-    return 1;
+    [tableView reloadData];
 }
+
+- (void)photosList:(PhotosList *)photosList didFailToUpdate:(NSError *)error
+{
+    
+}
+
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return photos.count; 
+    return photosList.photos.count + 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    if (section == photosList.photos.count) {
+        return photosList.completed ? 0 : 1;
+    }
+    return 1;
+    
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return indexPath.section == photosList.photos.count ? 28 : 320;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == photosList.photos.count) {
+        [photosList loadNextPageFor:account.accountId];
+        return [LoadingCell dequeOrCreateInTable:tableView];
+    }
     PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
-    VKPhoto *photo = [photos objectAtIndex:indexPath.section];
+    VKPhoto *photo = [photosList.photos objectAtIndex:indexPath.section];
     [cell displayPhoto:photo];
     return cell;
+
 }
 
 - (PhotoHeaderView *)dequeueHeader
@@ -82,7 +116,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 46.0;
+    return (section == photosList.photos.count) ? 0 : 46.0;
 }
 
 - (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section
@@ -93,7 +127,7 @@
         headerView = [PhotoHeaderView loadFromNIB];
         [sectionHeaders addObject:headerView];
     }
-    [headerView displayPhoto:[photos objectAtIndex:section]];
+    [headerView displayPhoto:[photosList.photos objectAtIndex:section]];
     return headerView;
 }
 
