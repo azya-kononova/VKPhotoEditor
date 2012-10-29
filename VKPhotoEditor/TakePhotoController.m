@@ -111,6 +111,7 @@ typedef NSInteger CameraBlurMode;
 {
     [super viewWillAppear:animated];
     [stillCamera startCameraCapture];
+    photoBtn.enabled = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -314,6 +315,8 @@ typedef NSInteger CameraBlurMode;
 
 - (IBAction)takePhoto:(id)sender
 {
+    [(UIButton *)sender setEnabled:NO];
+    		
     __block TakePhotoController *blockSelf = self;
     
     [basicFilter removeTarget:blurFilter];
