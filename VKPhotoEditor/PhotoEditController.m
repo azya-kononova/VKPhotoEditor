@@ -43,6 +43,7 @@
     NSInteger captionTemplateIndex;
     ActivityView *activityView;
     ArrowView *arrowView;
+    GPUImageOutput<GPUImageInput> *blurFilter;
 }
 
 @synthesize saveButton;
@@ -58,12 +59,13 @@
 @synthesize leftRecognizer;
 @synthesize rightRecognizer;
 
-- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex
+- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter
 {
     self = [super init];
     if (self) {
         image = _image;
         filterIndex = _filterIndex;
+        blurFilter = _blurFilter;
     }
     return self;
 }

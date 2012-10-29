@@ -214,11 +214,6 @@ typedef NSInteger CameraBlurMode;
     blurSlider.hidden = !blurFilter;
 }
 
-- (NSNumber *)setBlurSizeForImage:(UIImage *)image
-{
-    return [NSNumber numberWithFloat:fmaxf(image.size.width, image.size.height)/BLUR_SIZE_PROPORTION];
-}
-
 - (IBAction)updateFilter:(id)sender
 {
     CGFloat midpoint = [(UISlider *)sender value];
@@ -319,10 +314,8 @@ typedef NSInteger CameraBlurMode;
     		
     __block TakePhotoController *blockSelf = self;
     
-    //[basicFilter removeTarget:blurFilter];
     [stillCamera capturePhotoAsImageProcessedUpToFilter:basicFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
-        [blurFilter setValue:[blockSelf setBlurSizeForImage:processedImage] forKey:@"blurSize"];
-        [delegate takePhotoController:blockSelf didFinishWithBasicImage:processedImage filterIndex:filterIndex userInfo:[BlurFilterParams paramsWithFilter:blurFilter]];
+        [delegate takePhotoController:blockSelf didFinishWithBasicImage:processedImage filterIndex:filterIndex blurFilter:blurFilter];
     }];
 }
 

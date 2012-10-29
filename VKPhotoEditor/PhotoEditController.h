@@ -28,7 +28,7 @@
  
 @property (nonatomic, unsafe_unretained) id<PhotoEditControllerDelegate> delegate;
 
-- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex;
+- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter;
 - (IBAction)addCaption;
 - (IBAction)save;
 

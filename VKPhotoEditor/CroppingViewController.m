@@ -24,6 +24,7 @@
     ZoomingView *zoomingView;
     UIImage *image;
     NSInteger filterIndex;
+    GPUImageOutput<GPUImageInput> *blurFilter;
 }
 
 @end
@@ -32,17 +33,13 @@
 
 @synthesize delegate;
 
-- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex userInfo:(NSDictionary *)userInfo
+- (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter
 {
     self = [super init];
     if (self) {
         image = _image;
         filterIndex = _filterIndex;
-        
-        GPUImageOutput<GPUImageInput> *blurFilter = [BlurFilterParams filterWithParams:userInfo];
-        if (blurFilter) {
-            image = [blurFilter imageByFilteringImage:_image];
-        }
+        blurFilter = _blurFilter;
     }
     return self;
 }
@@ -53,7 +50,8 @@
     
     NSArray *filters = Filters.filters;
     GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:[[filters objectAtIndex:filterIndex] name]];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[filter imageByFilteringImage:image]];
+    UIImage *filteredImage = [blurFilter imageByFilteringImage:[filter imageByFilteringImage:image]];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:filteredImage];
     
     zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:captureView.frame];
     zoomingView.shouldClip = NO;
@@ -83,7 +81,7 @@
     CGFloat height = CGRectGetHeight(captureView.frame)/zoomingView.zoomScale;
     UIImage *cropImage = [image croppedImage:CGRectMake(x, y, width, height)];
 
-    [delegate croppingViewController:self didFinishWithImage:cropImage filterIndex:filterIndex];
+    [delegate croppingViewController:self didFinishWithImage:cropImage filterIndex:filterIndex blurFilter:blurFilter];
 }
 
 @end

@@ -125,6 +125,49 @@
     }];
 }
 
+<<<<<<< HEAD
+=======
+#pragma mark - Photos
+
+- (void)editPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex blurFilter:(id)blurFilter
+{
+    PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:image filterIndex:filterIndex blurFilter:blurFilter];
+    photoEditController.delegate = self;
+    
+    [self.navigationController pushViewController:photoEditController animated:NO];
+}
+
+- (void)cropPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex blurFilter:(id)blurFilter
+{
+    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image filterIndex:filterIndex blurFilter:blurFilter];
+    controller.delegate = self;
+    
+    isPhoto ? [self presentModalViewController:controller animated:NO] : [self presentModalViewController:controller withPushDirection:kCATransitionFromRight];
+}
+
+- (void)cropPhoto:(UIImage *)image
+{
+    [self cropPhoto:image filterIndex:0 blurFilter:nil];
+}
+
+- (void)takePhoto
+{
+    TakePhotoController *controller = [TakePhotoController new];
+    controller.delegate = self;
+    
+    [self presentModalViewController:controller animated:NO];
+}
+
+- (void)choosePhoto
+{
+    UIImagePickerController *imagePicker = [UIImagePickerController new];
+    imagePicker.delegate = self;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    
+    [self presentModalViewController:imagePicker withPushDirection:kCATransitionFromRight];
+}
+
+>>>>>>> take blur filter after take photo
 #pragma mark - Actions
 
 - (IBAction)takePhoto:(id)sender
@@ -208,6 +251,40 @@
 }
 
 
+<<<<<<< HEAD
+=======
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    isPhoto = picker.sourceType == UIImagePickerControllerSourceTypeCamera;
+    [self dismissModalViewControllerAnimated:NO];
+    
+    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self cropPhoto:image];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
+}
+
+
+#pragma mark - CroppingViewControllerDelegate
+
+- (void)croppingViewControllerDidCancel:(CroppingViewController *)controller
+{
+    isPhoto ? [self dismissModalViewControllerAnimated:NO] : [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
+}
+
+- (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image filterIndex:(NSInteger)index blurFilter:(id)blurFilter
+{
+    [self dismissModalViewControllerAnimated:NO];
+    [self editPhoto:image filterIndex:index blurFilter:blurFilter];
+}
+
+
+>>>>>>> take blur filter after take photo
 #pragma  mark - PhotoEditControllerDelegate
 
 
@@ -223,6 +300,29 @@
 //    UIImageWriteToSavedPhotosAlbum( image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
+<<<<<<< HEAD
+=======
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    [self loadAlbumImages];
+}
+
+#pragma mark - TakePhotoControllerDelegate
+
+- (void)takePhotoControllerDidCancel:(TakePhotoController *)controller
+{
+    [self dismissModalViewControllerAnimated:NO];
+}
+
+- (void)takePhotoController:(TakePhotoController *)controller didFinishWithBasicImage:(UIImage *)basic filterIndex:(NSInteger)index blurFilter:(id)blurFilter
+{
+    [self dismissModalViewControllerAnimated:NO];
+    
+    isPhoto = YES;
+    [self cropPhoto:basic filterIndex:index blurFilter:blurFilter];
+}
+
+>>>>>>> take blur filter after take photo
 #pragma mark - VKRequestExecutorDelegate
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
