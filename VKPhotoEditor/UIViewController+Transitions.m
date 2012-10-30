@@ -47,12 +47,15 @@
     transition.removedOnCompletion = YES;
     
     [[UIApplication sharedApplication].keyWindow.layer addAnimation:transition forKey:@"transition"];
-    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-    [CATransaction setCompletionBlock: ^ {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(transition.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^ {
-            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-        });
-    }];
+    
+    // TODO: check why transaction is not complete in profile controller;
+    
+//    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+//    [CATransaction setCompletionBlock: ^ {
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(transition.duration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^ {
+//            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//        });
+//    }];
     
     [self dismissModalViewControllerAnimated:NO];
     

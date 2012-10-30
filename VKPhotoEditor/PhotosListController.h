@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "PhotoManageBaseController.h"
 
-@interface PhotosListController : UIViewController
+@interface PhotosListController : PhotoManageBaseController
 - (id)initWithImageToUpload:(UIImage*)image;
 @end

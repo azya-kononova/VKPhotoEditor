@@ -14,6 +14,9 @@
 #import "VKRequestExecutor.h"
 #import "VKConnectionService.h"
 #import "ChoosePhotoView.h"
+#import "UIViewController+Transitions.h"
+#import "CroppingViewController.h"
+#import "PhotoEditController.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
@@ -27,6 +30,7 @@
     VKConnectionService *service;
     ChoosePhotoView *choosePhotoView;
     UIImage *imageToUpload;
+    BOOL isPhoto;
 }
 
 
@@ -106,15 +110,19 @@
 
 #pragma mark - ChoosePhotoViewDelegate
 
-
 - (void)choosePhotoViewDidChooseCameraRoll:(ChoosePhotoView*)view
 {
-    
+    [self choosePhoto];
 }
 
 - (void)choosePhotoViewDidChooseCamera:(ChoosePhotoView*)view
 {
-    
+    [self takePhoto];
+}
+
+- (void)choosePhotoView:(ChoosePhotoView *)view didChooseImage:(UIImage *)image
+{
+    [self cropPhoto:image];
 }
 
 - (void)choosePhotoViewDidCancel:(ChoosePhotoView*)view
@@ -128,9 +136,14 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (void)choosePhotoView:(ChoosePhotoView *)view didChooseImage:(UIImage *)image
+#pragma mark - PhotoEditControllerDelegate
+
+- (void)photoEditController:(PhotoEditController *)controller didEdit:(UIImage *)image
 {
-    
+    [choosePhotoView show:NO animated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
+    ProfileController *ctrl = [controllers objectAtIndex:0];
+    [ctrl uploadImage:image];
 }
 
 @end

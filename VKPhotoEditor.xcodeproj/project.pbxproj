@@ -222,6 +222,7 @@
 		8B7C09B216401EBB006BCE79 /* Added.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C09B016401EBB006BCE79 /* Added.png */; };
 		8B7C09B316401EBB006BCE79 /* Added@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C09B116401EBB006BCE79 /* Added@2x.png */; };
 		8B7C09B616402C75006BCE79 /* NSArray+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */; };
+		8B7C09CF164049E5006BCE79 /* PhotoManageBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C09CE164049E4006BCE79 /* PhotoManageBaseController.m */; };
 		8B8AF734163831610053706D /* RightArrow_Active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF732163831610053706D /* RightArrow_Active@2x.png */; };
 		8B8AF735163831610053706D /* RightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF733163831610053706D /* RightArrow@2x.png */; };
 		8B8AF738163831F50053706D /* DarkInner_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF736163831F50053706D /* DarkInner_Pressed@2x.png */; };
@@ -587,6 +588,8 @@
 		8B7C09B116401EBB006BCE79 /* Added@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Added@2x.png"; sourceTree = "<group>"; };
 		8B7C09B416402C75006BCE79 /* NSArray+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helpers.h"; sourceTree = "<group>"; };
 		8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Helpers.m"; sourceTree = "<group>"; };
+		8B7C09CD164049E4006BCE79 /* PhotoManageBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoManageBaseController.h; sourceTree = "<group>"; };
+		8B7C09CE164049E4006BCE79 /* PhotoManageBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoManageBaseController.m; sourceTree = "<group>"; };
 		8B8AF732163831610053706D /* RightArrow_Active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow_Active@2x.png"; sourceTree = "<group>"; };
 		8B8AF733163831610053706D /* RightArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow@2x.png"; sourceTree = "<group>"; };
 		8B8AF736163831F50053706D /* DarkInner_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkInner_Pressed@2x.png"; sourceTree = "<group>"; };
@@ -1041,6 +1044,8 @@
 				8B9B4E4C160F5055000BE08F /* PhotoEditController.h */,
 				8B9B4E4D160F5055000BE08F /* PhotoEditController.m */,
 				8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */,
+				8B7C09CD164049E4006BCE79 /* PhotoManageBaseController.h */,
+				8B7C09CE164049E4006BCE79 /* PhotoManageBaseController.m */,
 				22D1772F1618753D00B8093D /* StartViewController.h */,
 				22D177301618753D00B8093D /* StartViewController.m */,
 				22D7BF95160CCDD5008B5BFA /* StartViewController.xib */,
@@ -1567,6 +1572,7 @@
 				8BC0BC66163EF5170048CAB7 /* PhotosList.m in Sources */,
 				8BC0BC6A163F174C0048CAB7 /* LoadingCell.m in Sources */,
 				8B7C09B616402C75006BCE79 /* NSArray+Helpers.m in Sources */,
+				8B7C09CF164049E5006BCE79 /* PhotoManageBaseController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
