@@ -93,7 +93,6 @@
     
     sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
     GPUImageOutput<GPUImageInput> *basicFilter = [GPUImageEmptyFilter new];
-    [basicFilter setInputRotation:image.rotationMode atIndex:0];
     [basicFilter addTarget:imageView];
     [sourcePicture addTarget:basicFilter];
     
