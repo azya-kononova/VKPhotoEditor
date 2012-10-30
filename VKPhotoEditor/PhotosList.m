@@ -68,7 +68,15 @@
 
 - (void)VKRequestExecutor:(id)executor didFinishWithObject:(id)value
 {
-    NSArray *_photos = [[value objectForKey:@"photos"] map:^id(NSDictionary *dict) { return [VKPhoto VKPhotoWithDict:dict]; }];
+    NSMutableDictionary *accounts = [NSMutableDictionary new];
+    for (NSDictionary *user in [value objectForKey:@"users"]) {
+        Account *acc = [Account accountWithDict:user];
+        [accounts setObject:acc forKey:[user objectForKey:@"id"]];
+    }
+    NSArray *_photos = [[value objectForKey:@"photos"] map:^id(NSDictionary *dict) {
+        VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
+        photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
+        return photo; }];
     exec = nil;
     completed = !_photos.count;
     [self append:_photos];
