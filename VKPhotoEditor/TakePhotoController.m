@@ -26,7 +26,6 @@
 #import "GPUImageGaussianSelectiveBlurFilter.h"
 #import "GPUImageTiltShiftFilter.h"
 
-
 @interface TakePhotoController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate, UIGestureRecognizerDelegate, BlurViewDelegate> {
     IBOutlet GPUImageView *cameraView;
     IBOutlet UIImageView *blurImageView;
@@ -163,6 +162,13 @@
     [focusView performSelector:@selector(setHidden:) withObject:[NSNumber numberWithBool:YES] afterDelay:0.8];
 }
 
+- (void)forceProcessingAtScreenSize
+{
+    if (stillCamera.inputCamera.position == AVCaptureDevicePositionBack) {
+        [manager.basicFilter forceProcessingAtSize:[(GPUImageFilter*)manager.basicFilter outputFrameSize]];
+    }
+}
+
 #pragma mark ThumbnailView datasourse
 
 - (NSUInteger)numberOfItemsInThumbnailsView:(ThumbnailsView*)view
@@ -225,8 +231,8 @@
     		
     __block TakePhotoController *blockSelf = self;
     
-    //TODO: calculate size depens on screen size and selected camera
-    [manager.basicFilter forceProcessingAtSize:CGSizeMake(1024, 1024*4/3)];
+    [self forceProcessingAtScreenSize];
+    
     [stillCamera capturePhotoAsImageProcessedUpToFilter:manager.basicFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
         //TODO: fix blur radius problems
         [delegate takePhotoController:blockSelf didFinishWithBasicImage:processedImage filterIndex:manager.filterIndex blurFilter:manager.blurFilter];
