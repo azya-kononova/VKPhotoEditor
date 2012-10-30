@@ -38,6 +38,8 @@
 		221C31DB16104754005974C8 /* TablePopoverCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C31DA16104754005974C8 /* TablePopoverCell.xib */; };
 		222AB9F1163FC0E8001F089C /* FiltersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 222AB9F0163FC0E8001F089C /* FiltersManager.m */; };
 		222ABA00163FD52F001F089C /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 222AB9FF163FD52F001F089C /* BlurView.m */; };
+		222ABA03164036CD001F089C /* blur_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 222ABA01164036CD001F089C /* blur_bg.png */; };
+		222ABA04164036CD001F089C /* blur_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 222ABA02164036CD001F089C /* blur_bg@2x.png */; };
 		224C084D1620832300F10A85 /* UIImage+GPUOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */; };
 		226E750E160EFF0F00531350 /* Basic.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7505160EFF0F00531350 /* Basic.png */; };
 		226E750F160EFF0F00531350 /* Filter1.png in Resources */ = {isa = PBXBuildFile; fileRef = 226E7506160EFF0F00531350 /* Filter1.png */; };
@@ -358,6 +360,8 @@
 		222AB9F0163FC0E8001F089C /* FiltersManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiltersManager.m; sourceTree = "<group>"; };
 		222AB9FE163FD52F001F089C /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
 		222AB9FF163FD52F001F089C /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
+		222ABA01164036CD001F089C /* blur_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blur_bg.png; sourceTree = "<group>"; };
+		222ABA02164036CD001F089C /* blur_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blur_bg@2x.png"; sourceTree = "<group>"; };
 		224C084B1620832200F10A85 /* UIImage+GPUOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GPUOrientation.h"; sourceTree = "<group>"; };
 		224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GPUOrientation.m"; sourceTree = "<group>"; };
 		226E7505160EFF0F00531350 /* Basic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Basic.png; sourceTree = "<group>"; };
@@ -814,6 +818,8 @@
 			children = (
 				8B7C09B016401EBB006BCE79 /* Added.png */,
 				8B7C09B116401EBB006BCE79 /* Added@2x.png */,
+				222ABA01164036CD001F089C /* blur_bg.png */,
+				222ABA02164036CD001F089C /* blur_bg@2x.png */,
 				8B709699163C6588004DA31B /* AvatarPlace_Pressed.png */,
 				8B70969A163C6588004DA31B /* AvatarPlace.png */,
 				8B70969B163C6588004DA31B /* AvatarPlace_Pressed@2x.png */,
@@ -1499,6 +1505,8 @@
 				8BC0BC6B163F174C0048CAB7 /* LoadingCell.xib in Resources */,
 				8B7C09B216401EBB006BCE79 /* Added.png in Resources */,
 				8B7C09B316401EBB006BCE79 /* Added@2x.png in Resources */,
+				222ABA03164036CD001F089C /* blur_bg.png in Resources */,
+				222ABA04164036CD001F089C /* blur_bg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

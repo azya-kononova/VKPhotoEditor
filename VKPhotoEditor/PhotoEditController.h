@@ -22,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet GPUImageView *imageView;
 @property (nonatomic, strong) IBOutlet UIView *topView;
 @property (nonatomic, strong) IBOutlet UIView *captionOverlayView;
+@property (nonatomic, strong) IBOutlet UIButton *blurButton;
 
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *leftRecognizer;
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *rightRecognizer;
@@ -34,6 +35,9 @@
 
 - (IBAction)nextCaptionTemplate;
 - (IBAction)prevCaptionTemplate;
+
+- (IBAction)selectBlur;
+
 @end
 
 @protocol PhotoEditControllerDelegate

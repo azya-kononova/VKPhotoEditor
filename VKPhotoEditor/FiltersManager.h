@@ -23,7 +23,8 @@ typedef void(^PrepareFilter)(GPUImageOutput<GPUImageInput> *filter);
 @property (nonatomic, assign, readonly) NSInteger filterIndex;
 
 - (void)setFilterWithIndex:(NSInteger)index prepare:(PrepareFilter)prerareFilter;
-- (void)setBlurFilterWithMode:(BlurMode *)mode;
+- (void)setBlurFilterWithMode:(BlurMode *)mode prepare:(PrepareFilter)prerareFilter;
+- (void)setBlurFilterWithFilter:(GPUImageOutput<GPUImageInput> *)filter prepare:(PrepareFilter)prerareFilter;
 - (void)setBlurFilterRadius:(CGFloat)radius;
 
 FiltersManager *FiltersManagerMake(id basic, id camera, id view);

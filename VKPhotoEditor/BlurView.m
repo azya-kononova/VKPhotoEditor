@@ -40,7 +40,7 @@
         pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchBlur:)];
         pinch.delegate = self;
         
-        self.frame = CGRectMake(center.x, margin,  popover.frame.size.width,  popover.frame.size.height);
+        self.frame = CGRectMake(center.x, margin,  popover.frame.size.width,  popover.frame.size.height + margin);
     }
     return self;
 }

@@ -63,17 +63,22 @@ FiltersManager *FiltersManagerMake(id basic, id camera, id view)
     blurTargets = [NSArray arrayWithObject:filter];
 }
 
-- (void)setBlurFilterWithMode:(BlurMode *)mode
+- (void)setBlurFilterWithMode:(BlurMode *)mode prepare:(PrepareFilter)prerareFilter
+{
+    [self setBlurFilterWithFilter:mode.filter prepare:prerareFilter];
+}
+
+- (void)setBlurFilterWithFilter:(GPUImageOutput<GPUImageInput> *)filter prepare:(PrepareFilter)prerareFilter
 {
     [basicFilter removeAllTargets];
-    blurFilter = mode.filter;
+    blurFilter = filter;
     [blurFilter removeAllTargets];
     
     if (blurFilter) {
         for (GPUImageOutput<GPUImageInput> *target in blurTargets) {
             [blurFilter addTarget:target];
         }
-        [blurFilter prepareForImageCapture];
+        prerareFilter(blurFilter);
         [basicFilter addTarget:blurFilter];
     } else {
         for (GPUImageOutput<GPUImageInput> *target in blurTargets) {
@@ -102,4 +107,5 @@ FiltersManager *FiltersManagerMake(id basic, id camera, id view)
     
     return 0;
 }
+
 @end

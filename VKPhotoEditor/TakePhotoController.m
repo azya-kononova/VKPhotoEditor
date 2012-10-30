@@ -48,6 +48,8 @@
     NSArray *flashModes;
     GPUImageStillCamera *stillCamera;
     FiltersManager *manager;
+    
+    PrepareFilter prepareBlock;
 }
 
 @end
@@ -88,6 +90,10 @@
     [self.view addGestureRecognizer:blurView.pinch];
     
     filtersView.highlight = YES;
+    
+    prepareBlock = ^(GPUImageOutput<GPUImageInput> *filter) {
+        [filter prepareForImageCapture];
+    };
     
     manager = FiltersManagerMake(basicFilter, stillCamera, cameraView);
     
@@ -182,9 +188,7 @@
 
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    [manager setFilterWithIndex:index prepare:^(GPUImageOutput<GPUImageInput> *filter) {
-        [filter prepareForImageCapture];
-    }];
+    [manager setFilterWithIndex:index prepare:prepareBlock];
 }
 
 
@@ -224,6 +228,7 @@
     //TODO: calculate size depens on screen size and selected camera
     [manager.basicFilter forceProcessingAtSize:CGSizeMake(1024, 1024*4/3)];
     [stillCamera capturePhotoAsImageProcessedUpToFilter:manager.basicFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
+        //TODO: fix blur radius problems
         [delegate takePhotoController:blockSelf didFinishWithBasicImage:processedImage filterIndex:manager.filterIndex blurFilter:manager.blurFilter];
     }];
 }
@@ -304,7 +309,7 @@
 - (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode
 {
     blurImageView.image = mode.iconImage;
-    [manager setBlurFilterWithMode:mode];
+    [manager setBlurFilterWithMode:mode prepare:prepareBlock];
 }
 
 - (void)blurView:(BlurView *)view didChangeBlurRadius:(CGFloat)radius

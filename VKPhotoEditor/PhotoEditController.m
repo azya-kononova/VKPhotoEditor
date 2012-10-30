@@ -24,10 +24,11 @@
 #import "ActivityView.h"
 #import "ArrowView.h"
 #import "FiltersManager.h"
+#import "BlurView.h"
 
 #define MAX_FONT_SIZE 100
 
-@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, CaptionViewDelegate, CaptionTemplateDelegate>
+@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, CaptionViewDelegate, CaptionTemplateDelegate, BlurViewDelegate>
 @end
 
 @implementation PhotoEditController {
@@ -38,7 +39,6 @@
     BOOL isPhoto;
     NSInteger filterIndex;
     GPUImagePicture *sourcePicture;
-    //GPUImageFilter *filter;
     UIView<CaptionTemplateProtocol> *captionViewTemplate;
     NSArray *captionTemplates;
     NSInteger captionTemplateIndex;
@@ -46,6 +46,8 @@
     ArrowView *arrowView;
     GPUImageOutput<GPUImageInput> *blurFilter;
     FiltersManager *manager;
+    BlurView *blurView;
+    PrepareFilter prepareBlock;
 }
 
 @synthesize saveButton;
@@ -60,6 +62,7 @@
 @synthesize captionOverlayView;
 @synthesize leftRecognizer;
 @synthesize rightRecognizer;
+@synthesize blurButton;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter
 {
@@ -122,16 +125,27 @@
     
     filterView.highlight = YES;
     
+    prepareBlock = ^(GPUImageOutput<GPUImageInput> *filter) {
+        [(GPUImageFilter *)filter setInputRotation:image.rotationMode atIndex:0];
+    };
+    
+    blurView = [[BlurView alloc] initWithCenter:CGPointMake(270, 125) margin:CGRectGetMaxY(blurButton.frame)];
+    blurView.delegate = self;
+    [self.view addSubview:blurView];
+    [self.view addGestureRecognizer:blurView.pinch];
+    
     manager = FiltersManagerMake(basicFilter, sourcePicture, imageView);
+    
+    //TODO: do smth with fucking blur!!!
+    blurFilter = nil;
+    [manager setBlurFilterWithFilter:blurFilter prepare:prepareBlock];
+    
     [self setFilterWithIndex:filterIndex];
-    //[manager setBlurFilterWithMode:nil];
 }
 
 - (void)setFilterWithIndex:(NSInteger)index
 { 
-    [manager setFilterWithIndex:index prepare:^(GPUImageOutput<GPUImageInput> *filter) {
-        [(GPUImageFilter *)filter setInputRotation:image.rotationMode atIndex:0];
-    }];
+    [manager setFilterWithIndex:index prepare:prepareBlock];
     [sourcePicture processImage];
 }
 
@@ -165,6 +179,26 @@
 - (void)keyboardWillHide:(NSNotification *)notification
 {
     [self resizeScrollView:NO notification:notification];
+}
+
+- (UIImage *)applyFilters
+{
+    UIImage *result = [manager.basicFilter imageFromCurrentlyProcessedOutput];
+    
+    //TODO: apply all filters
+    //[self applyFilter:manager.basicFilter toImage:result];
+    
+    return result;
+}
+
+- (void)applyFilter:(GPUImageOutput<GPUImageInput> *)filter toImage:(UIImage *)result
+{
+    for (GPUImageOutput<GPUImageInput> *subFilter in filter.targets) {
+        if ([subFilter respondsToSelector:@selector(imageByFilteringImage:)]) {
+            result = [subFilter imageByFilteringImage:result];
+            [self applyFilter:subFilter toImage:result];
+        }
+    }
 }
 
 #pragma mark actions
@@ -217,7 +251,7 @@
         [captionViewTemplate removeFromSuperview];
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
         BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
-        UIImage *output = [[manager.basicFilter imageFromCurrentlyProcessedOutput] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
+        UIImage *output = [[self applyFilters] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
         [activityView showSelf:NO];
         [delegate photoEditController:self didEdit:output];
     });
@@ -231,6 +265,12 @@
     } else {
         [delegate photoEditControllerDidCancel:self];
     }
+}
+
+- (IBAction)selectBlur
+{
+    [blurView reloadData];
+    [blurView show:!blurView.isShown];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -293,6 +333,20 @@
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
     [self setFilterWithIndex:index];
+}
+
+#pragma mark - BlurViewDelegate
+
+- (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode
+{
+    [blurButton setImage:mode.iconImage forState:UIControlStateNormal];
+    [manager setBlurFilterWithMode:mode prepare:prepareBlock];
+    [sourcePicture processImage];
+}
+
+- (void)blurView:(BlurView *)view didChangeBlurRadius:(CGFloat)radius
+{
+    [manager setBlurFilterRadius:radius];
 }
 
 @end
