@@ -43,13 +43,14 @@ FiltersManager *FiltersManagerMake(id basic, id camera, id view)
     blurTargets = basicFilter.targets;
 }
 
-- (void)setFilterWithIndex:(NSInteger)index
+- (void)setFilterWithIndex:(NSInteger)index prepare:(PrepareFilter)prerareFilter
 {
     filterIndex = index;
     ImageFilter *imageFilter = [Filters.filters objectAtIndex:filterIndex];
     GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:imageFilter.name];
     [filter addTarget: cameraView];
-    [filter prepareForImageCapture];
+    
+    prerareFilter(filter);
     
     if (blurFilter) {
         [blurFilter removeAllTargets];

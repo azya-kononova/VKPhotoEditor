@@ -12,6 +12,8 @@
 #import "GPUImageView.h"
 #import "BlurMode.h"
 
+typedef void(^PrepareFilter)(GPUImageOutput<GPUImageInput> *filter);
+
 @interface FiltersManager : NSObject
 
 @property (nonatomic, strong, readonly) GPUImageOutput<GPUImageInput> *blurFilter;
@@ -20,7 +22,7 @@
 @property (nonatomic, strong, readonly) GPUImageView *cameraView;
 @property (nonatomic, assign, readonly) NSInteger filterIndex;
 
-- (void)setFilterWithIndex:(NSInteger)index;
+- (void)setFilterWithIndex:(NSInteger)index prepare:(PrepareFilter)prerareFilter;
 - (void)setBlurFilterWithMode:(BlurMode *)mode;
 - (void)setBlurFilterRadius:(CGFloat)radius;
 

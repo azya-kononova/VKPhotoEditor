@@ -182,7 +182,9 @@
 
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    [manager setFilterWithIndex:index];
+    [manager setFilterWithIndex:index prepare:^(GPUImageOutput<GPUImageInput> *filter) {
+        [filter prepareForImageCapture];
+    }];
 }
 
 

@@ -23,6 +23,7 @@
 #import "GPUImageNormalBlendFilter.h"
 #import "ActivityView.h"
 #import "ArrowView.h"
+#import "FiltersManager.h"
 
 #define MAX_FONT_SIZE 100
 
@@ -37,13 +38,14 @@
     BOOL isPhoto;
     NSInteger filterIndex;
     GPUImagePicture *sourcePicture;
-    GPUImageFilter *filter;
+    //GPUImageFilter *filter;
     UIView<CaptionTemplateProtocol> *captionViewTemplate;
     NSArray *captionTemplates;
     NSInteger captionTemplateIndex;
     ActivityView *activityView;
     ArrowView *arrowView;
     GPUImageOutput<GPUImageInput> *blurFilter;
+    FiltersManager *manager;
 }
 
 @synthesize saveButton;
@@ -87,12 +89,15 @@
     [retakeButton setTitle:isPhoto ? @"Retake" : @"Cancel" forState:UIControlStateNormal];
     
     sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
+    GPUImageOutput<GPUImageInput> *basicFilter = [GPUImageEmptyFilter new];
+    [basicFilter addTarget:imageView];
+    [sourcePicture addTarget:basicFilter];
+    
     filters = Filters.filters;
     filterView.margin = 7;
     filterView.thumbConrnerRadius = 7.0;
     [filterView reloadData];
     filterView.displayedItemIndex = filterIndex;
-    [self setImageFilter:[filters objectAtIndex:filterIndex]];
    
     captionView = [CaptionView loadFromNIB];
     [captionView moveTo:CGPointMake(0, 390)];
@@ -116,16 +121,17 @@
     [arrowView moveTo:CGPointMake(0, 200)];
     
     filterView.highlight = YES;
+    
+    manager = FiltersManagerMake(basicFilter, sourcePicture, imageView);
+    [self setFilterWithIndex:filterIndex];
+    //[manager setBlurFilterWithMode:nil];
 }
 
-- (void)setImageFilter:(ImageFilter*)imageFilter
+- (void)setFilterWithIndex:(NSInteger)index
 { 
-    [sourcePicture removeAllTargets];
-    [filter removeAllTargets];
-    filter = (GPUImageFilter *)[Filters GPUFilterWithName:imageFilter.name];
-    [filter setInputRotation:image.rotationMode atIndex:0];
-    [sourcePicture addTarget:filter];
-    [filter addTarget:imageView];
+    [manager setFilterWithIndex:index prepare:^(GPUImageOutput<GPUImageInput> *filter) {
+        [(GPUImageFilter *)filter setInputRotation:image.rotationMode atIndex:0];
+    }];
     [sourcePicture processImage];
 }
 
@@ -205,21 +211,18 @@
 
 - (IBAction)save
 {   
-
     [activityView showSelf:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
         CGFloat side = fmaxf(image.size.width, image.size.height);
         [captionViewTemplate removeFromSuperview];
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
         BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
-        UIImage *output = [[filter imageFromCurrentlyProcessedOutput] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
+        UIImage *output = [[manager.basicFilter imageFromCurrentlyProcessedOutput] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
         [activityView showSelf:NO];
         [delegate photoEditController:self didEdit:output];
     });
-
     
-    
-   }
+}
 
 - (IBAction)cancel
 {
@@ -289,7 +292,7 @@
 }
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    [self setImageFilter:[filters objectAtIndex:index]];
+    [self setFilterWithIndex:index];
 }
 
 @end
