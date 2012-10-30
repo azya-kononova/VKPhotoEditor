@@ -85,7 +85,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == photosList.photos.count ? 28 : 320;
+    return indexPath.section == photosList.photos.count ? 41 : 320;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -121,6 +121,8 @@
 
 - (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section
 {
+    if (section == photosList.photos.count) return nil;
+    
     PhotoHeaderView* headerView = [self dequeueHeader];
     if (!headerView)
     {
