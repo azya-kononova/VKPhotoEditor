@@ -181,26 +181,6 @@
     [self resizeScrollView:NO notification:notification];
 }
 
-- (UIImage *)applyFilters
-{
-    UIImage *result = [manager.basicFilter imageFromCurrentlyProcessedOutput];
-    
-    //TODO: apply all filters
-    //[self applyFilter:manager.basicFilter toImage:result];
-    
-    return result;
-}
-
-- (void)applyFilter:(GPUImageOutput<GPUImageInput> *)filter toImage:(UIImage *)result
-{
-    for (GPUImageOutput<GPUImageInput> *subFilter in filter.targets) {
-        if ([subFilter respondsToSelector:@selector(imageByFilteringImage:)]) {
-            result = [subFilter imageByFilteringImage:result];
-            [self applyFilter:subFilter toImage:result];
-        }
-    }
-}
-
 #pragma mark actions
 
 - (void)setCaptionViewTemplate:(UIView<CaptionTemplateProtocol>*)_captionViewTemplate
@@ -251,7 +231,8 @@
         [captionViewTemplate removeFromSuperview];
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
         BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
-        UIImage *output = [[self applyFilters] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
+        UIImage *filteredImage = [manager.blurFilter.targets.lastObject imageFromCurrentlyProcessedOutput];
+        UIImage *output = [filteredImage squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
         [activityView showSelf:NO];
         [delegate photoEditController:self didEdit:output];
     });
@@ -344,9 +325,9 @@
     [sourcePicture processImage];
 }
 
-- (void)blurView:(BlurView *)view didChangeBlurRadius:(CGFloat)radius
+- (void)blurView:(BlurView *)view didChangeBlurScale:(CGFloat)scale
 {
-    [manager setBlurFilterRadius:radius];
+    [manager setBlurFilterScale:scale];
 }
 
 @end

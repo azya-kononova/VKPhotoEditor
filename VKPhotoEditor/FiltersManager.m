@@ -87,8 +87,9 @@ FiltersManager *FiltersManagerMake(id basic, id camera, id view)
     }
 }
 
-- (void)setBlurFilterRadius:(CGFloat)radius
+- (void)setBlurFilterScale:(CGFloat)radius
 {
+    //TODO: right way to calculate radius
     if ([blurFilter isKindOfClass:[GPUImageTiltShiftFilter class]]) {
         [(GPUImageTiltShiftFilter *)blurFilter setTopFocusLevel:radius - 0.1];
         [(GPUImageTiltShiftFilter *)blurFilter setBottomFocusLevel:radius + 0.1];
@@ -96,16 +97,6 @@ FiltersManager *FiltersManagerMake(id basic, id camera, id view)
     if ([blurFilter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
         [(GPUImageGaussianSelectiveBlurFilter *)blurFilter setExcludeCircleRadius:radius];
     }
-}
-
-- (CGFloat)calculateBlurFilterRadius:(CGFloat)radius
-{
-    //TODO: right way to calculate radius
-    if ([blurFilter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
-        return [(GPUImageGaussianSelectiveBlurFilter *)blurFilter excludeCircleRadius] * radius;
-    }
-    
-    return 0;
 }
 
 @end

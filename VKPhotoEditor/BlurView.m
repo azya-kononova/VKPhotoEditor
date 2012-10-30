@@ -21,6 +21,7 @@
     TableViewPopover *popover;
     NSArray *blurModes;
     BlurMode *currentMode;
+    CGFloat blurScale;
 }
 
 @synthesize delegate, pinch;
@@ -58,7 +59,17 @@
 
 - (void)pinchBlur:(UIPinchGestureRecognizer *)recognizer
 {
-    [delegate blurView:self didChangeBlurRadius:recognizer.scale];
+    switch (recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+            blurScale = recognizer.scale;
+            break;
+        case UIGestureRecognizerStateChanged:
+            blurScale = recognizer.scale - blurScale;
+            [delegate blurView:self didChangeBlurScale:blurScale];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)reloadData

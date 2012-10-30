@@ -318,9 +318,9 @@
     [manager setBlurFilterWithMode:mode prepare:prepareBlock];
 }
 
-- (void)blurView:(BlurView *)view didChangeBlurRadius:(CGFloat)radius
+- (void)blurView:(BlurView *)view didChangeBlurScale:(CGFloat)scale
 {
-    [manager setBlurFilterRadius:radius];
+    [manager setBlurFilterScale:scale];
 }
 
 @end

@@ -26,5 +26,5 @@
 
 @protocol BlurViewDelegate
 - (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode;
-- (void)blurView:(BlurView *)view didChangeBlurRadius:(CGFloat)radius;
+- (void)blurView:(BlurView *)view didChangeBlurScale:(CGFloat)scale;
 @end
