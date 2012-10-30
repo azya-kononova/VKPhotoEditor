@@ -84,6 +84,7 @@
 {
     VKPhoto *photo = [VKPhoto VKPhotoWithDict:[value objectForKey:@"photo"]];
     photo.account = [Account accountWithDict:[[value objectForKey:@"users"] objectAtIndex:0]];
+    photo.justUploaded = YES;
     [photosList insert:photo];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }

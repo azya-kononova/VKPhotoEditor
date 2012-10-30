@@ -63,7 +63,7 @@
 												<int key="NSvFlags">292</int>
 												<string key="NSFrame">{{150, 150}, {20, 20}}</string>
 												<reference key="NSSuperview" ref="800639252"/>
-												<reference key="NSNextKeyView"/>
+												<reference key="NSNextKeyView" ref="746014281"/>
 												<bool key="IBUIOpaque">NO</bool>
 												<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 												<bool key="IBUIHidesWhenStopped">NO</bool>
@@ -94,6 +94,19 @@
 								</object>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+							</object>
+							<object class="IBUIImageView" id="746014281">
+								<reference key="NSNextResponder" ref="530180376"/>
+								<int key="NSvFlags">-2147483356</int>
+								<string key="NSFrame">{{128, 128}, {64, 64}}</string>
+								<reference key="NSSuperview" ref="530180376"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<object class="NSCustomResource" key="IBUIImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">Added.png</string>
+								</object>
 							</object>
 						</array>
 						<string key="NSFrameSize">{320, 319}</string>
@@ -136,11 +149,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="542435047"/>
+						<reference key="destination" ref="42260974"/>
+					</object>
+					<int key="connectionID">28</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">remoteImageView</string>
 						<reference key="source" ref="42260974"/>
 						<reference key="destination" ref="542435047"/>
 					</object>
 					<int key="connectionID">24</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">addedImageView</string>
+						<reference key="source" ref="42260974"/>
+						<reference key="destination" ref="746014281"/>
+					</object>
+					<int key="connectionID">27</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -167,6 +196,7 @@
 						<reference key="object" ref="42260974"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="542435047"/>
+							<reference ref="746014281"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -197,6 +227,11 @@
 						<reference key="object" ref="962245801"/>
 						<reference key="parent" ref="800639252"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">25</int>
+						<reference key="object" ref="746014281"/>
+						<reference key="parent" ref="42260974"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -205,6 +240,7 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="19.CustomClassName">PhotoCell</string>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="25.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.CustomClassName">RemoteImageView</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -215,13 +251,17 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">24</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">Added.png</string>
+			<string key="NS.object.0">{64, 64}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
 </archive>

@@ -9,14 +9,12 @@
 #import "RemoteImageView.h"
 #import "CALayer+Animations.h"
 
-@interface RemoteImageView () <RemoteImageDelegate>
-@end
-
 @implementation RemoteImageView
 @synthesize image;
 @synthesize imageView;
 @synthesize placeholder;
 @synthesize isCircular;
+@synthesize delegate;
 
 - (void)didMoveToWindow
 {
@@ -31,16 +29,20 @@
     BOOL animated = !imageView.image;
     
     if (animated) {
-        [self.layer fade];
-        [imageView.layer fade];
+        [self.layer fade].duration = 0.75;
+        [imageView.layer fade].duration = 0.75;
     }
-    placeholder.hidden = _image != nil;
+    self.placeholder.hidden = _image != nil;
     imageView.hidden = _image == nil;
     imageView.image = _image;
     
     if (isCircular) {
         self.layer.masksToBounds = YES;
         self.layer.cornerRadius = self.frame.size.width / 2;
+    }
+    
+    if (image && [delegate respondsToSelector:@selector(remoteImageView:didLoadImage:)]) {
+        [delegate remoteImageView:self didLoadImage:_image];
     }
 }
 
@@ -65,17 +67,5 @@
     }
 }
 
-
-- (void)remoteImageDidFinishLoading:(RemoteImage*)remoteImage
-{
-    if (image == remoteImage) {
-        [self _displayImage:remoteImage.image];
-    }
-}
-
-- (void)remoteImage:(RemoteImage*)remoteImage loadingFailedWithError:(NSError*)error
-{
-    NSLog(@"Failed to load remote image from '%@': %@", remoteImage.imageUrl, error);
-}
 
 @end

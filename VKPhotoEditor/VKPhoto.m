@@ -16,6 +16,7 @@
 @synthesize caption;
 @synthesize date;
 @synthesize account;
+@synthesize justUploaded;
 
 - (id)initWithID:(NSString*)_id
 {
