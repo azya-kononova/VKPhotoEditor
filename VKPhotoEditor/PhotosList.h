@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "VKPhoto.h"
 
 @protocol PhotosListDelegate;
 
@@ -18,6 +18,7 @@
 
 - (void)reset;
 - (void)append:(NSArray*)photos;
+- (void)insert:(VKPhoto*)photo;
 - (void)loadNextPageFor:(NSInteger)userId;
 
 - (id)initWithPhotos:(NSArray*)photos;

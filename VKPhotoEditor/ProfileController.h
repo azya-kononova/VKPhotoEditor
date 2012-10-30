@@ -17,7 +17,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 - (id)initWithAccount:(UserAccount*)account;
-
+- (void)uploadImage:(UIImage*)image;
 - (IBAction)openProfile;
 @end
 

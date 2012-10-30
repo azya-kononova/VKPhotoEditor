@@ -7,9 +7,7 @@
 //
 
 #import "PhotosList.h"
-#import "RequestExecutorDelegateAdapter.h"
 #import "VKConnectionService.h"
-#import "VKPhoto.h"
 #import "VKRequestExecutor.h"
 #import "NSObject+Map.h"
 
@@ -20,7 +18,7 @@
     VKConnectionService *service;
     NSInteger nextPage;
     VKRequestExecutor *exec;
-    NSInteger initialOffest;
+    NSInteger initialOffset;
 }
 @synthesize photos;
 @synthesize limit;
@@ -31,7 +29,7 @@
 {
     if (self = [super init]) {
         photos = [_photos copy];
-        initialOffest = photos.count;
+        initialOffset = photos.count;
         service = [VKConnectionService shared];
         limit = 20;
     }
@@ -49,7 +47,7 @@
 - (void)loadNextPageFor:(NSInteger)userId
 {
     if (exec) return;
-    exec = [service getPhotos:userId offset:initialOffest + limit*nextPage++];
+    exec = [service getPhotos:userId offset:initialOffset + limit*nextPage++];
     exec.delegate = self;
     [exec start];
 }
@@ -61,6 +59,13 @@
     } else {
         photos = [photos arrayByAddingObjectsFromArray:_photos];
     }
+    [delegate photosList:self didUpdatePhotos:photos];
+}
+
+- (void)insert:(VKPhoto*)photo
+{
+    initialOffset++;
+    photos = [[NSArray arrayWithObject:photo] arrayByAddingObjectsFromArray:photos];
     [delegate photosList:self didUpdatePhotos:photos];
 }
 

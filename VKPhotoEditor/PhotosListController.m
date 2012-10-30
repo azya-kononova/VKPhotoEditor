@@ -26,21 +26,14 @@
     VKRequestExecutor *exec;
     VKConnectionService *service;
     ChoosePhotoView *choosePhotoView;
+    UIImage *imageToUpload;
 }
 
-- (id)init
-{
-    return [self initWithImageToUpload:nil];
-}
 
 - (id)initWithImageToUpload:(UIImage *)image
 {
     if (self = [super init]) {
-        service = [VKConnectionService shared];
-        if (!image) return self;
-        exec = [service uploadPhoto:image withCaption:@"Test"];
-        exec.delegate = self;
-        [exec start];
+        imageToUpload = image;
     }
     return self;
 }
@@ -49,9 +42,11 @@
 {
     [super viewDidLoad];
     
+    service = [VKConnectionService shared];
     ProfileController *profileCtrl = [[ProfileController alloc] initWithAccount:service.account];
     profileCtrl.delegate = self;
     controllers =  [NSArray arrayWithObjects:profileCtrl, [UIViewController new],nil];
+    if (imageToUpload) [profileCtrl uploadImage:imageToUpload];
     
     tabBar = [VKTabBar loadFromNIB];
     [tabBar moveBy:CGPointMake(0, self.view.frame.size.height - tabBar.frame.size.height)];

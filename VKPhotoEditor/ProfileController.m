@@ -15,6 +15,8 @@
 #import "RequestExecutorDelegateAdapter.h"
 #import "PhotosList.h"
 #import "LoadingCell.h"
+#import "VKConnectionService.h"
+#import "VKRequestExecutor.h"
 
 @interface ProfileController () <UITableViewDataSource, UITableViewDelegate, PhotosListDelegate>
 @end
@@ -25,6 +27,7 @@
     NSMutableArray *sectionHeaders;
     RequestExecutorDelegateAdapter *adapter;
     NSInteger offset;
+    VKConnectionService *service;
 }
 
 @synthesize nameLabel;
@@ -38,6 +41,8 @@
         photosList = [[PhotosList alloc] initWithPhotos:account.lastPhotos];
         photosList.delegate = self;
         sectionHeaders = [NSMutableArray new];
+        service = [VKConnectionService shared];
+        adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
     }
     return self;
 }
@@ -46,6 +51,12 @@
 {
     [super viewDidLoad];
     nameLabel.text = account.login;
+}
+
+- (void)uploadImage:(UIImage *)image
+{
+    [adapter start:[service uploadPhoto:image withCaption:@"test"] onSuccess:@selector(exec:didUploadPhoto:) onError:@selector(exec:didFailToUpload:)];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 #pragma mark - actions
@@ -65,6 +76,21 @@
 - (void)photosList:(PhotosList *)photosList didFailToUpdate:(NSError *)error
 {
     
+}
+
+#pragma mark - Request Handler
+
+- (void)exec:(VKRequestExecutor*)exec didUploadPhoto:(id)value
+{
+    VKPhoto *photo = [VKPhoto VKPhotoWithDict:[value objectForKey:@"photo"]];
+    photo.account = [Account accountWithDict:[[value objectForKey:@"users"] objectAtIndex:0]];
+    [photosList insert:photo];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (void)exec:(VKRequestExecutor*)exec didFailWithError:(NSError*)error
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
 #pragma mark - UITableViewDataSource
@@ -98,7 +124,6 @@
     VKPhoto *photo = [photosList.photos objectAtIndex:indexPath.section];
     [cell displayPhoto:photo];
     return cell;
-
 }
 
 - (PhotoHeaderView *)dequeueHeader
