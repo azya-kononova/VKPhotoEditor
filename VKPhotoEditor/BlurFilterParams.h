@@ -13,5 +13,6 @@
 
 + (NSDictionary *)paramsWithFilter:(GPUImageOutput<GPUImageInput>*)filter;
 + (GPUImageOutput<GPUImageInput>*)filterWithParams:(NSDictionary *)params;
++ (GPUImageOutput<GPUImageInput>*)filterWithFilter:(GPUImageOutput<GPUImageInput>*)filter;
 
 @end

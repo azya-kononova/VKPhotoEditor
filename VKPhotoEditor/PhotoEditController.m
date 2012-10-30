@@ -93,6 +93,7 @@
     
     sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
     GPUImageOutput<GPUImageInput> *basicFilter = [GPUImageEmptyFilter new];
+    [basicFilter setInputRotation:image.rotationMode atIndex:0];
     [basicFilter addTarget:imageView];
     [sourcePicture addTarget:basicFilter];
     
@@ -136,16 +137,19 @@
     
     manager = FiltersManagerMake(basicFilter, sourcePicture, imageView);
     
-    //TODO: do smth with fucking blur!!!
-    blurFilter = nil;
-    [manager setBlurFilterWithFilter:blurFilter prepare:prepareBlock];
-    
     [self setFilterWithIndex:filterIndex];
+    [self setBlurFilterWithFilter:blurFilter];
 }
 
 - (void)setFilterWithIndex:(NSInteger)index
 { 
     [manager setFilterWithIndex:index prepare:prepareBlock];
+    [sourcePicture processImage];
+}
+
+- (void)setBlurFilterWithFilter:(id)filter
+{
+    [manager setBlurFilterWithFilter:filter prepare:prepareBlock];
     [sourcePicture processImage];
 }
 
@@ -321,8 +325,7 @@
 - (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode
 {
     [blurButton setImage:mode.iconImage forState:UIControlStateNormal];
-    [manager setBlurFilterWithMode:mode prepare:prepareBlock];
-    [sourcePicture processImage];
+    [self setBlurFilterWithFilter:mode.filter];
 }
 
 - (void)blurView:(BlurView *)view didChangeBlurScale:(CGFloat)scale

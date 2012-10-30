@@ -52,7 +52,7 @@
     GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:[[filters objectAtIndex:filterIndex] name]];
     UIImage *filteredImage = [filter imageByFilteringImage:image];
     if (blurFilter) {
-        filteredImage = [blurFilter imageByFilteringImage:filteredImage];
+        filteredImage = [[BlurFilterParams filterWithFilter:blurFilter] imageByFilteringImage:filteredImage];
     }
     UIImageView *imageView = [[UIImageView alloc] initWithImage:filteredImage];
     

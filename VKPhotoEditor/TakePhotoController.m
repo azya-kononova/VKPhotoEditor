@@ -23,8 +23,6 @@
 
 #import "GPUImageView.h"
 #import "GPUImageStillCamera.h"
-#import "GPUImageGaussianSelectiveBlurFilter.h"
-#import "GPUImageTiltShiftFilter.h"
 
 @interface TakePhotoController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate, UIGestureRecognizerDelegate, BlurViewDelegate> {
     IBOutlet GPUImageView *cameraView;

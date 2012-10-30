@@ -51,4 +51,9 @@
     return filter;
 }
 
++ (GPUImageOutput<GPUImageInput>*)filterWithFilter:(GPUImageOutput<GPUImageInput> *)filter
+{
+    return [self filterWithParams:[self paramsWithFilter:filter]];
+}
+
 @end
