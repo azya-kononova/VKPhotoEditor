@@ -2,7 +2,7 @@
 
 @implementation DataFormatter
 
-+ (NSString *)formatDate:(NSDate *)date useLongStyle:(BOOL)useLongStyle showDate:(BOOL)showDate showTime:(BOOL)showTime
++ (NSString *)formatRelativeDate:(NSDate *)date
 {
     static NSDateFormatter *dateFormatter;
     static dispatch_once_t onceToken;
@@ -11,9 +11,17 @@
         dateFormatter = [NSDateFormatter new];
     });
     
-    dateFormatter.dateStyle = (useLongStyle) ? NSDateFormatterLongStyle : NSDateFormatterShortStyle;
-    dateFormatter.dateStyle = (showDate) ? dateFormatter.dateStyle : NSDateFormatterNoStyle;
-    dateFormatter.timeStyle = (showTime) ? NSDateFormatterShortStyle : NSDateFormatterNoStyle;
+    NSInteger desiredComponents = NSDayCalendarUnit;
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:desiredComponents fromDate:date toDate:[NSDate date] options:0];
+    
+    NSString *day = @"";
+    if ([components day] == 0)
+        day = @"'Today at' ";
+    else if ([components day] == 1)
+        day = @"'Yesterday at' ";
+    
+    dateFormatter.dateFormat = day.length ? [day stringByAppendingString:@"HH:mm"] : @"dd-MM-yyyy 'at' HH:mm";
     
     return [dateFormatter stringFromDate:date];
 }
