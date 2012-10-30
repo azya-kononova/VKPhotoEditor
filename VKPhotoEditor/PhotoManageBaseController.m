@@ -21,17 +21,17 @@
 	// Do any additional setup after loading the view.
 }
 
-- (void)editPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex
+- (void)editPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex blurFilter:(id)blurFilter
 {
-    PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:image filterIndex:filterIndex];
+    PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:image filterIndex:filterIndex blurFilter:blurFilter];
     photoEditController.delegate = self;
     
     [self.navigationController pushViewController:photoEditController animated:NO];
 }
 
-- (void)cropPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex userInfo:(NSDictionary *)userInfo
+- (void)cropPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex blurFilter:(id)blurFilter
 {
-    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image filterIndex:filterIndex userInfo:userInfo];
+    CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image filterIndex:filterIndex blurFilter:blurFilter];
     controller.delegate = self;
     
     isPhoto ? [self presentModalViewController:controller animated:NO] : [self presentModalViewController:controller withPushDirection:kCATransitionFromRight];
@@ -39,7 +39,7 @@
 
 - (void)cropPhoto:(UIImage *)image
 {
-    [self cropPhoto:image filterIndex:0 userInfo:nil];
+    [self cropPhoto:image filterIndex:0 blurFilter:nil];
 }
 
 - (void)takePhoto
@@ -88,10 +88,10 @@
     isPhoto ? [self dismissModalViewControllerAnimated:NO] : [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
 }
 
-- (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image filterIndex:(NSInteger)index
+- (void)croppingViewController:(CroppingViewController *)controller didFinishWithImage:(UIImage *)image filterIndex:(NSInteger)index blurFilter:(id)blurFilter
 {
     [self dismissModalViewControllerAnimated:NO];
-    [self editPhoto:image filterIndex:index];
+    [self editPhoto:image filterIndex:index blurFilter:blurFilter];
 }
 
 
@@ -125,11 +125,12 @@
     [self dismissModalViewControllerAnimated:NO];
 }
 
-- (void)takePhotoController:(TakePhotoController *)controller didFinishWithBasicImage:(UIImage *)basic filterIndex:(NSInteger)index userInfo:(NSDictionary *)userInfo
+- (void)takePhotoController:(TakePhotoController *)controller didFinishWithBasicImage:(UIImage *)basic filterIndex:(NSInteger)index blurFilter:(id)blurFilter
 {
     [self dismissModalViewControllerAnimated:NO];
     
     isPhoto = YES;
-    [self cropPhoto:basic filterIndex:index userInfo:userInfo];
+    [self cropPhoto:basic filterIndex:index blurFilter:blurFilter];
 }
+
 @end
