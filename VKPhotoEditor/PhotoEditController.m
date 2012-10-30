@@ -184,6 +184,28 @@
     [self resizeScrollView:NO notification:notification];
 }
 
+- (UIImage *)imageByApplingFilters
+{
+    if (manager.blurFilter) {
+        return [self imageByApplingFilter:manager.blurFilter];
+    } else {
+        return [self imageByApplingFilter:manager.basicFilter];
+    }
+}
+
+- (UIImage *)imageByApplingFilter:(GPUImageOutput<GPUImageInput> *)filter
+{
+    UIImage *filteredImage = nil;
+    
+    if (filter.targets.count) {
+        filteredImage = [filter.targets.lastObject imageFromCurrentlyProcessedOutput];
+    } else {
+        filteredImage = [filter imageFromCurrentlyProcessedOutput];
+    }
+    
+    return filteredImage;
+}
+
 #pragma mark actions
 
 - (void)setCaptionViewTemplate:(UIView<CaptionTemplateProtocol>*)_captionViewTemplate
@@ -234,8 +256,7 @@
         [captionViewTemplate removeFromSuperview];
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
         BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
-        UIImage *filteredImage = [manager.blurFilter.targets.lastObject imageFromCurrentlyProcessedOutput];
-        UIImage *output = [filteredImage squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
+        UIImage *output = [[self imageByApplingFilters] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
         [activityView showSelf:NO];
         [delegate photoEditController:self didEdit:output];
     });
