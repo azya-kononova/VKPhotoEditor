@@ -50,7 +50,10 @@
     
     NSArray *filters = Filters.filters;
     GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:[[filters objectAtIndex:filterIndex] name]];
-    UIImage *filteredImage = [blurFilter imageByFilteringImage:[filter imageByFilteringImage:image]];
+    UIImage *filteredImage = [filter imageByFilteringImage:image];
+    if (blurFilter) {
+        filteredImage = [blurFilter imageByFilteringImage:filteredImage];
+    }
     UIImageView *imageView = [[UIImageView alloc] initWithImage:filteredImage];
     
     zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:captureView.frame];

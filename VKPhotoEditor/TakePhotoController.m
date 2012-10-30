@@ -15,6 +15,8 @@
 #import "FlashMode.h"
 #import "BlurMode.h"
 #import "BlurFilterParams.h"
+#import "FiltersManager.h"
+#import "BlurView.h"
 
 #import "UIView+NIB.h"
 #import "UITableViewCell+NIB.h"
@@ -25,16 +27,7 @@
 #import "GPUImageTiltShiftFilter.h"
 
 
-#define BLUR_SIZE_PROPORTION 320
-
-enum {
-    CameraBlurModeOff = 0,
-    CameraBlurModeLine = 1,
-    CameraBlurModeRound = 2
-};
-typedef NSInteger CameraBlurMode;
-
-@interface TakePhotoController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate, UIGestureRecognizerDelegate> {
+@interface TakePhotoController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, TableViewPopoverDataSource, TableViewPopoverDelegate, UIGestureRecognizerDelegate, BlurViewDelegate> {
     IBOutlet GPUImageView *cameraView;
     IBOutlet UIImageView *blurImageView;
     IBOutlet UIImageView *flashImageView;
@@ -43,37 +36,30 @@ typedef NSInteger CameraBlurMode;
     IBOutlet UIButton *photoBtn;
     IBOutlet UIButton *filterBtn;
     IBOutlet ThumbnailsView *filtersView;
-    IBOutlet UISlider *blurSlider;
     IBOutlet UIView *focusAreaView;
     IBOutlet UIView *focusView;
     
     TableViewPopover *flashPopover;
-    TableViewPopover *blurPopover;
+    BlurView *blurView;
     
     NSArray *filters;
     NSArray *movingButtons;
     
     NSArray *flashModes;
-    NSArray *blurModes;
-    NSArray *blurTargets;
     GPUImageStillCamera *stillCamera;
-    GPUImageOutput<GPUImageInput> *basicFilter;
-    GPUImageOutput<GPUImageInput> *blurFilter;
+    FiltersManager *manager;
 }
 
-@property (nonatomic, assign) NSUInteger filterIndex;
-- (IBAction)updateFilter:(id)sender;
 @end
 
 @implementation TakePhotoController
 
-@synthesize delegate, filterIndex;
+@synthesize delegate;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    blurSlider.transform = CGAffineTransformRotate(blurSlider.transform, -M_PI_2);
     filtersView.thumbConrnerRadius = 7.0;
     
     filters = Filters.filters;
@@ -83,7 +69,7 @@ typedef NSInteger CameraBlurMode;
     stillCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
     cameraView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
 
-    basicFilter = [GPUImageEmptyFilter new];
+    GPUImageOutput<GPUImageInput> *basicFilter = [GPUImageEmptyFilter new];
     [basicFilter prepareForImageCapture];
     [basicFilter addTarget:cameraView];
     
@@ -92,15 +78,18 @@ typedef NSInteger CameraBlurMode;
     flashPopover = [self loadPopoverWithOriginPoint:CGPointMake(44, 70)];
     flashModes = [self availabelFlashMode];
     
-    blurPopover = [self loadPopoverWithOriginPoint:CGPointMake(235, 70)];
-    blurModes = [self setBlurModes];
-    
     if (flashModes.count) {
         [self setCameraFlashMode:[flashModes objectAtIndex:1]];
     }
-    blurTargets = basicFilter.targets;
+    
+    blurView = [[BlurView alloc] initWithCenter:CGPointMake(235, 70) margin:CGRectGetMaxY(flashLabel.frame)];
+    blurView.delegate = self;
+    [self.view addSubview:blurView];
+    [self.view addGestureRecognizer:blurView.pinch];
     
     filtersView.highlight = YES;
+    
+    manager = FiltersManagerMake(basicFilter, stillCamera, cameraView);
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cameraFocus:)];
     recognizer.delegate = self;
@@ -151,16 +140,6 @@ typedef NSInteger CameraBlurMode;
     return modes;
 }
 
-- (NSArray *)setBlurModes
-{
-    NSMutableArray *modes = [NSMutableArray array];
-    
-    [modes addObject:MakeBlurMode(@"TiltShiftFilter", @"blur_line.png", @"blur_line_icon.png")];
-    [modes addObject:MakeBlurMode(@"GaussianSelectiveBlurFilterName", @"blur_round.png", @"blur_round_icon.png")];
-    [modes addObject:MakeBlurMode(nil, @"blur_off.png", @"blur_off_icon.png")];
-    
-    return modes;
-}
 - (void)setCameraFlashMode:(FlashMode *)mode
 {
     flashImageView.image = mode.image;
@@ -169,75 +148,6 @@ typedef NSInteger CameraBlurMode;
     [stillCamera.inputCamera lockForConfiguration:nil];
     [stillCamera.inputCamera setFlashMode:mode.mode];
     [stillCamera.inputCamera unlockForConfiguration];
-}
-
-- (void)setFilterIndex:(NSUInteger)_filterIndex
-{
-    filterIndex = _filterIndex;
-    ImageFilter *imageFilter = [filters objectAtIndex:filterIndex];
-    GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:imageFilter.name];
-    [filter addTarget: cameraView];
-    [filter prepareForImageCapture];
-    
-    if (blurFilter) {
-        [blurFilter removeAllTargets];
-        [blurFilter addTarget:filter];
-    } else {
-        [basicFilter removeAllTargets];
-        [basicFilter addTarget:filter];
-    }
-    
-    blurTargets = [NSArray arrayWithObject:filter];
-}
-
-- (void)setCameraBlurMode:(BlurMode *)mode
-{
-    blurImageView.image = mode.iconImage;
-    
-    [basicFilter removeAllTargets];
-    blurFilter = mode.filter;
-    [blurFilter removeAllTargets];
-    
-    if (blurFilter) {
-        for (GPUImageOutput<GPUImageInput> *target in blurTargets) {
-            [blurFilter addTarget:target];
-        }
-        [blurFilter prepareForImageCapture];
-        [basicFilter addTarget:blurFilter];
-    } else {
-        for (GPUImageOutput<GPUImageInput> *target in blurTargets) {
-            [basicFilter addTarget:target];
-        }
-    }
-    
-    [self resetSlider];
-    blurSlider.hidden = !blurFilter;
-}
-
-- (IBAction)updateFilter:(id)sender
-{
-    CGFloat midpoint = [(UISlider *)sender value];
-    if ([blurFilter isKindOfClass:[GPUImageTiltShiftFilter class]]) {
-        [(GPUImageTiltShiftFilter *)blurFilter setTopFocusLevel:midpoint - 0.1];
-        [(GPUImageTiltShiftFilter *)blurFilter setBottomFocusLevel:midpoint + 0.1];
-    }
-    if ([blurFilter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
-        [(GPUImageGaussianSelectiveBlurFilter *)blurFilter setExcludeCircleRadius:midpoint];
-    }
-}
-
-- (void)resetSlider
-{
-    if ([blurFilter isKindOfClass:[GPUImageTiltShiftFilter class]]) {
-        [blurSlider setMinimumValue:0.2];
-        [blurSlider setMaximumValue:0.8];
-        [blurSlider setValue:0.5];
-    }
-    if ([blurFilter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
-        [blurSlider setMinimumValue:0.0];
-        [blurSlider setMaximumValue:.75f];
-        [blurSlider setValue:40.0/320.0];
-    }
 }
 
 - (void)showFocusViewInPoint:(CGPoint)point
@@ -272,7 +182,7 @@ typedef NSInteger CameraBlurMode;
 
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    self.filterIndex = index;
+    [manager setFilterWithIndex:index];
 }
 
 
@@ -281,7 +191,7 @@ typedef NSInteger CameraBlurMode;
 - (UITableViewCell*)tableViewPopover:(TableViewPopover*)view cellForRowAtIndex:(NSInteger)index inTableView:(UITableView*)tableView
 {
     TablePopoverCell *cell = [TablePopoverCell dequeOrCreateInTable:tableView];
-    cell.imageView.image = [view isEqual:flashPopover] ? [[flashModes objectAtIndex:index] image] : [[blurModes objectAtIndex:index] image];
+    cell.imageView.image = [[flashModes objectAtIndex:index] image];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -289,19 +199,14 @@ typedef NSInteger CameraBlurMode;
 
 - (NSInteger)tableViewPopoverRowsNumber:(TableViewPopover *)view
 {
-    return [view isEqual:flashPopover] ? flashModes.count : blurModes.count;
+    return flashModes.count;
 }
 
 #pragma mark - TableViewPopover Delegate
 
 - (void)tableViewPopover:(TableViewPopover *)view didSelectRowAtIndex:(NSInteger)index
 {
-    if ([view isEqual:flashPopover]) {
-        [self setCameraFlashMode:[flashModes objectAtIndex:index]];
-    } else if ([view isEqual:blurPopover]) {
-        [self setCameraBlurMode:[blurModes objectAtIndex:index]];
-    }
-    
+    [self setCameraFlashMode:[flashModes objectAtIndex:index]];
     [view show:NO];
 }
 
@@ -314,8 +219,10 @@ typedef NSInteger CameraBlurMode;
     		
     __block TakePhotoController *blockSelf = self;
     
-    [stillCamera capturePhotoAsImageProcessedUpToFilter:basicFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
-        [delegate takePhotoController:blockSelf didFinishWithBasicImage:processedImage filterIndex:filterIndex blurFilter:blurFilter];
+    //TODO: calculate size depens on screen size and selected camera
+    [manager.basicFilter forceProcessingAtSize:CGSizeMake(1024, 1024*4/3)];
+    [stillCamera capturePhotoAsImageProcessedUpToFilter:manager.basicFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
+        [delegate takePhotoController:blockSelf didFinishWithBasicImage:processedImage filterIndex:manager.filterIndex blurFilter:manager.blurFilter];
     }];
 }
 
@@ -342,7 +249,7 @@ typedef NSInteger CameraBlurMode;
 
 - (IBAction)flash:(id)sender
 {
-    [blurPopover show:NO];
+    [blurView show:NO];
     if (stillCamera.inputCamera.flashAvailable) {
         [flashPopover show:!flashPopover.isShown];
         [flashPopover reloadData];
@@ -353,10 +260,9 @@ typedef NSInteger CameraBlurMode;
 
 - (IBAction)blur:(id)sender
 {
-    [blurPopover show:!blurPopover.isShown];
+    [blurView reloadData];
+    [blurView show:!blurView.isShown];
     [flashPopover show:NO];
-    
-    [blurPopover reloadData];
 }
 
 - (IBAction)rotateCamera:(id)sender
@@ -384,11 +290,24 @@ typedef NSInteger CameraBlurMode;
 {
     CGPoint point = [touch locationInView:self.view];
     
-    BOOL onFlashPopover = !flashPopover.hidden && CGRectContainsPoint(flashPopover.frame, point);
-    BOOL onBlurPopover = !blurPopover.hidden && CGRectContainsPoint(blurPopover.frame, point);
+    BOOL onFlashPopover = flashPopover.isShown && CGRectContainsPoint(flashPopover.frame, point);
+    BOOL onBlurView = blurView.isShown && CGRectContainsPoint(blurView.frame, point);
     BOOL onCamera = CGRectContainsPoint(focusAreaView.frame, point);
     
-    return onCamera && !(onFlashPopover || onBlurPopover);
+    return onCamera && !(onFlashPopover || onBlurView);
+}
+
+#pragma mark - BlurViewDelegate
+
+- (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode
+{
+    blurImageView.image = mode.iconImage;
+    [manager setBlurFilterWithMode:mode];
+}
+
+- (void)blurView:(BlurView *)view didChangeBlurRadius:(CGFloat)radius
+{
+    [manager setBlurFilterRadius:radius];
 }
 
 @end
