@@ -120,6 +120,15 @@ NSString *VKErrorDomain = @"VKErrorDomain";
     return exec;
 }
 
+- (VKRequestExecutor*)deletePhoto:(NSString*)photoId
+{
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            photoId, @"id",
+                            account.accessToken, @"access_token", nil];
+    RequestExecutorProxy *exec = [self postToPath:@"deletePhotos" params:[[WebParams alloc] initWithDictionary:params] json:NO];
+    return exec;
+}
+
 - (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset
 {
     RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"getPhotos?user_id=%d&offset=%d", userId, offset]];

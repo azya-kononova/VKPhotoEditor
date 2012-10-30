@@ -221,6 +221,7 @@
 		8B7096B8163C7F64004DA31B /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096B7163C7F63004DA31B /* ImageCache.m */; };
 		8B7C09B216401EBB006BCE79 /* Added.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C09B016401EBB006BCE79 /* Added.png */; };
 		8B7C09B316401EBB006BCE79 /* Added@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C09B116401EBB006BCE79 /* Added@2x.png */; };
+		8B7C09B616402C75006BCE79 /* NSArray+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */; };
 		8B8AF734163831610053706D /* RightArrow_Active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF732163831610053706D /* RightArrow_Active@2x.png */; };
 		8B8AF735163831610053706D /* RightArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF733163831610053706D /* RightArrow@2x.png */; };
 		8B8AF738163831F50053706D /* DarkInner_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B8AF736163831F50053706D /* DarkInner_Pressed@2x.png */; };
@@ -584,6 +585,8 @@
 		8B7096B7163C7F63004DA31B /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		8B7C09B016401EBB006BCE79 /* Added.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Added.png; sourceTree = "<group>"; };
 		8B7C09B116401EBB006BCE79 /* Added@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Added@2x.png"; sourceTree = "<group>"; };
+		8B7C09B416402C75006BCE79 /* NSArray+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helpers.h"; sourceTree = "<group>"; };
+		8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Helpers.m"; sourceTree = "<group>"; };
 		8B8AF732163831610053706D /* RightArrow_Active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow_Active@2x.png"; sourceTree = "<group>"; };
 		8B8AF733163831610053706D /* RightArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "RightArrow@2x.png"; sourceTree = "<group>"; };
 		8B8AF736163831F50053706D /* DarkInner_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkInner_Pressed@2x.png"; sourceTree = "<group>"; };
@@ -773,6 +776,8 @@
 				8B50D7831639AB5E007515BF /* NSString+MD5.m */,
 				8B50D790163AD8F9007515BF /* NSDictionary+Helpers.h */,
 				8B50D791163AD8F9007515BF /* NSDictionary+Helpers.m */,
+				8B7C09B416402C75006BCE79 /* NSArray+Helpers.h */,
+				8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1561,6 +1566,7 @@
 				8BC0BC63163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m in Sources */,
 				8BC0BC66163EF5170048CAB7 /* PhotosList.m in Sources */,
 				8BC0BC6A163F174C0048CAB7 /* LoadingCell.m in Sources */,
+				8B7C09B616402C75006BCE79 /* NSArray+Helpers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

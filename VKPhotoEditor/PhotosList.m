@@ -10,6 +10,7 @@
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 #import "NSObject+Map.h"
+#import "NSArray+Helpers.h"
 
 @interface PhotosList () <VKRequestExecutorDelegate>
 @end
@@ -66,6 +67,18 @@
 {
     initialOffset++;
     photos = [[NSArray arrayWithObject:photo] arrayByAddingObjectsFromArray:photos];
+    [delegate photosList:self didUpdatePhotos:photos];
+}
+
+- (void)deletePhoto:(NSString *)photoId
+{
+    NSUInteger index;
+    VKPhoto *photoToDelete = [photos find:^BOOL(VKPhoto *photo) { return [photo.photoId isEqualToString:photoId]; } index:&index];
+    if (!photoToDelete) return;
+    NSMutableArray *newPhotos = photos.mutableCopy;
+    [newPhotos removeObjectAtIndex:index];
+    photos = newPhotos.copy;
+    initialOffset--;
     [delegate photosList:self didUpdatePhotos:photos];
 }
 

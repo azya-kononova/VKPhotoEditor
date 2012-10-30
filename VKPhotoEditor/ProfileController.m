@@ -18,7 +18,7 @@
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 
-@interface ProfileController () <UITableViewDataSource, UITableViewDelegate, PhotosListDelegate>
+@interface ProfileController () <UITableViewDataSource, UITableViewDelegate, PhotosListDelegate, UIActionSheetDelegate>
 @end
 
 @implementation ProfileController {
@@ -28,6 +28,7 @@
     RequestExecutorDelegateAdapter *adapter;
     NSInteger offset;
     VKConnectionService *service;
+    NSInteger selectedPhoto;
 }
 
 @synthesize nameLabel;
@@ -43,6 +44,8 @@
         sectionHeaders = [NSMutableArray new];
         service = [VKConnectionService shared];
         adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
+        
+        selectedPhoto = -1;
     }
     return self;
 }
@@ -80,6 +83,8 @@
 
 #pragma mark - Request Handler
 
+//TODO: show result with row animation???
+
 - (void)exec:(VKRequestExecutor*)exec didUploadPhoto:(id)value
 {
     VKPhoto *photo = [VKPhoto VKPhotoWithDict:[value objectForKey:@"photo"]];
@@ -87,6 +92,11 @@
     photo.justUploaded = YES;
     [photosList insert:photo];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
+- (void)exec:(VKRequestExecutor*)exec didDeletePhoto:(id)ids
+{
+    if ([ids count]) [photosList deletePhoto:[ids objectAtIndex:0]];
 }
 
 - (void)exec:(VKRequestExecutor*)exec didFailWithError:(NSError*)error
@@ -157,6 +167,32 @@
     }
     [headerView displayPhoto:[photosList.photos objectAtIndex:section]];
     return headerView;
+}
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    selectedPhoto = indexPath.section;
+    UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                            destructiveButtonTitle:@"Delete Image"
+                                                 otherButtonTitles:@"Save Image",nil];
+    actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actSheet showInView:self.view.superview];
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        VKPhoto *photo = [photosList.photos objectAtIndex:selectedPhoto];
+        [adapter start:[service deletePhoto:photo.photoId] onSuccess:@selector(exec: didDeletePhoto:) onError:@selector(exec: didFailWithError:)];
+    } else {
+        selectedPhoto = -1;
+    }
 }
 
 @end
