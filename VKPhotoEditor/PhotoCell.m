@@ -14,11 +14,18 @@
 }
 @synthesize remoteImageView;
 @synthesize addedImageView;
+@synthesize captionTextView;
+
+- (void)awakeFromNib
+{
+    captionTextView.font = [UIFont fontWithName:@"Lobster" size:28.0];
+}
 
 - (void)displayPhoto:(VKPhoto *)_photo
 {
     photo = _photo;
     [remoteImageView displayImage:photo.photo];
+    if (![photo.caption isKindOfClass:[NSNull class]]) captionTextView.text = photo.caption ;
 }
 
 - (void)hideSelfAfterTimeout:(NSTimeInterval)timeout

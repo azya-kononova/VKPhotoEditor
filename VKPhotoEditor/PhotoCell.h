@@ -13,6 +13,7 @@
 @interface PhotoCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *addedImageView;
+@property (nonatomic, strong) IBOutlet UITextView *captionTextView;
 
 - (void)displayPhoto:(VKPhoto*)photo;
 @end
