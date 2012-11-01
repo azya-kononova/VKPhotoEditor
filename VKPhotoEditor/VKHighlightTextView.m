@@ -1,10 +1,10 @@
-#import "VKHighlightView.h"
+#import "VKHighlightTextView.h"
 
 #define EMPTY @""
 
 NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
 
-@interface VKHighlightView() {
+@interface VKHighlightTextView() {
     id internalDelegate;
 }
 - (NSAttributedString*)highlightText:(NSAttributedString*)stringIn;
@@ -35,7 +35,7 @@ NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
 
 static CGFloat MARGIN = 8;
 
-@implementation VKHighlightView {
+@implementation VKHighlightTextView {
     NSDictionary *highlightTheme;
     NSDictionary *definitions;
 }

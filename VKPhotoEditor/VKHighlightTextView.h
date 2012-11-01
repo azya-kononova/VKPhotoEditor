@@ -3,6 +3,5 @@
 
 FOUNDATION_EXPORT NSString *const kVKHighlightViewTypeHashTag;
 
-@interface VKHighlightView : UITextView
-
+@interface VKHighlightTextView : UITextView
 @end

@@ -56,7 +56,7 @@
 
 - (void)uploadImage:(UIImage *)image
 {
-    [adapter start:[service uploadPhoto:image withCaption:@"test"] onSuccess:@selector(exec:didUploadPhoto:) onError:@selector(exec:didFailToUpload:)];
+    [adapter start:[service uploadPhoto:image withCaption:@""] onSuccess:@selector(exec:didUploadPhoto:) onError:@selector(exec:didFailToUpload:)];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 

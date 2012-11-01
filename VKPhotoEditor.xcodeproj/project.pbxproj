@@ -244,7 +244,7 @@
 		8B918E9B1642980B009E45A0 /* SearchHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B918E991642980B009E45A0 /* SearchHeader.png */; };
 		8B918E9C1642980B009E45A0 /* SearchHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B918E9A1642980B009E45A0 /* SearchHeader@2x.png */; };
 		8B918ECE1642C003009E45A0 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B918ECD1642C003009E45A0 /* CoreText.framework */; };
-		8B918EDC16431053009E45A0 /* VKHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B918EDB16431053009E45A0 /* VKHighlightView.m */; };
+		8B918EDC16431053009E45A0 /* VKHighlightTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B918EDB16431053009E45A0 /* VKHighlightTextView.m */; };
 		8B9B4E51160F5055000BE08F /* PhotoEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4D160F5055000BE08F /* PhotoEditController.m */; };
 		8B9B4E52160F5055000BE08F /* PhotoEditController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */; };
 		8B9B4E53160F5055000BE08F /* UIColor+VKPhotoEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9B4E50160F5055000BE08F /* UIColor+VKPhotoEditor.m */; };
@@ -631,8 +631,8 @@
 		8B918E991642980B009E45A0 /* SearchHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SearchHeader.png; sourceTree = "<group>"; };
 		8B918E9A1642980B009E45A0 /* SearchHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SearchHeader@2x.png"; sourceTree = "<group>"; };
 		8B918ECD1642C003009E45A0 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
-		8B918EDA16431053009E45A0 /* VKHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKHighlightView.h; sourceTree = "<group>"; };
-		8B918EDB16431053009E45A0 /* VKHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKHighlightView.m; sourceTree = "<group>"; };
+		8B918EDA16431053009E45A0 /* VKHighlightTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKHighlightTextView.h; sourceTree = "<group>"; };
+		8B918EDB16431053009E45A0 /* VKHighlightTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKHighlightTextView.m; sourceTree = "<group>"; };
 		8B9B4E4C160F5055000BE08F /* PhotoEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoEditController.h; sourceTree = "<group>"; };
 		8B9B4E4D160F5055000BE08F /* PhotoEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoEditController.m; sourceTree = "<group>"; };
 		8B9B4E4E160F5055000BE08F /* PhotoEditController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditController.xib; sourceTree = "<group>"; };
@@ -780,8 +780,8 @@
 				8B918E9716428D1C009E45A0 /* StickyHeaderTableView.m */,
 				222AB9EF163FC0E8001F089C /* FiltersManager.h */,
 				222AB9F0163FC0E8001F089C /* FiltersManager.m */,
-				8B918EDA16431053009E45A0 /* VKHighlightView.h */,
-				8B918EDB16431053009E45A0 /* VKHighlightView.m */,
+				8B918EDA16431053009E45A0 /* VKHighlightTextView.h */,
+				8B918EDB16431053009E45A0 /* VKHighlightTextView.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1646,7 +1646,7 @@
 				8BE3C9DA1641B0950057031A /* AllPhotosController.m in Sources */,
 				8B309D161641C2290091BB6D /* SearchResultsList.m in Sources */,
 				8B918E9816428D1C009E45A0 /* StickyHeaderTableView.m in Sources */,
-				8B918EDC16431053009E45A0 /* VKHighlightView.m in Sources */,
+				8B918EDC16431053009E45A0 /* VKHighlightTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

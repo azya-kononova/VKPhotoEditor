@@ -12,4 +12,6 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+
+- (void)search:(NSString*)query;
 @end

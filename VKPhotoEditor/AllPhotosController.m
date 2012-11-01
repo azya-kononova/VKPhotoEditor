@@ -13,7 +13,7 @@
 #import "PhotoHeaderView.h"
 #import "UIView+Helpers.h"
 
-@interface AllPhotosController () <SearchResultsListDelegate>
+@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate>
 @end
 
 @implementation AllPhotosController {
@@ -63,7 +63,6 @@
         return searchResultsList.completed ? 0 : 1;
     }
     return 1;
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -78,6 +77,7 @@
         return [LoadingCell dequeOrCreateInTable:tableView];
     }
     PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+    cell.delegate = self;
     VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
     [cell displayPhoto:photo];
     return cell;
@@ -117,6 +117,10 @@
 
 - (void)setFindModeActive:(BOOL)active
 {
+    [tableView setContentOffset:CGPointZero animated:NO];
+    
+    if (active == (tableView.tableHeaderView == nil)) return;
+    
     if (active) {
         [self.view addSubview:searchBar];
         [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
@@ -137,36 +141,12 @@
     [tableView endUpdates];
     
     [searchBar setShowsCancelButton:active animated:YES];
-    [tableView setContentOffset:CGPointMake(0,0) animated:YES];
 }
 
-#pragma mark - search bar delegate
-
-- (void)searchBarTextDidBeginEditing:(UISearchBar *)_searchBar
+- (void)search:(NSString *)query
 {
-    [self.view addSubview:searchBar];
     [self setFindModeActive:YES];
-}
-
-- (void)searchBarTextDidEndEditing:(UISearchBar *)_searchBar
-{
-    NSLog(@"End editing");
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)_searchBar
-{
-    _searchBar.text = nil;
-    [searchBar resignFirstResponder];
-    
-    [searchResultsList reset];
-    [tableView reloadData];
-    
-    [self setFindModeActive:NO];
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar;
-{
-    [searchBar resignFirstResponder];
+    searchBar.text = query;
     
     [searchResultsList reset];
     [tableView reloadData];
@@ -178,8 +158,45 @@
             break;
         }
     }
-    
-    
+}
+
+#pragma mark - PhotoCellDelegate
+
+- (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
+{
+    [self search:hashTag];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)_searchBar
+{
+    [self setFindModeActive:YES];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)_searchBar
+{
+    [searchResultsList reset];
+    [tableView reloadData];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)_searchBar
+{
+    _searchBar.text = nil;
+    [searchBar resignFirstResponder];
+    [self setFindModeActive:NO];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar;
+{
+    [searchBar resignFirstResponder];    
+    for (UIView *possibleButton in searchBar.subviews) {
+        if ([possibleButton isKindOfClass:[UIButton class]]) {
+            UIButton *cancelButton = (UIButton*)possibleButton;
+            cancelButton.enabled = YES;
+            break;
+        }
+    }
 }
 
 @end

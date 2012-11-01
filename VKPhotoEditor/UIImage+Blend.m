@@ -13,7 +13,7 @@
 
 - (UIImage*)squareImageByBlendingWithView:(UIView*)view
 {
-    if (!view && abs(self.size.width - self.size.height) <= 1) return self;
+//    if (!view && abs(self.size.width - self.size.height) <= 1) return self;
     
     CGFloat side = fmaxf(self.size.width, self.size.height);
 
