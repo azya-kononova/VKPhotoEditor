@@ -28,7 +28,7 @@
         [captionButton setTitle:captionButtonTitle forState:UIControlStateNormal];
     }
     
-    textField.font = [UIFont fontWithName:@"Lobster 1.4" size:28.0];
+    textField.font = [UIFont fontWithName:@"Lobster" size:28.0];
 }
 
 - (IBAction)addCaption:(id)sender

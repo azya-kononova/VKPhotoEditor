@@ -28,6 +28,7 @@
 		220E6BC5161E040A00AB89B5 /* flash_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 220E6BB3161E040A00AB89B5 /* flash_on@2x.png */; };
 		220E6BC8161E06ED00AB89B5 /* BlurMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E6BC7161E06ED00AB89B5 /* BlurMode.m */; };
 		220E6BCB161E071500AB89B5 /* FlashMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E6BCA161E071500AB89B5 /* FlashMode.m */; };
+		22169D8D1642729F005C097E /* Lobster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22169D8C1642729F005C097E /* Lobster.ttf */; };
 		221C31C516103E2C005974C8 /* TableViewPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31C316103E2C005974C8 /* TableViewPopover.m */; };
 		221C31C616103E2C005974C8 /* TableViewPopover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C31C416103E2C005974C8 /* TableViewPopover.xib */; };
 		221C31CC16103E59005974C8 /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31CA16103E59005974C8 /* UIView+Helpers.m */; };
@@ -345,6 +346,7 @@
 		220E6BC7161E06ED00AB89B5 /* BlurMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurMode.m; sourceTree = "<group>"; };
 		220E6BC9161E071500AB89B5 /* FlashMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashMode.h; sourceTree = "<group>"; };
 		220E6BCA161E071500AB89B5 /* FlashMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashMode.m; sourceTree = "<group>"; };
+		22169D8C1642729F005C097E /* Lobster.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster.ttf; sourceTree = "<group>"; };
 		221C31C216103E2C005974C8 /* TableViewPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewPopover.h; sourceTree = "<group>"; };
 		221C31C316103E2C005974C8 /* TableViewPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewPopover.m; sourceTree = "<group>"; };
 		221C31C416103E2C005974C8 /* TableViewPopover.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableViewPopover.xib; sourceTree = "<group>"; };
@@ -1207,6 +1209,7 @@
 		8BDF189C1611A67B00507B5F /* fonts */ = {
 			isa = PBXGroup;
 			children = (
+				22169D8C1642729F005C097E /* Lobster.ttf */,
 				8BDF18AB1611AAD400507B5F /* ballw_.ttf */,
 				8BDF189E1611A67B00507B5F /* collegiateHeavyOutline_Medium.ttf */,
 				8BDF189F1611A67B00507B5F /* Complete_in_Him.ttf */,
@@ -1516,6 +1519,7 @@
 				222ABA03164036CD001F089C /* blur_bg.png in Resources */,
 				222ABA04164036CD001F089C /* blur_bg@2x.png in Resources */,
 				2285978D1641AAA000960779 /* CaptionTextView.xib in Resources */,
+				22169D8D1642729F005C097E /* Lobster.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
