@@ -24,12 +24,12 @@ NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
 }
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     //Only update the text if the text changed
-//	NSString* newText = [text stringByReplacingOccurrencesOfString:@"\t" withString:@"    "];
-//	if(![newText isEqualToString:text]) {
-//		textView.text = [textView.text stringByReplacingCharactersInRange:range withString:newText];
-//		return NO;
-//	}
-//	return YES;
+	NSString* newText = [text stringByReplacingOccurrencesOfString:@"\t" withString:@"    "];
+	if(![newText isEqualToString:text]) {
+		textView.text = [textView.text stringByReplacingCharactersInRange:range withString:newText];
+		return NO;
+	}
+	return YES;
 }
 @end
 
