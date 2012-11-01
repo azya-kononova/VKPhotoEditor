@@ -33,7 +33,7 @@
     return account;
 }
 
-- (RemoteImage*)photo
+- (RemoteImage*)avatar
 {
     return [[ImageCache shared] remoteImageForURL:avatarUrl];
 }
