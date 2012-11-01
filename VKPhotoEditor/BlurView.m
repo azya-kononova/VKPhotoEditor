@@ -10,9 +10,6 @@
 #import "TableViewPopover.h"
 #import "TablePopoverCell.h"
 
-#import "UIView+NIB.h"
-#import "UITableViewCell+NIB.h"
-
 
 @interface BlurView ()<TableViewPopoverDataSource, TableViewPopoverDelegate, UIGestureRecognizerDelegate>
 @end

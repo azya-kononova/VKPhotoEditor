@@ -9,11 +9,9 @@
 #import "ProfileController.h"
 #import "PhotoCell.h"
 #import "PhotoHeaderView.h"
-#import "UITableViewCell+NIB.h"
 #import "VKPhoto.h"
-#import "UIView+NIB.h"
 #import "RequestExecutorDelegateAdapter.h"
-#import "PhotosList.h"
+#import "UserPhotosList.h"
 #import "LoadingCell.h"
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
@@ -23,7 +21,7 @@
 
 @implementation ProfileController {
     UserAccount *account;
-    PhotosList *photosList;
+    UserPhotosList *photosList;
     NSMutableArray *sectionHeaders;
     RequestExecutorDelegateAdapter *adapter;
     NSInteger offset;
@@ -39,7 +37,7 @@
 {
     if (self = [super init]) {
         account = _account;
-        photosList = [[PhotosList alloc] initWithPhotos:account.lastPhotos];
+        photosList = [[UserPhotosList alloc] initWithPhotos:account.lastPhotos];
         photosList.delegate = self;
         sectionHeaders = [NSMutableArray new];
         service = [VKConnectionService shared];
@@ -71,12 +69,12 @@
 
 #pragma mark - PhotosListDelegate
 
-- (void)photosList:(PhotosList *)photosList didUpdatePhotos:(NSArray *)photos
+- (void)photosList:(UserPhotosList *)photosList didUpdatePhotos:(NSArray *)photos
 {
     [tableView reloadData];
 }
 
-- (void)photosList:(PhotosList *)photosList didFailToUpdate:(NSError *)error
+- (void)photosList:(UserPhotosList *)photosList didFailToUpdate:(NSError *)error
 {
     
 }

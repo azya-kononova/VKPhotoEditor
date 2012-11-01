@@ -10,7 +10,6 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ThumbnailsView.h"
 #import "FlexibleButton.h"
-#import "UIView+NIB.h"
 #import "UIColor+VKPhotoEditor.h"
 #import "CroppingViewController.h"
 #import "PhotoEditController.h"

@@ -8,7 +8,6 @@
 
 #import "PhotosListController.h"
 #import "VKTabBar.h"
-#import "UIView+NIB.h"
 #import "UIView+Helpers.h"
 #import "ProfileController.h"
 #import "VKRequestExecutor.h"
@@ -17,6 +16,7 @@
 #import "UIViewController+Transitions.h"
 #import "CroppingViewController.h"
 #import "PhotoEditController.h"
+#import "AllPhotosController.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
@@ -49,7 +49,10 @@
     service = [VKConnectionService shared];
     ProfileController *profileCtrl = [[ProfileController alloc] initWithAccount:service.account];
     profileCtrl.delegate = self;
-    controllers =  [NSArray arrayWithObjects:profileCtrl, [UIViewController new],nil];
+    
+    AllPhotosController *allPhotosCtrl = [AllPhotosController new];
+    
+    controllers =  [NSArray arrayWithObjects:profileCtrl, allPhotosCtrl, nil];
     if (imageToUpload) [profileCtrl uploadImage:imageToUpload];
     
     tabBar = [VKTabBar loadFromNIB];

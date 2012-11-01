@@ -129,9 +129,19 @@ NSString *VKErrorDomain = @"VKErrorDomain";
     return exec;
 }
 
-- (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset
+- (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset limit:(NSInteger)limit
 {
-    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"getPhotos?user_id=%d&offset=%d", userId, offset]];
+    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"getPhotos?user_id=%d&offset=%d&limit=%d", userId, offset, limit]];
+    return exec;
+}
+
+- (VKRequestExecutor*)searchPhotos:(NSString*)query offset:(NSInteger)offset limit:(NSInteger)limit
+{
+    NSString *path = [NSString stringWithFormat:@"searchPhotos?offset=%d&limit=%d", offset, limit];
+    if (query.length) {
+        path = [path stringByAppendingFormat:@"&q=%@", [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    RequestExecutorProxy *exec = [self getPath:path];
     return exec;
 }
 

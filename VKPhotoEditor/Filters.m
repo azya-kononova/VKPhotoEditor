@@ -13,7 +13,6 @@
 #import "DemotivatorCaptionView.h"
 #import "PolaroidCaptionView.h"
 #import "CloudCaptionView.h"
-#import "UIView+NIB.h"
 #import "ComicsCaptionView.h"
 
 NSString *MonochromeFilterName = @"MonochromeFilter";

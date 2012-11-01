@@ -6,16 +6,16 @@
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import "PhotosList.h"
+#import "UserPhotosList.h"
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 #import "NSObject+Map.h"
 #import "NSArray+Helpers.h"
 
-@interface PhotosList () <VKRequestExecutorDelegate>
+@interface UserPhotosList () <VKRequestExecutorDelegate>
 @end
 
-@implementation PhotosList {
+@implementation UserPhotosList {
     VKConnectionService *service;
     NSInteger nextPage;
     VKRequestExecutor *exec;
@@ -26,13 +26,27 @@
 @synthesize completed;
 @synthesize delegate;
 
+- (void)_init
+{
+    service = [VKConnectionService shared];
+    limit = 20;
+}
+
+- (id)init
+{
+    if (self = [super init]) {
+        [self _init];
+    }
+    return self;
+}
+
 - (id)initWithPhotos:(NSArray*)_photos
 {
     if (self = [super init]) {
+        [self _init];
         photos = [_photos copy];
         initialOffset = photos.count;
-        service = [VKConnectionService shared];
-        limit = 20;
+
     }
     return self;
 }
@@ -48,7 +62,7 @@
 - (void)loadNextPageFor:(NSInteger)userId
 {
     if (exec) return;
-    exec = [service getPhotos:userId offset:initialOffset + limit*nextPage++];
+    exec = [service getPhotos:userId offset:initialOffset + limit*nextPage++ limit:limit];
     exec.delegate = self;
     [exec start];
 }

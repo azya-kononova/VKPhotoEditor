@@ -17,10 +17,6 @@
 #import "BlurFilterParams.h"
 #import "FiltersManager.h"
 #import "BlurView.h"
-
-#import "UIView+NIB.h"
-#import "UITableViewCell+NIB.h"
-
 #import "GPUImageView.h"
 #import "GPUImageStillCamera.h"
 

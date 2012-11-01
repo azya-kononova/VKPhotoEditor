@@ -12,7 +12,6 @@
 #import "UIColor+VKPhotoEditor.h"
 #import "CaptionView.h"
 #import "UIView+Helpers.h"
-#import "UIView+NIB.h"
 #import "ImageFilter.h"
 #import "GPUImagePicture.h"
 #import "SPUserResizableView.h"

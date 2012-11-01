@@ -10,7 +10,7 @@
 
 @protocol PhotosListDelegate;
 
-@interface PhotosList : NSObject
+@interface UserPhotosList : NSObject
 @property (nonatomic, assign) id<PhotosListDelegate> delegate;
 @property (nonatomic, strong) NSArray *photos;
 @property (nonatomic, assign) NSInteger limit;
@@ -26,7 +26,7 @@
 @end
 
 @protocol PhotosListDelegate
-- (void)photosList:(PhotosList*)photosList didUpdatePhotos:(NSArray*)photos;
-- (void)photosList:(PhotosList *)photosList didFailToUpdate:(NSError*)error;
+- (void)photosList:(UserPhotosList*)photosList didUpdatePhotos:(NSArray*)photos;
+- (void)photosList:(UserPhotosList *)photosList didFailToUpdate:(NSError*)error;
 @end
 
