@@ -121,7 +121,7 @@
 					<object class="IBUIButton" id="941143366">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{229, 418}, {85, 35}}</string>
+						<string key="NSFrame">{{228, 418}, {85, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="383638345"/>
@@ -133,7 +133,7 @@
 						<bool key="IBUIAdjustsImageWhenHighlighted">NO</bool>
 						<bool key="IBUIAdjustsImageWhenDisabled">NO</bool>
 						<string key="IBUITitleShadowOffset">{25, 25}</string>
-						<string key="IBUINormalTitle">Caption</string>
+						<string key="IBUINormalTitle">Cancel</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="597097089">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MSAxIDEAA</bytes>
@@ -296,7 +296,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUIView" id="315574409">
-				<nil key="NSNextResponder"/>
+				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIScrollView" id="159498948">
@@ -304,6 +304,8 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="315574409"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">1</int>
@@ -315,6 +317,8 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 480}</string>
+				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="159498948"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
 				<object class="NSColor" key="IBUIBackgroundColor">
@@ -363,14 +367,6 @@
 						<reference key="destination" ref="222258461"/>
 					</object>
 					<int key="connectionID">23</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">captionButton</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="941143366"/>
-					</object>
-					<int key="connectionID">24</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -454,6 +450,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">cancelButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="941143366"/>
+					</object>
+					<int key="connectionID">95</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">dataSource</string>
 						<reference key="source" ref="698668678"/>
 						<reference key="destination" ref="372490531"/>
@@ -479,21 +483,21 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">cancel</string>
+						<string key="label">retake</string>
 						<reference key="source" ref="222258461"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">45</int>
+					<int key="connectionID">96</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">addCaption</string>
+						<string key="label">cancel</string>
 						<reference key="source" ref="941143366"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">32</int>
+					<int key="connectionID">97</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletCollectionConnection" key="connection">
@@ -553,13 +557,13 @@
 						<int key="objectID">1</int>
 						<reference key="object" ref="191373211"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="941143366"/>
-							<reference ref="222258461"/>
 							<reference ref="47964968"/>
 							<reference ref="383638345"/>
 							<reference ref="352913918"/>
 							<reference ref="635559761"/>
 							<reference ref="521858951"/>
+							<reference ref="941143366"/>
+							<reference ref="222258461"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Content View</string>
@@ -618,9 +622,9 @@
 						<reference key="object" ref="635559761"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="613514827"/>
-							<reference ref="698668678"/>
 							<reference ref="418654818"/>
 							<reference ref="408549179"/>
+							<reference ref="698668678"/>
 						</array>
 						<reference key="parent" ref="191373211"/>
 					</object>
@@ -702,7 +706,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">87</int>
+			<int key="maxID">97</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -726,15 +730,16 @@
 					<string key="className">PhotoEditController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="addCaption">id</string>
+						<string key="cancel">id</string>
 						<string key="nextCaptionTemplate">id</string>
 						<string key="prevCaptionTemplate">id</string>
+						<string key="retake">id</string>
 						<string key="save">id</string>
 						<string key="selectBlur">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="addCaption">
-							<string key="name">addCaption</string>
+						<object class="IBActionInfo" key="cancel">
+							<string key="name">cancel</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="nextCaptionTemplate">
@@ -743,6 +748,10 @@
 						</object>
 						<object class="IBActionInfo" key="prevCaptionTemplate">
 							<string key="name">prevCaptionTemplate</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="retake">
+							<string key="name">retake</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="save">
@@ -756,7 +765,7 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="blurButton">UIButton</string>
-						<string key="captionButton">FlexibleButton</string>
+						<string key="cancelButton">FlexibleButton</string>
 						<string key="captionOverlayView">UIView</string>
 						<string key="contentView">UIView</string>
 						<string key="filterView">ThumbnailsView</string>
@@ -773,8 +782,8 @@
 							<string key="name">blurButton</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="captionButton">
-							<string key="name">captionButton</string>
+						<object class="IBToOneOutletInfo" key="cancelButton">
+							<string key="name">cancelButton</string>
 							<string key="candidateClassName">FlexibleButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="captionOverlayView">

@@ -35,4 +35,9 @@
     return captionLabel.font;
 }
 
+- (UIColor *)textColor
+{
+    return captionLabel.textColor;
+}
+
 @end

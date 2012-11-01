@@ -49,9 +49,7 @@ NSString *TiltShiftFilterName = @"TiltShiftFilter";
 {
     return [NSArray arrayWithObjects: [DefaultCaptionView loadFromNIB],
             [DemotivatorCaptionView loadFromNIB],
-            [PolaroidCaptionView loadFromNIB],
-            [CloudCaptionView loadFromNIB],
-            [ComicsCaptionView loadFromNIB], nil];
+            [PolaroidCaptionView loadFromNIB], nil];
 }
 
 + (GPUImageOutput<GPUImageInput>*)GPUFilterWithName:(NSString*)name

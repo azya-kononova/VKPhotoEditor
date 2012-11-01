@@ -25,15 +25,15 @@
 #import "ArrowView.h"
 #import "FiltersManager.h"
 #import "BlurView.h"
+#import "CaptionTextView.h"
 
 #define MAX_FONT_SIZE 100
 
-@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, CaptionViewDelegate, CaptionTemplateDelegate, BlurViewDelegate>
+@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, CaptionTemplateDelegate, BlurViewDelegate, CaptionTextViewDelegate>
 @end
 
 @implementation PhotoEditController {
     NSArray *filters;
-    CaptionView *captionView;
     CGPoint oldContentOffset;
     UIImage *image;
     BOOL isPhoto;
@@ -48,11 +48,12 @@
     FiltersManager *manager;
     BlurView *blurView;
     PrepareFilter prepareBlock;
+    CaptionTextView *captionView;
 }
 
 @synthesize saveButton;
 @synthesize retakeButton;
-@synthesize captionButton;
+@synthesize cancelButton;
 @synthesize filterView;
 @synthesize contentView;
 @synthesize scrollView;
@@ -87,8 +88,7 @@
     
     saveButton.bgImagecaps = CGSizeMake(23, 0);
     retakeButton.bgImagecaps = CGSizeMake(23, 20);
-    captionButton.bgImagecaps = CGSizeMake(23, 20);
-    [captionButton setBackgroundImage:[UIImage imageNamed:@"RollBtn_Prsssed"] forState:(UIControlStateHighlighted|UIControlStateSelected)];
+    cancelButton.bgImagecaps = CGSizeMake(23, 20);
     [retakeButton setTitle:isPhoto ? @"Retake" : @"Cancel" forState:UIControlStateNormal];
     
     sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
@@ -101,16 +101,14 @@
     filterView.thumbConrnerRadius = 7.0;
     [filterView reloadData];
     filterView.displayedItemIndex = filterIndex;
-   
-    captionView = [CaptionView loadFromNIB];
-    [captionView moveTo:CGPointMake(0, 390)];
-    captionView.caption = @"Make me awesome ;)";
-    captionView.hidden = YES;
-    captionView.delegate = self;
     
     captionTemplates = Filters.captionViewTemplates;
     captionTemplateIndex = 0;
     [self setCaptionViewTemplate:[captionTemplates objectAtIndex:captionTemplateIndex]];
+    
+    captionView = [CaptionTextView loadFromNIB];
+    captionView.center = CGPointMake(self.view.center.x, 360);
+    captionView.delegate = self;
     
     [contentView addSubview:captionView];
     [scrollView addSubview:contentView];
@@ -213,10 +211,10 @@
     [captionViewTemplate removeFromSuperview];
     captionViewTemplate.delegate = nil;
     [captionOverlayView addSubview:_captionViewTemplate];
-    _captionViewTemplate.font = captionView.selectedFont;
-    _captionViewTemplate.text = captionView.caption;
     captionViewTemplate = _captionViewTemplate;
     captionViewTemplate.delegate = self;
+    
+    captionView.captionColor = captionViewTemplate.textColor;
 }
 
 - (IBAction)nextCaptionTemplate
@@ -231,23 +229,6 @@
     [self setCaptionViewTemplate:[captionTemplates objectAtIndex:captionTemplateIndex]];
 }
 
-- (IBAction)addCaption
-{
-    [arrowView showArrows];
-    BOOL show = captionView.hidden;
-    if (!show) [captionView resignFirstResponder];
-    captionButton.selected = show;
-    captionView.hidden = !show;
-    CGFloat adjustHeight = captionView.frame.size.height - 15;
-    [contentView expand:CGSizeMake(0, show ? adjustHeight : -adjustHeight)];
-    scrollView.contentSize = contentView.frame.size;
-    [UIView animateWithDuration:0.2 animations:^{
-        [topView moveTo:CGPointMake(0, 0)];
-    }];
-    CGPoint bottomOffset = show ? CGPointMake(0, scrollView.contentSize.height - self.scrollView.bounds.size.height) : CGPointZero;
-    [scrollView setContentOffset:bottomOffset animated:NO];
-}
-
 - (IBAction)save
 {   
     [activityView showSelf:YES];
@@ -258,12 +239,18 @@
         BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
         UIImage *output = [[self imageByApplingFilters] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
         [activityView showSelf:NO];
+        //TODO: send image and text
         [delegate photoEditController:self didEdit:output];
     });
     
 }
 
 - (IBAction)cancel
+{
+    [delegate photoEditControllerDidCancel:self];
+}
+
+- (IBAction)retake
 {
     if (isPhoto) {
         [delegate photoEditControllerDidRetake:self];
@@ -297,18 +284,6 @@
 - (void)captionTemplateEndEditing:(UIView<CaptionTemplateProtocol> *)captionTemplate
 {
     scrollView.scrollEnabled = leftRecognizer.enabled = rightRecognizer.enabled = YES;
-}
-
-#pragma mar CaptionView delegate
-
-- (void)captionViewdidChange:(CaptionView *)_captionView
-{
-    captionViewTemplate.text = captionView.caption;
-}
-
-- (void)captionView:(CaptionView *)captionView didSetFont:(UIFont *)font
-{
-    captionViewTemplate.font = font;
 }
 
 #pragma mark ThumbnailView datasourse
@@ -351,6 +326,18 @@
 - (void)blurView:(BlurView *)view didChangeBlurScale:(CGFloat)scale
 {
     [manager setBlurFilterScale:scale];
+}
+
+#pragma mark - CaptionTextViewDelegate
+
+- (void)captionTextViewDidStartEditing:(CaptionTextView *)view
+{
+    [arrowView showArrows];
+}
+
+- (void)captionTextViewDidFinishEditing:(CaptionTextView *)view
+{
+    NSLog(@"text: %@", captionView.caption);
 }
 
 @end

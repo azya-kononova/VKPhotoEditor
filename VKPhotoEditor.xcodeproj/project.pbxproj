@@ -125,6 +125,8 @@
 		226E75EE160F1DC700531350 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 226E75ED160F1DC700531350 /* AssetsLibrary.framework */; };
 		22843694163ED940009D75C8 /* FocusSquareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22843693163ED940009D75C8 /* FocusSquareView.m */; };
 		22855AD316119973007333D8 /* CroppingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22855AD116119973007333D8 /* CroppingViewController.m */; };
+		228597891641968600960779 /* CaptionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 228597881641968600960779 /* CaptionTextView.m */; };
+		2285978D1641AAA000960779 /* CaptionTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2285978C1641AAA000960779 /* CaptionTextView.xib */; };
 		22B4E3EE1621DF13008ECFA3 /* Filter9.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B4E3ED1621DF13008ECFA3 /* Filter9.png */; };
 		22D1772C1618752D00B8093D /* TakePhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1772A1618752D00B8093D /* TakePhotoController.m */; };
 		22D1772D1618752D00B8093D /* TakePhotoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D1772B1618752D00B8093D /* TakePhotoController.xib */; };
@@ -450,6 +452,9 @@
 		22843693163ED940009D75C8 /* FocusSquareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FocusSquareView.m; sourceTree = "<group>"; };
 		22855AD016119973007333D8 /* CroppingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CroppingViewController.h; sourceTree = "<group>"; };
 		22855AD116119973007333D8 /* CroppingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CroppingViewController.m; sourceTree = "<group>"; };
+		228597871641968600960779 /* CaptionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptionTextView.h; sourceTree = "<group>"; };
+		228597881641968600960779 /* CaptionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptionTextView.m; sourceTree = "<group>"; };
+		2285978C1641AAA000960779 /* CaptionTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptionTextView.xib; sourceTree = "<group>"; };
 		22B4E3ED1621DF13008ECFA3 /* Filter9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter9.png; sourceTree = "<group>"; };
 		22D177291618752D00B8093D /* TakePhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoController.h; sourceTree = "<group>"; };
 		22D1772A1618752D00B8093D /* TakePhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoController.m; sourceTree = "<group>"; };
@@ -1122,6 +1127,9 @@
 				22843693163ED940009D75C8 /* FocusSquareView.m */,
 				222AB9FE163FD52F001F089C /* BlurView.h */,
 				222AB9FF163FD52F001F089C /* BlurView.m */,
+				228597871641968600960779 /* CaptionTextView.h */,
+				228597881641968600960779 /* CaptionTextView.m */,
+				2285978C1641AAA000960779 /* CaptionTextView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1507,6 +1515,7 @@
 				8B7C09B316401EBB006BCE79 /* Added@2x.png in Resources */,
 				222ABA03164036CD001F089C /* blur_bg.png in Resources */,
 				222ABA04164036CD001F089C /* blur_bg@2x.png in Resources */,
+				2285978D1641AAA000960779 /* CaptionTextView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1593,6 +1602,7 @@
 				8B7C09CF164049E5006BCE79 /* PhotoManageBaseController.m in Sources */,
 				222AB9F1163FC0E8001F089C /* FiltersManager.m in Sources */,
 				222ABA00163FD52F001F089C /* BlurView.m in Sources */,
+				228597891641968600960779 /* CaptionTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -40,6 +40,11 @@
     return captionLabel.font;
 }
 
+- (UIColor *)textColor
+{
+    return captionLabel.textColor;
+}
+
 #pragma mark - SPUserResizableViewDelegate
 
 - (void)userResizableViewDidBeginEditing:(SPUserResizableView *)userResizableView

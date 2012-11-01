@@ -15,7 +15,7 @@
 @interface PhotoEditController : UIViewController
 @property (nonatomic, strong) IBOutlet FlexibleButton *saveButton;
 @property (nonatomic, strong) IBOutlet FlexibleButton *retakeButton;
-@property (nonatomic, strong) IBOutlet FlexibleButton *captionButton;
+@property (nonatomic, strong) IBOutlet FlexibleButton *cancelButton;
 @property (nonatomic, strong) IBOutlet ThumbnailsView *filterView;
 @property (nonatomic, strong) IBOutlet UIView *contentView;
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
@@ -30,13 +30,14 @@
 @property (nonatomic, unsafe_unretained) id<PhotoEditControllerDelegate> delegate;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter;
-- (IBAction)addCaption;
 - (IBAction)save;
 
 - (IBAction)nextCaptionTemplate;
 - (IBAction)prevCaptionTemplate;
 
 - (IBAction)selectBlur;
+- (IBAction)cancel;
+- (IBAction)retake;
 
 @end
 
