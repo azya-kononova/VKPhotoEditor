@@ -45,7 +45,6 @@
     GPUImageOutput<GPUImageInput> *blurFilter;
     FiltersManager *manager;
     BlurView *blurView;
-    PrepareFilter prepareBlock;
     CaptionTextView *captionView;
 }
 
@@ -92,6 +91,7 @@
     sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
     GPUImageOutput<GPUImageInput> *basicFilter = [GPUImageEmptyFilter new];
     [basicFilter addTarget:imageView];
+    [basicFilter setInputRotation:image.rotationMode atIndex:0];
     [sourcePicture addTarget:basicFilter];
     
     filters = Filters.filters;
@@ -121,10 +121,6 @@
     
     filterView.highlight = YES;
     
-    prepareBlock = ^(GPUImageOutput<GPUImageInput> *filter) {
-        [(GPUImageFilter *)filter setInputRotation:image.rotationMode atIndex:0];
-    };
-    
     blurView = [[BlurView alloc] initWithCenter:CGPointMake(270, 125) margin:CGRectGetMaxY(blurButton.frame)];
     blurView.delegate = self;
     [self.view addSubview:blurView];
@@ -138,13 +134,13 @@
 
 - (void)setFilterWithIndex:(NSInteger)index
 { 
-    [manager setFilterWithIndex:index prepare:prepareBlock];
+    [manager setFilterWithIndex:index prepare:nil];
     [sourcePicture processImage];
 }
 
 - (void)setBlurFilterWithFilter:(id)filter
 {
-    [manager setBlurFilterWithFilter:filter prepare:prepareBlock];
+    [manager setBlurFilterWithFilter:filter prepare:nil];
     [sourcePicture processImage];
 }
 

@@ -50,7 +50,9 @@ FiltersManager *FiltersManagerMake(id basic, id camera, id view)
     GPUImageOutput<GPUImageInput> *filter = [Filters GPUFilterWithName:imageFilter.name];
     [filter addTarget: cameraView];
     
-    prerareFilter(filter);
+    if (prerareFilter) {
+        prerareFilter(filter);
+    }
     
     if (blurFilter) {
         [blurFilter removeAllTargets];
@@ -78,7 +80,9 @@ FiltersManager *FiltersManagerMake(id basic, id camera, id view)
         for (GPUImageOutput<GPUImageInput> *target in blurTargets) {
             [blurFilter addTarget:target];
         }
-        prerareFilter(blurFilter);
+        if (prerareFilter) {
+            prerareFilter(blurFilter);
+        }
         [basicFilter addTarget:blurFilter];
     } else {
         for (GPUImageOutput<GPUImageInput> *target in blurTargets) {
