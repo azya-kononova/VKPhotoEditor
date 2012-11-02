@@ -227,6 +227,7 @@
 		8B7096AE163C7544004DA31B /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B7096AD163C7544004DA31B /* PhotoCell.xib */; };
 		8B7096B1163C760A004DA31B /* VKPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096B0163C760A004DA31B /* VKPhoto.m */; };
 		8B7096B8163C7F64004DA31B /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096B7163C7F63004DA31B /* ImageCache.m */; };
+		8B7406D01643E28B00379805 /* UITextView+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7406CF1643E28B00379805 /* UITextView+Resize.m */; };
 		8B7C09B216401EBB006BCE79 /* Added.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C09B016401EBB006BCE79 /* Added.png */; };
 		8B7C09B316401EBB006BCE79 /* Added@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C09B116401EBB006BCE79 /* Added@2x.png */; };
 		8B7C09B616402C75006BCE79 /* NSArray+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */; };
@@ -611,6 +612,8 @@
 		8B7096B0163C760A004DA31B /* VKPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKPhoto.m; sourceTree = "<group>"; };
 		8B7096B6163C7F63004DA31B /* ImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCache.h; sourceTree = "<group>"; };
 		8B7096B7163C7F63004DA31B /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
+		8B7406CE1643E28B00379805 /* UITextView+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Resize.h"; sourceTree = "<group>"; };
+		8B7406CF1643E28B00379805 /* UITextView+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Resize.m"; sourceTree = "<group>"; };
 		8B7C09B016401EBB006BCE79 /* Added.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Added.png; sourceTree = "<group>"; };
 		8B7C09B116401EBB006BCE79 /* Added@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Added@2x.png"; sourceTree = "<group>"; };
 		8B7C09B416402C75006BCE79 /* NSArray+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helpers.h"; sourceTree = "<group>"; };
@@ -827,6 +830,8 @@
 				8B50D791163AD8F9007515BF /* NSDictionary+Helpers.m */,
 				8B7C09B416402C75006BCE79 /* NSArray+Helpers.h */,
 				8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */,
+				8B7406CE1643E28B00379805 /* UITextView+Resize.h */,
+				8B7406CF1643E28B00379805 /* UITextView+Resize.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1647,6 +1652,7 @@
 				8B309D161641C2290091BB6D /* SearchResultsList.m in Sources */,
 				8B918E9816428D1C009E45A0 /* StickyHeaderTableView.m in Sources */,
 				8B918EDC16431053009E45A0 /* VKHighlightTextView.m in Sources */,
+				8B7406D01643E28B00379805 /* UITextView+Resize.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

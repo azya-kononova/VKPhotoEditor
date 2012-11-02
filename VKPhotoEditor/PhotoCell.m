@@ -9,6 +9,7 @@
 #import "PhotoCell.h"
 #import "CALayer+Animations.h"
 #import "VKHighlightTextView.h"
+#import "UITextView+Resize.h"
 
 @implementation PhotoCell {
     VKPhoto *photo;
@@ -30,6 +31,7 @@
     photo = _photo;
     [remoteImageView displayImage:photo.photo];
     if (![photo.caption isKindOfClass:[NSNull class]]) captionTextView.text = photo.caption ;
+    [captionTextView sizeFontToFitMinSize:8 maxSize:28];
     [captionTextView setNeedsDisplay];
 }
 

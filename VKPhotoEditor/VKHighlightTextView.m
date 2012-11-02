@@ -1,5 +1,5 @@
 #import "VKHighlightTextView.h"
-
+#import "UITextView+Resize.h"
 #define EMPTY @""
 
 NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
@@ -17,6 +17,7 @@ NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
 @implementation RegexHighlightViewDelegate
 //Update the syntax highlighting if the text gets changed or the scrollview gets updated
 - (void)textViewDidChange:(UITextView *)textView {
+    [textView sizeFontToFitMinSize:8 maxSize:28];
     [textView setNeedsDisplay];
 }
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
