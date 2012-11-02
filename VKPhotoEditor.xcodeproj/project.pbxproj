@@ -794,8 +794,6 @@
 				8B918E9716428D1C009E45A0 /* StickyHeaderTableView.m */,
 				222AB9EF163FC0E8001F089C /* FiltersManager.h */,
 				222AB9F0163FC0E8001F089C /* FiltersManager.m */,
-				8B918EDA16431053009E45A0 /* VKHighlightTextView.h */,
-				8B918EDB16431053009E45A0 /* VKHighlightTextView.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1182,6 +1180,8 @@
 				22843693163ED940009D75C8 /* FocusSquareView.m */,
 				222AB9FE163FD52F001F089C /* BlurView.h */,
 				222AB9FF163FD52F001F089C /* BlurView.m */,
+				8B918EDA16431053009E45A0 /* VKHighlightTextView.h */,
+				8B918EDB16431053009E45A0 /* VKHighlightTextView.m */,
 				228597871641968600960779 /* CaptionTextView.h */,
 				228597881641968600960779 /* CaptionTextView.m */,
 				2285978C1641AAA000960779 /* CaptionTextView.xib */,

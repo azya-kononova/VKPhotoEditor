@@ -13,6 +13,7 @@
 - (NSInvocation*)invocationForSelector:(SEL)sel;
 
 - (void)invokeSelector:(SEL)sel withObject:(id)object1 withObject:(id)object2;
-
+- (void)invokeSelector:(SEL)sel withObject:(id)object;
+- (id)invokeReturnedSelector:(SEL)sel withObject:(id)object;
 @end
 

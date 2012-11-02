@@ -9,14 +9,19 @@
 #import "CaptionTextView.h"
 #import "FlexibleButton.h"
 #import "FlexibleTextField.h"
+#import "VKHighlightTextView.h"
 
-@interface CaptionTextView ()<UITextFieldDelegate>
+#define SIZE_STEP 2
+#define MAX_FONT_SIZE 28
+#define MIN_FONT_SIZE 14
+
+@interface CaptionTextView ()<UITextViewDelegate>
 - (IBAction)addCaption:(id)sender;
 @end
 
 @implementation CaptionTextView {
     IBOutlet FlexibleButton *captionButton;
-    IBOutlet UITextField *textField;
+    IBOutlet VKHighlightTextView *textView;
 }
 
 @synthesize captionButtonTitle, delegate;
@@ -28,45 +33,58 @@
         [captionButton setTitle:captionButtonTitle forState:UIControlStateNormal];
     }
     
-    textField.font = [UIFont fontWithName:@"Lobster" size:28.0];
+    textView.font = [UIFont fontWithName:@"Lobster" size:MAX_FONT_SIZE];
+    
+    [textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
+    textView.isEditable = YES;
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    UITextView *tv = object;
+    CGFloat topCorrect = (tv.bounds.size.height - tv.contentSize.height);
+    topCorrect = topCorrect < 0.0 ? 0.0 : topCorrect;
+    tv.contentOffset = CGPointMake(0, -topCorrect);
 }
 
 - (IBAction)addCaption:(id)sender
 {
     captionButton.hidden = YES;
-    textField.enabled = YES;
-    [textField becomeFirstResponder];
+    textView.editable = YES;
+    [textView becomeFirstResponder];
 }
 
 - (NSString *)caption
 {
-    return textField.text;
+    return textView.text;
 }
 
 - (void)setCaptionColor:(UIColor *)captionColor
 {
-    textField.textColor = captionColor;
+    textView.textColor = captionColor;
 }
 
 - (UIColor *)captionColor
 {
-    return textField.textColor;
+    return textView.textColor;
 }
 
 #pragma mark - UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)_textField
-{
-    [_textField resignFirstResponder];
-    captionButton.hidden = _textField.text.length;
-    [delegate captionTextViewDidFinishEditing:self];
-    
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)_textField
+- (void)textViewDidBeginEditing:(UITextView *)tv
 {
     [delegate captionTextViewDidStartEditing:self];
+}
+
+- (BOOL)textView:(UITextView *)tv shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+    if ([text isEqualToString:@"\n"]) {
+        [tv resignFirstResponder];
+        captionButton.hidden = tv.text.length;
+        [delegate captionTextViewDidFinishEditing:self];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end

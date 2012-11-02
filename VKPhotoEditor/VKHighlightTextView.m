@@ -1,5 +1,7 @@
 #import "VKHighlightTextView.h"
 #import "UITextView+Resize.h"
+#import "NSObject+Invocation.h"
+
 #define EMPTY @""
 
 NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
@@ -12,17 +14,40 @@ NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
 @end
 
 @interface RegexHighlightViewDelegate : NSObject<UITextViewDelegate>
+@property (nonatomic, unsafe_unretained) NSObject<UITextViewDelegate> *delegate;
 @end
 
 @implementation RegexHighlightViewDelegate
+
+@synthesize delegate;
+
+- (void)delegatePerformSelector:(SEL)aSelector withObject:(id)object
+{
+    if ([delegate respondsToSelector:aSelector]) {
+        [delegate invokeSelector:aSelector withObject:object];
+    }
+}
+
+- (id)delegatePerformReturnedSelector:(SEL)aSelector withObject:(id)object
+{
+    if ([delegate respondsToSelector:aSelector]) {
+        return [delegate invokeReturnedSelector:aSelector withObject:object];
+    }
+    return nil;
+}
+
 //Update the syntax highlighting if the text gets changed or the scrollview gets updated
 - (void)textViewDidChange:(UITextView *)textView {
     [textView sizeFontToFitMinSize:8 maxSize:28];
     [textView setNeedsDisplay];
+    
+    [self delegatePerformSelector:@selector(textViewDidChange:) withObject:textView];
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
 	[scrollView setNeedsDisplay];
 }
+
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     //Only update the text if the text changed
 	NSString* newText = [text stringByReplacingOccurrencesOfString:@"\t" withString:@"    "];
@@ -30,8 +55,39 @@ NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
 		textView.text = [textView.text stringByReplacingCharactersInRange:range withString:newText];
 		return NO;
 	}
+    
+    if ([delegate respondsToSelector:@selector(textView:shouldChangeTextInRange:replacementText:)]) {
+        return [delegate textView:textView shouldChangeTextInRange:range replacementText:text];
+    }
+    
 	return YES;
 }
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    return [[self delegatePerformReturnedSelector:@selector(textViewShouldBeginEditing:) withObject:textView] boolValue];
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+    return [[self delegatePerformReturnedSelector:@selector(textViewShouldEndEditing:) withObject:textView] boolValue];
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [self delegatePerformSelector:@selector(textViewDidBeginEditing:) withObject:textView];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+    [self delegatePerformSelector:@selector(textViewDidEndEditing:) withObject:textView];
+}
+
+- (void)textViewDidChangeSelection:(UITextView *)textView
+{
+    [self delegatePerformSelector:@selector(textViewDidChangeSelection:) withObject:textView];
+}
+
 @end
 
 static CGFloat MARGIN = 8;
@@ -43,6 +99,11 @@ static CGFloat MARGIN = 8;
 @synthesize isEditable;
 
 - (BOOL)canBecomeFirstResponder
+{
+    return isEditable;
+}
+
+- (BOOL)canResignFirstResponder
 {
     return isEditable;
 }
@@ -77,6 +138,15 @@ static CGFloat MARGIN = 8;
     }
     return self;
     
+}
+
+- (void)setDelegate:(id<UITextViewDelegate>)delegate
+{
+    if (![delegate isKindOfClass:[RegexHighlightViewDelegate class]]) {
+        [(RegexHighlightViewDelegate *)internalDelegate setDelegate:delegate];
+    } else {
+        [super setDelegate:delegate];
+    }
 }
 
 -(void)drawRect:(CGRect)rect {

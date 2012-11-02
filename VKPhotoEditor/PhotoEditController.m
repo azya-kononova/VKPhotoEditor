@@ -105,7 +105,7 @@
     [self setCaptionViewTemplate:[captionTemplates objectAtIndex:captionTemplateIndex]];
     
     captionView = [CaptionTextView loadFromNIB];
-    captionView.center = CGPointMake(self.view.center.x, 360);
+    captionView.center = CGPointMake(self.view.center.x, 350);
     captionView.delegate = self;
     
     [contentView addSubview:captionView];

@@ -28,5 +28,21 @@
 #pragma clang diagnostic pop
 }
 
+- (void)invokeSelector:(SEL)sel withObject:(id)object
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [self performSelector:sel withObject:object];
+#pragma clang diagnostic pop
+}
+
+- (id)invokeReturnedSelector:(SEL)sel withObject:(id)object
+{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    return [self performSelector:sel withObject:object];
+#pragma clang diagnostic pop
+}
+
 @end
 
