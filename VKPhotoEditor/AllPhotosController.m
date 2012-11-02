@@ -13,7 +13,7 @@
 #import "PhotoHeaderView.h"
 #import "UIView+Helpers.h"
 
-@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate>
+@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate>
 @end
 
 @implementation AllPhotosController {
@@ -23,6 +23,7 @@
 @synthesize tableView;
 @synthesize tableHeaderView;
 @synthesize searchBar;
+@synthesize delegate;
 
 - (void)viewDidLoad
 {
@@ -109,6 +110,7 @@
     if (!headerView)
     {
         headerView = [PhotoHeaderView loadFromNIB];
+        headerView.delegate = self;
         [sectionHeaders addObject:headerView];
     }
     [headerView displayPhoto:[searchResultsList.photos objectAtIndex:section]];
@@ -184,6 +186,7 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar;
 {
+    [searchBar resignFirstResponder];
     [searchResultsList reset];
     [tableView reloadData];
     for (UIView *possibleButton in searchBar.subviews) {
@@ -193,6 +196,13 @@
             break;
         }
     }
+}
+
+#pragma mark - PhotoHeaderViewDelegate
+
+- (void)photoHeaderView:(PhotoHeaderView *)view didSelectAccount:(Account *)_account
+{
+    [delegate allPhotosController:self didSelectAccount:_account];
 }
 
 @end

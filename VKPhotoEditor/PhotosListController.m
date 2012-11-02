@@ -20,7 +20,7 @@
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
-@interface PhotosListController () <VKTabBarDelegate, VKRequestExecutorDelegate, ChoosePhotoViewDelegate, ProfileControllerDelegate>
+@interface PhotosListController () <VKTabBarDelegate, VKRequestExecutorDelegate, ChoosePhotoViewDelegate, ProfileControllerDelegate, AllPhotosControllerDelegate>
 @end
 
 @implementation PhotosListController {
@@ -31,6 +31,8 @@
     ChoosePhotoView *choosePhotoView;
     UIImage *imageToUpload;
     BOOL isPhoto;
+    UINavigationController *navCtrl;
+    AllPhotosController *allPhotosCtrl;
 }
 
 
@@ -50,9 +52,11 @@
     ProfileController *profileCtrl = [[ProfileController alloc] initWithAccount:service.account];
     profileCtrl.delegate = self;
     
-    AllPhotosController *allPhotosCtrl = [AllPhotosController new];
-    
-    controllers =  [NSArray arrayWithObjects:profileCtrl, allPhotosCtrl, nil];
+    allPhotosCtrl = [AllPhotosController new];
+    allPhotosCtrl.delegate = self;
+    navCtrl = [[UINavigationController alloc] initWithRootViewController:allPhotosCtrl];
+    [navCtrl setNavigationBarHidden:YES animated:NO];
+    controllers =  [NSArray arrayWithObjects:profileCtrl, navCtrl, nil];
     if (imageToUpload) [profileCtrl uploadImage:imageToUpload];
     
     tabBar = [VKTabBar loadFromNIB];
@@ -60,23 +64,21 @@
     [self.view addSubview:tabBar];
     
     tabBar.delegate = self;
-    tabBar.selectedIndex = 0;
+    tabBar.state = TabBarStateProfile;
     
     choosePhotoView = [ChoosePhotoView loadFromNIB];
     [self.view addSubview:choosePhotoView];
     choosePhotoView.delegate = self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 #pragma mark - VKTabBarDelegate
 
 - (void)VKTabBar:(VKTabBar *)_tabBar didSelectIndex:(NSInteger)index
 {
+    if (navCtrl.viewControllers.count == 2) {
+        [navCtrl popToRootViewControllerAnimated:YES];
+    }
+    
     UIView* currentView = [self.view viewWithTag:SELECTED_VIEW_CONTROLLER_TAG];
     [currentView removeFromSuperview];
     
@@ -109,6 +111,31 @@
 - (void)profileControllerDidOpenProfile:(ProfileController *)ctrl
 {
     [choosePhotoView show:YES withExitButton:YES animated:YES];
+}
+
+- (void)profileControllerDidBack:(ProfileController *)ctrl
+{
+    tabBar.state = TabBarStateAllPhotos;
+}
+
+- (void)profileController:(ProfileController *)ctrl didTapHashTag:(NSString *)hashTag
+{
+    tabBar.state = TabBarStateAllPhotos;
+    [allPhotosCtrl search:hashTag];
+}
+
+#pragma mark - AllPhotosControllerDelegate
+
+- (void)allPhotosController:(AllPhotosController *)ctrl didSelectAccount:(Account *)account
+{
+    if (account.accountId == service.account.accountId) {
+        tabBar.state = TabBarStateProfile;
+        return;
+    }
+    tabBar.state = TabBarStateUnselected;
+    ProfileController *prof_ctrl = [[ProfileController alloc] initWithAccount:(UserProfile*)account];
+    prof_ctrl.delegate = self;
+    [navCtrl pushViewController:prof_ctrl animated:YES];
 }
 
 #pragma mark - ChoosePhotoViewDelegate

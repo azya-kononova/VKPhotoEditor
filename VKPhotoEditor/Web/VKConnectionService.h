@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UserAccount.h"
+#import "UserProfile.h"
 #import "VKRequestExecutor.h"
 
 extern NSString *VKErrorDomain;
@@ -15,7 +15,7 @@ extern NSString *VKErrorDomain;
 @interface VKConnectionService : NSObject
 
 @property (nonatomic, strong, readonly) NSURL *rootURL;
-@property (nonatomic, strong, readonly) UserAccount *account;
+@property (nonatomic, strong, readonly) UserProfile *account;
 
 + (VKConnectionService*)shared;
 

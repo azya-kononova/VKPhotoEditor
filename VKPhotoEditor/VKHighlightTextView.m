@@ -97,9 +97,14 @@ static CGFloat MARGIN = 8;
     UIColor* textColor = self.textColor;
     
     CTFontRef font = CTFontCreateWithName((__bridge CFStringRef)self.font.fontName,self.font.pointSize,NULL);
-    
+    CGFloat minimumLineHeight = [self.text sizeWithFont:self.font].height,maximumLineHeight = minimumLineHeight;
+    CTLineBreakMode lineBreakMode = kCTLineBreakByWordWrapping;
+
     CTTextAlignment alignment = kCTTextAlignmentCenter;
-    CTParagraphStyleSetting _settings[] = {    {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment} };
+    CTParagraphStyleSetting _settings[] = {     {kCTParagraphStyleSpecifierAlignment, sizeof(alignment), &alignment},
+                                                {kCTParagraphStyleSpecifierMinimumLineHeight,sizeof(minimumLineHeight),&minimumLineHeight},
+                                                {kCTParagraphStyleSpecifierMaximumLineHeight,sizeof(maximumLineHeight),&maximumLineHeight},
+                                                {kCTParagraphStyleSpecifierLineBreakMode,sizeof(CTLineBreakMode),&lineBreakMode} };
     CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(_settings, sizeof(_settings) / sizeof(_settings[0]));
     
     NSDictionary* attributes = [NSDictionary dictionaryWithObjectsAndKeys:(__bridge id)font,(NSString*)kCTFontAttributeName,(__bridge id)textColor.CGColor,(NSString*)kCTForegroundColorAttributeName,(__bridge id)paragraphStyle,(NSString*)kCTParagraphStyleAttributeName,nil];

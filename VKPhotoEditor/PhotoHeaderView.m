@@ -10,17 +10,33 @@
 #import "DataFormatter.h"
 
 @implementation PhotoHeaderView {
+    Account *account;
 }
 @synthesize nameLabel;
 @synthesize dateLabel;
 @synthesize remoteImageView;
+@synthesize delegate;
 
 - (void)displayPhoto:(VKPhoto *)photo
 {
-    nameLabel.text = photo.account.login;
+    account = photo.account;
     [remoteImageView displayImage:photo.account.avatar];
-    
+    nameLabel.text = photo.account.login;
     dateLabel.text = [DataFormatter formatRelativeDate:photo.date];
 }
+
+- (IBAction)selectAccount
+{
+    [delegate photoHeaderView:self didSelectAccount:account];
+}
+
+#pragma mark - HighlightedButtonDelegate
+
+- (void)highlightedButton:(HighlightedButton *)button didBecameHighlighted:(BOOL)highlighted
+{
+    nameLabel.textColor = highlighted ? [UIColor whiteColor] : [UIColor blackColor];
+    dateLabel.textColor = highlighted ? [UIColor whiteColor] : [UIColor lightGrayColor];
+}
+
 
 @end

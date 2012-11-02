@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import "UserAccount.h"
+#import "UserProfile.h"
 #import "NSDictionary+Helpers.h"
 #import "Settings.h"
 #import "ImageCache.h"
 
-@implementation UserAccount {
+@implementation UserProfile {
     Settings *settings;
 }
 @synthesize lastPhotos;
@@ -28,7 +28,7 @@
 {
     if (!dict || ![dict isKindOfClass:[NSDictionary class]]) return nil;
     
-    UserAccount *profile = [UserAccount new];
+    UserProfile *profile = [UserProfile new];
     profile.accountId = [[dict objectForKey:@"id"] intValue];
     profile.login = [dict objectForKey:@"login"];
     profile.avatarUrl = [NSURL URLWithString:[[dict objectForKey:@"photo"] objectForKey:@"photo_small"]];
@@ -78,7 +78,7 @@
 
 - (RemoteImage*)avatar
 {
-    return [[ImageCache shared] remoteImageForURL:self.avatarURL];
+    return [[ImageCache shared] remoteImageForURL:self.avatarUrl];
 }
 
 - (NSString*)description
@@ -89,7 +89,7 @@
 - (void)logout
 {
     self.accountId = 0;
-    self.avatarURL = nil;
+    self.avatarUrl = nil;
     self.login = nil;
     self.accessToken = nil;
 }

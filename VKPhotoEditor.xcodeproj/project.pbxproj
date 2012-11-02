@@ -186,7 +186,7 @@
 		8B50D75316385435007515BF /* Cancel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B50D74F16385435007515BF /* Cancel@2x.png */; };
 		8B50D75616385476007515BF /* UIButton+StateImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D75516385476007515BF /* UIButton+StateImage.m */; };
 		8B50D76C16395392007515BF /* UIViewController+Transitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D76B16395392007515BF /* UIViewController+Transitions.m */; };
-		8B50D7731639A35B007515BF /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D7721639A35B007515BF /* UserAccount.m */; };
+		8B50D7731639A35B007515BF /* UserProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D7721639A35B007515BF /* UserProfile.m */; };
 		8B50D7761639A440007515BF /* Settings.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D7751639A440007515BF /* Settings.m */; };
 		8B50D7791639A483007515BF /* NSObject+Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D7781639A483007515BF /* NSObject+Map.m */; };
 		8B50D77B1639A573007515BF /* Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8B50D77A1639A573007515BF /* Settings.plist */; };
@@ -228,6 +228,11 @@
 		8B7096B1163C760A004DA31B /* VKPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096B0163C760A004DA31B /* VKPhoto.m */; };
 		8B7096B8163C7F64004DA31B /* ImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7096B7163C7F63004DA31B /* ImageCache.m */; };
 		8B7406D01643E28B00379805 /* UITextView+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7406CF1643E28B00379805 /* UITextView+Resize.m */; };
+		8B7406E91643FAFE00379805 /* PostHeader_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7406E71643FAFE00379805 /* PostHeader_Pressed.png */; };
+		8B7406EA1643FAFE00379805 /* PhotoHeader_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7406E81643FAFE00379805 /* PhotoHeader_Pressed@2x.png */; };
+		8B7406ED1644028D00379805 /* HighlightedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7406EC1644028D00379805 /* HighlightedButton.m */; };
+		8B7406F01644089B00379805 /* BackBtn_Pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7406EE1644089B00379805 /* BackBtn_Pressed.png */; };
+		8B7406F11644089B00379805 /* BackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7406EF1644089B00379805 /* BackBtn.png */; };
 		8B7C09B216401EBB006BCE79 /* Added.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C09B016401EBB006BCE79 /* Added.png */; };
 		8B7C09B316401EBB006BCE79 /* Added@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B7C09B116401EBB006BCE79 /* Added@2x.png */; };
 		8B7C09B616402C75006BCE79 /* NSArray+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */; };
@@ -557,8 +562,8 @@
 		8B50D75516385476007515BF /* UIButton+StateImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+StateImage.m"; sourceTree = "<group>"; };
 		8B50D76A16395392007515BF /* UIViewController+Transitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Transitions.h"; sourceTree = "<group>"; };
 		8B50D76B16395392007515BF /* UIViewController+Transitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Transitions.m"; sourceTree = "<group>"; };
-		8B50D7711639A35B007515BF /* UserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccount.h; sourceTree = "<group>"; };
-		8B50D7721639A35B007515BF /* UserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccount.m; sourceTree = "<group>"; };
+		8B50D7711639A35B007515BF /* UserProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserProfile.h; sourceTree = "<group>"; };
+		8B50D7721639A35B007515BF /* UserProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserProfile.m; sourceTree = "<group>"; };
 		8B50D7741639A440007515BF /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		8B50D7751639A440007515BF /* Settings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Settings.m; sourceTree = "<group>"; };
 		8B50D7771639A483007515BF /* NSObject+Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Map.h"; sourceTree = "<group>"; };
@@ -614,6 +619,12 @@
 		8B7096B7163C7F63004DA31B /* ImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCache.m; sourceTree = "<group>"; };
 		8B7406CE1643E28B00379805 /* UITextView+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Resize.h"; sourceTree = "<group>"; };
 		8B7406CF1643E28B00379805 /* UITextView+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Resize.m"; sourceTree = "<group>"; };
+		8B7406E71643FAFE00379805 /* PostHeader_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostHeader_Pressed.png; sourceTree = "<group>"; };
+		8B7406E81643FAFE00379805 /* PhotoHeader_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoHeader_Pressed@2x.png"; sourceTree = "<group>"; };
+		8B7406EB1644028D00379805 /* HighlightedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HighlightedButton.h; sourceTree = "<group>"; };
+		8B7406EC1644028D00379805 /* HighlightedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HighlightedButton.m; sourceTree = "<group>"; };
+		8B7406EE1644089B00379805 /* BackBtn_Pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackBtn_Pressed.png; sourceTree = "<group>"; };
+		8B7406EF1644089B00379805 /* BackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackBtn.png; sourceTree = "<group>"; };
 		8B7C09B016401EBB006BCE79 /* Added.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Added.png; sourceTree = "<group>"; };
 		8B7C09B116401EBB006BCE79 /* Added@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Added@2x.png"; sourceTree = "<group>"; };
 		8B7C09B416402C75006BCE79 /* NSArray+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Helpers.h"; sourceTree = "<group>"; };
@@ -765,8 +776,8 @@
 				220E6BCA161E071500AB89B5 /* FlashMode.m */,
 				8BA3D6E9163C892E00CEA6AD /* Account.h */,
 				8BA3D6EA163C892E00CEA6AD /* Account.m */,
-				8B50D7711639A35B007515BF /* UserAccount.h */,
-				8B50D7721639A35B007515BF /* UserAccount.m */,
+				8B50D7711639A35B007515BF /* UserProfile.h */,
+				8B50D7721639A35B007515BF /* UserProfile.m */,
 				8B50D7741639A440007515BF /* Settings.h */,
 				8B50D7751639A440007515BF /* Settings.m */,
 				8B7096AF163C760A004DA31B /* VKPhoto.h */,
@@ -855,6 +866,10 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8B7406EE1644089B00379805 /* BackBtn_Pressed.png */,
+				8B7406EF1644089B00379805 /* BackBtn.png */,
+				8B7406E71643FAFE00379805 /* PostHeader_Pressed.png */,
+				8B7406E81643FAFE00379805 /* PhotoHeader_Pressed@2x.png */,
 				8B918E991642980B009E45A0 /* SearchHeader.png */,
 				8B918E9A1642980B009E45A0 /* SearchHeader@2x.png */,
 				8B7C09B016401EBB006BCE79 /* Added.png */,
@@ -1025,7 +1040,6 @@
 		22D7BF48160CCC33008B5BFA = {
 			isa = PBXGroup;
 			children = (
-				8B918ECD1642C003009E45A0 /* CoreText.framework */,
 				22D7BF5D160CCC33008B5BFA /* VKPhotoEditor */,
 				22D7BF56160CCC33008B5BFA /* Frameworks */,
 				22D7BF54160CCC33008B5BFA /* Products */,
@@ -1047,6 +1061,7 @@
 				8B0FFEB11636E7D500714F70 /* JSONKit */,
 				8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */,
 				8BDD882216186C9C008FFC24 /* OpenGLES.framework */,
+				8B918ECD1642C003009E45A0 /* CoreText.framework */,
 				8BDD882016186C91008FFC24 /* GLKit.framework */,
 				8BDD881E16186C84008FFC24 /* AVFoundation.framework */,
 				8BDD881C16186C79008FFC24 /* CoreVideo.framework */,
@@ -1170,6 +1185,8 @@
 				228597871641968600960779 /* CaptionTextView.h */,
 				228597881641968600960779 /* CaptionTextView.m */,
 				2285978C1641AAA000960779 /* CaptionTextView.xib */,
+				8B7406EB1644028D00379805 /* HighlightedButton.h */,
+				8B7406EC1644028D00379805 /* HighlightedButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1561,6 +1578,10 @@
 				8BE3C9DB1641B0950057031A /* AllPhotosController.xib in Resources */,
 				8B918E9B1642980B009E45A0 /* SearchHeader.png in Resources */,
 				8B918E9C1642980B009E45A0 /* SearchHeader@2x.png in Resources */,
+				8B7406E91643FAFE00379805 /* PostHeader_Pressed.png in Resources */,
+				8B7406EA1643FAFE00379805 /* PhotoHeader_Pressed@2x.png in Resources */,
+				8B7406F01644089B00379805 /* BackBtn_Pressed.png in Resources */,
+				8B7406F11644089B00379805 /* BackBtn.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1621,7 +1642,7 @@
 				8B1A563C1636EC2A0034B723 /* VKConnectionService.m in Sources */,
 				8B50D75616385476007515BF /* UIButton+StateImage.m in Sources */,
 				8B50D76C16395392007515BF /* UIViewController+Transitions.m in Sources */,
-				8B50D7731639A35B007515BF /* UserAccount.m in Sources */,
+				8B50D7731639A35B007515BF /* UserProfile.m in Sources */,
 				8B50D7761639A440007515BF /* Settings.m in Sources */,
 				8B50D7791639A483007515BF /* NSObject+Map.m in Sources */,
 				8B50D77E1639A71D007515BF /* RequestExecutorProxy.m in Sources */,
@@ -1653,6 +1674,8 @@
 				8B918E9816428D1C009E45A0 /* StickyHeaderTableView.m in Sources */,
 				8B918EDC16431053009E45A0 /* VKHighlightTextView.m in Sources */,
 				8B7406D01643E28B00379805 /* UITextView+Resize.m in Sources */,
+				22D4BA651644053700B95C50 /* UIImage+Blending.m in Sources */,
+				8B7406ED1644028D00379805 /* HighlightedButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

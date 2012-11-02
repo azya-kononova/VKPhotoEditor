@@ -16,11 +16,11 @@
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 
-@interface ProfileController () <UITableViewDataSource, UITableViewDelegate, PhotosListDelegate, UIActionSheetDelegate>
+@interface ProfileController () <UITableViewDataSource, UITableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoHeaderViewDelegate, PhotoCellDelegate>
 @end
 
 @implementation ProfileController {
-    UserAccount *account;
+    UserProfile *account;
     UserPhotosList *photosList;
     NSMutableArray *sectionHeaders;
     RequestExecutorDelegateAdapter *adapter;
@@ -28,16 +28,16 @@
     VKConnectionService *service;
     NSInteger selectedPhoto;
 }
-
 @synthesize nameLabel;
 @synthesize delegate;
 @synthesize tableView;
+@synthesize backButton;
 
-- (id)initWithAccount:(UserAccount *)_account
+- (id)initWithAccount:(UserProfile *)_account
 {
     if (self = [super init]) {
         account = _account;
-        photosList = [[UserPhotosList alloc] initWithPhotos:account.lastPhotos];
+        photosList = ([account isKindOfClass:UserProfile.class]) ? [[UserPhotosList alloc] initWithPhotos:account.lastPhotos] : [UserPhotosList new];
         photosList.delegate = self;
         sectionHeaders = [NSMutableArray new];
         service = [VKConnectionService shared];
@@ -46,12 +46,16 @@
         selectedPhoto = -1;
     }
     return self;
-}
+}               
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     nameLabel.text = account.login;
+    
+    BOOL isProfile = !self.navigationController;
+    backButton.hidden = isProfile;
+    backButton.bgImagecaps = CGSizeMake(15, 7);
 }
 
 - (void)uploadImage:(UIImage *)image
@@ -65,6 +69,11 @@
 - (IBAction)openProfile
 {
     [delegate profileControllerDidOpenProfile:self];
+}
+
+- (IBAction)back
+{
+    [delegate profileControllerDidBack:self];
 }
 
 #pragma mark - PhotosListDelegate
@@ -130,6 +139,7 @@
         return [LoadingCell dequeOrCreateInTable:tableView];
     }
     PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+    cell.delegate = self;
     VKPhoto *photo = [photosList.photos objectAtIndex:indexPath.section];
     [cell displayPhoto:photo];
     return cell;
@@ -161,6 +171,7 @@
     if (!headerView)
     {
         headerView = [PhotoHeaderView loadFromNIB];
+        headerView.delegate = self;
         [sectionHeaders addObject:headerView];
     }
     [headerView displayPhoto:[photosList.photos objectAtIndex:section]];
@@ -191,6 +202,20 @@
     } else {
         selectedPhoto = -1;
     }
+}
+
+#pragma mark - PhotoCellDelegate
+
+- (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
+{
+    [delegate profileController:self didTapHashTag:hashTag];
+}
+
+#pragma mark - PhotoHeaderViewDelegate
+
+- (void)photoHeaderView:(PhotoHeaderView *)view didSelectAccount:(Account *)_account
+{
+    NSLog(@"Account id: %d", _account.accountId);
 }
 
 @end

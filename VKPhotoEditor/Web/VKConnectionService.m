@@ -34,7 +34,7 @@ NSString *VKErrorDomain = @"VKErrorDomain";
 {
     if (self = [super init]) {
         rootURL = url;
-        account = [UserAccount new];
+        account = [UserProfile new];
     }
     return self;
 }
@@ -149,7 +149,7 @@ NSString *VKErrorDomain = @"VKErrorDomain";
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data
 {
-    account = [UserAccount accountWithDict:[[data objectForKey:@"users"] objectAtIndex:0]];
+    account = [UserProfile accountWithDict:[[data objectForKey:@"users"] objectAtIndex:0]];
     account.accessToken = [[data objectForKey:@"credentials"] objectForKey:@"access_token"];
     
     NSMutableDictionary *accounts = [NSMutableDictionary new];

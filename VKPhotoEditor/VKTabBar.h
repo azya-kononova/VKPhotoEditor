@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    TabBarStateUnselected = -1,
+    TabBarStateProfile = 0,
+    TabBarStateAllPhotos = 1
+} TabBarState;
+
 @protocol VKTabBarDelegate;
 
 @interface VKTabBar : UIView
@@ -16,7 +22,7 @@
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *buttons;
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *titles;
 
-@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, assign) TabBarState state;
 
 - (IBAction)didSelect:(UIButton*)sender;
 - (IBAction)central;

@@ -13,46 +13,26 @@
 @synthesize titles;
 @synthesize delegate;
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
 
-- (void)awakeFromNib
-{
-}
-
-- (void)setSelectedIndex:(NSInteger)selectedIndex
+- (void)setState:(TabBarState)state
 {
     for (UIButton *button in buttons) {
-        button.selected = (button.tag == selectedIndex);
+        button.selected = (button.tag == state);
     }
     for (UILabel *label in titles) {
-        label.textColor = label.tag == selectedIndex ? [UIColor whiteColor] : [UIColor grayColor];
+        label.textColor = label.tag == state ? [UIColor whiteColor] : [UIColor grayColor];
     }
-    [delegate VKTabBar:self didSelectIndex:selectedIndex];
+    if (state != TabBarStateUnselected) [delegate VKTabBar:self didSelectIndex:state];
 }
 
 - (IBAction)didSelect:(UIButton*)sender
 {
-    self.selectedIndex = sender.tag;
+    self.state = sender.tag;
 }
 
 - (IBAction)central
 {
     [delegate VKTabBarDidTapCentral:self];
 }
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

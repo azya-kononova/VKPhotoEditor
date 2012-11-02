@@ -8,11 +8,20 @@
 
 #import "VKPhoto.h"
 #import "RemoteImageView.h"
+#import "HighlightedButton.h"
 
-@interface PhotoHeaderView : UIView
+@protocol PhotoHeaderViewDelegate;
+
+@interface PhotoHeaderView : UIView <HighlightedButtonDelegate>
+@property (nonatomic, assign) id<PhotoHeaderViewDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
 
 - (void)displayPhoto:(VKPhoto*)photo;
+- (IBAction)selectAccount;
+@end
+
+@protocol PhotoHeaderViewDelegate
+- (void)photoHeaderView:(PhotoHeaderView*)view didSelectAccount:(Account*)account;
 @end
