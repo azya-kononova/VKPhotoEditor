@@ -16,14 +16,6 @@
 @synthesize isCircular;
 @synthesize delegate;
 
-- (void)didMoveToWindow
-{
-    [super didMoveToWindow];
-    if (self.window) {
-        [image startLoading];
-    }
-}
-
 - (void)_displayImage:(UIImage*)_image
 {
     BOOL animated = !imageView.image;
