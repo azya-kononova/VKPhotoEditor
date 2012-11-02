@@ -524,14 +524,14 @@
 		8B0B45741644629000F59DF5 /* VKNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKNavigationBar.h; sourceTree = "<group>"; };
 		8B0B45751644629000F59DF5 /* VKNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKNavigationBar.m; sourceTree = "<group>"; };
 		8B0B457C1644653800F59DF5 /* VKNavigationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VKNavigationController.xib; sourceTree = "<group>"; };
-		8B0B457E1644778900F59DF5 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
-		8B0B457F1644778900F59DF5 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
-		8B0B45801644778900F59DF5 /* LoadMoreTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadMoreTableFooterView.h; sourceTree = "<group>"; };
-		8B0B45811644778900F59DF5 /* LoadMoreTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadMoreTableFooterView.m; sourceTree = "<group>"; };
-		8B0B45821644778900F59DF5 /* MessageInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInterceptor.h; sourceTree = "<group>"; };
-		8B0B45831644778900F59DF5 /* MessageInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInterceptor.m; sourceTree = "<group>"; };
-		8B0B45841644778900F59DF5 /* PullTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullTableView.h; sourceTree = "<group>"; };
-		8B0B45851644778900F59DF5 /* PullTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullTableView.m; sourceTree = "<group>"; };
+		8B0B457E1644778900F59DF5 /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EGORefreshTableHeaderView.h; path = VKPhotoEditor/EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
+		8B0B457F1644778900F59DF5 /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EGORefreshTableHeaderView.m; path = VKPhotoEditor/EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
+		8B0B45801644778900F59DF5 /* LoadMoreTableFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadMoreTableFooterView.h; path = VKPhotoEditor/LoadMoreTableFooterView.h; sourceTree = "<group>"; };
+		8B0B45811644778900F59DF5 /* LoadMoreTableFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoadMoreTableFooterView.m; path = VKPhotoEditor/LoadMoreTableFooterView.m; sourceTree = "<group>"; };
+		8B0B45821644778900F59DF5 /* MessageInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageInterceptor.h; path = VKPhotoEditor/MessageInterceptor.h; sourceTree = "<group>"; };
+		8B0B45831644778900F59DF5 /* MessageInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageInterceptor.m; path = VKPhotoEditor/MessageInterceptor.m; sourceTree = "<group>"; };
+		8B0B45841644778900F59DF5 /* PullTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PullTableView.h; path = VKPhotoEditor/PullTableView.h; sourceTree = "<group>"; };
+		8B0B45851644778900F59DF5 /* PullTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PullTableView.m; path = VKPhotoEditor/PullTableView.m; sourceTree = "<group>"; };
 		8B0FFE201636C3BA00714F70 /* FileUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileUpload.h; sourceTree = "<group>"; };
 		8B0FFE211636C3BA00714F70 /* FileUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileUpload.m; sourceTree = "<group>"; };
 		8B0FFE241636C3BA00714F70 /* NSString+Web.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Web.h"; sourceTree = "<group>"; };
@@ -826,8 +826,6 @@
 				222AB9F0163FC0E8001F089C /* FiltersManager.m */,
 				8B918EDA16431053009E45A0 /* VKHighlightTextView.h */,
 				8B918EDB16431053009E45A0 /* VKHighlightTextView.m */,
-				8B0B45741644629000F59DF5 /* VKNavigationBar.h */,
-				8B0B45751644629000F59DF5 /* VKNavigationBar.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1094,6 +1092,7 @@
 		22D7BF56160CCC33008B5BFA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8B68FE9E1644886E008883E0 /* PullToRefreshTableView */,
 				8B0FFEB11636E7D500714F70 /* JSONKit */,
 				8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */,
 				8BDD882216186C9C008FFC24 /* OpenGLES.framework */,
@@ -1178,14 +1177,10 @@
 		22D7BFA1160EF628008B5BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8B0B457E1644778900F59DF5 /* EGORefreshTableHeaderView.h */,
-				8B0B457F1644778900F59DF5 /* EGORefreshTableHeaderView.m */,
-				8B0B45801644778900F59DF5 /* LoadMoreTableFooterView.h */,
-				8B0B45811644778900F59DF5 /* LoadMoreTableFooterView.m */,
-				8B0B45821644778900F59DF5 /* MessageInterceptor.h */,
-				8B0B45831644778900F59DF5 /* MessageInterceptor.m */,
-				8B0B45841644778900F59DF5 /* PullTableView.h */,
-				8B0B45851644778900F59DF5 /* PullTableView.m */,
+				8B0B45741644629000F59DF5 /* VKNavigationBar.h */,
+				8B0B45751644629000F59DF5 /* VKNavigationBar.m */,
+				8B918EDA16431053009E45A0 /* VKHighlightTextView.h */,
+				8B918EDB16431053009E45A0 /* VKHighlightTextView.m */,
 				8BFF7C111644310A0073D195 /* InformationView.h */,
 				8BFF7C121644310A0073D195 /* InformationView.m */,
 				8BFF7C131644310A0073D195 /* InformationView.xib */,
@@ -1229,8 +1224,6 @@
 				22843693163ED940009D75C8 /* FocusSquareView.m */,
 				222AB9FE163FD52F001F089C /* BlurView.h */,
 				222AB9FF163FD52F001F089C /* BlurView.m */,
-				8B918EDA16431053009E45A0 /* VKHighlightTextView.h */,
-				8B918EDB16431053009E45A0 /* VKHighlightTextView.m */,
 				228597871641968600960779 /* CaptionTextView.h */,
 				228597881641968600960779 /* CaptionTextView.m */,
 				2285978C1641AAA000960779 /* CaptionTextView.xib */,
@@ -1309,6 +1302,21 @@
 				8B61EC1E161C627F009A2B9B /* GPUImageTests.octest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8B68FE9E1644886E008883E0 /* PullToRefreshTableView */ = {
+			isa = PBXGroup;
+			children = (
+				8B0B457E1644778900F59DF5 /* EGORefreshTableHeaderView.h */,
+				8B0B457F1644778900F59DF5 /* EGORefreshTableHeaderView.m */,
+				8B0B45801644778900F59DF5 /* LoadMoreTableFooterView.h */,
+				8B0B45811644778900F59DF5 /* LoadMoreTableFooterView.m */,
+				8B0B45821644778900F59DF5 /* MessageInterceptor.h */,
+				8B0B45831644778900F59DF5 /* MessageInterceptor.m */,
+				8B0B45841644778900F59DF5 /* PullTableView.h */,
+				8B0B45851644778900F59DF5 /* PullTableView.m */,
+			);
+			name = PullToRefreshTableView;
 			sourceTree = "<group>";
 		};
 		8BDF189C1611A67B00507B5F /* fonts */ = {
