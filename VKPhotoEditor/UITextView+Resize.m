@@ -22,10 +22,13 @@
     CGSize tallerSize = CGSizeMake(self.frame.size.width-fudgeFactor,kMaxFieldHeight);
     CGSize stringSize = [self.text sizeWithFont:self.font constrainedToSize:tallerSize lineBreakMode:UILineBreakModeWordWrap];
     
-    while (stringSize.height >= self.frame.size.height) {
+    // UITextView has some margins ??
+    
+    while (stringSize.height >= (self.frame.size.height - 14)) {
         
-        if (fontSize <= aMinFontSize) // it just won't fit, ever
+        if (fontSize <= aMinFontSize) { // it just won't fit, ever
             return NO;
+        }
         
         fontSize -= 1.0;
         self.font = [self.font fontWithSize:fontSize];
