@@ -80,8 +80,7 @@ static CGFloat MARGIN = 8;
 }
 
 -(void)drawRect:(CGRect)rect {
-    if(self.text.length<=0) {
-        self.text = EMPTY;
+    if(!self.text.length) {
         return;
     }
 
