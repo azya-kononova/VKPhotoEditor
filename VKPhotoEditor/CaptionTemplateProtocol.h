@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic, strong, readonly) UIColor *textColor;
+@property (nonatomic, strong, readonly) UIImage *templateImage;
 @end
 
 @protocol CaptionTemplateDelegate

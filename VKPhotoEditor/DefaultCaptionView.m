@@ -48,6 +48,11 @@
     return [UIColor whiteColor];
 }
 
+- (UIImage *)templateImage
+{
+    return nil;
+}
+
 #pragma mark - SPUserResizableViewDelegate
 
 - (void)userResizableViewDidBeginEditing:(SPUserResizableView *)userResizableView

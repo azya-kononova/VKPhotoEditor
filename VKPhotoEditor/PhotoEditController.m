@@ -18,13 +18,12 @@
 #import "UIImage+GPUOrientation.h"
 #import "DemotivatorCaptionView.h"
 #import "CaptionTemplateProtocol.h"
-#import "UIImage+Blend.h"
-#import "GPUImageNormalBlendFilter.h"
 #import "ActivityView.h"
 #import "ArrowView.h"
 #import "FiltersManager.h"
 #import "BlurView.h"
 #import "CaptionTextView.h"
+#import "UIImage+Blending.h"
 
 #define MAX_FONT_SIZE 100
 
@@ -235,8 +234,10 @@
         CGFloat side = fmaxf(image.size.width, image.size.height);
         [captionViewTemplate removeFromSuperview];
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
-        BOOL needCaptionOverlay = captionView.caption.length || captionTemplateIndex;
-        UIImage *output = [[self imageByApplingFilters] squareImageByBlendingWithView: needCaptionOverlay ? captionViewTemplate : nil];
+        UIImage *output = [self imageByApplingFilters];
+        if (captionTemplateIndex) {
+            output = [output blendWithImage:captionViewTemplate.templateImage];
+        }
         [activityView showSelf:NO];
         //TODO: send image and text
         [delegate photoEditController:self didEdit:output];

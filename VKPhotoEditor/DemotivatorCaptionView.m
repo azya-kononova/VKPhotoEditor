@@ -8,6 +8,11 @@
 
 #import "DemotivatorCaptionView.h"
 
+@interface DemotivatorCaptionView () {
+    IBOutlet UIImageView *templateImageView;
+}
+
+@end
 @implementation DemotivatorCaptionView
 @synthesize captionLabel;
 @synthesize delegate;
@@ -37,6 +42,11 @@
 - (UIColor *)textColor
 {
     return captionLabel.textColor;
+}
+
+- (UIImage *)templateImage
+{
+    return templateImageView.image;
 }
 
 @end

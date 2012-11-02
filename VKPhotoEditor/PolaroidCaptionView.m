@@ -9,6 +9,11 @@
 #import "PolaroidCaptionView.h"
 #import "UIView+Helpers.h"
 
+@interface PolaroidCaptionView () {
+    IBOutlet UIImageView *templateImageView;
+}
+
+@end
 @implementation PolaroidCaptionView
 @synthesize captionLabel;
 @synthesize delegate;
@@ -38,6 +43,11 @@
 - (UIColor *)textColor
 {
     return captionLabel.textColor;
+}
+
+- (UIImage *)templateImage
+{
+    return templateImageView.image;
 }
 
 @end
