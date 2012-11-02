@@ -8,7 +8,6 @@
 
 #import "AllPhotosController.h"
 #import "SearchResultsList.h"
-#import "LoadingCell.h"
 #import "PhotoCell.h"
 #import "PhotoHeaderView.h"
 #import "UIView+Helpers.h"
@@ -37,46 +36,63 @@
     UIImageView* iview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"SearchHeader.png"]];
     iview.frame = searchBar.bounds;
     [searchBar insertSubview:iview atIndex:1];
+    
+    tableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
+    tableView.pullBackgroundColor = [UIColor lightGrayColor];
+    tableView.pullTextColor = [UIColor blackColor];
+    
+    tableView.pullTableIsRefreshing = YES;
+    [searchResultsList loadNextPageFor:nil];
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    self.navigationItem.title = @"All photos";
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:(tableView.contentOffset.y > 0) animated:YES];
 }
 
 #pragma mark - PhotosListDelegate
 
+- (void)reloadPullTable
+{
+    if (!searchResultsList.completed) [tableView reloadData];
+    tableView.pullTableIsLoadingMore = NO;
+    tableView.pullTableIsRefreshing = NO;
+}
+
 - (void)searchResultsList:(SearchResultsList *)photosList didUpdatePhotos:(NSArray *)photos user:(Account *)user
 {
-    [tableView reloadData];
+     tableView.pullLastRefreshDate = [NSDate date];
+    [self reloadPullTable];
 }
 
 - (void)searchResultsList:(SearchResultsList *)photosList didFailToUpdate:(NSError *)error
 {
-    
+    [self reloadPullTable];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return searchResultsList.photos.count + 1;
+    return searchResultsList.photos.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == searchResultsList.photos.count) {
-        return searchResultsList.completed ? 0 : 1;
-    }
     return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == searchResultsList.photos.count ? 41 : 320;
+    return 320;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == searchResultsList.photos.count) {
-        [searchResultsList loadNextPageFor:searchBar.text];
-        return [LoadingCell dequeOrCreateInTable:tableView];
-    }
     PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
     cell.delegate = self;
     VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
@@ -99,13 +115,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return (section == searchResultsList.photos.count) ? 0 : 46.0;
+    return 46.0;
 }
 
 - (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (section == searchResultsList.photos.count) return nil;
-    
+{   
     PhotoHeaderView* headerView = [self dequeueHeader];
     if (!headerView)
     {
@@ -117,26 +131,25 @@
     return headerView;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView*)scrollView
+{
+    BOOL findModeActive = !tableView.tableHeaderView;
+    if (!findModeActive) [self.navigationController setNavigationBarHidden:(scrollView.contentOffset.y > 0) animated:NO];
+}
+
 - (void)setFindModeActive:(BOOL)active
 {
     [tableView setContentOffset:CGPointZero animated:NO];
     
     if (active == (tableView.tableHeaderView == nil)) return;
     
-    if (active) {
-        [self.view addSubview:searchBar];
-        [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
-            [searchBar moveTo:CGPointMake(0, 0)];
-            tableView.frame = CGRectMake(0, searchBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - searchBar.frame.size.height);
-        } completion:^(BOOL finished) { }];
-       
-    } else {
-        [tableHeaderView addSubview:searchBar];
-        tableView.frame = self.view.bounds;
-        [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
-            [searchBar moveTo:CGPointMake(0, 44)];
-        } completion:^(BOOL finished) { }];
-    }
+    if (active) [self.navigationController setNavigationBarHidden:YES animated:YES];
+    
+    active ? [self.view addSubview:searchBar] : [tableHeaderView addSubview:searchBar];
+    CGFloat dy = active ? searchBar.frame.size.height : 0;
+    tableView.frame = CGRectMake(0, dy, self.view.frame.size.width, self.view.frame.size.height - dy);
+
+     if (!active) [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     [tableView beginUpdates];
     tableView.tableHeaderView = active ? nil : tableHeaderView;
@@ -150,8 +163,7 @@
     [self setFindModeActive:YES];
     searchBar.text = query;
     
-    [searchResultsList reset];
-    [tableView reloadData];
+    [self reload];
     
     for (UIView *possibleButton in searchBar.subviews) {
         if ([possibleButton isKindOfClass:[UIButton class]]) {
@@ -169,6 +181,14 @@
     [self search:hashTag];
 }
 
+- (void)reload
+{
+    tableView.pullTableIsRefreshing = YES;
+    [searchResultsList reset];
+    [tableView reloadData];
+    [searchResultsList loadNextPageFor:searchBar.text];
+}
+
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)_searchBar
@@ -179,16 +199,15 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)_searchBar
 {
     _searchBar.text = nil;
-    [searchResultsList reset];
-    [tableView reloadData];
+    [self reload];
     [self setFindModeActive:NO];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar;
 {
     [searchBar resignFirstResponder];
-    [searchResultsList reset];
-    [tableView reloadData];
+    [self reload];
+    
     for (UIView *possibleButton in searchBar.subviews) {
         if ([possibleButton isKindOfClass:[UIButton class]]) {
             UIButton *cancelButton = (UIButton*)possibleButton;
@@ -204,5 +223,19 @@
 {
     [delegate allPhotosController:self didSelectAccount:_account];
 }
+
+#pragma mark - PullTableViewDelegate
+
+- (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
+{
+    [searchResultsList reset];
+    [searchResultsList loadNextPageFor:searchBar.text];
+}
+
+- (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
+{
+    [searchResultsList loadNextPageFor:searchBar.text];
+}
+
 
 @end

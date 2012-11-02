@@ -12,11 +12,10 @@
 #import "VKPhoto.h"
 #import "RequestExecutorDelegateAdapter.h"
 #import "UserPhotosList.h"
-#import "LoadingCell.h"
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 
-@interface ProfileController () <UITableViewDataSource, UITableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoHeaderViewDelegate, PhotoCellDelegate>
+@interface ProfileController () <UITableViewDataSource, PullTableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoHeaderViewDelegate, PhotoCellDelegate>
 @end
 
 @implementation ProfileController {
@@ -27,22 +26,23 @@
     NSInteger offset;
     VKConnectionService *service;
     NSInteger selectedPhoto;
+    BOOL isProfile;
 }
 @synthesize nameLabel;
 @synthesize delegate;
 @synthesize tableView;
-@synthesize backButton;
+@synthesize titleView;
 
 - (id)initWithAccount:(UserProfile *)_account
 {
     if (self = [super init]) {
         account = _account;
-        photosList = ([account isKindOfClass:UserProfile.class]) ? [[UserPhotosList alloc] initWithPhotos:account.lastPhotos] : [UserPhotosList new];
+        isProfile = [account isKindOfClass:UserProfile.class];
+        photosList = (isProfile) ? [[UserPhotosList alloc] initWithPhotos:account.lastPhotos] : [UserPhotosList new];
         photosList.delegate = self;
         sectionHeaders = [NSMutableArray new];
         service = [VKConnectionService shared];
         adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
-        
         selectedPhoto = -1;
     }
     return self;
@@ -50,12 +50,29 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    nameLabel.text = account.login;
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    BOOL isProfile = !self.navigationController;
-    backButton.hidden = isProfile;
-    backButton.bgImagecaps = CGSizeMake(15, 7);
+    [super viewDidLoad];
+    if (isProfile) {
+        nameLabel.text = account.login;
+        self.navigationItem.titleView = titleView;
+    } else {
+        self.navigationItem.title = account.login;
+    }
+    
+    tableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
+    tableView.pullBackgroundColor = [UIColor lightGrayColor];
+    tableView.pullTextColor = [UIColor blackColor];
+    
+    tableView.pullTableIsRefreshing = YES;
+    [photosList loadNextPageFor:account.accountId];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        [delegate profileControllerDidBack:self];
+    }
 }
 
 - (void)uploadImage:(UIImage *)image
@@ -71,21 +88,24 @@
     [delegate profileControllerDidOpenProfile:self];
 }
 
-- (IBAction)back
-{
-    [delegate profileControllerDidBack:self];
-}
-
 #pragma mark - PhotosListDelegate
 
-- (void)photosList:(UserPhotosList *)photosList didUpdatePhotos:(NSArray *)photos
+- (void)reloadPullTable
 {
-    [tableView reloadData];
+    if (!photosList.completed) [tableView reloadData];
+    tableView.pullTableIsLoadingMore = NO;
+    tableView.pullTableIsRefreshing = NO;
+}
+
+- (void)photosList:(UserPhotosList *)_photosList didUpdatePhotos:(NSArray *)photos
+{
+    tableView.pullLastRefreshDate = [NSDate date];
+    [self reloadPullTable];
 }
 
 - (void)photosList:(UserPhotosList *)photosList didFailToUpdate:(NSError *)error
 {
-    [tableView reloadData];
+    [self reloadPullTable];
 }
 
 #pragma mark - Request Handler
@@ -115,29 +135,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return photosList.photos.count + 1;
+    return photosList.photos.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == photosList.photos.count) {
-        return photosList.completed ? 0 : 1;
-    }
     return 1;
-    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == photosList.photos.count ? 41 : 320;
+    return 320;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == photosList.photos.count) {
-        [photosList loadNextPageFor:account.accountId];
-        return [LoadingCell dequeOrCreateInTable:tableView];
-    }
     PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
     cell.delegate = self;
     VKPhoto *photo = [photosList.photos objectAtIndex:indexPath.section];
@@ -160,13 +172,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return (section == photosList.photos.count) ? 0 : 46.0;
+    return 46.0;
 }
 
 - (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (section == photosList.photos.count) return nil;
-    
+{    
     PhotoHeaderView* headerView = [self dequeueHeader];
     if (!headerView)
     {
@@ -217,5 +227,19 @@
 {
     NSLog(@"Account id: %d", _account.accountId);
 }
+
+#pragma mark - PullTableViewDelegate
+
+- (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
+{
+    [photosList reset];
+    [photosList loadNextPageFor:account.accountId];
+}
+
+- (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
+{
+    [photosList loadNextPageFor:account.accountId];
+}
+
 
 @end

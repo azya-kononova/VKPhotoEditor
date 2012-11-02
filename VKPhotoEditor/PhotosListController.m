@@ -54,9 +54,14 @@
     
     allPhotosCtrl = [AllPhotosController new];
     allPhotosCtrl.delegate = self;
-    navCtrl = [[UINavigationController alloc] initWithRootViewController:allPhotosCtrl];
-    [navCtrl setNavigationBarHidden:YES animated:NO];
-    controllers =  [NSArray arrayWithObjects:profileCtrl, navCtrl, nil];
+    
+    navCtrl = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
+    navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
+    
+    UINavigationController *navCtrl1 = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
+    navCtrl1.viewControllers = [NSArray arrayWithObject:profileCtrl];
+    
+    controllers =  [NSArray arrayWithObjects:navCtrl1, navCtrl, nil];
     if (imageToUpload) [profileCtrl uploadImage:imageToUpload];
     
     tabBar = [VKTabBar loadFromNIB];

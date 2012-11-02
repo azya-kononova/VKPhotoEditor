@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Account.h"
+#import "PullTableView.h"
 
 @protocol AllPhotosControllerDelegate;
 
 @interface AllPhotosController : UIViewController <UISearchBarDelegate>
 @property (nonatomic, assign) id<AllPhotosControllerDelegate> delegate;
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet PullTableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 

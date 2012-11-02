@@ -9,19 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "UserProfile.h"
 #import "FlexibleButton.h"
+#import "PullTableView.h"
 
 @protocol ProfileControllerDelegate;
 
 @interface ProfileController : UIViewController
 @property (nonatomic, assign) id<ProfileControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
-@property (nonatomic, strong) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) IBOutlet FlexibleButton *backButton;
+@property (nonatomic, strong) IBOutlet PullTableView *tableView;
+@property (nonatomic, strong) IBOutlet UIView *titleView;
 
 - (id)initWithAccount:(UserProfile*)account;
 - (void)uploadImage:(UIImage*)image;
 - (IBAction)openProfile;
-- (IBAction)back;
 @end
 
 @protocol ProfileControllerDelegate
