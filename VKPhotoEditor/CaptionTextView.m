@@ -68,6 +68,11 @@
     return textView.textColor;
 }
 
+- (void)dealloc
+{
+    [textView removeObserver:self forKeyPath:@"contentSize"];
+}
+
 #pragma mark - UITextFieldDelegate
 
 - (void)textViewDidBeginEditing:(UITextView *)tv

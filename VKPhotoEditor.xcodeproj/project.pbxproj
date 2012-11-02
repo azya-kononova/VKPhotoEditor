@@ -1674,7 +1674,6 @@
 				8B918E9816428D1C009E45A0 /* StickyHeaderTableView.m in Sources */,
 				8B918EDC16431053009E45A0 /* VKHighlightTextView.m in Sources */,
 				8B7406D01643E28B00379805 /* UITextView+Resize.m in Sources */,
-				22D4BA651644053700B95C50 /* UIImage+Blending.m in Sources */,
 				8B7406ED1644028D00379805 /* HighlightedButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
