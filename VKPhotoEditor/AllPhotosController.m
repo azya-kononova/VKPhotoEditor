@@ -174,22 +174,18 @@
     [self setFindModeActive:YES];
 }
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)_searchBar
-{
-    [searchResultsList reset];
-    [tableView reloadData];
-}
-
 - (void)searchBarCancelButtonClicked:(UISearchBar *)_searchBar
 {
     _searchBar.text = nil;
-    [searchBar resignFirstResponder];
+    [searchResultsList reset];
+    [tableView reloadData];
     [self setFindModeActive:NO];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar;
 {
-    [searchBar resignFirstResponder];    
+    [searchResultsList reset];
+    [tableView reloadData];
     for (UIView *possibleButton in searchBar.subviews) {
         if ([possibleButton isKindOfClass:[UIButton class]]) {
             UIButton *cancelButton = (UIButton*)possibleButton;
