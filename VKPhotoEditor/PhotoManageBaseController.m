@@ -25,6 +25,7 @@
 {
     PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:image filterIndex:filterIndex blurFilter:blurFilter];
     photoEditController.delegate = self;
+    photoEditController.isPhoto = isPhoto;
     
     [self.navigationController pushViewController:photoEditController animated:NO];
 }
@@ -108,7 +109,7 @@
     [self takePhoto];
 }
 
-- (void)photoEditController:(PhotoEditController *)controller didEdit:(UIImage *)image
+- (void)photoEditController:(PhotoEditController *)controller didEditImage:(UIImage *)image withCaption:(NSString *)caption
 {
     // implement in subclass
 }

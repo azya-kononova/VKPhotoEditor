@@ -10,7 +10,6 @@
 #import "UIImage+Resize.h"
 #import "ZoomingView.h"
 #import "FlexibleButton.h"
-#import "PhotoEditController.h"
 #import "Filters.h"
 #import "GPUImageFilter.h"
 #import "BlurFilterParams.h"

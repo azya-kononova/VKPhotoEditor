@@ -48,5 +48,5 @@
 @protocol PhotoEditControllerDelegate
 - (void)photoEditControllerDidCancel:(PhotoEditController *)controller;
 - (void)photoEditControllerDidRetake:(PhotoEditController *)controller;
-- (void)photoEditController:(PhotoEditController *)controller didEdit:(UIImage*)image;
+- (void)photoEditController:(PhotoEditController *)controller didEditImage:(UIImage*)image withCaption:(NSString *)caption;
 @end

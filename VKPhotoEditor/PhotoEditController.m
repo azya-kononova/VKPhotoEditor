@@ -72,8 +72,6 @@
         image = _image;
         filterIndex = _filterIndex;
         blurFilter = _blurFilter;
-        
-        isAvatar = YES;
     }
     return self;
 }
@@ -247,8 +245,7 @@
         }
         
         [activityView showSelf:NO];
-        //TODO: send image and text
-        [delegate photoEditController:self didEdit:output];
+        [delegate photoEditController:self didEditImage:output withCaption:captionView.caption];
     });
     
 }

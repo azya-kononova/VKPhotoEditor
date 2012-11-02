@@ -210,7 +210,7 @@
 #pragma  mark - PhotoEditControllerDelegate
 
 
-- (void)photoEditController:(PhotoEditController *)controller didEdit:(UIImage *)image
+- (void)photoEditController:(PhotoEditController *)controller didEditImage:(UIImage *)image withCaption:(NSString *)caption
 {
     [self.navigationController popViewControllerAnimated:YES];
     [self clearThumbnailsImages];
