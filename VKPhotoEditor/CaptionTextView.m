@@ -24,14 +24,11 @@
     IBOutlet VKHighlightTextView *textView;
 }
 
-@synthesize captionButtonTitle, delegate;
+@synthesize delegate, captionButtonTitle;
 
 - (void)awakeFromNib
 {
     captionButton.bgImagecaps = CGSizeMake(23, 20);
-    if (captionButtonTitle) {
-        [captionButton setTitle:captionButtonTitle forState:UIControlStateNormal];
-    }
     
     textView.font = [UIFont fontWithName:@"Lobster" size:MAX_FONT_SIZE];
     
@@ -44,6 +41,8 @@
     CGFloat topCorrect = (tv.bounds.size.height - tv.contentSize.height);
     topCorrect = topCorrect < 0.0 ? 0.0 : topCorrect;
     tv.contentOffset = CGPointMake(0, -topCorrect);
+    
+    [delegate captionTextView:self didChangeOffset:tv.contentOffset];
 }
 
 - (IBAction)addCaption:(id)sender
@@ -53,10 +52,12 @@
     [textView becomeFirstResponder];
 }
 
-- (NSString *)caption
+- (void)dealloc
 {
-    return textView.text;
+    [textView removeObserver:self forKeyPath:@"contentSize"];
 }
+
+#pragma mark - properties
 
 - (void)setCaptionColor:(UIColor *)captionColor
 {
@@ -68,9 +69,18 @@
     return textView.textColor;
 }
 
-- (void)dealloc
+- (NSString *)caption
 {
-    [textView removeObserver:self forKeyPath:@"contentSize"];
+    return textView.text;
+}
+
+- (void)setCaptionButtonTitle:(NSString *)title
+{
+    captionButtonTitle = title;
+    
+    if (captionButtonTitle) {
+        [captionButton setTitle:captionButtonTitle forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark - UITextFieldDelegate

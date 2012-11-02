@@ -34,7 +34,6 @@
     NSArray *filters;
     CGPoint oldContentOffset;
     UIImage *image;
-    BOOL isPhoto;
     NSInteger filterIndex;
     GPUImagePicture *sourcePicture;
     UIView<CaptionTemplateProtocol> *captionViewTemplate;
@@ -46,6 +45,7 @@
     FiltersManager *manager;
     BlurView *blurView;
     CaptionTextView *captionView;
+    CGFloat initTagLabelY;
 }
 
 @synthesize saveButton;
@@ -61,6 +61,9 @@
 @synthesize leftRecognizer;
 @synthesize rightRecognizer;
 @synthesize blurButton;
+@synthesize isPhoto;
+@synthesize isAvatar;
+@synthesize avatarTagLabel;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter
 {
@@ -69,6 +72,8 @@
         image = _image;
         filterIndex = _filterIndex;
         blurFilter = _blurFilter;
+        
+        isAvatar = YES;
     }
     return self;
 }
@@ -82,6 +87,11 @@
      addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:self.view.window];
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:self.view.window];
+    
+    avatarTagLabel.hidden = !isAvatar;
+    avatarTagLabel.font = [UIFont fontWithName:@"Lobster" size:28];
+    avatarTagLabel.textColor = [UIColor colorWithRed:149.0/255 green:200.0/255 blue:255.0/255 alpha:1];
+    initTagLabelY = avatarTagLabel.frame.origin.y;
     
     saveButton.bgImagecaps = CGSizeMake(23, 0);
     retakeButton.bgImagecaps = CGSizeMake(23, 20);
@@ -107,6 +117,7 @@
     captionView = [CaptionTextView loadFromNIB];
     captionView.center = CGPointMake(self.view.center.x, 350);
     captionView.delegate = self;
+    captionView.captionButtonTitle = isAvatar ? @"Your name" : @"Add caption";
     
     [contentView addSubview:captionView];
     [scrollView addSubview:contentView];
@@ -335,6 +346,13 @@
 - (void)captionTextViewDidFinishEditing:(CaptionTextView *)view
 {
     NSLog(@"text: %@", captionView.caption);
+}
+
+- (void)captionTextView:(CaptionTextView *)view didChangeOffset:(CGPoint)offset
+{
+    CGRect frame = avatarTagLabel.frame;
+    frame.origin.y = initTagLabelY - offset.y;
+    avatarTagLabel.frame = frame;
 }
 
 @end
