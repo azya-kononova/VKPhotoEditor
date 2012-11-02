@@ -39,6 +39,12 @@ static CGFloat MARGIN = 8;
     NSDictionary *highlightTheme;
     NSDictionary *definitions;
 }
+@synthesize isEditable;
+
+- (BOOL)canBecomeFirstResponder
+{
+    return isEditable;
+}
 
 - (void)_init
 {
