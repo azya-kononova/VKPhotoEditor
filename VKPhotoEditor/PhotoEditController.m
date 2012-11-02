@@ -240,12 +240,18 @@
         [captionViewTemplate removeFromSuperview];
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
         UIImage *output = [self imageByApplingFilters];
+        
         if (captionTemplateIndex) {
             output = [output squareImageByBlendingWithView:captionViewTemplate.templateImage];
         }
         
+        NSString *caption = captionView.caption;
+        if (isAvatar) {
+            caption = [NSString stringWithFormat:@"#me %@", caption];
+        }
+        
         [activityView showSelf:NO];
-        [delegate photoEditController:self didEditImage:output withCaption:captionView.caption];
+        [delegate photoEditController:self didEditImage:output withCaption:caption];
     });
     
 }
