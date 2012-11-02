@@ -44,9 +44,9 @@
     return captionLabel.textColor;
 }
 
-- (UIImage *)templateImage
+- (UIImageView *)templateImage
 {
-    return templateImageView.image;
+    return templateImageView;
 }
 
 @end

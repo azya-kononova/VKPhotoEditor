@@ -48,7 +48,7 @@
     return [UIColor whiteColor];
 }
 
-- (UIImage *)templateImage
+- (UIImageView *)templateImage
 {
     return nil;
 }

@@ -23,7 +23,7 @@
 #import "FiltersManager.h"
 #import "BlurView.h"
 #import "CaptionTextView.h"
-#import "UIImage+Blending.h"
+#import "UIImage+Blend.h"
 
 #define MAX_FONT_SIZE 100
 
@@ -236,8 +236,9 @@
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
         UIImage *output = [self imageByApplingFilters];
         if (captionTemplateIndex) {
-            output = [output blendWithImage:captionViewTemplate.templateImage];
+            output = [output squareImageByBlendingWithView:captionViewTemplate.templateImage];
         }
+        
         [activityView showSelf:NO];
         //TODO: send image and text
         [delegate photoEditController:self didEdit:output];

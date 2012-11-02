@@ -134,7 +134,6 @@
 		22D177311618753D00B8093D /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D177301618753D00B8093D /* StartViewController.m */; };
 		22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */; };
 		22D1FF0E1612047C00E66FEE /* CroppingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */; };
-		22D4BA651644053700B95C50 /* UIImage+Blending.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D4BA641644053700B95C50 /* UIImage+Blending.m */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -476,8 +475,6 @@
 		22D1FEE71611FC6600E66FEE /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CroppingViewController.xib; sourceTree = "<group>"; };
-		22D4BA631644053700B95C50 /* UIImage+Blending.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Blending.h"; sourceTree = "<group>"; };
-		22D4BA641644053700B95C50 /* UIImage+Blending.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Blending.m"; sourceTree = "<group>"; };
 		22D7BF53160CCC33008B5BFA /* BeautyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -835,8 +832,6 @@
 				8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */,
 				8B7406CE1643E28B00379805 /* UITextView+Resize.h */,
 				8B7406CF1643E28B00379805 /* UITextView+Resize.m */,
-				22D4BA631644053700B95C50 /* UIImage+Blending.h */,
-				22D4BA641644053700B95C50 /* UIImage+Blending.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1658,7 +1653,6 @@
 				8B918E9816428D1C009E45A0 /* StickyHeaderTableView.m in Sources */,
 				8B918EDC16431053009E45A0 /* VKHighlightTextView.m in Sources */,
 				8B7406D01643E28B00379805 /* UITextView+Resize.m in Sources */,
-				22D4BA651644053700B95C50 /* UIImage+Blending.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
