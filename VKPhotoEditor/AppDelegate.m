@@ -9,8 +9,11 @@
 #import "AppDelegate.h"
 #import "PhotosListController.h"
 #import "StartViewController.h"
+#import "InformationView.h"
 
-@implementation AppDelegate
+@implementation AppDelegate {
+    InformationView *informationView;
+}
 
 @synthesize window, navigationController, connectionService, settings, imageCache;
 
@@ -27,8 +30,15 @@
     connectionService = [[VKConnectionService alloc] initWithURL:settings.serviceRootURL];
     imageCache = [ImageCache new];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:VKRequestDidFailNotification object:connectionService];
+    
     self.navigationController.navigationBar.hidden = YES;
     navigationController.viewControllers = settings.accessToken ? [NSArray arrayWithObjects: [StartViewController new], [PhotosListController new], nil] : [NSArray arrayWithObject:[StartViewController new]];
+    
+    informationView = [InformationView loadFromNIB];
+    [self.window addSubview:informationView];
+    [self.window bringSubviewToFront:informationView];
+
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -58,6 +68,12 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)requestDidFail:(NSNotification*)n;
+{
+    NSError *error = [n.userInfo objectForKey:@"Error"];
+    [informationView showMessage:error.localizedDescription];
 }
 
 #pragma mark - UINavigationControllerDelegate

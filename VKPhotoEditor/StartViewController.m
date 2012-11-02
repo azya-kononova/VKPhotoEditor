@@ -47,6 +47,8 @@
     BOOL isPostPhotoMode;
     VKRequestExecutor *exec;
     
+    IBOutlet UILabel* errorLabel;
+    
     UIImage *savedImage;
 }
 
@@ -148,6 +150,8 @@
 
 - (IBAction)postPhoto
 {
+    if (exec) return;
+    errorLabel.text = nil;
     exec = [[VKConnectionService shared] login:loginInputField.text];
     exec.delegate = self;
     [exec start];
@@ -228,11 +232,13 @@
 {
     PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:savedImage];
     [self.navigationController pushViewController:ctrl animated:YES];
+    exec = nil;
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
 {
-    
+    errorLabel.text = error.localizedDescription;
+    exec = nil;
 }
 
 @end

@@ -9,6 +9,8 @@
 #import "VKRequestExecutor.h"
 #import "VKConnectionService.h"
 #import "JSONKit.h"
+#import "NSDictionary+Helpers.h"
+#import "Settings.h"
 
 @protocol RequestExecutor_NSURLConnectionHandler
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data;
@@ -78,8 +80,10 @@
 
 - (NSError*)errorWithMessage:(NSString*)message code:(NSInteger)code reason:(NSString*)reason;
 {
+    NSString *description = [[Settings current] descriptionForErrorKey:message];
+    
     NSDictionary *info = [NSDictionary dictionaryWithObjectsAndKeys:
-                          message, NSLocalizedDescriptionKey,
+                          description ? description : message, NSLocalizedDescriptionKey,
                           reason, NSLocalizedFailureReasonErrorKey,
                           nil];
     return [NSError errorWithDomain:VKErrorDomain code:code userInfo:info];
@@ -109,7 +113,8 @@
         return;
     }
     if ([obj isKindOfClass:[NSDictionary class]] && [obj objectForKey:@"error"]) {
-        [self _notifyError:[self errorWithMessage:[obj objectForKey:@"error"] code:[obj integerForKey:@"code"] reason:@"Server error"]];
+        NSDictionary *error = [obj objectForKey:@"error"];
+        [self _notifyError:[self errorWithMessage:[error objectForKey:@"type"] code:[error integerForKey:@"code"] reason:@"Server error"]];
         return;
     }
     [delegate VKRequestExecutor:self didFinishWithObject:[obj objectForKey:@"response"]];

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSURL *avatarURL;
 
 - (id)initWithDefaults:(NSDictionary*)defs;
+- (NSString*)descriptionForErrorKey:(NSString*)errorKey;
 
 + (Settings*)current;
 

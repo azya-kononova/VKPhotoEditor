@@ -15,6 +15,7 @@
 #define ACCESS_TOKEN_KEY @"accessToken"
 #define AVATAR_URL_KEY @"avatarURL"
 #define SERVICE_URL_KEY @"serviceRootURL"
+#define ERRORS_DESCRIPTIONS_KEY @"errorsDescriptions"
 
 @interface NSUserDefaults (Def)
 - (id)objectForKey:(NSString*)name withDef:(NSDictionary*)def map:(MapBlock)map;
@@ -40,6 +41,11 @@
 + (Settings*)current
 {
     return [AppDelegate shared].settings;
+}
+
+- (NSString*)descriptionForErrorKey:(NSString *)errorKey
+{
+    return [[user objectForKey:ERRORS_DESCRIPTIONS_KEY] objectForKey:errorKey];
 }
 
 - (NSURL*)serviceRootURL

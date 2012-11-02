@@ -85,7 +85,7 @@
 
 - (void)photosList:(UserPhotosList *)photosList didFailToUpdate:(NSError *)error
 {
-    
+    [tableView reloadData];
 }
 
 #pragma mark - Request Handler

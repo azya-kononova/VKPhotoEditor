@@ -2,6 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>errorsDescriptions</key>
+	<dict>
+		<key>ALREADY_AUTHORIZED</key>
+		<string>You have already authorized</string>
+		<key>LOGIN_EMPTY</key>
+		<string>Username can&apos;t be empty</string>
+		<key>LOGIN_INVALID</key>
+		<string>Username invalid</string>
+		<key>PASSWORD_EMPTY</key>
+		<string>Password can&apos;t be empty</string>
+		<key>PASSWORD_INVALID</key>
+		<string>Password invalid</string>
+		<key>SIGN_IN_FAILED</key>
+		<string>Sorry, this username is already taken</string>
+		<key>QUERY_TOO_SHORT</key>
+		<string>Query is too short</string>
+	</dict>
 	<key>serviceRootURL</key>
 	<string>https://api.airshipdock.com/</string>
 </dict>

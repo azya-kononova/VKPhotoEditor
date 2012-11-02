@@ -20,6 +20,7 @@
 #import <net/if_dl.h>
 
 NSString *VKErrorDomain = @"VKErrorDomain";
+NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 
 @implementation VKConnectionService
 @synthesize rootURL;
@@ -105,6 +106,7 @@ NSString *VKErrorDomain = @"VKErrorDomain";
 - (VKRequestExecutor*)login:(NSString*)login
 {
     RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"login?login=%@&password=%@", login, [[self getMacAddress] md5]]];
+    exec.onError = nil;
     exec.onSuccess = @selector(exec:didLogin:);
     return exec;
 }
@@ -162,13 +164,12 @@ NSString *VKErrorDomain = @"VKErrorDomain";
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
         photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
         return photo; }];
-    
-    NSLog(@"%@",account);
 }
 
 - (void)exec:(VKRequestExecutor*)exec didFailWithError:(id)error
 {
-    
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:error forKey:@"Error"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:VKRequestDidFailNotification object:self userInfo:userInfo];
 }
 
 - (NSString *)getMacAddress

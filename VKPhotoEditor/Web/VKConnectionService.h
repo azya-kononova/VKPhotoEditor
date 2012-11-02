@@ -11,6 +11,7 @@
 #import "VKRequestExecutor.h"
 
 extern NSString *VKErrorDomain;
+extern NSString *VKRequestDidFailNotification;
 
 @interface VKConnectionService : NSObject
 

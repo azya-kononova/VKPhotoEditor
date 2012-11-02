@@ -309,6 +309,10 @@
 		8BDF18AC1611AAD400507B5F /* ballw_.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BDF18AB1611AAD400507B5F /* ballw_.ttf */; };
 		8BE3C9DA1641B0950057031A /* AllPhotosController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BE3C9D81641B0950057031A /* AllPhotosController.m */; };
 		8BE3C9DB1641B0950057031A /* AllPhotosController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BE3C9D91641B0950057031A /* AllPhotosController.xib */; };
+		8BFF7C141644310A0073D195 /* InformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BFF7C121644310A0073D195 /* InformationView.m */; };
+		8BFF7C151644310A0073D195 /* InformationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF7C131644310A0073D195 /* InformationView.xib */; };
+		8BFF7C181644324F0073D195 /* alert_panel_mark_error.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF7C161644324F0073D195 /* alert_panel_mark_error.png */; };
+		8BFF7C191644324F0073D195 /* alert_panel_mark_error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8BFF7C171644324F0073D195 /* alert_panel_mark_error@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -725,6 +729,11 @@
 		8BE3C9D71641B0950057031A /* AllPhotosController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllPhotosController.h; sourceTree = "<group>"; };
 		8BE3C9D81641B0950057031A /* AllPhotosController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllPhotosController.m; sourceTree = "<group>"; };
 		8BE3C9D91641B0950057031A /* AllPhotosController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllPhotosController.xib; sourceTree = "<group>"; };
+		8BFF7C111644310A0073D195 /* InformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationView.h; sourceTree = "<group>"; };
+		8BFF7C121644310A0073D195 /* InformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationView.m; sourceTree = "<group>"; };
+		8BFF7C131644310A0073D195 /* InformationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InformationView.xib; sourceTree = "<group>"; };
+		8BFF7C161644324F0073D195 /* alert_panel_mark_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = alert_panel_mark_error.png; sourceTree = "<group>"; };
+		8BFF7C171644324F0073D195 /* alert_panel_mark_error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert_panel_mark_error@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -864,6 +873,8 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				8BFF7C161644324F0073D195 /* alert_panel_mark_error.png */,
+				8BFF7C171644324F0073D195 /* alert_panel_mark_error@2x.png */,
 				8B7406EE1644089B00379805 /* BackBtn_Pressed.png */,
 				8B7406EF1644089B00379805 /* BackBtn.png */,
 				8B7406E71643FAFE00379805 /* PostHeader_Pressed.png */,
@@ -1140,6 +1151,9 @@
 		22D7BFA1160EF628008B5BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8BFF7C111644310A0073D195 /* InformationView.h */,
+				8BFF7C121644310A0073D195 /* InformationView.m */,
+				8BFF7C131644310A0073D195 /* InformationView.xib */,
 				8B121D3D16208A8B00F166D8 /* CaptionTemplates */,
 				221C31D916104732005974C8 /* Cell */,
 				8BA3D707163DC80F00CEA6AD /* ChoosePhotoView.h */,
@@ -1582,6 +1596,9 @@
 				8B7406EA1643FAFE00379805 /* PhotoHeader_Pressed@2x.png in Resources */,
 				8B7406F01644089B00379805 /* BackBtn_Pressed.png in Resources */,
 				8B7406F11644089B00379805 /* BackBtn.png in Resources */,
+				8BFF7C151644310A0073D195 /* InformationView.xib in Resources */,
+				8BFF7C181644324F0073D195 /* alert_panel_mark_error.png in Resources */,
+				8BFF7C191644324F0073D195 /* alert_panel_mark_error@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1675,6 +1692,7 @@
 				8B918EDC16431053009E45A0 /* VKHighlightTextView.m in Sources */,
 				8B7406D01643E28B00379805 /* UITextView+Resize.m in Sources */,
 				8B7406ED1644028D00379805 /* HighlightedButton.m in Sources */,
+				8BFF7C141644310A0073D195 /* InformationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
