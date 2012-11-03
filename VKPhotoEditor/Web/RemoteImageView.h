@@ -17,6 +17,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) IBOutlet UIView *placeholder;
 @property (nonatomic, assign) BOOL isCircular;
+@property (nonatomic, strong) IBOutlet UIView *progressView;
 
 - (void)displayImage:(RemoteImage*)imaged;
 @end

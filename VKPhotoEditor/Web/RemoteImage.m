@@ -8,13 +8,15 @@
 @property (nonatomic, assign) BOOL isLoad;
 @end
 
-@implementation RemoteImage
+@implementation RemoteImage {
+    NSInteger expectedSize;
+}
 @synthesize delegate;
 @synthesize imageUrl;
 @synthesize imageData;
 @synthesize lastError;
 @synthesize isLoad;
-
+@synthesize progress;
 
 + (RemoteImage*)remoteImageWithURL:(NSURL*)url
 {
@@ -36,7 +38,6 @@
     }
 	return self;
 }
-
 
 - (NSData*)imageData
 {
@@ -80,6 +81,11 @@
 
 #pragma mark URL Connection Delegate
 
+- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse*)_response
+{
+    expectedSize = _response.expectedContentLength;
+}
+
 - (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data
 {
 	if (!connectionData) {
@@ -87,6 +93,8 @@
 	} else {
 		[connectionData appendData:data];
 	}
+    
+    self.progress = expectedSize > 0 ? (float)connectionData.length / (float)expectedSize : 0;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
