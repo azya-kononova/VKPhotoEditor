@@ -29,6 +29,10 @@
 		220E6BC8161E06ED00AB89B5 /* BlurMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E6BC7161E06ED00AB89B5 /* BlurMode.m */; };
 		220E6BCB161E071500AB89B5 /* FlashMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E6BCA161E071500AB89B5 /* FlashMode.m */; };
 		22129D8E1645A53B00E7FB96 /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 22129D8D1645A53B00E7FB96 /* UIViewController+StatusBar.m */; };
+		22129DB31645C1D100E7FB96 /* camera_bg_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 22129DAF1645C1D100E7FB96 /* camera_bg_bottom.png */; };
+		22129DB41645C1D100E7FB96 /* camera_bg_bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22129DB01645C1D100E7FB96 /* camera_bg_bottom@2x.png */; };
+		22129DB51645C1D100E7FB96 /* camera_bg_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 22129DB11645C1D100E7FB96 /* camera_bg_top.png */; };
+		22129DB61645C1D100E7FB96 /* camera_bg_top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22129DB21645C1D100E7FB96 /* camera_bg_top@2x.png */; };
 		2214CD6F16458C950099FD47 /* ALAsset+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */; };
 		22169D8D1642729F005C097E /* Lobster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22169D8C1642729F005C097E /* Lobster.ttf */; };
 		221C31C516103E2C005974C8 /* TableViewPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31C316103E2C005974C8 /* TableViewPopover.m */; };
@@ -385,6 +389,10 @@
 		220E6BCA161E071500AB89B5 /* FlashMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashMode.m; sourceTree = "<group>"; };
 		22129D8C1645A53B00E7FB96 /* UIViewController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBar.h"; sourceTree = "<group>"; };
 		22129D8D1645A53B00E7FB96 /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
+		22129DAF1645C1D100E7FB96 /* camera_bg_bottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_bg_bottom.png; sourceTree = "<group>"; };
+		22129DB01645C1D100E7FB96 /* camera_bg_bottom@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_bg_bottom@2x.png"; sourceTree = "<group>"; };
+		22129DB11645C1D100E7FB96 /* camera_bg_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_bg_top.png; sourceTree = "<group>"; };
+		22129DB21645C1D100E7FB96 /* camera_bg_top@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera_bg_top@2x.png"; sourceTree = "<group>"; };
 		2214CD6D16458C950099FD47 /* ALAsset+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+UIImage.h"; sourceTree = "<group>"; };
 		2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+UIImage.m"; sourceTree = "<group>"; };
 		22169D8C1642729F005C097E /* Lobster.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster.ttf; sourceTree = "<group>"; };
@@ -924,6 +932,10 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22129DAF1645C1D100E7FB96 /* camera_bg_bottom.png */,
+				22129DB01645C1D100E7FB96 /* camera_bg_bottom@2x.png */,
+				22129DB11645C1D100E7FB96 /* camera_bg_top.png */,
+				22129DB21645C1D100E7FB96 /* camera_bg_top@2x.png */,
 				8B68FEFA16456FD1008883E0 /* PostHeader_Pressed.png */,
 				8B68FEFB16456FD1008883E0 /* PostHeader_Pressed@2x.png */,
 				8B68FEFC16456FD1008883E0 /* PostHeader.png */,
@@ -1685,6 +1697,10 @@
 				8B68FEFF16456FD1008883E0 /* PostHeader_Pressed@2x.png in Resources */,
 				8B68FF0016456FD1008883E0 /* PostHeader.png in Resources */,
 				8B68FF0116456FD1008883E0 /* PostHeader@2x.png in Resources */,
+				22129DB31645C1D100E7FB96 /* camera_bg_bottom.png in Resources */,
+				22129DB41645C1D100E7FB96 /* camera_bg_bottom@2x.png in Resources */,
+				22129DB51645C1D100E7FB96 /* camera_bg_top.png in Resources */,
+				22129DB61645C1D100E7FB96 /* camera_bg_top@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

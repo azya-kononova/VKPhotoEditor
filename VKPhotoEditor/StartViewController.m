@@ -54,6 +54,8 @@
     IBOutlet UILabel* errorLabel;
     
     ImageToUpload *imageToUpload;
+    
+    BOOL isPostViewFrameUpdated;
 }
 
 - (void)viewDidLoad
@@ -83,6 +85,16 @@
     if (![Settings current].firstLaunch) [self showPostViewHeaderLogin:YES];
     
     postImageView.layer.cornerRadius = 5.0;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    if (!isPostViewFrameUpdated) {
+        [postView moveTo:CGPointMake(0,self.view.frame.size.height)];
+        isPostViewFrameUpdated = YES;
+    }
 }
 
 - (void)dealloc
