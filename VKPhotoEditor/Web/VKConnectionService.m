@@ -111,7 +111,6 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     return exec;
 }
 
-
 - (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -119,6 +118,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
                             caption, @"caption",
                             account.accessToken, @"access_token", nil];
     RequestExecutorProxy *exec = [self postToPath:@"uploadPhoto" params:[[WebParams alloc] initWithDictionary:params] json:NO];
+    if (caption.length >= 3 && [[caption substringWithRange:NSMakeRange(0, 3)] isEqualToString:@"#me"]) exec.onSuccess = @selector(exec:didLoadAvatar:);
     return exec;
 }
 
@@ -128,6 +128,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
                             photoId, @"id",
                             account.accessToken, @"access_token", nil];
     RequestExecutorProxy *exec = [self postToPath:@"deletePhotos" params:[[WebParams alloc] initWithDictionary:params] json:NO];
+    if ([photoId isEqualToString:account.avatarId]) exec.onSuccess = @selector(exec:didDeleteAvatar:);
     return exec;
 }
 
@@ -164,6 +165,19 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
         photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
         return photo; }];
+}
+
+- (void)exec:(VKRequestExecutor*)exec didLoadAvatar:(id)data
+{
+    NSDictionary *user = [[data objectForKey:@"users"] objectAtIndex:0];
+    account.avatarUrl = [NSURL URLWithString:[[user objectForKey:@"photo"] objectForKey:@"photo_small"]];
+    account.avatarId = [[data objectForKey:@"photo"] objectForKey:@"id"];
+}
+
+- (void)exec:(VKRequestExecutor*)exec didDeleteAvatar:(id)data
+{
+    account.avatarUrl = nil;
+    account.avatarId = nil;
 }
 
 - (void)exec:(VKRequestExecutor*)exec didFailWithError:(id)error

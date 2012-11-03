@@ -25,6 +25,12 @@
 
 - (void)displayImage:(RemoteImage*)_image
 {
+    if (!_image) {
+        [self.layer fade].duration = 0.75;
+        [self setImage:[UIImage imageNamed:@"AvatarPlace"] forState:UIControlStateNormal];
+        [self setImage:[UIImage imageNamed:@"AvatarPlace_Pressed"] forState:UIControlStateHighlighted];
+        return;
+    }
     image.delegate = nil;
     [image removeObserver:self forKeyPath:@"isLoad"];
     image = _image;

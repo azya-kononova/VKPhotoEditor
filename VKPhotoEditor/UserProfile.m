@@ -32,6 +32,7 @@
     profile.accountId = [[dict objectForKey:@"id"] intValue];
     profile.login = [dict objectForKey:@"login"];
     profile.avatarUrl = [NSURL URLWithString:[[dict objectForKey:@"photo"] objectForKey:@"photo_small"]];
+    profile.avatarId = [[dict objectForKey:@"photo"] objectForKey:@"id"];
     
     return profile;
 }
@@ -44,6 +45,16 @@
 - (NSInteger)accountId
 {
     return settings.userId;
+}
+
+- (void)setAvatarId:(NSString *)avatarId
+{
+    settings.avatarId = avatarId;
+}
+
+- (NSString*)avatarId
+{
+    return settings.avatarId;
 }
 
 - (void)setLogin:(NSString *)login
@@ -90,6 +101,7 @@
 {
     self.accountId = 0;
     self.avatarUrl = nil;
+    self.avatarId = nil;
     self.login = nil;
     self.accessToken = nil;
 }

@@ -50,6 +50,9 @@
         account = _account;
         isProfile = [account isKindOfClass:UserProfile.class];
         photosList = (isProfile) ? [[UserPhotosList alloc] initWithPhotos:account.lastPhotos] : [UserPhotosList new];
+        if (isProfile) {
+            [account addObserver:self forKeyPath:@"avatarUrl" options:0 context:NULL];
+        }
         photosList.delegate = self;
         sectionHeaders = [NSMutableArray new];
         service = [VKConnectionService shared];
@@ -57,7 +60,12 @@
         selectedPhoto = -1;
     }
     return self;
-}               
+}
+
+- (void)dealloc
+{
+    if (isProfile) [account removeObserver:self forKeyPath:@"avatarUrl"];
+}
 
 - (void)viewDidLoad
 {   
@@ -72,9 +80,7 @@
     if (isProfile) {
         nameLabel.text = account.login;
         self.navigationItem.titleView = titleView;
-        addAvatarView.hidden = account.avatarUrl != nil;
-        [nameLabel moveTo:CGPointMake(nameLabel.frame.origin.x, account.avatarUrl ? 12 : 3)];
-        [avatarButton displayImage:account.avatar];
+        [self reloadAvatar];
     } else {
         self.navigationItem.title = account.login;
     }
@@ -92,6 +98,21 @@
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         [delegate profileControllerDidBack:self];
     }
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if([keyPath isEqualToString:@"avatarUrl"]) {
+        [self reloadAvatar];
+    }
+}
+
+- (void)reloadAvatar
+{
+    BOOL hasAvatar = account.avatarUrl != nil;
+    addAvatarView.hidden = hasAvatar;
+    [nameLabel moveTo:CGPointMake(nameLabel.frame.origin.x, hasAvatar ? 12 : 3)];
+    [avatarButton displayImage:account.avatar];
 }
 
 - (void)showUploading:(UIImage*)image

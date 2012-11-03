@@ -11,6 +11,8 @@
 #import "VKRequestExecutor.h"
 #import "NSObject+Map.h"
 #import "NSArray+Helpers.h"
+#import "UserProfile.h"
+#import "NSDictionary+Helpers.h"
 
 @interface UserPhotosList () <VKRequestExecutorDelegate>
 @end
@@ -103,7 +105,7 @@
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     for (NSDictionary *user in [value objectForKey:@"users"]) {
-        Account *acc = [Account accountWithDict:user];
+        Account *acc = [user integerForKey:@"id"] == service.account.accountId ? service.account : [Account accountWithDict:user];
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
     }
     NSArray *_photos = [[value objectForKey:@"photos"] map:^id(NSDictionary *dict) {

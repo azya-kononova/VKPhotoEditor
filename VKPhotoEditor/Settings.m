@@ -17,6 +17,7 @@
 #define SERVICE_URL_KEY @"serviceRootURL"
 #define ERRORS_DESCRIPTIONS_KEY @"errorsDescriptions"
 #define FIRST_LAUNCH_KEY @"firstLaunch"
+#define AVATAR_ID_KEY @"avatarId"
 
 @interface NSUserDefaults (Def)
 - (id)objectForKey:(NSString*)name withDef:(NSDictionary*)def map:(MapBlock)map;
@@ -33,7 +34,7 @@
         user = [NSUserDefaults standardUserDefaults];
         if (defs) {
             [user registerDefaults:defs];
-            [self sync];
+            [user synchronize];
         }
     }
     return self;
@@ -62,7 +63,18 @@
 - (void)setFirstLaunch:(BOOL)firstLaunch
 {
     [user setBool:firstLaunch forKey:FIRST_LAUNCH_KEY];
-    [self sync];
+    [user synchronize];
+}
+
+- (NSString*)avatarId
+{
+    return [user objectForKey:AVATAR_ID_KEY];
+}
+
+- (void)setAvatarId:(NSString *)avatarId
+{
+    [user setObject:avatarId forKey:AVATAR_ID_KEY];
+    [user synchronize];
 }
 
 - (NSString*)login
@@ -73,7 +85,7 @@
 - (void)setLogin:(NSString *)login
 {
     [user setObject:login forKey:LOGIN_KEY];
-    [self sync];
+    [user synchronize];;
 }
 
 - (NSInteger)userId
@@ -84,7 +96,7 @@
 - (void)setUserId:(NSInteger)userId
 {
     [user setInteger:userId forKey:USER_ID_KEY];
-    [self sync];
+    [user synchronize];
 }
 
 - (NSString*)accessToken
@@ -95,7 +107,7 @@
 - (void)setAccessToken:(NSString *)accessToken
 {
     [user setObject:accessToken forKey:ACCESS_TOKEN_KEY];
-    [self sync];
+    [user synchronize];
 }
 
 - (NSURL*)avatarURL
@@ -106,12 +118,8 @@
 - (void)setAvatarURL:(NSURL *)avatarURL
 {
     [user setObject:avatarURL.absoluteString forKey:AVATAR_URL_KEY];
-    [self sync];
-}
-
-- (void)sync
-{
     [user synchronize];
 }
+
 
 @end

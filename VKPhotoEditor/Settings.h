@@ -15,13 +15,11 @@
 @property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSURL *avatarURL;
+@property (nonatomic, strong) NSString *avatarId;
 @property (nonatomic, assign) BOOL firstLaunch;
 
 - (id)initWithDefaults:(NSDictionary*)defs;
 - (NSString*)descriptionForErrorKey:(NSString*)errorKey;
 
 + (Settings*)current;
-
-- (void)sync;
-
 @end

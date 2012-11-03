@@ -11,6 +11,7 @@
 
 @interface UserProfile : Account
 @property (nonatomic, strong) NSString *accessToken;
+@property (nonatomic, strong) NSString *avatarId;
 @property (nonatomic, strong) NSArray *lastPhotos;
 
 + (id)accountWithDict:(NSDictionary*)dict;
