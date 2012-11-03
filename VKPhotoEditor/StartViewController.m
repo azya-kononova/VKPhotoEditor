@@ -79,6 +79,8 @@
     [self loadAlbumImages];
     
     if (![Settings current].firstLaunch) [self showPostViewHeaderLogin:YES];
+    
+    postImageView.layer.cornerRadius = 5.0;
 }
 
 - (void)dealloc
