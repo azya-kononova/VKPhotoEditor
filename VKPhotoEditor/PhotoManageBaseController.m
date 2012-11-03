@@ -90,6 +90,7 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
+    [self hideStatusBarIfNeed];
     [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
 }
 
@@ -98,6 +99,7 @@
 
 - (void)croppingViewControllerDidCancel:(CroppingViewController *)controller
 {
+    [self hideStatusBarIfNeed];
     isPhoto ? [self dismissModalViewControllerAnimated:NO] : [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
 }
 
