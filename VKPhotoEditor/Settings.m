@@ -88,12 +88,12 @@
 
 - (NSURL*)avatarURL
 {
-     return [user objectForKey:AVATAR_URL_KEY];
+     return [NSURL URLWithString:[user objectForKey:AVATAR_URL_KEY]];
 }
 
 - (void)setAvatarURL:(NSURL *)avatarURL
 {
-    [user setObject:avatarURL forKey:AVATAR_URL_KEY];
+    [user setObject:avatarURL.absoluteString forKey:AVATAR_URL_KEY];
     [self sync];
 }
 
