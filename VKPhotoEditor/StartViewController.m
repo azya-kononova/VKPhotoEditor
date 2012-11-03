@@ -24,6 +24,8 @@
 #import "PhotosListController.h"
 #import "ALAsset+UIImage.h"
 #import "Settings.h"
+#import "UINavigationController+Transistions.h"
+
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, VKRequestExecutorDelegate>
 - (IBAction)takePhoto:(id)sender;
@@ -239,7 +241,7 @@
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
     PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:imageToUpload];
-    [self.navigationController pushViewController:ctrl animated:YES];
+    [self.navigationController pushViewController:ctrl transition:UIViewAnimationTransitionFlipFromRight];
     [self showPost:NO];
     [self showPostViewHeaderLogin:YES];
     exec = nil;

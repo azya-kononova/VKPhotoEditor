@@ -17,6 +17,7 @@
 #import "CroppingViewController.h"
 #import "PhotoEditController.h"
 #import "AllPhotosController.h"
+#import "UINavigationController+Transistions.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
@@ -172,7 +173,7 @@
 - (void)choosePhotoViewDidExit:(ChoosePhotoView*)view
 {
     [service logout];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerTransition:UIViewAnimationTransitionFlipFromRight];
 }
 
 - (void)editPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex blurFilter:(id)blurFilter

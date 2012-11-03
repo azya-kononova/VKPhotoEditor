@@ -216,6 +216,7 @@
 		8B68FEFF16456FD1008883E0 /* PostHeader_Pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B68FEFB16456FD1008883E0 /* PostHeader_Pressed@2x.png */; };
 		8B68FF0016456FD1008883E0 /* PostHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B68FEFC16456FD1008883E0 /* PostHeader.png */; };
 		8B68FF0116456FD1008883E0 /* PostHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B68FEFD16456FD1008883E0 /* PostHeader@2x.png */; };
+		8B68FF081645725F008883E0 /* UINavigationController+Transistions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B68FF071645725F008883E0 /* UINavigationController+Transistions.m */; };
 		8B70963D163C330F004DA31B /* PhotosListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B70963B163C330F004DA31B /* PhotosListController.m */; };
 		8B70963E163C330F004DA31B /* PhotosListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B70963C163C330F004DA31B /* PhotosListController.xib */; };
 		8B709641163C347C004DA31B /* Bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70963F163C347C004DA31B /* Bottom@2x.png */; };
@@ -624,6 +625,8 @@
 		8B68FEFB16456FD1008883E0 /* PostHeader_Pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PostHeader_Pressed@2x.png"; sourceTree = "<group>"; };
 		8B68FEFC16456FD1008883E0 /* PostHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostHeader.png; sourceTree = "<group>"; };
 		8B68FEFD16456FD1008883E0 /* PostHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PostHeader@2x.png"; sourceTree = "<group>"; };
+		8B68FF061645725F008883E0 /* UINavigationController+Transistions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Transistions.h"; sourceTree = "<group>"; };
+		8B68FF071645725F008883E0 /* UINavigationController+Transistions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Transistions.m"; sourceTree = "<group>"; };
 		8B70963A163C330F004DA31B /* PhotosListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosListController.h; sourceTree = "<group>"; };
 		8B70963B163C330F004DA31B /* PhotosListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosListController.m; sourceTree = "<group>"; };
 		8B70963C163C330F004DA31B /* PhotosListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosListController.xib; sourceTree = "<group>"; };
@@ -891,6 +894,8 @@
 				8B7406CF1643E28B00379805 /* UITextView+Resize.m */,
 				2214CD6D16458C950099FD47 /* ALAsset+UIImage.h */,
 				2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */,
+				8B68FF061645725F008883E0 /* UINavigationController+Transistions.h */,
+				8B68FF071645725F008883E0 /* UINavigationController+Transistions.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1772,6 +1777,7 @@
 				8B68FEB216449802008883E0 /* RightTriangleView.m in Sources */,
 				8B68FECB1645315D008883E0 /* ImageToUpload.m in Sources */,
 				2214CD6F16458C950099FD47 /* ALAsset+UIImage.m in Sources */,
+				8B68FF081645725F008883E0 /* UINavigationController+Transistions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
