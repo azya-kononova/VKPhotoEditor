@@ -9,7 +9,8 @@
 #import "BlurView.h"
 #import "TableViewPopover.h"
 #import "TablePopoverCell.h"
-
+#import "GPUImageGaussianSelectiveBlurFilter.h"
+#import "GPUImageTiltShiftFilter.h"
 
 @interface BlurView ()<TableViewPopoverDataSource, TableViewPopoverDelegate, UIGestureRecognizerDelegate>
 @end
@@ -17,11 +18,9 @@
 @implementation BlurView {
     TableViewPopover *popover;
     NSArray *blurModes;
-    BlurMode *currentMode;
-    CGFloat blurScale;
 }
 
-@synthesize delegate, pinch;
+@synthesize delegate, pinch, mode;
 
 - (id)initWithCenter:(CGPoint)center margin:(CGFloat)margin
 {
@@ -47,10 +46,10 @@
 {
     NSMutableArray *modes = [NSMutableArray array];
     
-    [modes addObject:MakeBlurMode(@"TiltShiftFilter", @"blur_line.png", @"blur_line_icon.png")];
+    [modes addObject:MakeBlurMode(@"TiltShiftFilterName", @"blur_line.png", @"blur_line_icon.png")];
     [modes addObject:MakeBlurMode(@"GaussianSelectiveBlurFilterName", @"blur_round.png", @"blur_round_icon.png")];
     [modes addObject:MakeBlurMode(nil, @"blur_off.png", @"blur_off_icon.png")];
-    
+
     return modes;
 }
 
@@ -58,11 +57,14 @@
 {
     switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
-            blurScale = recognizer.scale;
+            [delegate blurViewDidBeginBlurScaleEditing:self];
             break;
         case UIGestureRecognizerStateChanged:
-            blurScale = recognizer.scale - blurScale;
-            [delegate blurView:self didChangeBlurScale:blurScale];
+            [delegate blurView:self didChangeBlurScale:recognizer.scale];
+            break;
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+            [delegate blurViewDidFinishBlurScaleEditing:self];
             break;
         default:
             break;
@@ -82,6 +84,21 @@
 - (BOOL)isShown
 {
     return [popover isShown];
+}
+
+- (void)setModeWithFilter:(id)filter
+{
+    if ([filter isKindOfClass:[GPUImageTiltShiftFilter class]]) {
+        mode = [blurModes objectAtIndex:0];
+    }
+    if ([filter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
+        mode = [blurModes objectAtIndex:1];
+    }
+    if (!filter) {
+        mode = [blurModes objectAtIndex:2];
+    }
+    
+    [delegate blurView:self didFinishWithBlurMode:mode blurFilter:filter];
 }
 
 #pragma mark - TableViewPopoverDataSource
@@ -106,15 +123,15 @@
 {
     [popover show:NO];
     
-    currentMode = [blurModes objectAtIndex:index];
-    [delegate blurView:self didFinishWithBlurMode:currentMode];
+    mode = [blurModes objectAtIndex:index];
+    [delegate blurView:self didFinishWithBlurMode:mode blurFilter:mode.filter];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    return currentMode.filter != nil && !self.isShown;
+    return mode.hasFilter && !self.isShown;
 }
 
 @end

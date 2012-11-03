@@ -13,7 +13,7 @@
     NSString *filterName;
 }
 
-@synthesize iconImage, image, filter;
+@synthesize iconImage, image, filter, hasFilter;
 
 - (id)initWithFilter:(NSString *)_filterName imageName:(NSString *)_imageName iconImageName:(NSString *)_iconImageName
 {
@@ -22,6 +22,7 @@
         filterName = _filterName;
         image = [UIImage imageNamed:_imageName];
         iconImage = [UIImage imageNamed:_iconImageName];
+        hasFilter = filterName.length;
     }
     return self;
 }

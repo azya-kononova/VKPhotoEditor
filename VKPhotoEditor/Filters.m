@@ -25,7 +25,7 @@ NSString *ContrastFilterName = @"ContrastFilter";
 NSString *ToonFilterName = @"ToonFilter";
 NSString *WhiteBalanceFilterName = @"WhiteBalanceFilter";
 NSString *GaussianSelectiveBlurFilter = @"GaussianSelectiveBlurFilterName";
-NSString *TiltShiftFilterName = @"TiltShiftFilter";
+NSString *TiltShiftFilterName = @"TiltShiftFilterName";
 
 @implementation Filters
 
@@ -84,8 +84,11 @@ NSString *TiltShiftFilterName = @"TiltShiftFilter";
         [(GPUImageWhiteBalanceFilter *)filter setTemperature:3500];
         return filter;
     }
-    if (name == GaussianSelectiveBlurFilter)
-        return [GPUImageGaussianSelectiveBlurFilter new];
+    if (name == GaussianSelectiveBlurFilter) {
+        GPUImageGaussianSelectiveBlurFilter *filter = [GPUImageGaussianSelectiveBlurFilter new];
+        [filter setExcludeCircleRadius:0.12];
+        return filter;
+    }
     if (name == TiltShiftFilterName)
         return [GPUImageTiltShiftFilter new];
     else

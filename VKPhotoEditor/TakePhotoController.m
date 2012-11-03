@@ -226,9 +226,7 @@
     __block TakePhotoController *blockSelf = self;
     
     [self forceProcessingAtScreenSize];
-    
     [stillCamera capturePhotoAsImageProcessedUpToFilter:manager.basicFilter withCompletionHandler:^(UIImage *processedImage, NSError *error) {
-        //TODO: fix blur radius problems
         [delegate takePhotoController:blockSelf didFinishWithBasicImage:processedImage filterIndex:manager.filterIndex blurFilter:manager.blurFilter];
     }];
 }
@@ -306,7 +304,7 @@
 
 #pragma mark - BlurViewDelegate
 
-- (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode
+- (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode blurFilter:(id)filter
 {
     blurImageView.image = mode.iconImage;
     [manager setBlurFilterWithMode:mode prepare:prepareBlock];
@@ -315,6 +313,16 @@
 - (void)blurView:(BlurView *)view didChangeBlurScale:(CGFloat)scale
 {
     [manager setBlurFilterScale:scale];
+}
+
+- (void)blurViewDidBeginBlurScaleEditing:(BlurView *)view
+{
+    [manager beginBlurScaleEditing];
+}
+
+- (void)blurViewDidFinishBlurScaleEditing:(BlurView *)view
+{
+    [manager finishBlurScaleEditing];
 }
 
 @end

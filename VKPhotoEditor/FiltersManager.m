@@ -12,6 +12,12 @@
 #import "GPUImageTiltShiftFilter.h"
 #import "GPUImageGaussianSelectiveBlurFilter.h"
 
+#define MIN_BLUR_RADIUS 0.12
+#define BLUR_SIZE_STEP 4
+
+typedef void (^GaussianFilterBlock)(GPUImageGaussianSelectiveBlurFilter *gaussian);
+typedef void (^TiltShiftFilterBlock)(GPUImageTiltShiftFilter *tiltShift);
+
 @interface FiltersManager ()
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput> *blurFilter;
 @property (nonatomic, strong) GPUImageOutput<GPUImageInput> *basicFilter;
@@ -23,6 +29,9 @@
 
 @implementation FiltersManager {
     NSArray *blurTargets;
+    CGFloat blurRadius;
+    CGFloat topFocusLevel;
+    CGFloat bottomFocusLevel;
 }
 
 @synthesize basicFilter, blurFilter, cameraView, stillCamera, filterIndex;
@@ -91,15 +100,49 @@ FiltersManager *FiltersManagerMake(id basic, id camera, id view)
     }
 }
 
-- (void)setBlurFilterScale:(CGFloat)radius
+- (void)setBlurFilterScale:(CGFloat)scale
 {
-    //TODO: right way to calculate radius
+    [self executeGaussianFilterBlock:^(GPUImageGaussianSelectiveBlurFilter *gaussian) {
+        CGFloat radius = blurRadius * scale;
+        [gaussian setExcludeCircleRadius:radius < MIN_BLUR_RADIUS ? MIN_BLUR_RADIUS : radius];
+    } tiltShiftFilterBlock:^(GPUImageTiltShiftFilter *filter) {
+        if ((bottomFocusLevel * scale - topFocusLevel / scale) > 0) {
+            [filter setTopFocusLevel:topFocusLevel / scale];
+            [filter setBottomFocusLevel:bottomFocusLevel * scale];
+        }
+    }];
+}
+
+- (void)beginBlurScaleEditing
+{
+    [self executeGaussianFilterBlock:^(GPUImageGaussianSelectiveBlurFilter *gaussian) {
+        gaussian.blurSize += BLUR_SIZE_STEP;
+        blurRadius = gaussian.excludeCircleRadius;
+    } tiltShiftFilterBlock:^(GPUImageTiltShiftFilter *filter) {
+        filter.blurSize += BLUR_SIZE_STEP;
+        topFocusLevel = filter.topFocusLevel;
+        bottomFocusLevel = filter.bottomFocusLevel;
+    }];
+}
+
+- (void)finishBlurScaleEditing
+{
+    [self executeGaussianFilterBlock:^(GPUImageGaussianSelectiveBlurFilter *gaussian) {
+        gaussian.blurSize -= BLUR_SIZE_STEP;
+    } tiltShiftFilterBlock:^(GPUImageTiltShiftFilter *filter) {
+        filter.blurSize -= BLUR_SIZE_STEP;
+    }];
+}
+
+- (void)executeGaussianFilterBlock:(GaussianFilterBlock)gaussianBlock tiltShiftFilterBlock:(TiltShiftFilterBlock)tiltShiftBlock
+{
     if ([blurFilter isKindOfClass:[GPUImageTiltShiftFilter class]]) {
-        [(GPUImageTiltShiftFilter *)blurFilter setTopFocusLevel:radius - 0.1];
-        [(GPUImageTiltShiftFilter *)blurFilter setBottomFocusLevel:radius + 0.1];
+        GPUImageTiltShiftFilter *filter = (GPUImageTiltShiftFilter*)blurFilter;
+        tiltShiftBlock(filter);
     }
     if ([blurFilter isKindOfClass:[GPUImageGaussianSelectiveBlurFilter class]]) {
-        [(GPUImageGaussianSelectiveBlurFilter *)blurFilter setExcludeCircleRadius:radius];
+        GPUImageGaussianSelectiveBlurFilter *gaussian = (GPUImageGaussianSelectiveBlurFilter *)blurFilter;
+        gaussianBlock(gaussian);
     }
 }
 

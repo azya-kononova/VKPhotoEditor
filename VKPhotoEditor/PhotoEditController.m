@@ -132,6 +132,7 @@
     
     blurView = [[BlurView alloc] initWithCenter:CGPointMake(270, 125) margin:CGRectGetMaxY(blurButton.frame)];
     blurView.delegate = self;
+    [blurView setModeWithFilter:blurFilter];
     [self.view addSubview:blurView];
     [self.view addGestureRecognizer:blurView.pinch];
     
@@ -328,15 +329,28 @@
 
 #pragma mark - BlurViewDelegate
 
-- (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode
+- (void)blurView:(BlurView *)view didFinishWithBlurMode:(BlurMode *)mode blurFilter:(id)filter
 {
     [blurButton setImage:mode.iconImage forState:UIControlStateNormal];
-    [self setBlurFilterWithFilter:mode.filter];
+    [self setBlurFilterWithFilter:filter];
 }
 
 - (void)blurView:(BlurView *)view didChangeBlurScale:(CGFloat)scale
 {
     [manager setBlurFilterScale:scale];
+    [sourcePicture processImage];
+}
+
+- (void)blurViewDidBeginBlurScaleEditing:(BlurView *)view
+{
+    [manager beginBlurScaleEditing];
+    [sourcePicture processImage];
+}
+
+- (void)blurViewDidFinishBlurScaleEditing:(BlurView *)view
+{
+    [manager finishBlurScaleEditing];
+    [sourcePicture processImage];
 }
 
 #pragma mark - CaptionTextViewDelegate
