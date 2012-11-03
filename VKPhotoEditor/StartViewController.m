@@ -205,7 +205,7 @@
     isPhoto = NO;
     
     ALAssetRepresentation *representation = [[assets objectAtIndex:index] defaultRepresentation];
-    UIImage *image = [UIImage imageWithCGImage:[representation fullResolutionImage] scale:1.0 orientation:representation.orientation];
+    UIImage *image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:1.0 orientation:representation.orientation];
     
     [self cropPhoto:image];
 }
