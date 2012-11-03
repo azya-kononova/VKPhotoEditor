@@ -10,5 +10,4 @@
 #import "CaptionTemplateProtocol.h"
 
 @interface DemotivatorCaptionView : UIView <CaptionTemplateProtocol>
-@property (nonatomic, strong) IBOutlet UILabel *captionLabel;
 @end

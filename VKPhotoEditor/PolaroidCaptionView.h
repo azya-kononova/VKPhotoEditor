@@ -10,5 +10,4 @@
 #import "CaptionTemplateProtocol.h"
 
 @interface PolaroidCaptionView : UIView <CaptionTemplateProtocol>
-@property (nonatomic, strong) IBOutlet UILabel *captionLabel;
 @end

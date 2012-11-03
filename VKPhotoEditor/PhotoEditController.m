@@ -27,7 +27,7 @@
 
 #define MAX_FONT_SIZE 100
 
-@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, CaptionTemplateDelegate, BlurViewDelegate, CaptionTextViewDelegate>
+@interface PhotoEditController () <ThumbnailsViewDelegate, ThumbnailsViewDataSource, BlurViewDelegate, CaptionTextViewDelegate>
 @end
 
 @implementation PhotoEditController {
@@ -213,10 +213,8 @@
 - (void)setCaptionViewTemplate:(UIView<CaptionTemplateProtocol>*)_captionViewTemplate
 {
     [captionViewTemplate removeFromSuperview];
-    captionViewTemplate.delegate = nil;
     [captionOverlayView addSubview:_captionViewTemplate];
     captionViewTemplate = _captionViewTemplate;
-    captionViewTemplate.delegate = self;
     
     captionView.captionColor = captionViewTemplate.textColor;
 }
@@ -243,7 +241,7 @@
         UIImage *output = [self imageByApplingFilters];
         
         if (captionTemplateIndex) {
-            output = [output squareImageByBlendingWithView:captionViewTemplate.templateImage];
+            output = [output squareImageByBlendingWithView:[[UIImageView alloc] initWithImage:captionViewTemplate.templateImage]];
         }
         
         NSString *caption = captionView.caption;
@@ -283,18 +281,6 @@
     } else {
         [delegate photoEditControllerDidCancel:self];
     }
-}
-
-#pragma mark - CaptionTemplateDelegate
-
-- (void)captionTemplateStartEditing:(UIView<CaptionTemplateProtocol> *)captionTemplate
-{
-    scrollView.scrollEnabled = leftRecognizer.enabled = rightRecognizer.enabled = NO;
-}
-
-- (void)captionTemplateEndEditing:(UIView<CaptionTemplateProtocol> *)captionTemplate
-{
-    scrollView.scrollEnabled = leftRecognizer.enabled = rightRecognizer.enabled = YES;
 }
 
 #pragma mark ThumbnailView datasourse

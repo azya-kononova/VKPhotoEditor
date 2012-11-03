@@ -11,6 +11,4 @@
 #import "SPUserResizableView.h"
 
 @interface CloudCaptionView : UIView <CaptionTemplateProtocol>
-@property (nonatomic, strong) IBOutlet UILabel *captionLabel;
-@property (nonatomic, strong) IBOutlet SPUserResizableView *labelView;
 @end

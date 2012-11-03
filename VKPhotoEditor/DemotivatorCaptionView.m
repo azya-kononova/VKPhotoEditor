@@ -11,42 +11,20 @@
 @interface DemotivatorCaptionView () {
     IBOutlet UIImageView *templateImageView;
 }
-
 @end
+
 @implementation DemotivatorCaptionView
-@synthesize captionLabel;
-@synthesize delegate;
 
 #pragma mark - CaptionTemplateProtocol
 
-- (NSString*)text
-{
-    return captionLabel.text;
-}
-
-- (void)setText:(NSString *)_text
-{
-    captionLabel.text = _text;
-}
-
-- (void)setFont:(UIFont *)_font
-{
-    captionLabel.font = [_font fontWithSize:captionLabel.font.pointSize];
-}
-
-- (UIFont*)font
-{
-    return captionLabel.font;
-}
-
 - (UIColor *)textColor
 {
-    return captionLabel.textColor;
+    return [UIColor whiteColor];
 }
 
-- (UIImageView *)templateImage
+- (UIImage *)templateImage
 {
-    return templateImageView;
+    return templateImageView.image;
 }
 
 @end

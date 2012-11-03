@@ -11,6 +11,4 @@
 #import "SPUserResizableView.h"
 
 @interface ComicsCaptionView : UIView <CaptionTemplateProtocol>
-@property (nonatomic, strong) IBOutlet UILabel *captionLabel;
-@property (nonatomic, strong) IBOutlet SPUserResizableView *labelView;
 @end

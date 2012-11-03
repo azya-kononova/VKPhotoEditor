@@ -8,17 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol CaptionTemplateDelegate;
-
 @protocol CaptionTemplateProtocol <NSObject>
-@property (nonatomic, assign) id<CaptionTemplateDelegate> delegate;
-@property (nonatomic, strong) NSString *text;
-@property (nonatomic, strong) UIFont *font;
 @property (nonatomic, strong, readonly) UIColor *textColor;
-@property (nonatomic, strong, readonly) UIImageView *templateImage;
-@end
-
-@protocol CaptionTemplateDelegate
-- (void)captionTemplateStartEditing:(UIView<CaptionTemplateProtocol>*)captionTemplate;
-- (void)captionTemplateEndEditing:(UIView<CaptionTemplateProtocol>*)captionTemplate;
+@property (nonatomic, strong, readonly) UIImage *templateImage;
 @end
