@@ -109,7 +109,7 @@
     [self takePhoto];
 }
 
-- (void)photoEditController:(PhotoEditController *)controller didEditImage:(UIImage *)image withCaption:(NSString *)caption
+- (void)photoEditController:(PhotoEditController *)controller didFinishWithImage:(ImageToUpload *)image
 {
     // implement in subclass
 }

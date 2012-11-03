@@ -81,9 +81,9 @@
     }
 }
 
-- (void)uploadImage:(UIImage *)image
+- (void)uploadImage:(ImageToUpload *)image
 {
-    [adapter start:[service uploadPhoto:image withCaption:@""] onSuccess:@selector(exec:didUploadPhoto:) onError:@selector(exec:didFailWithError:)];
+    [adapter start:[service uploadPhoto:image.image withCaption:image.caption] onSuccess:@selector(exec:didUploadPhoto:) onError:@selector(exec:didFailWithError:)];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
@@ -98,7 +98,9 @@
 
 - (void)reloadPullTable
 {
-    if (!photosList.completed) [tableView reloadData];
+    [tableView setCompleted:photosList.completed];
+    
+    [tableView reloadData];
     tableView.pullTableIsLoadingMore = NO;
     tableView.pullTableIsRefreshing = NO;
 }

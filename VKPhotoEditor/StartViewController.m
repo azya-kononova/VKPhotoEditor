@@ -49,7 +49,7 @@
     
     IBOutlet UILabel* errorLabel;
     
-    UIImage *savedImage;
+    ImageToUpload *imageToUpload;
 }
 
 - (void)viewDidLoad
@@ -214,13 +214,13 @@
 #pragma  mark - PhotoEditControllerDelegate
 
 
-- (void)photoEditController:(PhotoEditController *)controller didEditImage:(UIImage *)image withCaption:(NSString *)caption
+- (void)photoEditController:(PhotoEditController *)controller didFinishWithImage:(ImageToUpload*)image
 {
     [self.navigationController popViewControllerAnimated:YES];
     [self clearThumbnailsImages];
     [activityIndicator startAnimating];
-    savedImage = image;
-    postImageView.image = savedImage;
+    imageToUpload = image;
+    postImageView.image = imageToUpload.image;
     [self showPostViewHeader:YES];
     
     //    UIImageWriteToSavedPhotosAlbum( image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
@@ -230,7 +230,7 @@
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
-    PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:savedImage];
+    PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:imageToUpload];
     [self.navigationController pushViewController:ctrl animated:YES];
     exec = nil;
 }

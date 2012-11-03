@@ -31,7 +31,10 @@
 - (void) configDisplayProperties;
 @end
 
-@implementation PullTableView
+@implementation PullTableView {
+    BOOL completed;
+    LoadMoreTableFooterView *footer;
+}
 
 # pragma mark - Initialization / Deallocation
 
@@ -60,6 +63,7 @@
     [pullTextColor release];
     [pullLastRefreshDate release];
     
+    [footer release];
     [refreshView release];
     [loadMoreView release];
     [delegateInterceptor release];
@@ -88,13 +92,27 @@
     [self addSubview:refreshView];
     
     /* Load more view init */
-    loadMoreView = [[LoadMoreTableFooterView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, self.bounds.size.height)];
-    loadMoreView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
-    loadMoreView.delegate = self;
-    [self addSubview:loadMoreView];
+    footer = [[LoadMoreTableFooterView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, self.bounds.size.height)];
+    footer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    footer.delegate = self;
     
+    loadMoreView = footer;
+    [self addSubview:loadMoreView];
 }
 
+- (void)setCompleted:(BOOL)_completed
+{
+    if (completed == _completed) return;
+    completed = _completed;
+    
+    if (completed) {
+        [loadMoreView removeFromSuperview];
+        loadMoreView = nil;
+    } else {
+        loadMoreView = footer;
+        [self addSubview:loadMoreView];
+    }
+}
 
 # pragma mark - View changes
 
@@ -106,10 +124,6 @@
     CGRect loadMoreFrame = loadMoreView.frame;
     loadMoreFrame.origin.y = self.contentSize.height + visibleTableDiffBoundsHeight;
     loadMoreView.frame = loadMoreFrame;
-    
-    
-    
-    
 }
 
 #pragma mark - Preserving the original behaviour

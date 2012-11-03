@@ -52,15 +52,20 @@
     [exec start];
 }
 
-- (void)append:(NSArray*)_photos user:(Account*)_user;
+- (void)append:(NSArray*)_photos user:(NSDictionary*)_user total:(NSUInteger)total;
 {
-    user = _user;
+    if (_user) total = total - 1;
+
+    
     if (!photos) {
         photos = _photos.copy;
     } else {
         photos = [photos arrayByAddingObjectsFromArray:_photos];
     }
-    [delegate searchResultsList:self didUpdatePhotos:photos user:user];
+    
+    completed = _photos.count == total;
+    
+    [delegate searchResultsList:self didUpdatePhotos:photos user:nil];
 }
 
 #pragma mark - VKRequestExecutorDelegate
@@ -74,7 +79,11 @@
     }
     
     NSArray *results = [value objectForKey:@"results"];
+    
+    //TODO: user???
+    
     NSDictionary *_user = [results find:^BOOL(NSDictionary *result) { return [[result objectForKey:@"type"] isEqualToString:@"user"]; } ];
+    
     NSArray *_photos = [results map:^id(NSDictionary *dict) {
         if ([[dict objectForKey:@"type"] isEqualToString:@"user"]) return nil;
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:[dict objectForKey:@"photo"]];
@@ -83,15 +92,14 @@
     }];
     
     exec = nil;
-    completed = !_photos.count;
     
-    [self append:_photos user:nil];
+    [self append:_photos user:_user total:[[value objectForKey:@"count"] integerValue]];
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
 {
     exec = nil;
-    completed = YES;
+    nextPage--;
     [delegate searchResultsList:self didFailToUpdate:error];
 }
 

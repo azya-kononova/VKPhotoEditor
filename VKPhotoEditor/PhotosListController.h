@@ -7,7 +7,8 @@
 //
 
 #import "PhotoManageBaseController.h"
+#import "ImageToUpload.h"
 
 @interface PhotosListController : PhotoManageBaseController
-- (id)initWithImageToUpload:(UIImage*)image;
+- (id)initWithImageToUpload:(ImageToUpload*)image;
 @end

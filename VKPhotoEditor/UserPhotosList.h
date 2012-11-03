@@ -17,7 +17,6 @@
 @property (nonatomic, assign, readonly) BOOL completed;
 
 - (void)reset;
-- (void)append:(NSArray*)photos;
 - (void)insert:(VKPhoto*)photo;
 - (void)deletePhoto:(NSString*)photoId;
 - (void)loadNextPageFor:(NSInteger)userId;

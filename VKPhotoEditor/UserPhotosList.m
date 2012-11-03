@@ -62,18 +62,19 @@
 - (void)loadNextPageFor:(NSInteger)userId
 {
     if (exec) return;
-    exec = [service getPhotos:userId offset:initialOffset + limit*nextPage++ limit:limit];
+    exec = [service getPhotos:userId offset:initialOffset + limit * completed? nextPage : nextPage++ limit:limit];
     exec.delegate = self;
     [exec start];
 }
 
-- (void)append:(NSArray*)_photos
+- (void)append:(NSArray*)_photos totalCount:(NSUInteger)totalCount
 {
     if (!photos) {
         photos = _photos.copy;
     } else {
         photos = [photos arrayByAddingObjectsFromArray:_photos];
     }
+    completed = photos.count == totalCount;
     [delegate photosList:self didUpdatePhotos:photos];
 }
 
@@ -110,14 +111,14 @@
         photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
         return photo; }];
     exec = nil;
-    completed = !_photos.count;
-    [self append:_photos];
+    [self append:_photos totalCount:[[value objectForKey:@"count"] integerValue]];
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
 {
     exec = nil;
-    completed = YES;
+    nextPage--;
+    
     [delegate photosList:self didFailToUpdate:error];
 }
 

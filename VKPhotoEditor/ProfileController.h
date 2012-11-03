@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "UserProfile.h"
 #import "RemoteImageButton.h"
 #import "PullTableView.h"
+#import "ImageToUpload.h"
 
 @protocol ProfileControllerDelegate;
 
@@ -22,7 +22,7 @@
 @property (nonatomic, strong) IBOutlet UIView *addAvatarView;
 
 - (id)initWithAccount:(UserProfile*)account;
-- (void)uploadImage:(UIImage*)image;
+- (void)uploadImage:(ImageToUpload*)image;
 - (IBAction)openProfile;
 @end
 

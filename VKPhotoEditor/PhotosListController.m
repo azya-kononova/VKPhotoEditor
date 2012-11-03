@@ -29,14 +29,16 @@
     VKRequestExecutor *exec;
     VKConnectionService *service;
     ChoosePhotoView *choosePhotoView;
-    UIImage *imageToUpload;
-    BOOL isPhoto;
+    
+    ImageToUpload *imageToUpload;
+    BOOL isAvatar;
+    
     UINavigationController *navCtrl;
     AllPhotosController *allPhotosCtrl;
+    ProfileController *profileCtrl;
 }
 
-
-- (id)initWithImageToUpload:(UIImage *)image
+- (id)initWithImageToUpload:(ImageToUpload*)image
 {
     if (self = [super init]) {
         imageToUpload = image;
@@ -49,7 +51,7 @@
     [super viewDidLoad];
     
     service = [VKConnectionService shared];
-    ProfileController *profileCtrl = [[ProfileController alloc] initWithAccount:service.account];
+    profileCtrl = [[ProfileController alloc] initWithAccount:service.account];
     profileCtrl.delegate = self;
     
     allPhotosCtrl = [AllPhotosController new];
@@ -96,6 +98,7 @@
 
 - (void)VKTabBarDidTapCentral:(VKTabBar *)tabBar
 {
+    isAvatar = NO;
     [choosePhotoView show:YES withExitButton:NO animated:YES];
 }
 
@@ -115,6 +118,7 @@
 
 - (void)profileControllerDidOpenProfile:(ProfileController *)ctrl
 {
+    isAvatar = YES;
     [choosePhotoView show:YES withExitButton:YES animated:YES];
 }
 
@@ -171,14 +175,23 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
+- (void)editPhoto:(UIImage *)image filterIndex:(NSInteger)filterIndex blurFilter:(id)blurFilter
+{
+    PhotoEditController *photoEditController = [[PhotoEditController alloc] initWithImage:image filterIndex:filterIndex blurFilter:blurFilter];
+    photoEditController.delegate = self;
+    photoEditController.isPhoto = self.isPhoto;
+    photoEditController.isAvatar = isAvatar;
+    
+    [self.navigationController pushViewController:photoEditController animated:NO];
+}
+
 #pragma mark - PhotoEditControllerDelegate
 
-- (void)photoEditController:(PhotoEditController *)controller didEdit:(UIImage *)image
+- (void)photoEditController:(PhotoEditController *)controller didFinishWithImage:(ImageToUpload *)image
 {
     [choosePhotoView show:NO animated:NO];
     [self.navigationController popViewControllerAnimated:YES];
-    ProfileController *ctrl = [controllers objectAtIndex:0];
-    [ctrl uploadImage:image];
+    [profileCtrl uploadImage:image];
 }
 
 @end

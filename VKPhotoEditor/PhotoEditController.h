@@ -9,6 +9,7 @@
 #import "FlexibleButton.h"
 #import "ThumbnailsView.h"
 #import "GPUImageView.h"
+#import "ImageToUpload.h"
 
 @protocol PhotoEditControllerDelegate;
 
@@ -48,5 +49,5 @@
 @protocol PhotoEditControllerDelegate
 - (void)photoEditControllerDidCancel:(PhotoEditController *)controller;
 - (void)photoEditControllerDidRetake:(PhotoEditController *)controller;
-- (void)photoEditController:(PhotoEditController *)controller didEditImage:(UIImage*)image withCaption:(NSString *)caption;
+- (void)photoEditController:(PhotoEditController *)controller didFinishWithImage:(ImageToUpload*)image;
 @end

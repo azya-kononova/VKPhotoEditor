@@ -66,6 +66,8 @@
     
 }
 
+- (void)setCompleted:(BOOL)completed;
+
 /* The configurable display properties of PullTableView. Set to nil for default values */
 @property (nonatomic, retain) UIImage *pullArrowImage;
 @property (nonatomic, retain) UIColor *pullBackgroundColor;

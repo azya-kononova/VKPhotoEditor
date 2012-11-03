@@ -252,9 +252,8 @@
         }
         
         [activityView showSelf:NO];
-        [delegate photoEditController:self didEditImage:output withCaption:caption];
+        [delegate photoEditController:self didFinishWithImage:[ImageToUpload imageWithImage:output caption:caption]];
     });
-    
 }
 
 - (IBAction)cancel

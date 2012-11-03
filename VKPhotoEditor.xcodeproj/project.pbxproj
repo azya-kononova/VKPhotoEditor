@@ -210,6 +210,7 @@
 		8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61EC1C161C627F009A2B9B /* libGPUImage.a */; };
 		8B68FEAF16448A6A008883E0 /* RemoteImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B68FEAE16448A6A008883E0 /* RemoteImageButton.m */; };
 		8B68FEB216449802008883E0 /* RightTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B68FEB116449802008883E0 /* RightTriangleView.m */; };
+		8B68FECB1645315D008883E0 /* ImageToUpload.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B68FECA1645315D008883E0 /* ImageToUpload.m */; };
 		8B70963D163C330F004DA31B /* PhotosListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B70963B163C330F004DA31B /* PhotosListController.m */; };
 		8B70963E163C330F004DA31B /* PhotosListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B70963C163C330F004DA31B /* PhotosListController.xib */; };
 		8B709641163C347C004DA31B /* Bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70963F163C347C004DA31B /* Bottom@2x.png */; };
@@ -613,6 +614,8 @@
 		8B68FEAE16448A6A008883E0 /* RemoteImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteImageButton.m; sourceTree = "<group>"; };
 		8B68FEB016449802008883E0 /* RightTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightTriangleView.h; sourceTree = "<group>"; };
 		8B68FEB116449802008883E0 /* RightTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightTriangleView.m; sourceTree = "<group>"; };
+		8B68FEC91645315D008883E0 /* ImageToUpload.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageToUpload.h; sourceTree = "<group>"; };
+		8B68FECA1645315D008883E0 /* ImageToUpload.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageToUpload.m; sourceTree = "<group>"; };
 		8B70963A163C330F004DA31B /* PhotosListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosListController.h; sourceTree = "<group>"; };
 		8B70963B163C330F004DA31B /* PhotosListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosListController.m; sourceTree = "<group>"; };
 		8B70963C163C330F004DA31B /* PhotosListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosListController.xib; sourceTree = "<group>"; };
@@ -832,6 +835,8 @@
 				222AB9F0163FC0E8001F089C /* FiltersManager.m */,
 				8B918EDA16431053009E45A0 /* VKHighlightTextView.h */,
 				8B918EDB16431053009E45A0 /* VKHighlightTextView.m */,
+				8B68FEC91645315D008883E0 /* ImageToUpload.h */,
+				8B68FECA1645315D008883E0 /* ImageToUpload.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1756,6 +1761,7 @@
 				8BFF7C141644310A0073D195 /* InformationView.m in Sources */,
 				8B68FEAF16448A6A008883E0 /* RemoteImageButton.m in Sources */,
 				8B68FEB216449802008883E0 /* RightTriangleView.m in Sources */,
+				8B68FECB1645315D008883E0 /* ImageToUpload.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

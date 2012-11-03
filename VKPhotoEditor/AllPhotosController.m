@@ -58,7 +58,10 @@
 
 - (void)reloadPullTable
 {
-    if (!searchResultsList.completed) [tableView reloadData];
+    [tableView setCompleted:searchResultsList.completed];
+    
+    [tableView reloadData];
+    
     tableView.pullTableIsLoadingMore = NO;
     tableView.pullTableIsRefreshing = NO;
 }
