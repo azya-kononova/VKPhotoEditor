@@ -28,6 +28,7 @@
 		220E6BC5161E040A00AB89B5 /* flash_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 220E6BB3161E040A00AB89B5 /* flash_on@2x.png */; };
 		220E6BC8161E06ED00AB89B5 /* BlurMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E6BC7161E06ED00AB89B5 /* BlurMode.m */; };
 		220E6BCB161E071500AB89B5 /* FlashMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E6BCA161E071500AB89B5 /* FlashMode.m */; };
+		22129D8E1645A53B00E7FB96 /* UIViewController+StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 22129D8D1645A53B00E7FB96 /* UIViewController+StatusBar.m */; };
 		2214CD6F16458C950099FD47 /* ALAsset+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */; };
 		22169D8D1642729F005C097E /* Lobster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22169D8C1642729F005C097E /* Lobster.ttf */; };
 		221C31C516103E2C005974C8 /* TableViewPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31C316103E2C005974C8 /* TableViewPopover.m */; };
@@ -382,6 +383,8 @@
 		220E6BC7161E06ED00AB89B5 /* BlurMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurMode.m; sourceTree = "<group>"; };
 		220E6BC9161E071500AB89B5 /* FlashMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashMode.h; sourceTree = "<group>"; };
 		220E6BCA161E071500AB89B5 /* FlashMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashMode.m; sourceTree = "<group>"; };
+		22129D8C1645A53B00E7FB96 /* UIViewController+StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+StatusBar.h"; sourceTree = "<group>"; };
+		22129D8D1645A53B00E7FB96 /* UIViewController+StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+StatusBar.m"; sourceTree = "<group>"; };
 		2214CD6D16458C950099FD47 /* ALAsset+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+UIImage.h"; sourceTree = "<group>"; };
 		2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+UIImage.m"; sourceTree = "<group>"; };
 		22169D8C1642729F005C097E /* Lobster.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster.ttf; sourceTree = "<group>"; };
@@ -896,6 +899,8 @@
 				2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */,
 				8B68FF061645725F008883E0 /* UINavigationController+Transistions.h */,
 				8B68FF071645725F008883E0 /* UINavigationController+Transistions.m */,
+				22129D8C1645A53B00E7FB96 /* UIViewController+StatusBar.h */,
+				22129D8D1645A53B00E7FB96 /* UIViewController+StatusBar.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1778,6 +1783,7 @@
 				8B68FECB1645315D008883E0 /* ImageToUpload.m in Sources */,
 				2214CD6F16458C950099FD47 /* ALAsset+UIImage.m in Sources */,
 				8B68FF081645725F008883E0 /* UINavigationController+Transistions.m in Sources */,
+				22129D8E1645A53B00E7FB96 /* UIViewController+StatusBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

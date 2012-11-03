@@ -10,6 +10,7 @@
 #import "PhotosListController.h"
 #import "StartViewController.h"
 #import "InformationView.h"
+#import "UIViewController+StatusBar.h"
 
 @implementation AppDelegate {
     InformationView *informationView;
@@ -81,8 +82,7 @@
 
 - (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    BOOL needStatusBar =  [viewController isKindOfClass:PhotosListController.class];
-    [[UIApplication sharedApplication] setStatusBarHidden:!needStatusBar withAnimation: UIStatusBarAnimationFade];
+    [viewController hideStatusBarIfNeed];
 }
 
 @end

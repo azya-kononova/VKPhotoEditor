@@ -10,6 +10,7 @@
 #import "UIViewController+Transitions.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "ALAsset+UIImage.h"
+#import "UIViewController+StatusBar.h"
 
 @interface PhotoManageBaseController ()
 @end
@@ -36,6 +37,7 @@
 {
     CroppingViewController *controller = [[CroppingViewController alloc] initWithImage:image filterIndex:filterIndex blurFilter:blurFilter];
     controller.delegate = self;
+    [controller hideStatusBarIfNeed];
     
     isPhoto ? [self presentModalViewController:controller animated:NO] : [self presentModalViewController:controller withPushDirection:kCATransitionFromRight];
 }
@@ -49,6 +51,7 @@
 {
     TakePhotoController *controller = [TakePhotoController new];
     controller.delegate = self;
+    [controller hideStatusBarIfNeed];
     
     [self presentModalViewController:controller animated:NO];
 }
@@ -58,6 +61,7 @@
     UIImagePickerController *imagePicker = [UIImagePickerController new];
     imagePicker.delegate = self;
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [imagePicker hideStatusBarIfNeed];
     
     [self presentModalViewController:imagePicker withPushDirection:kCATransitionFromRight];
 }
