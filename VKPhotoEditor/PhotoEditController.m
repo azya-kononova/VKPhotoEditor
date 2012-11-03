@@ -239,10 +239,8 @@
         [captionViewTemplate removeFromSuperview];
         [captionViewTemplate resizeTo:CGSizeMake(side, side)];
         UIImage *output = [self imageByApplingFilters];
-        
-        if (captionTemplateIndex) {
-            output = [output squareImageByBlendingWithView:[[UIImageView alloc] initWithImage:captionViewTemplate.templateImage]];
-        }
+  
+        output = [output squareImageByBlendingWithImage:captionViewTemplate.templateImage];
         
         NSString *caption = captionView.caption;
         if (isAvatar) {

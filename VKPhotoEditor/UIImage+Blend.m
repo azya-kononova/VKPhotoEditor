@@ -11,9 +11,9 @@
 
 @implementation UIImage (Blend)
 
-- (UIImage*)squareImageByBlendingWithView:(UIView*)view
+- (UIImage*)squareImageByBlendingWithImage:(UIImage *)image
 {
-//    if (!view && abs(self.size.width - self.size.height) <= 1) return self;
+    if (!image && abs(self.size.width - self.size.height) <= 1) return self;
     
     CGFloat side = fmaxf(self.size.width, self.size.height);
 
@@ -22,7 +22,9 @@
     [[UIColor blackColor] set];
     UIRectFill(rect);
     [self drawInRect:CGRectMake((side - self.size.width)/2, (side - self.size.height)/2, self.size.width, self.size.height)];
-    if (view) [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    if (image) [image drawInRect:rect];
+    
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     

@@ -10,6 +10,6 @@
 
 @interface UIImage (Blend)
 
-- (UIImage*)squareImageByBlendingWithView:(UIView*)view;
+- (UIImage*)squareImageByBlendingWithImage:(UIImage *)image;
 
 @end
