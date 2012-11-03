@@ -8,6 +8,8 @@
 
 #import "PhotoManageBaseController.h"
 #import "UIViewController+Transitions.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "ALAsset+UIImage.h"
 
 @interface PhotoManageBaseController ()
 @end
@@ -72,8 +74,14 @@
     isPhoto = picker.sourceType == UIImagePickerControllerSourceTypeCamera;
     [self dismissModalViewControllerAnimated:NO];
     
-    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-    [self cropPhoto:image];
+    NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+    
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    
+    [library assetForURL:assetURL resultBlock:^(ALAsset *asset) {
+        [self cropPhoto:[asset image]];
+    } failureBlock:^(NSError *error) {
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

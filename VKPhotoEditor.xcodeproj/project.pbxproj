@@ -28,6 +28,7 @@
 		220E6BC5161E040A00AB89B5 /* flash_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 220E6BB3161E040A00AB89B5 /* flash_on@2x.png */; };
 		220E6BC8161E06ED00AB89B5 /* BlurMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E6BC7161E06ED00AB89B5 /* BlurMode.m */; };
 		220E6BCB161E071500AB89B5 /* FlashMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 220E6BCA161E071500AB89B5 /* FlashMode.m */; };
+		2214CD6F16458C950099FD47 /* ALAsset+UIImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */; };
 		22169D8D1642729F005C097E /* Lobster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 22169D8C1642729F005C097E /* Lobster.ttf */; };
 		221C31C516103E2C005974C8 /* TableViewPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = 221C31C316103E2C005974C8 /* TableViewPopover.m */; };
 		221C31C616103E2C005974C8 /* TableViewPopover.xib in Resources */ = {isa = PBXBuildFile; fileRef = 221C31C416103E2C005974C8 /* TableViewPopover.xib */; };
@@ -379,6 +380,8 @@
 		220E6BC7161E06ED00AB89B5 /* BlurMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurMode.m; sourceTree = "<group>"; };
 		220E6BC9161E071500AB89B5 /* FlashMode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashMode.h; sourceTree = "<group>"; };
 		220E6BCA161E071500AB89B5 /* FlashMode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashMode.m; sourceTree = "<group>"; };
+		2214CD6D16458C950099FD47 /* ALAsset+UIImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALAsset+UIImage.h"; sourceTree = "<group>"; };
+		2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALAsset+UIImage.m"; sourceTree = "<group>"; };
 		22169D8C1642729F005C097E /* Lobster.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Lobster.ttf; sourceTree = "<group>"; };
 		221C31C216103E2C005974C8 /* TableViewPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewPopover.h; sourceTree = "<group>"; };
 		221C31C316103E2C005974C8 /* TableViewPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewPopover.m; sourceTree = "<group>"; };
@@ -884,6 +887,8 @@
 				8B7C09B516402C75006BCE79 /* NSArray+Helpers.m */,
 				8B7406CE1643E28B00379805 /* UITextView+Resize.h */,
 				8B7406CF1643E28B00379805 /* UITextView+Resize.m */,
+				2214CD6D16458C950099FD47 /* ALAsset+UIImage.h */,
+				2214CD6E16458C950099FD47 /* ALAsset+UIImage.m */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -1762,6 +1767,7 @@
 				8B68FEAF16448A6A008883E0 /* RemoteImageButton.m in Sources */,
 				8B68FEB216449802008883E0 /* RightTriangleView.m in Sources */,
 				8B68FECB1645315D008883E0 /* ImageToUpload.m in Sources */,
+				2214CD6F16458C950099FD47 /* ALAsset+UIImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

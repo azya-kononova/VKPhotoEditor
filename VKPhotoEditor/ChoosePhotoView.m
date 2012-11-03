@@ -11,6 +11,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "UIView+Helpers.h"
 #import "CALayer+Animations.h"
+#import "ALAsset+UIImage.h"
 
 @implementation ChoosePhotoView {
     ALAssetsLibrary *library;
@@ -175,11 +176,7 @@
 
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
-    
-    ALAssetRepresentation *representation = [[assets objectAtIndex:index] defaultRepresentation];
-    UIImage *image = [UIImage imageWithCGImage:[representation fullResolutionImage] scale:1.0 orientation:representation.orientation];
-    [delegate choosePhotoView:self didChooseImage:image];
-    
+    [delegate choosePhotoView:self didChooseImage:[[assets objectAtIndex:index] image]];
 }
 
 @end

@@ -79,8 +79,10 @@
 {
     CGFloat x = zoomingView.contentOffset.x/zoomingView.zoomScale;
     CGFloat y = (zoomingView.contentOffset.y)/zoomingView.zoomScale;
-    CGFloat width = CGRectGetWidth(captureView.frame)/zoomingView.zoomScale;
-    CGFloat height = CGRectGetHeight(captureView.frame)/zoomingView.zoomScale;
+    NSInteger width = CGRectGetWidth(captureView.frame)/zoomingView.zoomScale;
+    NSInteger height = CGRectGetHeight(captureView.frame)/zoomingView.zoomScale;
+    width = height = fminf(width, height);
+
     UIImage *cropImage = [image croppedImage:CGRectMake(x, y, width, height)];
 
     [delegate croppingViewController:self didFinishWithImage:cropImage filterIndex:filterIndex blurFilter:blurFilter];

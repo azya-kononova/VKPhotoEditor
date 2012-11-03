@@ -22,6 +22,7 @@
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 #import "PhotosListController.h"
+#import "ALAsset+UIImage.h"
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, VKRequestExecutorDelegate>
 - (IBAction)takePhoto:(id)sender;
@@ -203,11 +204,8 @@
 - (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
 {
     isPhoto = NO;
-    
-    ALAssetRepresentation *representation = [[assets objectAtIndex:index] defaultRepresentation];
-    UIImage *image = [UIImage imageWithCGImage:[representation fullScreenImage] scale:1.0 orientation:representation.orientation];
-    
-    [self cropPhoto:image];
+
+    [self cropPhoto:[[assets objectAtIndex:index] image]];
 }
 
 
