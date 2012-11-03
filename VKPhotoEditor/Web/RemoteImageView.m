@@ -80,6 +80,7 @@
 
 - (void)dealloc
 {
+    [image removeObserver:self forKeyPath:@"isLoad"];
     [image removeObserver:self forKeyPath:@"progress"];
 }
 
