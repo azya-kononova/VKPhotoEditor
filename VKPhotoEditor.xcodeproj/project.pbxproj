@@ -208,6 +208,8 @@
 		8B50D7841639AB5E007515BF /* NSString+MD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D7831639AB5E007515BF /* NSString+MD5.m */; };
 		8B50D792163AD8F9007515BF /* NSDictionary+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B50D791163AD8F9007515BF /* NSDictionary+Helpers.m */; };
 		8B61EC37161C6789009A2B9B /* libGPUImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B61EC1C161C627F009A2B9B /* libGPUImage.a */; };
+		8B68FEAF16448A6A008883E0 /* RemoteImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B68FEAE16448A6A008883E0 /* RemoteImageButton.m */; };
+		8B68FEB216449802008883E0 /* RightTriangleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B68FEB116449802008883E0 /* RightTriangleView.m */; };
 		8B70963D163C330F004DA31B /* PhotosListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B70963B163C330F004DA31B /* PhotosListController.m */; };
 		8B70963E163C330F004DA31B /* PhotosListController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8B70963C163C330F004DA31B /* PhotosListController.xib */; };
 		8B709641163C347C004DA31B /* Bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B70963F163C347C004DA31B /* Bottom@2x.png */; };
@@ -607,6 +609,10 @@
 		8B50D790163AD8F9007515BF /* NSDictionary+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Helpers.h"; sourceTree = "<group>"; };
 		8B50D791163AD8F9007515BF /* NSDictionary+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Helpers.m"; sourceTree = "<group>"; };
 		8B61EC12161C627E009A2B9B /* GPUImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GPUImage.xcodeproj; path = GPUImage/framework/GPUImage.xcodeproj; sourceTree = "<group>"; };
+		8B68FEAD16448A6A008883E0 /* RemoteImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteImageButton.h; sourceTree = "<group>"; };
+		8B68FEAE16448A6A008883E0 /* RemoteImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteImageButton.m; sourceTree = "<group>"; };
+		8B68FEB016449802008883E0 /* RightTriangleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RightTriangleView.h; sourceTree = "<group>"; };
+		8B68FEB116449802008883E0 /* RightTriangleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RightTriangleView.m; sourceTree = "<group>"; };
 		8B70963A163C330F004DA31B /* PhotosListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosListController.h; sourceTree = "<group>"; };
 		8B70963B163C330F004DA31B /* PhotosListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosListController.m; sourceTree = "<group>"; };
 		8B70963C163C330F004DA31B /* PhotosListController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotosListController.xib; sourceTree = "<group>"; };
@@ -1177,6 +1183,8 @@
 		22D7BFA1160EF628008B5BFA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				8B121D3D16208A8B00F166D8 /* CaptionTemplates */,
+				221C31D916104732005974C8 /* Cell */,
 				8B0B45741644629000F59DF5 /* VKNavigationBar.h */,
 				8B0B45751644629000F59DF5 /* VKNavigationBar.m */,
 				8B918EDA16431053009E45A0 /* VKHighlightTextView.h */,
@@ -1184,13 +1192,13 @@
 				8BFF7C111644310A0073D195 /* InformationView.h */,
 				8BFF7C121644310A0073D195 /* InformationView.m */,
 				8BFF7C131644310A0073D195 /* InformationView.xib */,
-				8B121D3D16208A8B00F166D8 /* CaptionTemplates */,
-				221C31D916104732005974C8 /* Cell */,
 				8BA3D707163DC80F00CEA6AD /* ChoosePhotoView.h */,
 				8BA3D708163DC80F00CEA6AD /* ChoosePhotoView.m */,
 				8BA3D70A163DC83800CEA6AD /* ChoosePhotoView.xib */,
 				221C31D316104640005974C8 /* TriangleView.h */,
 				221C31D416104640005974C8 /* TriangleView.m */,
+				8B68FEB016449802008883E0 /* RightTriangleView.h */,
+				8B68FEB116449802008883E0 /* RightTriangleView.m */,
 				221C31C216103E2C005974C8 /* TableViewPopover.h */,
 				221C31C316103E2C005974C8 /* TableViewPopover.m */,
 				221C31C416103E2C005974C8 /* TableViewPopover.xib */,
@@ -1230,6 +1238,8 @@
 				8B7406EB1644028D00379805 /* HighlightedButton.h */,
 				8B7406EC1644028D00379805 /* HighlightedButton.m */,
 				8B0B457C1644653800F59DF5 /* VKNavigationController.xib */,
+				8B68FEAD16448A6A008883E0 /* RemoteImageButton.h */,
+				8B68FEAE16448A6A008883E0 /* RemoteImageButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1744,6 +1754,8 @@
 				8B7406D01643E28B00379805 /* UITextView+Resize.m in Sources */,
 				8B7406ED1644028D00379805 /* HighlightedButton.m in Sources */,
 				8BFF7C141644310A0073D195 /* InformationView.m in Sources */,
+				8B68FEAF16448A6A008883E0 /* RemoteImageButton.m in Sources */,
+				8B68FEB216449802008883E0 /* RightTriangleView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

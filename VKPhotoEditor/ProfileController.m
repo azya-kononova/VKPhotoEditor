@@ -14,6 +14,7 @@
 #import "UserPhotosList.h"
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
+#import "UIView+Helpers.h"
 
 @interface ProfileController () <UITableViewDataSource, PullTableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoHeaderViewDelegate, PhotoCellDelegate>
 @end
@@ -32,6 +33,8 @@
 @synthesize delegate;
 @synthesize tableView;
 @synthesize titleView;
+@synthesize avatarButton;
+@synthesize addAvatarView;
 
 - (id)initWithAccount:(UserProfile *)_account
 {
@@ -56,6 +59,9 @@
     if (isProfile) {
         nameLabel.text = account.login;
         self.navigationItem.titleView = titleView;
+        addAvatarView.hidden = account.avatarUrl != nil;
+        [nameLabel moveTo:CGPointMake(nameLabel.frame.origin.x, account.avatarUrl ? 12 : 7)];
+        [avatarButton displayImage:account.avatar];
     } else {
         self.navigationItem.title = account.login;
     }

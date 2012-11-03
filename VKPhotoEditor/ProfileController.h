@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "UserProfile.h"
-#import "FlexibleButton.h"
+#import "RemoteImageButton.h"
 #import "PullTableView.h"
 
 @protocol ProfileControllerDelegate;
@@ -18,6 +18,8 @@
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet PullTableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *titleView;
+@property (nonatomic, strong) IBOutlet RemoteImageButton *avatarButton;
+@property (nonatomic, strong) IBOutlet UIView *addAvatarView;
 
 - (id)initWithAccount:(UserProfile*)account;
 - (void)uploadImage:(UIImage*)image;
