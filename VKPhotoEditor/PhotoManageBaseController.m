@@ -109,6 +109,12 @@
     [self takePhoto];
 }
 
+- (void)photoEditControllerDidSelect:(PhotoEditController *)controller
+{
+    [self.navigationController popViewControllerAnimated:NO];
+    [self choosePhoto];
+}
+
 - (void)photoEditController:(PhotoEditController *)controller didFinishWithImage:(ImageToUpload *)image
 {
     // implement in subclass

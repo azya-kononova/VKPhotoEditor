@@ -94,7 +94,7 @@
     saveButton.bgImagecaps = CGSizeMake(23, 0);
     retakeButton.bgImagecaps = CGSizeMake(23, 20);
     cancelButton.bgImagecaps = CGSizeMake(23, 20);
-    [retakeButton setTitle:isPhoto ? @"Retake" : @"Cancel" forState:UIControlStateNormal];
+    [retakeButton setTitle:isPhoto ? @"Retake" : @"Select" forState:UIControlStateNormal];
     
     sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
     GPUImageOutput<GPUImageInput> *basicFilter = [GPUImageEmptyFilter new];
@@ -262,7 +262,7 @@
     if (isPhoto) {
         [delegate photoEditControllerDidRetake:self];
     } else {
-        [delegate photoEditControllerDidCancel:self];
+        [delegate photoEditControllerDidSelect:self];
     }
 }
 

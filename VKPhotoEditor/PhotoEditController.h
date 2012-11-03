@@ -49,5 +49,6 @@
 @protocol PhotoEditControllerDelegate
 - (void)photoEditControllerDidCancel:(PhotoEditController *)controller;
 - (void)photoEditControllerDidRetake:(PhotoEditController *)controller;
+- (void)photoEditControllerDidSelect:(PhotoEditController *)controller;
 - (void)photoEditController:(PhotoEditController *)controller didFinishWithImage:(ImageToUpload*)image;
 @end
