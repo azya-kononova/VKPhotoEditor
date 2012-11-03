@@ -38,12 +38,12 @@
 
 - (void)setAccountId:(NSInteger)accountId
 {
-    settings.userId = [NSNumber numberWithInt:accountId];
+    settings.userId = accountId;
 }
 
 - (NSInteger)accountId
 {
-    return [[settings userId] intValue];
+    return settings.userId;
 }
 
 - (void)setLogin:(NSString *)login

@@ -12,9 +12,10 @@
 @property (nonatomic, strong, readonly) NSURL *serviceRootURL;
 
 @property (nonatomic, strong) NSString *login;
-@property (nonatomic, strong) NSNumber *userId;
+@property (nonatomic, assign) NSInteger userId;
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSURL *avatarURL;
+@property (nonatomic, assign) BOOL firstLaunch;
 
 - (id)initWithDefaults:(NSDictionary*)defs;
 - (NSString*)descriptionForErrorKey:(NSString*)errorKey;

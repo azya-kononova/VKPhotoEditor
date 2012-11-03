@@ -23,6 +23,7 @@
 #import "VKRequestExecutor.h"
 #import "PhotosListController.h"
 #import "ALAsset+UIImage.h"
+#import "Settings.h"
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, VKRequestExecutorDelegate>
 - (IBAction)takePhoto:(id)sender;
@@ -76,6 +77,8 @@
     [appNameLabel setFont:[UIFont fontWithName:@"Lobster 1.4" size:36.0]];
     
     [self loadAlbumImages];
+    
+    if (![Settings current].firstLaunch) [self showPostViewHeaderLogin:YES];
 }
 
 - (void)dealloc
@@ -152,14 +155,20 @@
 - (IBAction)postPhoto
 {
     if (exec) return;
+    [loginInputField resignFirstResponder];
     errorLabel.text = nil;
     exec = [[VKConnectionService shared] login:loginInputField.text];
     exec.delegate = self;
     [exec start];
 }
 
-- (void)showPostViewHeader:(BOOL)show
+- (void)showPostViewHeaderLogin:(BOOL)login
 {
+    [postHeaderBtn setTitle:login ? @"Login in Pictograph" : @"Post to Pictograph" forState:UIControlStateNormal];
+    [postPhotoBtn setTitle:login ? @"Login" : @"Post photo" forState:UIControlStateNormal];
+    if (login) imageToUpload = nil;
+    postImageView.image = imageToUpload.image;
+    
     [UIView animateWithDuration:0.4 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
         [postView moveTo:CGPointMake(0, self.view.frame.size.height - 45)];
     } completion:nil];
@@ -176,7 +185,6 @@
         isPostPhotoMode = show;
         if (show) [loginInputField becomeFirstResponder];
     }];
-    
 }
 
 #pragma mark - ThumbnailsViewDataSource
@@ -219,7 +227,7 @@
     [activityIndicator startAnimating];
     imageToUpload = image;
     postImageView.image = imageToUpload.image;
-    [self showPostViewHeader:YES];
+    [self showPostViewHeaderLogin:NO];
     
     //    UIImageWriteToSavedPhotosAlbum( image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
@@ -230,6 +238,8 @@
 {
     PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:imageToUpload];
     [self.navigationController pushViewController:ctrl animated:YES];
+    [self showPost:NO];
+    [self showPostViewHeaderLogin:YES];
     exec = nil;
 }
 

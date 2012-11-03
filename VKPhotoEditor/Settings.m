@@ -16,6 +16,7 @@
 #define AVATAR_URL_KEY @"avatarURL"
 #define SERVICE_URL_KEY @"serviceRootURL"
 #define ERRORS_DESCRIPTIONS_KEY @"errorsDescriptions"
+#define FIRST_LAUNCH_KEY @"firstLaunch"
 
 @interface NSUserDefaults (Def)
 - (id)objectForKey:(NSString*)name withDef:(NSDictionary*)def map:(MapBlock)map;
@@ -53,6 +54,17 @@
     return [NSURL URLWithString:[user objectForKey:SERVICE_URL_KEY]];
 }
 
+- (BOOL)firstLaunch
+{
+    return [user boolForKey:FIRST_LAUNCH_KEY];
+}
+
+- (void)setFirstLaunch:(BOOL)firstLaunch
+{
+    [user setBool:firstLaunch forKey:FIRST_LAUNCH_KEY];
+    [self sync];
+}
+
 - (NSString*)login
 {
     return [user objectForKey:LOGIN_KEY];
@@ -64,14 +76,14 @@
     [self sync];
 }
 
-- (NSNumber*)userId
+- (NSInteger)userId
 {
-    return [user objectForKey:USER_ID_KEY];
+    return [user integerForKey:USER_ID_KEY];
 }
 
-- (void)setUserId:(NSNumber *)userId
+- (void)setUserId:(NSInteger)userId
 {
-    [user setObject:userId forKey:USER_ID_KEY];
+    [user setInteger:userId forKey:USER_ID_KEY];
     [self sync];
 }
 
