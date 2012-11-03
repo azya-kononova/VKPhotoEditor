@@ -50,6 +50,11 @@
     
 }
 
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
+{
+    [self.delegate VKRequestExecutor:self didAlreadyUpload:progress];
+}
+
 - (void)dealloc
 {
     realExec.delegate = nil;

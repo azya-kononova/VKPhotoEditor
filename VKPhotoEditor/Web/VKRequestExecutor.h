@@ -28,5 +28,6 @@ extern const NSString* VKRequestExecutorErrorDomain;
 @protocol VKRequestExecutorDelegate
 - (void)VKRequestExecutor:(VKRequestExecutor*)executor didFinishWithObject:(id)value;
 - (void)VKRequestExecutor:(VKRequestExecutor*)executor didFailedWithError:(NSError*)error;
+- (void)VKRequestExecutor:(VKRequestExecutor*)executor didAlreadyUpload:(float)progress;
 @end
 

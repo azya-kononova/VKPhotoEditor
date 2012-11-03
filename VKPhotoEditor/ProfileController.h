@@ -21,6 +21,11 @@
 @property (nonatomic, strong) IBOutlet RemoteImageButton *avatarButton;
 @property (nonatomic, strong) IBOutlet UIView *addAvatarView;
 
+@property (nonatomic, strong) IBOutlet UIView *uploadingContainerView;
+@property (nonatomic, strong) IBOutlet UIView *uploadingView;
+@property (nonatomic, strong) IBOutlet UIImageView *uploadingImageView;
+@property (nonatomic, strong) IBOutlet UILabel *uploadInfoLabel;
+
 - (id)initWithAccount:(UserProfile*)account;
 - (void)uploadImage:(ImageToUpload*)image;
 - (IBAction)openProfile;

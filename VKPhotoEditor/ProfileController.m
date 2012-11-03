@@ -15,8 +15,9 @@
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 #import "UIView+Helpers.h"
+#import "CALayer+Animations.h"
 
-@interface ProfileController () <UITableViewDataSource, PullTableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoHeaderViewDelegate, PhotoCellDelegate>
+@interface ProfileController () <UITableViewDataSource, PullTableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoHeaderViewDelegate, PhotoCellDelegate, VKRequestExecutorDelegate>
 @end
 
 @implementation ProfileController {
@@ -24,10 +25,12 @@
     UserPhotosList *photosList;
     NSMutableArray *sectionHeaders;
     RequestExecutorDelegateAdapter *adapter;
+    VKRequestExecutor *uploadPhotoExec;
     NSInteger offset;
     VKConnectionService *service;
     NSInteger selectedPhoto;
     BOOL isProfile;
+    CGFloat uploadWidth;
 }
 @synthesize nameLabel;
 @synthesize delegate;
@@ -35,6 +38,11 @@
 @synthesize titleView;
 @synthesize avatarButton;
 @synthesize addAvatarView;
+
+@synthesize uploadingContainerView;
+@synthesize uploadingView;
+@synthesize uploadingImageView;
+@synthesize uploadInfoLabel;
 
 - (id)initWithAccount:(UserProfile *)_account
 {
@@ -52,10 +60,15 @@
 }               
 
 - (void)viewDidLoad
-{
+{   
+    [super viewDidLoad];
+    
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    [super viewDidLoad];
+    uploadingView.superview.layer.cornerRadius = 6;
+    uploadingImageView.layer.cornerRadius = 8;
+    uploadWidth = uploadingView.superview.frame.size.width;
+    
     if (isProfile) {
         nameLabel.text = account.login;
         self.navigationItem.titleView = titleView;
@@ -81,9 +94,33 @@
     }
 }
 
+- (void)showUploading:(UIImage*)image
+{
+    BOOL show = image != nil;
+    
+    if (show) uploadInfoLabel.text = nil;
+    
+    [uploadingContainerView.layer fade].duration = 0.8;
+    uploadingContainerView.hidden = !show;
+    [UIView animateWithDuration:0.8 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
+         [tableView moveTo:CGPointMake(0, show ? uploadingContainerView.frame.size.height : 0)];
+    } completion:^(BOOL finished) {}];
+   
+    uploadingImageView.image = image;
+    
+    [uploadingView resizeTo:CGSizeMake(0, uploadingView.frame.size.height)];
+}
+
 - (void)uploadImage:(ImageToUpload *)image
 {
-    [adapter start:[service uploadPhoto:image.image withCaption:image.caption] onSuccess:@selector(exec:didUploadPhoto:) onError:@selector(exec:didFailWithError:)];
+    if (uploadPhotoExec) return;
+    
+    [self showUploading:image.image];
+    
+    uploadPhotoExec = [service uploadPhoto:image.image withCaption:image.caption];
+    uploadPhotoExec.delegate = self;
+    [uploadPhotoExec start];
+
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
@@ -116,28 +153,45 @@
     [self reloadPullTable];
 }
 
-#pragma mark - Request Handler
+- (void)cancelUpload
+{
+    uploadPhotoExec = nil;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];
+    [self performSelector:@selector(showUploading:) withObject:nil afterDelay:1];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
 
-//TODO: show result with row animation???
+#pragma mark - VKRequestExecutorDelegate
 
-- (void)exec:(VKRequestExecutor*)exec didUploadPhoto:(id)value
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
     VKPhoto *photo = [VKPhoto VKPhotoWithDict:[value objectForKey:@"photo"]];
     photo.account = [Account accountWithDict:[[value objectForKey:@"users"] objectAtIndex:0]];
     photo.justUploaded = YES;
     [photosList insert:photo];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    uploadInfoLabel.text = @"Done!";
+    [self cancelUpload];
 }
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
+{
+    uploadInfoLabel.text = @"Failed";
+    [self cancelUpload];
+}
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
+{
+    [uploadingView resizeTo:CGSizeMake(uploadWidth * progress, uploadingView.frame.size.height)];
+    NSLog(@"Did upload %f", progress);
+}
+
+#pragma mark - Request Handler
 
 - (void)exec:(VKRequestExecutor*)exec didDeletePhoto:(id)ids
 {
     if ([ids count]) [photosList deletePhoto:[ids objectAtIndex:0]];
 }
 
-- (void)exec:(VKRequestExecutor*)exec didFailWithError:(NSError*)error
-{
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-}
 
 #pragma mark - UITableViewDataSource
 

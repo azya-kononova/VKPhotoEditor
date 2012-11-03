@@ -10,7 +10,6 @@
 #import "VKTabBar.h"
 #import "UIView+Helpers.h"
 #import "ProfileController.h"
-#import "VKRequestExecutor.h"
 #import "VKConnectionService.h"
 #import "ChoosePhotoView.h"
 #import "UIViewController+Transitions.h"
@@ -21,7 +20,7 @@
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
-@interface PhotosListController () <VKTabBarDelegate, VKRequestExecutorDelegate, ChoosePhotoViewDelegate, ProfileControllerDelegate, AllPhotosControllerDelegate>
+@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileControllerDelegate, AllPhotosControllerDelegate>
 @end
 
 @implementation PhotosListController {
@@ -64,8 +63,9 @@
     UINavigationController *navCtrl1 = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
     navCtrl1.viewControllers = [NSArray arrayWithObject:profileCtrl];
     
+    [profileCtrl view];
+    
     controllers =  [NSArray arrayWithObjects:navCtrl1, navCtrl, nil];
-    if (imageToUpload) [profileCtrl uploadImage:imageToUpload];
     
     tabBar = [VKTabBar loadFromNIB];
     [tabBar moveBy:CGPointMake(0, self.view.frame.size.height - tabBar.frame.size.height)];
@@ -77,6 +77,8 @@
     choosePhotoView = [ChoosePhotoView loadFromNIB];
     [self.view addSubview:choosePhotoView];
     choosePhotoView.delegate = self;
+    
+    if (imageToUpload) [profileCtrl uploadImage:imageToUpload];
 }
 
 #pragma mark - VKTabBarDelegate
@@ -101,18 +103,6 @@
 {
     isAvatar = NO;
     [choosePhotoView show:YES withExitButton:NO animated:YES];
-}
-
-#pragma mark - VKRequestExecutorDelegate
-
-- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
-{
-    NSLog(@"%@", value);
-}
-
-- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
-{
-    
 }
 
 #pragma mark - ProfileControllerDelegate

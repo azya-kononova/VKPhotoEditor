@@ -98,4 +98,8 @@ typedef void (^Visitor)(RequestHandler *handler);
     } remove:NO];
 }
 
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
+{
+    
+}
 @end

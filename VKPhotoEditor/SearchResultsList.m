@@ -103,6 +103,9 @@
     [delegate searchResultsList:self didFailToUpdate:error];
 }
 
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
+{
+}
 @end
 
 

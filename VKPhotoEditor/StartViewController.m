@@ -253,4 +253,9 @@
     exec = nil;
 }
 
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
+{
+    
+}
+
 @end
