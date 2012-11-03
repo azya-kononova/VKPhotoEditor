@@ -60,7 +60,7 @@
         nameLabel.text = account.login;
         self.navigationItem.titleView = titleView;
         addAvatarView.hidden = account.avatarUrl != nil;
-        [nameLabel moveTo:CGPointMake(nameLabel.frame.origin.x, account.avatarUrl ? 12 : 7)];
+        [nameLabel moveTo:CGPointMake(nameLabel.frame.origin.x, account.avatarUrl ? 12 : 3)];
         [avatarButton displayImage:account.avatar];
     } else {
         self.navigationItem.title = account.login;
@@ -83,7 +83,7 @@
 
 - (void)uploadImage:(UIImage *)image
 {
-    [adapter start:[service uploadPhoto:image withCaption:@""] onSuccess:@selector(exec:didUploadPhoto:) onError:@selector(exec:didFailToUpload:)];
+    [adapter start:[service uploadPhoto:image withCaption:@""] onSuccess:@selector(exec:didUploadPhoto:) onError:@selector(exec:didFailWithError:)];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
