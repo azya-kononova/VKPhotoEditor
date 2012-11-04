@@ -18,6 +18,7 @@
 @property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *addedImageView;
 @property (nonatomic, strong) IBOutlet VKHighlightTextView *captionTextView;
+@property (nonatomic, copy) NSString *searchString;
 
 - (void)displayPhoto:(VKPhoto*)photo;
 @end

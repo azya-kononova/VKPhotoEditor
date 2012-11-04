@@ -96,7 +96,7 @@ static CGFloat MARGIN = 8;
     NSDictionary *highlightTheme;
     NSDictionary *definitions;
 }
-@synthesize isEditable;
+@synthesize isEditable, searchString;
 
 - (BOOL)canBecomeFirstResponder
 {
@@ -182,7 +182,7 @@ static CGFloat MARGIN = 8;
     //Create path to work with a frame with applied margins
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathAddRect(path,NULL,CGRectMake(MARGIN+0.0,(-self.contentOffset.y+0),(size.width-2*MARGIN),(size.height+self.contentOffset.y-MARGIN)));
-        
+    
     //Create attributed string, with applied syntax highlighting
     CFAttributedStringRef attributedString = (__bridge CFAttributedStringRef)[self highlightText:[[NSAttributedString alloc] initWithString:self.text attributes:attributes]];
     
@@ -190,7 +190,7 @@ static CGFloat MARGIN = 8;
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attributedString);
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0,CFAttributedStringGetLength(attributedString)),path,NULL);
     CTFrameDraw(frame,context);
-        CFRelease(paragraphStyle);
+    CFRelease(paragraphStyle);
 }
 
 -(NSRange)visibleRangeOfTextView:(UITextView *)textView {
@@ -220,6 +220,14 @@ static CGFloat MARGIN = 8;
             if(!(textColor=[highlightTheme objectForKey:key]))
                 textColor = [UIColor blackColor];
             [coloredString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)textColor.CGColor range:[match rangeAtIndex:0]];                            
+        }
+    }
+    
+    if (searchString.length) {
+        NSArray* matches = [[NSRegularExpression regularExpressionWithPattern:searchString options:NSRegularExpressionCaseInsensitive error:nil] matchesInString:string options:0 range:range];
+        for(NSTextCheckingResult* match in matches) {
+            NSNumber *width = [NSNumber numberWithFloat:5.0];
+            [coloredString addAttribute:(NSString*)kCTUnderlineStyleAttributeName value:(id)width range:[match rangeAtIndex:0]];
         }
     }
     

@@ -98,6 +98,7 @@
 {
     PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
     cell.delegate = self;
+    cell.searchString = searchBar.text;
     VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
     [cell displayPhoto:photo];
     return cell;

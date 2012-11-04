@@ -19,6 +19,7 @@
 @synthesize addedImageView;
 @synthesize captionTextView;
 @synthesize delegate;
+@synthesize searchString;
 
 - (void)awakeFromNib
 {
@@ -34,6 +35,7 @@
     [remoteImageView displayImage:photo.photo];
     if (![photo.caption isKindOfClass:[NSNull class]]) captionTextView.text = photo.caption ;
     [captionTextView sizeFontToFitMinSize:8 maxSize:28];
+    captionTextView.searchString = searchString;
     [captionTextView setNeedsDisplay];
 }
 
