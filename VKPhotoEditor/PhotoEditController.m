@@ -85,6 +85,10 @@
     [[NSNotificationCenter defaultCenter]
      addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:self.view.window];
     
+    [contentView resizeTo:[[UIScreen mainScreen] bounds].size];
+    [scrollView addSubview:contentView];
+    scrollView.contentSize = contentView.frame.size;
+    
     avatarTagLabel.hidden = !isAvatar;
     avatarTagLabel.font = [UIFont fontWithName:@"Lobster" size:28];
     avatarTagLabel.textColor = [UIColor colorWithRed:149.0/255 green:200.0/255 blue:255.0/255 alpha:1];
@@ -103,6 +107,8 @@
     filters = Filters.filters;
     filterView.margin = 7;
     filterView.thumbConrnerRadius = 7.0;
+    
+    [filterView resizeTo:CGSizeMake(filterView.frame.size.width, topView.frame.origin.y + 4)];
     [filterView reloadData];
     filterView.displayedItemIndex = filterIndex;
     
@@ -111,13 +117,11 @@
     [self setCaptionViewTemplate:[captionTemplates objectAtIndex:captionTemplateIndex]];
     
     captionView = [CaptionTextView loadFromNIB];
-    captionView.center = CGPointMake(self.view.center.x, 350);
+    captionView.center = CGPointMake(self.view.center.x, 290);
     captionView.delegate = self;
     captionView.captionButtonTitle = isAvatar ? @"Your name" : @"Add caption";
     
-    [contentView addSubview:captionView];
-    [scrollView addSubview:contentView];
-    scrollView.contentSize = contentView.frame.size;
+    [topView addSubview:captionView];
     
     activityView = [ActivityView loadFromNIB];
     [self.view addSubview:activityView];
@@ -128,11 +132,11 @@
     
     filterView.highlight = YES;
     
-    blurView = [[BlurView alloc] initWithCenter:CGPointMake(270, 125) margin:CGRectGetMaxY(blurButton.frame)];
+    blurView = [[BlurView alloc] initWithCenter:CGPointMake(270, 60) margin:CGRectGetMaxY(blurButton.frame)];
     blurView.delegate = self;
     [blurView setModeWithFilter:blurFilter];
-    [self.view addSubview:blurView];
-    [self.view addGestureRecognizer:blurView.pinch];
+    [topView addSubview:blurView];
+    [topView addGestureRecognizer:blurView.pinch];
     
     manager = FiltersManagerMake(basicFilter, sourcePicture, imageView);
     

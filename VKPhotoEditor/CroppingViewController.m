@@ -13,12 +13,15 @@
 #import "Filters.h"
 #import "GPUImageFilter.h"
 #import "BlurFilterParams.h"
+#import "UIView+Helpers.h"
 
 @interface CroppingViewController () {
     IBOutlet UIView *captureView;
     IBOutlet UIView *zoomingPlaceholder;
     IBOutlet FlexibleButton *cancelBtn;
     IBOutlet FlexibleButton *chooseBtn;
+    IBOutlet UIImageView *topView;
+    IBOutlet UIImageView *bottomView;
     
     ZoomingView *zoomingView;
     UIImage *image;
@@ -55,16 +58,22 @@
     }
     UIImageView *imageView = [[UIImageView alloc] initWithImage:filteredImage];
     
-    zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:captureView.frame];
+    zoomingView = [[ZoomingView alloc] initWithContentView:imageView frame:captureView.bounds];
     zoomingView.shouldClip = NO;
     zoomingView.contentMode = image.size.width > image.size.height ? UIViewContentModeScaleAspectFit : UIViewContentModeScaleAspectFill;
-    [zoomingPlaceholder addSubview:zoomingView];
+    [captureView addSubview:zoomingView];
     
     cancelBtn.bgImagecaps = CGSizeMake(20, 20);
     chooseBtn.bgImagecaps = CGSizeMake(20, 20);
     
     captureView.layer.borderWidth = 2;
     captureView.layer.borderColor = [[UIColor whiteColor] CGColor];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [topView resizeTo:CGSizeMake(topView.frame.size.width, CGRectGetMinY(captureView.frame))];
+    [bottomView setFrame:CGRectMake(0, CGRectGetMaxY(captureView.frame), topView.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(captureView.frame))];
 }
 
 

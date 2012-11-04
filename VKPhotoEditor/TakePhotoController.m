@@ -79,7 +79,7 @@
         [self setCameraFlashMode:[flashModes objectAtIndex:1]];
     }
     
-    blurView = [[BlurView alloc] initWithCenter:CGPointMake(235, 70) margin:CGRectGetMaxY(flashLabel.frame)];
+    blurView = [[BlurView alloc] initWithCenter:CGPointMake(265, 70) margin:CGRectGetMaxY(flashLabel.frame)];
     blurView.delegate = self;
     [self.view addSubview:blurView];
     [self.view addGestureRecognizer:blurView.pinch];

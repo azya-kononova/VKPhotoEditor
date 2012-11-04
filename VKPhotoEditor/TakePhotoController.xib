@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">12C60</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
-		<string key="IBDocument.AppKitVersion">1187.34</string>
-		<string key="IBDocument.HIToolboxVersion">625.00</string>
+		<string key="IBDocument.SystemVersion">11E53</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
+		<string key="IBDocument.AppKitVersion">1138.47</string>
+		<string key="IBDocument.HIToolboxVersion">569.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1929</string>
+			<string key="NS.object.0">1926</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -67,8 +67,8 @@
 					</object>
 					<object class="IBUIImageView" id="332519199">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrameSize">{320, 480}</string>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrameSize">{320, 69}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="460989760"/>
@@ -77,12 +77,27 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Camera_Background.png</string>
+							<string key="NSResourceName">Camera_Background_Top.png</string>
+						</object>
+					</object>
+					<object class="IBUIImageView" id="795190516">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">264</int>
+						<string key="NSFrame">{{0, 388}, {320, 92}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="547927083"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<object class="NSCustomResource" key="IBUIImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">Camera_Background_Bottom.png</string>
 						</object>
 					</object>
 					<object class="IBUIButton" id="547927083">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{20, 416}, {78, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
@@ -122,7 +137,7 @@
 					</object>
 					<object class="IBUIButton" id="405901553">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{222, 416}, {78, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
@@ -142,7 +157,7 @@
 					</object>
 					<object class="IBUIButton" id="433001899">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">268</int>
 						<string key="NSFrame">{{111, 413}, {98, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
@@ -299,11 +314,11 @@
 					</object>
 					<object class="IBUIView" id="443875053">
 						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">-2147483356</int>
+						<int key="NSvFlags">-2147483368</int>
 						<string key="NSFrame">{{0, 355}, {320, 70}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="547927083"/>
+						<reference key="NSNextKeyView" ref="795190516"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="322593578"/>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -344,7 +359,7 @@
 						<string key="NSFrame">{{135, 215}, {60, 60}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
+						<reference key="NSNextKeyView" ref="443875053"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="8720698"/>
 						<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
@@ -567,6 +582,7 @@
 							<reference ref="878846967"/>
 							<reference ref="492699819"/>
 							<reference ref="582616170"/>
+							<reference ref="795190516"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -661,6 +677,11 @@
 						<reference key="object" ref="582616170"/>
 						<reference key="parent" ref="191373211"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">66</int>
+						<reference key="object" ref="795190516"/>
+						<reference key="parent" ref="191373211"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -690,12 +711,13 @@
 				<string key="62.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="64.CustomClassName">FocusSquareView</string>
 				<string key="64.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="66.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">65</int>
+			<int key="maxID">66</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -718,48 +740,8 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">TakePhotoController</string>
 					<string key="superclassName">UIViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="blur:">id</string>
-						<string key="cancel:">id</string>
-						<string key="filters:">id</string>
-						<string key="flash:">id</string>
-						<string key="rotateCamera:">id</string>
-						<string key="takePhoto:">id</string>
-						<string key="updateFilter:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="blur:">
-							<string key="name">blur:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="cancel:">
-							<string key="name">cancel:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="filters:">
-							<string key="name">filters:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="flash:">
-							<string key="name">flash:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="rotateCamera:">
-							<string key="name">rotateCamera:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="takePhoto:">
-							<string key="name">takePhoto:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="updateFilter:">
-							<string key="name">updateFilter:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="blurImageView">UIImageView</string>
-						<string key="blurSlider">UISlider</string>
 						<string key="cameraView">GPUImageView</string>
 						<string key="cancelBtn">UIButton</string>
 						<string key="filterBtn">UIButton</string>
@@ -774,10 +756,6 @@
 						<object class="IBToOneOutletInfo" key="blurImageView">
 							<string key="name">blurImageView</string>
 							<string key="candidateClassName">UIImageView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="blurSlider">
-							<string key="name">blurSlider</string>
-							<string key="candidateClassName">UISlider</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="cameraView">
 							<string key="name">cameraView</string>
@@ -852,13 +830,14 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="CameraBtn.png">{84, 38}</string>
 			<string key="CameraBtn_Pressed.png">{84, 38}</string>
-			<string key="Camera_Background.png">{320, 480}</string>
+			<string key="Camera_Background_Bottom.png">{320, 92}</string>
+			<string key="Camera_Background_Top.png">{320, 69}</string>
 			<string key="Camera_ReverseFill.png">{64, 35}</string>
 			<string key="PhotoBtn.png">{98, 46}</string>
 			<string key="PhotoBtn_Pressed.png">{98, 46}</string>
 			<string key="blur_off_icon.png">{20, 25}</string>
 			<string key="flash_off.png">{20, 25}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1929</string>
+		<string key="IBCocoaTouchPluginVersion">1926</string>
 	</data>
 </archive>
