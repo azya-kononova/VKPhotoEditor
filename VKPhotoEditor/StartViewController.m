@@ -48,6 +48,8 @@
     IBOutlet FlexibleTextField *loginInputField;
     IBOutlet UIButton *postHeaderBtn;
     IBOutlet UIImageView *postImageView;
+    IBOutlet UIActivityIndicatorView *loginActivity;
+    
     BOOL isPostPhotoMode;
     VKRequestExecutor *exec;
     
@@ -65,8 +67,6 @@
     self.view.backgroundColor = [UIColor defaultBgColor];
     
     postView.backgroundColor = [UIColor defaultBgColor];
-    [self.view addSubview:postView];
-    [postView moveTo:CGPointMake(0,self.view.frame.size.height)];
     
     library = [[ALAssetsLibrary alloc] init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAlbumImages) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -82,8 +82,6 @@
     
     [self loadAlbumImages];
     
-    if (![Settings current].firstLaunch) [self showPostViewHeaderLogin:YES];
-    
     postImageView.layer.cornerRadius = 5.0;
 }
 
@@ -91,10 +89,8 @@
 {
     [super viewWillAppear:animated];
     
-    if (!isPostViewFrameUpdated) {
-        [postView moveTo:CGPointMake(0,self.view.frame.size.height)];
-        isPostViewFrameUpdated = YES;
-    }
+    if (!isPostViewFrameUpdated && ![Settings current].firstLaunch) [self showPostViewHeaderLogin:YES];
+    isPostViewFrameUpdated = YES;
 }
 
 - (void)dealloc
@@ -173,7 +169,9 @@
 - (IBAction)postPhoto
 {
     if (exec) return;
+    [loginActivity startAnimating];
     [loginInputField resignFirstResponder];
+    loginInputField.userInteractionEnabled = postPhotoBtn.userInteractionEnabled = NO;
     errorLabel.text = nil;
     exec = [[VKConnectionService shared] login:loginInputField.text];
     exec.delegate = self;
@@ -194,7 +192,11 @@
 
 - (void)showPost:(BOOL)show
 {
-    if (!show) [loginInputField resignFirstResponder];
+    if (!show) {
+        [loginInputField resignFirstResponder];
+        [exec stop];
+        [self loginDidFinish];
+    }
     [postHeaderBtn setDefaultImage:[UIImage imageNamed: show ? @"Cancel.png" : @"DownArrow.png" ]
                        higthligted:[UIImage imageNamed:show ?  @"Cancel_Active.png" : @"DownArrow_Active.png"]];
     [UIView animateWithDuration:1 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
@@ -253,19 +255,25 @@
 
 #pragma mark - VKRequestExecutorDelegate
 
+- (void)loginDidFinish
+{
+    [loginActivity stopAnimating];
+    loginInputField.userInteractionEnabled = postPhotoBtn.userInteractionEnabled = YES;
+    exec = nil;
+}
+
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
     PhotosListController *ctrl = [[PhotosListController alloc] initWithImageToUpload:imageToUpload];
     [self.navigationController pushViewController:ctrl transition:UIViewAnimationTransitionFlipFromRight];
     [self showPost:NO];
     [self showPostViewHeaderLogin:YES];
-    exec = nil;
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
 {
     errorLabel.text = error.localizedDescription;
-    exec = nil;
+    [self loginDidFinish];
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress

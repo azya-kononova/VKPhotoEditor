@@ -163,6 +163,7 @@
 - (void)choosePhotoViewDidExit:(ChoosePhotoView*)view
 {
     [service logout];
+    [choosePhotoView show:NO animated:NO];
     [self.navigationController popToRootViewControllerTransition:UIViewAnimationTransitionFlipFromRight];
 }
 
