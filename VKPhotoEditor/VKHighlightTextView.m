@@ -49,6 +49,9 @@ NSString *const kVKHighlightViewTypeHashTag = @"hash_tag";
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if (([[textView text] length] + (text.length - range.length) > 140)) return NO;
+    
     //Only update the text if the text changed
 	NSString* newText = [text stringByReplacingOccurrencesOfString:@"\t" withString:@"    "];
 	if(![newText isEqualToString:text]) {
