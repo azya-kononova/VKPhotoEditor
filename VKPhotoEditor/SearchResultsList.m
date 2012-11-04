@@ -52,11 +52,8 @@
     [exec start];
 }
 
-- (void)append:(NSArray*)_photos user:(NSDictionary*)_user total:(NSUInteger)total;
-{
-    if (_user) total = total - 1;
-
-    
+- (void)append:(NSArray*)_photos total:(NSUInteger)total;
+{    
     if (!photos) {
         photos = _photos.copy;
     } else {
@@ -95,7 +92,7 @@
     
     exec = nil;
     
-    [self append:_photos user:_user total:[[value objectForKey:@"count"] integerValue]];
+    [self append:_photos total:[[value objectForKey:@"count"] integerValue]];
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
