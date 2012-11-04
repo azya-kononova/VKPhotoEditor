@@ -117,6 +117,7 @@
     
     assets = [NSMutableArray array];
     [activityIndicator startAnimating];
+    gallery.userInteractionEnabled = NO;
     
     [self performSelector:@selector(loadAlbumImagesAfterDelay) withObject:nil afterDelay:0.5];
 }
@@ -137,6 +138,7 @@
                 
                 [gallery reloadData];
                 [activityIndicator stopAnimating];
+                gallery.userInteractionEnabled = YES;
                 
                 noPhotoLabel.hidden = assets.count;
             }
@@ -241,6 +243,7 @@
     [self.navigationController popViewControllerAnimated:YES];
     [self clearThumbnailsImages];
     [activityIndicator startAnimating];
+    gallery.userInteractionEnabled = NO;
     imageToUpload = image;
     postImageView.image = imageToUpload.image;
     [self showPostViewHeaderLogin:NO];
