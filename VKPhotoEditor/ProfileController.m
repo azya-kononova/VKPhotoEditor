@@ -43,6 +43,7 @@
 @synthesize uploadingView;
 @synthesize uploadingImageView;
 @synthesize uploadInfoLabel;
+@synthesize noPhotoLabel;
 
 - (id)initWithAccount:(UserProfile *)_account
 {
@@ -156,6 +157,7 @@
 
 - (void)reloadPullTable
 {
+    noPhotoLabel.hidden = photosList.photos.count;
     [tableView reloadData];
     tableView.pullTableIsLoadingMore = NO;
     tableView.pullTableIsRefreshing = NO;
@@ -315,6 +317,7 @@
 
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
 {
+    noPhotoLabel.hidden = YES;
     [photosList reset];
     [photosList loadNextPageFor:account.accountId];
 }
