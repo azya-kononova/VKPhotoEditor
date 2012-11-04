@@ -31,8 +31,7 @@
 - (void)_init
 {
     service = [VKConnectionService shared];
-    //TODO: change when deloy!!
-    limit = 5;
+    limit = 20;
 }
 
 - (id)init
