@@ -17,6 +17,7 @@
 @property (nonatomic, strong) IBOutlet PullTableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, strong) IBOutlet UILabel* noPhotosLabel;
 
 - (void)search:(NSString*)query;
 @end

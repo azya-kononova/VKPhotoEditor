@@ -23,6 +23,7 @@
 @synthesize tableHeaderView;
 @synthesize searchBar;
 @synthesize delegate;
+@synthesize noPhotosLabel;
 
 - (void)viewDidLoad
 {
@@ -58,11 +59,13 @@
 
 - (void)reloadPullTable
 {
+    noPhotosLabel.hidden = searchResultsList.photos.count;
+    
     [tableView reloadData];
     tableView.pullTableIsLoadingMore = NO;
     tableView.pullTableIsRefreshing = NO;
     
-    [tableView setCompleted:searchResultsList.completed];
+//    [tableView setCompleted:searchResultsList.completed];
 }
 
 - (void)searchResultsList:(SearchResultsList *)photosList didUpdatePhotos:(NSArray *)photos user:(Account *)user
@@ -187,6 +190,7 @@
 
 - (void)reload
 {
+    noPhotosLabel.hidden = YES;
     tableView.pullTableIsRefreshing = YES;
     [searchResultsList reset];
     [tableView reloadData];
