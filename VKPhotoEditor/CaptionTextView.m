@@ -59,16 +59,6 @@
 
 #pragma mark - properties
 
-- (void)setCaptionColor:(UIColor *)captionColor
-{
-    textView.textColor = captionColor;
-}
-
-- (UIColor *)captionColor
-{
-    return textView.textColor;
-}
-
 - (NSString *)caption
 {
     return textView.text;

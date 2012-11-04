@@ -17,12 +17,6 @@
 
 #pragma mark - CaptionTemplateProtocol
 
-
-- (UIColor *)textColor
-{
-    return [UIColor blackColor];
-}
-
 - (UIImage *)templateImage
 {
     return templateImageView.image;

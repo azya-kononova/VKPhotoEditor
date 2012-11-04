@@ -215,8 +215,6 @@
     [captionViewTemplate removeFromSuperview];
     [captionOverlayView addSubview:_captionViewTemplate];
     captionViewTemplate = _captionViewTemplate;
-    
-    captionView.captionColor = captionViewTemplate.textColor;
 }
 
 - (IBAction)nextCaptionTemplate

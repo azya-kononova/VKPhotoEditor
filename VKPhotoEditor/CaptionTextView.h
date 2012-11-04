@@ -15,7 +15,6 @@
 @property (nonatomic, unsafe_unretained) id<CaptionTextViewDelegate> delegate;
 @property (nonatomic, strong) NSString *captionButtonTitle;
 @property (nonatomic, strong, readonly) NSString *caption;
-@property (nonatomic, strong) UIColor *captionColor;
 
 @end
 

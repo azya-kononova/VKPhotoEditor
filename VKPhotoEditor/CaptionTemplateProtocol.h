@@ -9,6 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @protocol CaptionTemplateProtocol <NSObject>
-@property (nonatomic, strong, readonly) UIColor *textColor;
 @property (nonatomic, strong, readonly) UIImage *templateImage;
 @end
