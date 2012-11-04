@@ -21,7 +21,7 @@
     else if ([components day] == 1)
         day = @"'Yesterday at' ";
     
-    dateFormatter.dateFormat = day.length ? [day stringByAppendingString:@"HH:mm"] : @"dd-MM-yyyy 'at' HH:mm";
+    dateFormatter.dateFormat = day.length ? [day stringByAppendingString:@"hh:mm a"] : @"dd-MM-yyyy 'at' hh:mm a";
     
     return [dateFormatter stringFromDate:date];
 }
