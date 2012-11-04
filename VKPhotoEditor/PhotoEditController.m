@@ -340,7 +340,6 @@
 
 - (void)captionTextViewDidStartEditing:(CaptionTextView *)view
 {
-    [arrowView showArrows];
 }
 
 - (void)captionTextViewDidFinishEditing:(CaptionTextView *)view

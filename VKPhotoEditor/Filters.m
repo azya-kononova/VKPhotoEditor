@@ -46,9 +46,7 @@ NSString *TiltShiftFilterName = @"TiltShiftFilterName";
 
 + (NSArray*)captionViewTemplates
 {
-    return [NSArray arrayWithObjects: [DefaultCaptionView loadFromNIB],
-            [DemotivatorCaptionView loadFromNIB],
-            [PolaroidCaptionView loadFromNIB], nil];
+    return nil;
 }
 
 + (GPUImageOutput<GPUImageInput>*)GPUFilterWithName:(NSString*)name
