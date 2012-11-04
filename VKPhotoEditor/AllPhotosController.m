@@ -90,7 +90,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 320;
+    VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
+    return photo.imageURL ? 320 : 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -10,6 +10,7 @@
 #import "CALayer+Animations.h"
 #import "VKHighlightTextView.h"
 #import "UITextView+Resize.h"
+#import "UIView+Helpers.h"
 
 @implementation PhotoCell {
     VKPhoto *photo;
@@ -28,6 +29,7 @@
 
 - (void)displayPhoto:(VKPhoto *)_photo
 {
+    self.hidden = _photo.imageURL == nil;
     photo = _photo;
     [remoteImageView displayImage:photo.photo];
     if (![photo.caption isKindOfClass:[NSNull class]]) captionTextView.text = photo.caption ;

@@ -8,6 +8,7 @@
 
 #import "PhotoHeaderView.h"
 #import "DataFormatter.h"
+#import "UIView+Helpers.h"
 
 @implementation PhotoHeaderView {
     Account *account;
@@ -16,13 +17,18 @@
 @synthesize dateLabel;
 @synthesize remoteImageView;
 @synthesize delegate;
+@synthesize arrowView;
 
 - (void)displayPhoto:(VKPhoto *)photo
 {
+    BOOL hasPhoto = photo.imageURL != nil;
+    arrowView.hidden = hasPhoto;
+    [nameLabel moveTo:CGPointMake(49, hasPhoto ? 5 : 13)];
+    
     account = photo.account;
     [remoteImageView displayImage:photo.account.avatar];
     nameLabel.text = photo.account.login;
-    dateLabel.text = [DataFormatter formatRelativeDate:photo.date];
+    dateLabel.text = hasPhoto ? [DataFormatter formatRelativeDate:photo.date] : nil;
 }
 
 - (IBAction)selectAccount

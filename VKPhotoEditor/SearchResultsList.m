@@ -80,16 +80,18 @@
     
     NSArray *results = [value objectForKey:@"results"];
     
-    //TODO: user???
-    
-    NSDictionary *_user = [results find:^BOOL(NSDictionary *result) { return [[result objectForKey:@"type"] isEqualToString:@"user"]; } ];
-    
-    NSArray *_photos = [results map:^id(NSDictionary *dict) {
-        if ([[dict objectForKey:@"type"] isEqualToString:@"user"]) return nil;
+    NSMutableArray *_photos = [results map:^id(NSDictionary *dict) {
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:[dict objectForKey:@"photo"]];
         photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
         return photo;
     }];
+    
+    NSDictionary *_user = [results find:^BOOL(NSDictionary *result) { return [[result objectForKey:@"type"] isEqualToString:@"user"]; } ];
+    if (_user && ![_user objectForKey:@"photo"]) {
+        VKPhoto *photo = [VKPhoto new];
+        photo.account = [accounts objectForKey:[_user objectForKey:@"user_id"]];
+        [_photos insertObject:photo atIndex:0];
+    }
     
     exec = nil;
     

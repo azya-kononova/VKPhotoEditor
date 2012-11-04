@@ -17,6 +17,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *arrowView;
 
 - (void)displayPhoto:(VKPhoto*)photo;
 - (IBAction)selectAccount;
