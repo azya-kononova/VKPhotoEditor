@@ -31,7 +31,8 @@
 - (void)_init
 {
     service = [VKConnectionService shared];
-    limit = 20;
+    //TODO: change when deloy!!
+    limit = 5;
 }
 
 - (id)init
@@ -59,12 +60,13 @@
     nextPage = 0;
     completed = NO;
     photos = nil;
+    initialOffset = 0;
 }
 
 - (void)loadNextPageFor:(NSInteger)userId
 {
     if (exec) return;
-    exec = [service getPhotos:userId offset:initialOffset + limit * completed? nextPage : nextPage++ limit:limit];
+    exec = [service getPhotos:userId offset:initialOffset + limit * nextPage++ limit:limit];
     exec.delegate = self;
     [exec start];
 }

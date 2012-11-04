@@ -58,12 +58,11 @@
 
 - (void)reloadPullTable
 {
-    [tableView setCompleted:searchResultsList.completed];
-    
     [tableView reloadData];
-    
     tableView.pullTableIsLoadingMore = NO;
     tableView.pullTableIsRefreshing = NO;
+    
+    [tableView setCompleted:searchResultsList.completed];
 }
 
 - (void)searchResultsList:(SearchResultsList *)photosList didUpdatePhotos:(NSArray *)photos user:(Account *)user
