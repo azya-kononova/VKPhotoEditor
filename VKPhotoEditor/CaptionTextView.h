@@ -21,5 +21,4 @@
 @protocol CaptionTextViewDelegate
 - (void)captionTextViewDidStartEditing:(CaptionTextView *)view;
 - (void)captionTextViewDidFinishEditing:(CaptionTextView *)view;
-- (void)captionTextView:(CaptionTextView *)view didChangeOffset:(CGPoint)offset;
 @end

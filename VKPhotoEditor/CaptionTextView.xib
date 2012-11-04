@@ -99,7 +99,7 @@
 					<object class="IBUIButton" id="97444885">
 						<reference key="NSNextResponder" ref="295468060"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{101, 29}, {99, 36}}</string>
+						<string key="NSFrame">{{101, 15}, {99, 36}}</string>
 						<reference key="NSSuperview" ref="295468060"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -251,20 +251,6 @@
 							<string key="candidateClassName">id</string>
 						</object>
 					</object>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="captionButton">FlexibleButton</string>
-						<string key="textView">VKHighlightTextView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="captionButton">
-							<string key="name">captionButton</string>
-							<string key="candidateClassName">FlexibleButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="textView">
-							<string key="name">textView</string>
-							<string key="candidateClassName">VKHighlightTextView</string>
-						</object>
-					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/CaptionTextView.h</string>

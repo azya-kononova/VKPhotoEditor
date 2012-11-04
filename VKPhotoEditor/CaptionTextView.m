@@ -31,30 +31,15 @@
     captionButton.bgImagecaps = CGSizeMake(23, 20);
     
     textView.font = [UIFont fontWithName:@"Lobster" size:MAX_FONT_SIZE];
-    
-    [textView addObserver:self forKeyPath:@"contentSize" options:(NSKeyValueObservingOptionNew) context:NULL];
     textView.isEditable = YES;
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
-    UITextView *tv = object;
-    CGFloat topCorrect = (tv.bounds.size.height - tv.contentSize.height);
-    topCorrect = topCorrect < 0.0 ? 0.0 : topCorrect;
-    tv.contentOffset = CGPointMake(0, -topCorrect);
-    
-    [delegate captionTextView:self didChangeOffset:tv.contentOffset];
-}
 
 - (IBAction)addCaption:(id)sender
 {
     captionButton.hidden = YES;
     textView.editable = YES;
     [textView becomeFirstResponder];
-}
-
-- (void)dealloc
-{
-    [textView removeObserver:self forKeyPath:@"contentSize"];
 }
 
 #pragma mark - properties

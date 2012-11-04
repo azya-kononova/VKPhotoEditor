@@ -45,7 +45,6 @@
     FiltersManager *manager;
     BlurView *blurView;
     CaptionTextView *captionView;
-    CGFloat initTagLabelY;
 }
 
 @synthesize saveButton;
@@ -89,7 +88,6 @@
     avatarTagLabel.hidden = !isAvatar;
     avatarTagLabel.font = [UIFont fontWithName:@"Lobster" size:28];
     avatarTagLabel.textColor = [UIColor colorWithRed:149.0/255 green:200.0/255 blue:255.0/255 alpha:1];
-    initTagLabelY = avatarTagLabel.frame.origin.y;
     
     saveButton.bgImagecaps = CGSizeMake(23, 0);
     retakeButton.bgImagecaps = CGSizeMake(23, 20);
@@ -344,13 +342,6 @@
 - (void)captionTextViewDidFinishEditing:(CaptionTextView *)view
 {
     NSLog(@"text: %@", captionView.caption);
-}
-
-- (void)captionTextView:(CaptionTextView *)view didChangeOffset:(CGPoint)offset
-{
-    CGRect frame = avatarTagLabel.frame;
-    frame.origin.y = initTagLabelY - offset.y;
-    avatarTagLabel.frame = frame;
 }
 
 @end
