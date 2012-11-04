@@ -160,7 +160,7 @@
     tableView.pullTableIsLoadingMore = NO;
     tableView.pullTableIsRefreshing = NO;
     
-    [tableView setCompleted:photosList.completed];
+//    [tableView setCompleted:photosList.completed];
 }
 
 - (void)photosList:(UserPhotosList *)_photosList didUpdatePhotos:(NSArray *)photos
