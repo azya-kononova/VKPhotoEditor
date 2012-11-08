@@ -26,6 +26,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *uploadingImageView;
 @property (nonatomic, strong) IBOutlet UILabel *uploadInfoLabel;
 @property (nonatomic, strong) IBOutlet UILabel *noPhotoLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *savingIndicator;
 
 - (id)initWithAccount:(UserProfile*)account;
 - (void)uploadImage:(ImageToUpload*)image;

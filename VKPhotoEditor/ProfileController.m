@@ -44,6 +44,7 @@
 @synthesize uploadingImageView;
 @synthesize uploadInfoLabel;
 @synthesize noPhotoLabel;
+@synthesize savingIndicator;
 
 - (id)initWithAccount:(UserProfile *)_account
 {
@@ -277,6 +278,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (!isProfile) return;
+    
     selectedPhoto = indexPath.section;
     UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                           delegate:self
@@ -290,13 +293,23 @@
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+{    
     if (buttonIndex == 0) {
         VKPhoto *photo = [photosList.photos objectAtIndex:selectedPhoto];
         [adapter start:[service deletePhoto:photo.photoId] onSuccess:@selector(exec: didDeletePhoto:) onError:@selector(exec: didFailWithError:)];
-    } else {
-        selectedPhoto = -1;
+    } else if (buttonIndex == 1) {
+        VKPhoto *photo = [photosList.photos objectAtIndex:selectedPhoto];
+        if (photo.photo.image) {
+            [savingIndicator startAnimating];
+            UIImageWriteToSavedPhotosAlbum( photo.photo.image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
     }
+    selectedPhoto = -1;
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    [savingIndicator stopAnimating];
 }
 
 #pragma mark - PhotoCellDelegate
