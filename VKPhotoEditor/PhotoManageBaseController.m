@@ -131,7 +131,7 @@
 
 - (void)photoEditController:(PhotoEditController *)controller didFinishWithImage:(ImageToUpload *)image
 {
-    // implement in subclass
+    UIImageWriteToSavedPhotosAlbum(image.image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

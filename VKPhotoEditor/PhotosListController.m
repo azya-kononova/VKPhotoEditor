@@ -184,6 +184,8 @@
     [choosePhotoView show:NO animated:NO];
     [self.navigationController popViewControllerAnimated:YES];
     [profileCtrl uploadImage:image];
+    
+    [super photoEditController:controller didFinishWithImage:image];
 }
 
 @end

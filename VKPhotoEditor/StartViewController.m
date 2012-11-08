@@ -250,7 +250,7 @@
     postImageView.image = imageToUpload.image;
     [self showPostViewHeaderLogin:NO];
     
-    //    UIImageWriteToSavedPhotosAlbum( image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+    [super photoEditController:controller didFinishWithImage:image];
 }
 
 #pragma mark - VKRequestExecutorDelegate
