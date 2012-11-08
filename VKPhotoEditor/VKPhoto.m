@@ -38,8 +38,7 @@
     // TODO: store all size info
     NSArray *sizes = [dict objectForKey:@"sizes"];
     // TODO: helpers for JK collections
-    photo.imageURL = [NSURL URLWithString:[[sizes objectAtIndex:1] objectForKey:@"location"]];
-    NSLog (@"%@", photo);
+    photo.imageURL = [NSURL URLWithString:[[sizes lastObject] objectForKey:@"location"]];
     return photo;
 }
 
