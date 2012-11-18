@@ -232,8 +232,10 @@
 }
 
 - (IBAction)save
-{   
+{
+    [captionView resignFirstResponder];
     [activityView showSelf:YES];
+    
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, NSEC_PER_MSEC), dispatch_get_main_queue(), ^{
         CGFloat side = fmaxf(image.size.width, image.size.height);
         [captionViewTemplate removeFromSuperview];
@@ -254,11 +256,14 @@
 
 - (IBAction)cancel
 {
+    [captionView resignFirstResponder];
     [delegate photoEditControllerDidCancel:self];
 }
 
 - (IBAction)retake
 {
+    [captionView resignFirstResponder];
+    
     if (isPhoto) {
         [delegate photoEditControllerDidRetake:self];
     } else {

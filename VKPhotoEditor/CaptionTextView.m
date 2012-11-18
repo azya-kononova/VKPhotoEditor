@@ -42,6 +42,11 @@
     [textView becomeFirstResponder];
 }
 
+- (BOOL)resignFirstResponder
+{
+    return [textView resignFirstResponder];
+}
+
 #pragma mark - properties
 
 - (NSString *)caption
