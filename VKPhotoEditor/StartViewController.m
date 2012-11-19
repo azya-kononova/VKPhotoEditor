@@ -25,6 +25,7 @@
 #import "ALAsset+UIImage.h"
 #import "Settings.h"
 #import "UINavigationController+Transistions.h"
+#import "ErrorMessage.h"
 
 
 @interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, VKRequestExecutorDelegate>
@@ -272,7 +273,7 @@
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
 {
-    errorLabel.text = error.localizedDescription;
+    errorLabel.text = [ErrorMessage loginMessageWithError:error loginData:loginInputField.text];
     [self loginDidFinish];
 }
 
