@@ -20,6 +20,8 @@
 
 - (void)reset;
 - (void)loadNextPageFor:(NSString*)query;
+- (void)deletePhoto:(NSString *)photoId;
+
 @end
 
 @protocol SearchResultsListDelegate

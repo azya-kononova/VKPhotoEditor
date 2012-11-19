@@ -11,13 +11,17 @@
 #import "PhotoCell.h"
 #import "PhotoHeaderView.h"
 #import "UIView+Helpers.h"
+#import "RequestExecutorDelegateAdapter.h"
+#import "VKConnectionService.h"
 
-@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate>
+@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate>
 @end
 
 @implementation AllPhotosController {
     SearchResultsList *searchResultsList;
     NSMutableArray *sectionHeaders;
+    NSInteger selectedPhoto;
+    RequestExecutorDelegateAdapter *adapter;
 }
 @synthesize tableView;
 @synthesize tableHeaderView;
@@ -47,6 +51,9 @@
     
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.title = @"All photos";
+    
+    selectedPhoto = -1;
+    adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -105,6 +112,21 @@
     VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
     [cell displayPhoto:photo];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    selectedPhoto = indexPath.section;
+    
+    if (![self isProfilePhoto]) return;
+    
+    UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                          delegate:self
+                                                 cancelButtonTitle:@"Cancel"
+                                            destructiveButtonTitle:@"Delete Image"
+                                                 otherButtonTitles:@"Save Image",nil];
+    actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    [actSheet showInView:self.view.superview];
 }
 
 - (PhotoHeaderView *)dequeueHeader
@@ -181,6 +203,12 @@
     }
 }
 
+- (BOOL)isProfilePhoto
+{
+    Account *account = [[searchResultsList.photos objectAtIndex:selectedPhoto] account];
+    return account.accountId == [VKConnectionService shared].account.accountId;
+}
+
 #pragma mark - PhotoCellDelegate
 
 - (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
@@ -245,5 +273,31 @@
     [searchResultsList loadNextPageFor:searchBar.text];
 }
 
+#pragma mark - UIActionSheetDelegate
 
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        VKPhoto *photo = [searchResultsList.photos objectAtIndex:selectedPhoto];
+        [adapter start:[[VKConnectionService shared] deletePhoto:photo.photoId] onSuccess:@selector(exec: didDeletePhoto:) onError:@selector(exec: didFailWithError:)];
+    } else if (buttonIndex == 1) {
+        VKPhoto *photo = [searchResultsList.photos objectAtIndex:selectedPhoto];
+        if (photo.photo.image) {
+            UIImageWriteToSavedPhotosAlbum(photo.photo.image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+    }
+    selectedPhoto = -1;
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+}
+
+#pragma mark - Request Handler
+
+- (void)exec:(VKRequestExecutor*)exec didDeletePhoto:(id)ids
+{
+    if ([ids count]) [searchResultsList deletePhoto:[ids objectAtIndex:0]];
+}
+ 
 @end

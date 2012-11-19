@@ -65,6 +65,17 @@
     [delegate searchResultsList:self didUpdatePhotos:photos user:nil];
 }
 
+- (void)deletePhoto:(NSString *)photoId
+{
+    NSUInteger index;
+    VKPhoto *photoToDelete = [photos find:^BOOL(VKPhoto *photo) { return [photo.photoId isEqualToString:photoId]; } index:&index];
+    if (!photoToDelete) return;
+    NSMutableArray *newPhotos = photos.mutableCopy;
+    [newPhotos removeObjectAtIndex:index];
+    photos = newPhotos.copy;
+    [delegate searchResultsList:self didUpdatePhotos:photos user:user];
+}
+
 #pragma mark - VKRequestExecutorDelegate
 
 - (void)VKRequestExecutor:(id)executor didFinishWithObject:(id)value
