@@ -240,9 +240,6 @@
     cell.delegate = self;
     VKPhoto *photo = [photosList.photos objectAtIndex:indexPath.section];
     [cell displayPhoto:photo];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
 }
 

@@ -111,9 +111,6 @@
     cell.searchString = searchBar.text;
     VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
     [cell displayPhoto:photo];
-    
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
     return cell;
 }
 
