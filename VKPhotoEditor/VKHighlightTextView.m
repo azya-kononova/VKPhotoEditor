@@ -152,6 +152,15 @@ static CGFloat MARGIN = 8;
     }
 }
 
+- (void)setContentSize:(CGSize)contentSize
+{
+    [super setContentSize:contentSize];
+    
+    CGFloat topCorrect = (self.bounds.size.height - self.contentSize.height);
+    topCorrect = (topCorrect < 0.0 ? 0.0 : topCorrect);
+    self.contentOffset = CGPointMake(0, -topCorrect);
+}
+
 -(void)drawRect:(CGRect)rect {
     if(!self.text.length) {
         return;
