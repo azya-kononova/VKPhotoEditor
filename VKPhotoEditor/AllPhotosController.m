@@ -51,6 +51,8 @@
     
     [self.navigationController setNavigationBarHidden:NO];
     self.navigationItem.title = @"All photos";
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:nil];
+    self.navigationItem.backBarButtonItem = backButton;
     
     selectedPhoto = -1;
     adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
