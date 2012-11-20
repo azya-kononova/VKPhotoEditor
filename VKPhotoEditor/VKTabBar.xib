@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1536</int>
-		<string key="IBDocument.SystemVersion">11E53</string>
-		<string key="IBDocument.InterfaceBuilderVersion">2840</string>
-		<string key="IBDocument.AppKitVersion">1138.47</string>
-		<string key="IBDocument.HIToolboxVersion">569.00</string>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2844</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">1926</string>
+			<string key="NS.object.0">1930</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -47,10 +47,6 @@
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Bottom.png</string>
-						</object>
 					</object>
 					<object class="IBUIButton" id="132137025">
 						<reference key="NSNextResponder" ref="206369204"/>
@@ -129,6 +125,7 @@
 						<string key="NSFrame">{{233, 32}, {70, 16}}</string>
 						<reference key="NSSuperview" ref="206369204"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -267,6 +264,14 @@
 					<int key="connectionID">56</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">backgroundView</string>
+						<reference key="source" ref="206369204"/>
+						<reference key="destination" ref="1056962780"/>
+					</object>
+					<int key="connectionID">59</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">didSelect:</string>
 						<reference key="source" ref="132137025"/>
@@ -359,7 +364,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">11</int>
 						<reference key="object" ref="1056962780"/>
-						<array class="NSMutableArray" key="children"/>
 						<reference key="parent" ref="206369204"/>
 					</object>
 				</array>
@@ -384,7 +388,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">57</int>
+			<int key="maxID">59</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -405,6 +409,17 @@
 							<string key="candidateClassName">UIButton</string>
 						</object>
 					</dictionary>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">backgroundView</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">backgroundView</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">backgroundView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="toManyOutletInfosByName">
 						<object class="IBToManyOutletInfo" key="buttons">
 							<string key="name">buttons</string>
@@ -431,12 +446,11 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="AllTab.png">{34, 32}</string>
 			<string key="AllTab_Pressed.png">{34, 32}</string>
-			<string key="Bottom.png">{100, 51}</string>
 			<string key="Camera.png">{74, 39}</string>
 			<string key="Camera_Pressed.png">{74, 39}</string>
 			<string key="ProfileTab.png">{34, 32}</string>
 			<string key="ProfileTab_Pressed.png">{34, 32}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">1926</string>
+		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>
 </archive>

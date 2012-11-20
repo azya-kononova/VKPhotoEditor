@@ -21,6 +21,7 @@ typedef enum {
 
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *buttons;
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *titles;
+@property (nonatomic, strong) IBOutlet UIImageView *backgroundView;
 
 @property (nonatomic, assign) TabBarState state;
 

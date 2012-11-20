@@ -12,7 +12,12 @@
 @synthesize buttons;
 @synthesize titles;
 @synthesize delegate;
+@synthesize backgroundView;
 
+- (void)awakeFromNib
+{
+    backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Bottom.png"]];
+}
 
 - (void)setState:(TabBarState)state
 {
