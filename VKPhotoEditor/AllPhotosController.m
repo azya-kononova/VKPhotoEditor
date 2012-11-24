@@ -14,8 +14,9 @@
 #import "RequestExecutorDelegateAdapter.h"
 #import "VKConnectionService.h"
 #import "ThumbnailPhotoCell.h"
+#import "GridModeButton.h"
 
-@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate>
+@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate>
 @end
 
 @implementation AllPhotosController {
@@ -58,8 +59,11 @@
     self.navigationItem.title = @"All photos";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.backBarButtonItem = backButton;
-    UIBarButtonItem *gridButton = [[UIBarButtonItem alloc] initWithTitle:@"Grid" style:UIBarButtonItemStylePlain target:self action:@selector(switchTableViewMode)];
-    self.navigationItem.rightBarButtonItem = gridButton;
+    
+    GridModeButton *gridButton = [GridModeButton loadFromNIB];
+    gridButton.delegate = self;
+    UIBarButtonItem *gridItem = [[UIBarButtonItem alloc] initWithCustomView:gridButton];
+    self.navigationItem.rightBarButtonItem = gridItem;
     
     selectedPhoto = -1;
     adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
@@ -80,6 +84,7 @@
 - (void)switchTableViewMode
 {
     isGridMode = !isGridMode;
+    self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:isGridMode ? @"Selector_PhotoViewActive.png" : @"Selector_PhotoView.png"];
     [self reloadPullTable];
 }
 
@@ -349,5 +354,13 @@
 {
     if ([ids count]) [searchResultsList deletePhoto:[ids objectAtIndex:0]];
 }
- 
+
+#pragma mark - GridModeButtonDelegate
+
+- (void)gridModeButtonDidSwitchMode:(GridModeButton *)gridButton
+{
+    isGridMode = !isGridMode;
+    [self reloadPullTable];
+}
+
 @end

@@ -144,6 +144,12 @@
 		22D177311618753D00B8093D /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D177301618753D00B8093D /* StartViewController.m */; };
 		22D1FEE91611FC6600E66FEE /* UIImage+Resize.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */; };
 		22D1FF0E1612047C00E66FEE /* CroppingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */; };
+		22D5D2441661265B00BCB7E0 /* Selector_PhotoView.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2401661265B00BCB7E0 /* Selector_PhotoView.png */; };
+		22D5D2451661265B00BCB7E0 /* Selector_PhotoView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2411661265B00BCB7E0 /* Selector_PhotoView@2x.png */; };
+		22D5D2461661265B00BCB7E0 /* Selector_PhotoViewActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2421661265B00BCB7E0 /* Selector_PhotoViewActive.png */; };
+		22D5D2471661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2431661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png */; };
+		22D5D24A16612BF600BCB7E0 /* GridModeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D5D24916612BF600BCB7E0 /* GridModeButton.m */; };
+		22D5D24C16612C0900BCB7E0 /* GridModeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -533,6 +539,13 @@
 		22D1FEE71611FC6600E66FEE /* UIImage+Resize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Resize.h"; sourceTree = "<group>"; };
 		22D1FEE81611FC6600E66FEE /* UIImage+Resize.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Resize.m"; sourceTree = "<group>"; };
 		22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CroppingViewController.xib; sourceTree = "<group>"; };
+		22D5D2401661265B00BCB7E0 /* Selector_PhotoView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selector_PhotoView.png; sourceTree = "<group>"; };
+		22D5D2411661265B00BCB7E0 /* Selector_PhotoView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Selector_PhotoView@2x.png"; sourceTree = "<group>"; };
+		22D5D2421661265B00BCB7E0 /* Selector_PhotoViewActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selector_PhotoViewActive.png; sourceTree = "<group>"; };
+		22D5D2431661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Selector_PhotoViewActive@2x.png"; sourceTree = "<group>"; };
+		22D5D24816612BF600BCB7E0 /* GridModeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridModeButton.h; sourceTree = "<group>"; };
+		22D5D24916612BF600BCB7E0 /* GridModeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridModeButton.m; sourceTree = "<group>"; };
+		22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridModeButton.xib; sourceTree = "<group>"; };
 		22D7BF53160CCC33008B5BFA /* BeautyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -961,6 +974,10 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22D5D2401661265B00BCB7E0 /* Selector_PhotoView.png */,
+				22D5D2411661265B00BCB7E0 /* Selector_PhotoView@2x.png */,
+				22D5D2421661265B00BCB7E0 /* Selector_PhotoViewActive.png */,
+				22D5D2431661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png */,
 				8B9D064516467E19005EE0E3 /* arrow_right.png */,
 				8B9D064616467E19005EE0E3 /* arrow_right@2x.png */,
 				22129DAF1645C1D100E7FB96 /* camera_bg_bottom.png */,
@@ -1311,6 +1328,9 @@
 				2269E08D1661091F00FF7833 /* ThumbnailPhotoView.h */,
 				2269E08E1661092000FF7833 /* ThumbnailPhotoView.m */,
 				2269E0901661092E00FF7833 /* ThumbnailPhotoView.xib */,
+				22D5D24816612BF600BCB7E0 /* GridModeButton.h */,
+				22D5D24916612BF600BCB7E0 /* GridModeButton.m */,
+				22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1745,6 +1765,11 @@
 				8BBAE1381646B30A00A9A423 /* Camera_Background_Top@2x.png in Resources */,
 				2269E089166108DD00FF7833 /* ThumbnailPhotoCell.xib in Resources */,
 				2269E0911661092E00FF7833 /* ThumbnailPhotoView.xib in Resources */,
+				22D5D2441661265B00BCB7E0 /* Selector_PhotoView.png in Resources */,
+				22D5D2451661265B00BCB7E0 /* Selector_PhotoView@2x.png in Resources */,
+				22D5D2461661265B00BCB7E0 /* Selector_PhotoViewActive.png in Resources */,
+				22D5D2471661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png in Resources */,
+				22D5D24C16612C0900BCB7E0 /* GridModeButton.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1848,6 +1873,7 @@
 				2269E0871661089700FF7833 /* XIBLoaderView.m in Sources */,
 				2269E08C166108FA00FF7833 /* ThumbnailPhotoCell.m in Sources */,
 				2269E08F1661092000FF7833 /* ThumbnailPhotoView.m in Sources */,
+				22D5D24A16612BF600BCB7E0 /* GridModeButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
