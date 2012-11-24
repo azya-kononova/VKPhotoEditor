@@ -1,0 +1,23 @@
+//
+//  LoadedPhotoView.h
+//  VKPhotoEditor
+//
+//  Created by asya on 11/24/12.
+//  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "RemoteImageView.h"
+#import "VKPhoto.h"
+#import "VKHighlightTextView.h"
+
+@interface ThumbnailPhotoView : UIView
+
+@property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
+@property (nonatomic, strong) IBOutlet VKHighlightTextView *captionTextView;
+@property (nonatomic, copy) NSString *searchString;
+
+- (void)displayPhoto:(VKPhoto*)photo;
+
+@end
+

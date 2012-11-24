@@ -17,6 +17,7 @@
 @synthesize date;
 @synthesize account;
 @synthesize justUploaded;
+@synthesize thumbnailURL;
 
 - (id)initWithID:(NSString*)_id
 {
@@ -39,12 +40,18 @@
     NSArray *sizes = [dict objectForKey:@"sizes"];
     // TODO: helpers for JK collections
     photo.imageURL = [NSURL URLWithString:[[sizes lastObject] objectForKey:@"location"]];
+    photo.thumbnailURL = [NSURL URLWithString:[[sizes objectAtIndex:0] objectForKey:@"location"]];
     return photo;
 }
 
 - (RemoteImage*)photo
 {
     return [[ImageCache shared] remoteImageForURL:imageURL];
+}
+
+- (RemoteImage*)thumbnail
+{
+    return [[ImageCache shared] remoteImageForURL:thumbnailURL];
 }
 
 - (NSString*)description

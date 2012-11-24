@@ -13,6 +13,7 @@
 #import "UIView+Helpers.h"
 #import "RequestExecutorDelegateAdapter.h"
 #import "VKConnectionService.h"
+#import "ThumbnailPhotoCell.h"
 
 @interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate>
 @end
@@ -22,6 +23,10 @@
     NSMutableArray *sectionHeaders;
     NSInteger selectedPhoto;
     RequestExecutorDelegateAdapter *adapter;
+    
+    BOOL isGridMode;
+    NSInteger itemsInRow;
+    NSInteger gridCellHeight;
 }
 @synthesize tableView;
 @synthesize tableHeaderView;
@@ -53,15 +58,43 @@
     self.navigationItem.title = @"All photos";
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:nil];
     self.navigationItem.backBarButtonItem = backButton;
+    UIBarButtonItem *gridButton = [[UIBarButtonItem alloc] initWithTitle:@"Grid" style:UIBarButtonItemStylePlain target:self action:@selector(switchTableViewMode)];
+    self.navigationItem.rightBarButtonItem = gridButton;
     
     selectedPhoto = -1;
     adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
+    
+    ThumbnailPhotoCell *cell = [UITableViewCell loadCellOfType:[ThumbnailPhotoCell class] fromNib:@"ThumbnailPhotoCell" withId:@"ThumbnailPhotoCell"];
+    itemsInRow = cell.itemsInRow;
+    gridCellHeight = cell.frame.size.height;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:(tableView.contentOffset.y > 0) animated:YES];
+}
+
+#pragma mark - Internals
+
+- (void)switchTableViewMode
+{
+    isGridMode = !isGridMode;
+    [self reloadPullTable];
+}
+
+- (NSArray *)getPhotosForIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:itemsInRow];
+    
+    for (int i = 0; i < itemsInRow; i++) {
+        int row = itemsInRow * indexPath.row + i;
+        if (row < searchResultsList.photos.count) {
+            [photos addObject:[searchResultsList.photos objectAtIndex:row]];
+        }
+    }
+    
+    return photos;
 }
 
 #pragma mark - PhotosListDelegate
@@ -92,28 +125,41 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return searchResultsList.photos.count;
+    return isGridMode ? 1 : searchResultsList.photos.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return isGridMode ? (NSInteger) ceil((double) searchResultsList.photos.count / itemsInRow) : 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
-    return photo.imageURL ? 320 : 0;
+    
+    if (photo.imageURL) {
+        return isGridMode ? gridCellHeight : 320;
+    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
-    cell.delegate = self;
-    cell.searchString = searchBar.text;
-    VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
-    [cell displayPhoto:photo];
-    return cell;
+    if (isGridMode) {
+        ThumbnailPhotoCell *cell = [ThumbnailPhotoCell dequeOrCreateInTable:tableView];
+        [cell displayPhotos:[self getPhotosForIndexPath:indexPath]];
+        
+        return cell;
+    } else {
+        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+        cell.delegate = self;
+        cell.searchString = searchBar.text;
+        VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
+        [cell displayPhoto:photo];
+        
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,11 +192,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 46.0;
+    return isGridMode ? 0 : 46.0;
 }
 
 - (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section
-{   
+{
+    if (isGridMode) return nil;
+    
     PhotoHeaderView* headerView = [self dequeueHeader];
     if (!headerView)
     {
