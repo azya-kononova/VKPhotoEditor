@@ -28,6 +28,7 @@
     RequestExecutorDelegateAdapter *adapter;
     
     BOOL isGridMode;
+    BOOL isFastViewerOpen;
     NSInteger itemsInRow;
     NSInteger gridCellHeight;
 }
@@ -367,9 +368,13 @@
 
 - (void)thumbnailPhotoCell:(ThumbnailPhotoCell *)cell didSelectPhoto:(VKPhoto *)photo
 {
-    FastViewerController *controller = [[FastViewerController alloc] initWithPhoto:photo];
-    controller.delegate = self;
-    [delegate allPhotosController:self presenModalViewController:controller animated:YES];
+    if (!isFastViewerOpen) {
+        isFastViewerOpen = YES;
+        
+        FastViewerController *controller = [[FastViewerController alloc] initWithPhoto:photo];
+        controller.delegate = self;
+        [delegate allPhotosController:self presenModalViewController:controller animated:YES];
+    }
 }
 
 #pragma mark - FastViewerControllerDelegate
@@ -377,6 +382,7 @@
 - (void)fastViewerControllerDidFinish:(FastViewerController *)controller
 {
     [delegate allPhotosController:self dismissModalViewController:controller animated:YES];
+    isFastViewerOpen = NO;
 }
 
 @end
