@@ -150,6 +150,8 @@
 		22D5D2471661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2431661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png */; };
 		22D5D24A16612BF600BCB7E0 /* GridModeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D5D24916612BF600BCB7E0 /* GridModeButton.m */; };
 		22D5D24C16612C0900BCB7E0 /* GridModeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */; };
+		22D5D271166216D100BCB7E0 /* FastViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D5D26F166216D100BCB7E0 /* FastViewerController.m */; };
+		22D5D272166216D100BCB7E0 /* FastViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D270166216D100BCB7E0 /* FastViewerController.xib */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -546,6 +548,9 @@
 		22D5D24816612BF600BCB7E0 /* GridModeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridModeButton.h; sourceTree = "<group>"; };
 		22D5D24916612BF600BCB7E0 /* GridModeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridModeButton.m; sourceTree = "<group>"; };
 		22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridModeButton.xib; sourceTree = "<group>"; };
+		22D5D26E166216D100BCB7E0 /* FastViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastViewerController.h; sourceTree = "<group>"; };
+		22D5D26F166216D100BCB7E0 /* FastViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastViewerController.m; sourceTree = "<group>"; };
+		22D5D270166216D100BCB7E0 /* FastViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FastViewerController.xib; sourceTree = "<group>"; };
 		22D7BF53160CCC33008B5BFA /* BeautyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1261,6 +1266,9 @@
 				8BE3C9D71641B0950057031A /* AllPhotosController.h */,
 				8BE3C9D81641B0950057031A /* AllPhotosController.m */,
 				8BE3C9D91641B0950057031A /* AllPhotosController.xib */,
+				22D5D26E166216D100BCB7E0 /* FastViewerController.h */,
+				22D5D26F166216D100BCB7E0 /* FastViewerController.m */,
+				22D5D270166216D100BCB7E0 /* FastViewerController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1770,6 +1778,7 @@
 				22D5D2461661265B00BCB7E0 /* Selector_PhotoViewActive.png in Resources */,
 				22D5D2471661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png in Resources */,
 				22D5D24C16612C0900BCB7E0 /* GridModeButton.xib in Resources */,
+				22D5D272166216D100BCB7E0 /* FastViewerController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1874,6 +1883,7 @@
 				2269E08C166108FA00FF7833 /* ThumbnailPhotoCell.m in Sources */,
 				2269E08F1661092000FF7833 /* ThumbnailPhotoView.m in Sources */,
 				22D5D24A16612BF600BCB7E0 /* GridModeButton.m in Sources */,
+				22D5D271166216D100BCB7E0 /* FastViewerController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
