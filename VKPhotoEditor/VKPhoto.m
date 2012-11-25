@@ -54,6 +54,11 @@
     return [[ImageCache shared] remoteImageForURL:thumbnailURL];
 }
 
+- (BOOL)isPhotoLoading
+{
+    return self.photo.isLoading;
+}
+
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"<%@: url:'%@' date:'%@' caption:'%@'>", NSStringFromClass(self.class), imageURL, date, caption];

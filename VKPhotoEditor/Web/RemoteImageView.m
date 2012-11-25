@@ -12,7 +12,6 @@
 
 @implementation RemoteImageView {
     CGFloat totalProgressWidth;
-    BOOL loadingOnly;
 }
 
 @synthesize image;
@@ -39,25 +38,23 @@
 
 - (void)_displayImage:(UIImage*)_image
 {
-    if (!loadingOnly) {
-        
-        BOOL animated = !imageView.image;
-        
-        if (animated) {
-            [self.layer fade].duration = 0.75;
-            [imageView.layer fade].duration = 0.75;
-        }
-        imageView.hidden = _image == nil;
-        imageView.image = _image;
-        
-        if (isCircular) {
-            self.layer.masksToBounds = YES;
-            self.layer.cornerRadius = self.frame.size.width / 2;
-        }
-        
+    BOOL animated = !imageView.image;
+    
+    if (animated) {
+        [self.layer fade].duration = 0.75;
+        [imageView.layer fade].duration = 0.75;
     }
     
     self.placeholder.hidden = _image != nil;
+    
+    imageView.hidden = _image == nil;
+    imageView.image = _image;
+    
+    if (isCircular) {
+        self.layer.masksToBounds = YES;
+        self.layer.cornerRadius = self.frame.size.width / 2;
+    }
+    
     if (_image && [delegate respondsToSelector:@selector(remoteImageView:didLoadImage:)]) {
         [delegate remoteImageView:self didLoadImage:_image];
     }
@@ -69,20 +66,6 @@
 }
 
 - (void)displayImage:(RemoteImage*)_image
-{
-    loadingOnly = NO;
-    
-    [self prepareToLoading:_image];
-}
-
-- (void)loadImage:(RemoteImage *)_image showProgressBar:(BOOL)show
-{
-    loadingOnly = YES;
-    self.placeholder.hidden = !show;
-    [self prepareToLoading:_image];
-}
-
-- (void)prepareToLoading:(RemoteImage *)_image
 {
     [image removeObserver:self forKeyPath:@"progress"];
     [image removeObserver:self forKeyPath:@"isLoad"];

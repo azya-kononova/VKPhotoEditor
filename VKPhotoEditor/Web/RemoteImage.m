@@ -17,6 +17,7 @@
 @synthesize lastError;
 @synthesize isLoad;
 @synthesize progress;
+@synthesize isLoading;
 
 + (RemoteImage*)remoteImageWithURL:(NSURL*)url
 {
@@ -58,6 +59,9 @@
 - (void)startLoading
 {
 	if (image || imageData || activeConnection || !imageUrl) return;
+    
+    isLoading = YES;
+    
 	NSURLRequest *request = [NSURLRequest requestWithURL:imageUrl];
     activeConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
 	[activeConnection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
@@ -69,6 +73,7 @@
 	[activeConnection cancel];
 	activeConnection = nil;
 	connectionData = nil;
+    isLoading = NO;
 }
 
 - (void)clear:(BOOL)full

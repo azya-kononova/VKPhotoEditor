@@ -17,6 +17,8 @@
 
 @property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
 @property (nonatomic, strong) IBOutlet VKHighlightTextView *captionTextView;
+@property (nonatomic, strong) IBOutlet UIView *progressView;
+@property (nonatomic, strong) IBOutlet UIView *placeholderView;
 @property (nonatomic, copy) NSString *searchString;
 @property (nonatomic, unsafe_unretained) id<ThumbnailPhotoViewDelegate> delegate;
 

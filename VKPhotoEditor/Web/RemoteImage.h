@@ -27,6 +27,7 @@
 @property (strong, nonatomic, readonly) UIImage *image;
 @property (strong, nonatomic, readonly) NSError *lastError;
 @property (nonatomic, assign, readonly) BOOL isLoad;
+@property (nonatomic, assign, readonly) BOOL isLoading;
 @property (nonatomic, assign) float progress;
 
 + (RemoteImage*)remoteImageWithURL:(NSURL*)url;
