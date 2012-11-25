@@ -154,6 +154,12 @@
 		22D5D272166216D100BCB7E0 /* FastViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D270166216D100BCB7E0 /* FastViewerController.xib */; };
 		22D5D28B1662239D00BCB7E0 /* DarkArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2891662239D00BCB7E0 /* DarkArrow.png */; };
 		22D5D28C1662239D00BCB7E0 /* DarkArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D28A1662239D00BCB7E0 /* DarkArrow@2x.png */; };
+		22D5D2A916626A0800BCB7E0 /* Selector_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2A716626A0800BCB7E0 /* Selector_active.png */; };
+		22D5D2AA16626A0800BCB7E0 /* Selector_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2A816626A0800BCB7E0 /* Selector_active@2x.png */; };
+		22D5D2AD16626A3B00BCB7E0 /* Selector.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2AB16626A3B00BCB7E0 /* Selector.png */; };
+		22D5D2AE16626A3B00BCB7E0 /* Selector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2AC16626A3B00BCB7E0 /* Selector@2x.png */; };
+		22D5D2B11662774500BCB7E0 /* DarkArrow_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2AF1662773300BCB7E0 /* DarkArrow_active.png */; };
+		22D5D2B21662774500BCB7E0 /* DarkArrow_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2B01662773C00BCB7E0 /* DarkArrow_active@2x.png */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -555,6 +561,12 @@
 		22D5D270166216D100BCB7E0 /* FastViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FastViewerController.xib; sourceTree = "<group>"; };
 		22D5D2891662239D00BCB7E0 /* DarkArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DarkArrow.png; sourceTree = "<group>"; };
 		22D5D28A1662239D00BCB7E0 /* DarkArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkArrow@2x.png"; sourceTree = "<group>"; };
+		22D5D2A716626A0800BCB7E0 /* Selector_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selector_active.png; sourceTree = "<group>"; };
+		22D5D2A816626A0800BCB7E0 /* Selector_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Selector_active@2x.png"; sourceTree = "<group>"; };
+		22D5D2AB16626A3B00BCB7E0 /* Selector.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selector.png; sourceTree = "<group>"; };
+		22D5D2AC16626A3B00BCB7E0 /* Selector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Selector@2x.png"; sourceTree = "<group>"; };
+		22D5D2AF1662773300BCB7E0 /* DarkArrow_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DarkArrow_active.png; sourceTree = "<group>"; };
+		22D5D2B01662773C00BCB7E0 /* DarkArrow_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkArrow_active@2x.png"; sourceTree = "<group>"; };
 		22D7BF53160CCC33008B5BFA /* BeautyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -985,6 +997,12 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22D5D2AF1662773300BCB7E0 /* DarkArrow_active.png */,
+				22D5D2B01662773C00BCB7E0 /* DarkArrow_active@2x.png */,
+				22D5D2AB16626A3B00BCB7E0 /* Selector.png */,
+				22D5D2AC16626A3B00BCB7E0 /* Selector@2x.png */,
+				22D5D2A716626A0800BCB7E0 /* Selector_active.png */,
+				22D5D2A816626A0800BCB7E0 /* Selector_active@2x.png */,
 				22D5D2891662239D00BCB7E0 /* DarkArrow.png */,
 				22D5D28A1662239D00BCB7E0 /* DarkArrow@2x.png */,
 				22D5D2401661265B00BCB7E0 /* Selector_PhotoView.png */,
@@ -1789,6 +1807,12 @@
 				22D5D272166216D100BCB7E0 /* FastViewerController.xib in Resources */,
 				22D5D28B1662239D00BCB7E0 /* DarkArrow.png in Resources */,
 				22D5D28C1662239D00BCB7E0 /* DarkArrow@2x.png in Resources */,
+				22D5D2A916626A0800BCB7E0 /* Selector_active.png in Resources */,
+				22D5D2AA16626A0800BCB7E0 /* Selector_active@2x.png in Resources */,
+				22D5D2AD16626A3B00BCB7E0 /* Selector.png in Resources */,
+				22D5D2AE16626A3B00BCB7E0 /* Selector@2x.png in Resources */,
+				22D5D2B11662774500BCB7E0 /* DarkArrow_active.png in Resources */,
+				22D5D2B21662774500BCB7E0 /* DarkArrow_active@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

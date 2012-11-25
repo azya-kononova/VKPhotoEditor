@@ -7,6 +7,7 @@
 //
 
 #import "VKTabBar.h"
+#import "UIColor+VKPhotoEditor.h"
 
 @implementation VKTabBar
 @synthesize buttons;
@@ -16,7 +17,7 @@
 
 - (void)awakeFromNib
 {
-    backgroundView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Bottom.png"]];
+    backgroundView.backgroundColor = [UIColor tabBarBgColor];
 }
 
 - (void)setState:(TabBarState)state

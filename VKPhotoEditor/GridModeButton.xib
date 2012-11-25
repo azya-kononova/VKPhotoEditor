@@ -61,11 +61,11 @@
 						</object>
 						<object class="NSCustomResource" key="IBUISelectedBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Selector_PhotoViewActive.png</string>
+							<string key="NSResourceName">Selector_active.png</string>
 						</object>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Selector_PhotoView.png</string>
+							<string key="NSResourceName">Selector.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">2</int>
@@ -184,8 +184,8 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="Selector_PhotoView.png">{22, 22}</string>
-			<string key="Selector_PhotoViewActive.png">{22, 22}</string>
+			<string key="Selector.png">{27, 26}</string>
+			<string key="Selector_active.png">{27, 26}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">1930</string>
 	</data>

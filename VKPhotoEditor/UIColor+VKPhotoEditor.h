@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UIColor (VKPhotoEditor)
-+ (UIColor*)defaultBgColor;
++ (UIColor *)defaultBgColor;
++ (UIColor *)tabBarBgColor;
 @end

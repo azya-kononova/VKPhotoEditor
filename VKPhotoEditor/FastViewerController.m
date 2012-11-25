@@ -10,6 +10,7 @@
 #import "RemoteImageView.h"
 #import "DataFormatter.h"
 #import "ZoomingView.h"
+#import "UIColor+VKPhotoEditor.h"
 
 @interface FastViewerController () {
     IBOutlet UIView *backTopView;
@@ -44,6 +45,11 @@
 {
     [super viewDidLoad];
     
+    photoLabel.font = [UIFont fontWithName:@"Lobster" size:22.0];
+    
+    backBottomView.backgroundColor = [UIColor defaultBgColor];
+    backTopView.backgroundColor = [UIColor defaultBgColor];
+    
     userNameLabel.text = photo.account.login;
     postDateLabel.text = [DataFormatter formatRelativeDate:photo.date];
     
@@ -51,19 +57,34 @@
     
     zoomingView = [[ZoomingView alloc] initWithContentView:[[UIImageView alloc] initWithImage:photo.photo.image] frame:photoPlaceholder.bounds];
     zoomingView.shouldClip = YES;
-    zoomingView.minZoomScale = 1;
-    zoomingView.maxZoomScale = 4;
+    zoomingView.maxZoomScale = 3;
     zoomingView.bounces = NO;
     zoomingView.contentMode = UIViewContentModeScaleAspectFit;
     [photoPlaceholder addSubview:zoomingView];
     
-    UITapGestureRecognizer *topRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack:)];
-    UITapGestureRecognizer *bottomRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack:)];
+    UITapGestureRecognizer *topRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topViewGoBack:)];
+    UITapGestureRecognizer *bottomRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomViewGoBack:)];
     [backBottomView addGestureRecognizer:bottomRecognizer];
     [backTopView addGestureRecognizer:topRecognizer];
 }
 
-- (void)goBack:(UIGestureRecognizer *)recognizer
+- (void)topViewGoBack:(UIGestureRecognizer *)recognizer
+{
+    arrowImageView.highlighted = YES;
+    backTopView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DarkInner_Pressed.png"]];
+    photoLabel.textColor = [UIColor whiteColor];
+    photoLabel.shadowColor = [UIColor blueColor];
+    [self performSelector:@selector(goBack) withObject:nil afterDelay:0.4];
+}
+
+- (void)bottomViewGoBack:(UIGestureRecognizer *)recognizer
+{
+    backBottomView.highlighted = YES;
+    backBottomView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DarkInner_Pressed.png"]];
+    [self performSelector:@selector(goBack) withObject:nil afterDelay:0.4];
+}
+
+- (void)goBack
 {
     [delegate fastViewerControllerDidFinish:self];
 }
