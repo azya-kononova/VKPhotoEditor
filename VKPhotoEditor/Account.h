@@ -9,12 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "RemoteImage.h"
 
-@interface Account : NSObject
+@interface Account : NSObject <NSCoding>
 @property (nonatomic, strong) NSString *login;
 @property (nonatomic, assign, readonly) NSInteger accountId;
 @property (nonatomic, strong) NSURL *avatarUrl;
 
 @property (nonatomic, strong, readonly) RemoteImage *avatar;
 
+- (id)initWithID:(NSInteger)_id;
 + (id)accountWithDict:(NSDictionary*)dict;
 @end

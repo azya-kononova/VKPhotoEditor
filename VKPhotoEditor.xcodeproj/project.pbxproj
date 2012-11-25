@@ -574,6 +574,7 @@
 		22E51F14160F4E8E00299D42 /* UIView+NIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NIB.m"; sourceTree = "<group>"; };
 		22F682361621D3600082E914 /* BlurFilterParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurFilterParams.h; sourceTree = "<group>"; };
 		22F682371621D3600082E914 /* BlurFilterParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurFilterParams.m; sourceTree = "<group>"; };
+		44AC1B5816622F0D00043552 /* NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoding.h; sourceTree = "<group>"; };
 		8B0B4560164457C400F59DF5 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
 		8B0B4561164457C400F59DF5 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		8B0B45741644629000F59DF5 /* VKNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKNavigationBar.h; sourceTree = "<group>"; };
@@ -905,6 +906,7 @@
 		221C31D2161045DC005974C8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				44AC1B5816622F0D00043552 /* NSCoding.h */,
 				8B50D77F1639A78D007515BF /* NSObject+Invocation.h */,
 				8B50D7801639A78D007515BF /* NSObject+Invocation.m */,
 				8B50D7771639A483007515BF /* NSObject+Map.h */,

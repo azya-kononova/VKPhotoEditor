@@ -9,11 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "Account.h"
 
-@interface UserProfile : Account
+@interface UserProfile : Account <NSCoding>
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSString *avatarId;
 @property (nonatomic, strong) NSArray *lastPhotos;
 
 + (id)accountWithDict:(NSDictionary*)dict;
-- (void)logout;
 @end

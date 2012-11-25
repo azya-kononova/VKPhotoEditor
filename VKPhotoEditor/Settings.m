@@ -10,14 +10,10 @@
 #import "NSObject+Map.h"
 #import "AppDelegate.h"
 
-#define LOGIN_KEY @"login"
-#define USER_ID_KEY @"userId"
-#define ACCESS_TOKEN_KEY @"accessToken"
-#define AVATAR_URL_KEY @"avatarURL"
 #define SERVICE_URL_KEY @"serviceRootURL"
 #define ERRORS_DESCRIPTIONS_KEY @"errorsDescriptions"
 #define FIRST_LAUNCH_KEY @"firstLaunch"
-#define AVATAR_ID_KEY @"avatarId"
+#define PROFILE_KEY @"profile"
 
 @interface NSUserDefaults (Def)
 - (id)objectForKey:(NSString*)name withDef:(NSDictionary*)def map:(MapBlock)map;
@@ -66,60 +62,16 @@
     [user synchronize];
 }
 
-- (NSString*)avatarId
+- (UserProfile*)profile
 {
-    return [user objectForKey:AVATAR_ID_KEY];
+    NSData *profileData = [user objectForKey:PROFILE_KEY];
+    return  profileData ? [NSKeyedUnarchiver unarchiveObjectWithData:profileData] : nil;
 }
 
-- (void)setAvatarId:(NSString *)avatarId
+- (void)setProfile:(UserProfile *)profile
 {
-    [user setObject:avatarId forKey:AVATAR_ID_KEY];
+    [user setObject:[NSKeyedArchiver archivedDataWithRootObject:profile] forKey:PROFILE_KEY];
     [user synchronize];
 }
-
-- (NSString*)login
-{
-    return [user objectForKey:LOGIN_KEY];
-}
-
-- (void)setLogin:(NSString *)login
-{
-    [user setObject:login forKey:LOGIN_KEY];
-    [user synchronize];;
-}
-
-- (NSInteger)userId
-{
-    return [user integerForKey:USER_ID_KEY];
-}
-
-- (void)setUserId:(NSInteger)userId
-{
-    [user setInteger:userId forKey:USER_ID_KEY];
-    [user synchronize];
-}
-
-- (NSString*)accessToken
-{
-     return [user objectForKey:ACCESS_TOKEN_KEY];
-}
-
-- (void)setAccessToken:(NSString *)accessToken
-{
-    [user setObject:accessToken forKey:ACCESS_TOKEN_KEY];
-    [user synchronize];
-}
-
-- (NSURL*)avatarURL
-{
-     return [NSURL URLWithString:[user objectForKey:AVATAR_URL_KEY]];
-}
-
-- (void)setAvatarURL:(NSURL *)avatarURL
-{
-    [user setObject:avatarURL.absoluteString forKey:AVATAR_URL_KEY];
-    [user synchronize];
-}
-
 
 @end

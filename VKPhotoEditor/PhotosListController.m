@@ -51,7 +51,7 @@
     [super viewDidLoad];
     
     service = [VKConnectionService shared];
-    profileCtrl = [[ProfileController alloc] initWithAccount:service.account];
+    profileCtrl = [[ProfileController alloc] initWithAccount:service.profile];
     profileCtrl.delegate = self;
     
     allPhotosCtrl = [AllPhotosController new];
@@ -128,7 +128,7 @@
 
 - (void)allPhotosController:(AllPhotosController *)ctrl didSelectAccount:(Account *)account
 {
-    if (account.accountId == service.account.accountId) {
+    if (account.accountId == service.profile.accountId) {
         tabBar.state = TabBarStateProfile;
         return;
     }

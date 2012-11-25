@@ -16,7 +16,7 @@ extern NSString *VKRequestDidFailNotification;
 @interface VKConnectionService : NSObject
 
 @property (nonatomic, strong, readonly) NSURL *rootURL;
-@property (nonatomic, strong, readonly) UserProfile *account;
+@property (nonatomic, strong, readonly) UserProfile *profile;
 
 + (VKConnectionService*)shared;
 

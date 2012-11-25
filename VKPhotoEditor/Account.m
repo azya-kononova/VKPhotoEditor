@@ -9,6 +9,7 @@
 #import "Account.h"
 #import "NSDictionary+Helpers.h"
 #import "ImageCache.h"
+#import "NSCoding.h"
 
 @implementation Account
 @synthesize accountId;
@@ -21,6 +22,23 @@
         accountId = _id;
     }
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super init]) {
+        DECODEINT(accountId);
+        DECODEOBJECT(login);
+        DECODEOBJECT(avatarUrl);
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder
+{
+    ENCODEINT(accountId);
+    ENCODEOBJECT(login);
+    ENCODEOBJECT(avatarUrl);
 }
 
 + (id)accountWithDict:(NSDictionary*)dict

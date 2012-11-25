@@ -106,7 +106,7 @@
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     for (NSDictionary *user in [value objectForKey:@"users"]) {
-        Account *acc = [user integerForKey:@"id"] == service.account.accountId ? service.account : [Account accountWithDict:user];
+        Account *acc = [user integerForKey:@"id"] == service.profile.accountId ? service.profile : [Account accountWithDict:user];
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
     }
     NSArray *_photos = [[value objectForKey:@"photos"] map:^id(NSDictionary *dict) {

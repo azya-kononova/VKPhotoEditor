@@ -7,15 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserProfile.h"
 
 @interface Settings : NSObject
 @property (nonatomic, strong, readonly) NSURL *serviceRootURL;
 
-@property (nonatomic, strong) NSString *login;
-@property (nonatomic, assign) NSInteger userId;
-@property (nonatomic, strong) NSString *accessToken;
-@property (nonatomic, strong) NSURL *avatarURL;
-@property (nonatomic, strong) NSString *avatarId;
+@property (nonatomic, strong) UserProfile *profile;
 @property (nonatomic, assign) BOOL firstLaunch;
 
 - (id)initWithDefaults:(NSDictionary*)defs;

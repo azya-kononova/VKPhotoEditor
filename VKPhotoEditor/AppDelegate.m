@@ -34,7 +34,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:VKRequestDidFailNotification object:connectionService];
     
     self.navigationController.navigationBar.hidden = YES;
-    navigationController.viewControllers = settings.accessToken ? [NSArray arrayWithObjects: [StartViewController new], [PhotosListController new], nil] : [NSArray arrayWithObject:[StartViewController new]];
+    navigationController.viewControllers = connectionService.profile.accessToken ? [NSArray arrayWithObjects: [StartViewController new], [PhotosListController new], nil] : [NSArray arrayWithObject:[StartViewController new]];
     
     informationView = [InformationView loadFromNIB];
     [self.window addSubview:informationView];

@@ -10,16 +10,27 @@
 #import "NSDictionary+Helpers.h"
 #import "Settings.h"
 #import "ImageCache.h"
+#import "NSCoding.h"
 
 @implementation UserProfile {
     Settings *settings;
 }
 @synthesize lastPhotos;
+@synthesize accessToken;
+@synthesize avatarId;
 
-- (id)init
+- (void)encodeWithCoder:(NSCoder *)coder
 {
-    if (self = [super init]) {
-        settings = [Settings current];
+    [super encodeWithCoder:coder];
+    ENCODEOBJECT(accessToken);
+    ENCODEOBJECT(avatarId);
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if (self = [super initWithCoder:decoder]) {
+        DECODEOBJECT(accessToken);
+        DECODEOBJECT(avatarId);
     }
     return self;
 }
@@ -28,63 +39,12 @@
 {
     if (!dict || ![dict isKindOfClass:[NSDictionary class]]) return nil;
     
-    UserProfile *profile = [UserProfile new];
-    profile.accountId = [[dict objectForKey:@"id"] intValue];
+    UserProfile *profile = [[UserProfile alloc] initWithID:[[dict objectForKey:@"id"] intValue]];
     profile.login = [dict objectForKey:@"login"];
     profile.avatarUrl = [NSURL URLWithString:[[dict objectForKey:@"photo"] objectForKey:@"photo_small"]];
     profile.avatarId = [[dict objectForKey:@"photo"] objectForKey:@"id"];
     
     return profile;
-}
-
-- (void)setAccountId:(NSInteger)accountId
-{
-    settings.userId = accountId;
-}
-
-- (NSInteger)accountId
-{
-    return settings.userId;
-}
-
-- (void)setAvatarId:(NSString *)avatarId
-{
-    settings.avatarId = avatarId;
-}
-
-- (NSString*)avatarId
-{
-    return settings.avatarId;
-}
-
-- (void)setLogin:(NSString *)login
-{
-    settings.login = login;
-}
-
-- (NSString*)login
-{
-    return settings.login;
-}
-
-- (void)setAccessToken:(NSString *)accessToken
-{
-    settings.accessToken = accessToken;
-}
-
-- (NSString*)accessToken
-{
-    return settings.accessToken;
-}
-
-- (NSURL*)avatarUrl
-{
-    return settings.avatarURL;
-}
-
-- (void)setAvatarUrl:(NSURL *)avatarUrl
-{
-    settings.avatarURL = avatarUrl;
 }
 
 - (RemoteImage*)avatar
@@ -95,15 +55,6 @@
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"<%@:account:'%@', token: '%@', photos total:%d>", NSStringFromClass(self.class), self.login, self.accessToken, lastPhotos.count];
-}
-
-- (void)logout
-{
-    self.accountId = 0;
-    self.avatarUrl = nil;
-    self.avatarId = nil;
-    self.login = nil;
-    self.accessToken = nil;
 }
 
 @end

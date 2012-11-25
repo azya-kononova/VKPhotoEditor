@@ -259,7 +259,7 @@
 - (BOOL)isProfilePhoto
 {
     Account *account = [[searchResultsList.photos objectAtIndex:selectedPhoto] account];
-    return account.accountId == [VKConnectionService shared].account.accountId;
+    return account.accountId == [VKConnectionService shared].profile.accountId;
 }
 
 #pragma mark - PhotoCellDelegate

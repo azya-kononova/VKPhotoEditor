@@ -13,6 +13,7 @@
 #import "NSString+MD5.h"
 #import "NSObject+Map.h"
 #import "VKPhoto.h"
+#import "Settings.h"
 
 #import <sys/socket.h>
 #import <sys/sysctl.h>
@@ -24,7 +25,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 
 @implementation VKConnectionService
 @synthesize rootURL;
-@synthesize account;
+@synthesize profile;
 
 + (VKConnectionService*)shared
 {
@@ -35,7 +36,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 {
     if (self = [super init]) {
         rootURL = url;
-        account = [UserProfile new];
+        profile = [Settings current].profile;
     }
     return self;
 }
@@ -98,7 +99,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 
 - (void)logout
 {
-    [account logout];
+    [Settings current].profile = nil;
 }
 
 #pragma mark - api methods
@@ -116,7 +117,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             photo, @"file",
                             caption, @"caption",
-                            account.accessToken, @"access_token", nil];
+                            profile.accessToken, @"access_token", nil];
     RequestExecutorProxy *exec = [self postToPath:@"uploadPhoto" params:[[WebParams alloc] initWithDictionary:params] json:NO];
     if (caption.length >= 3 && [[caption substringWithRange:NSMakeRange(0, 3)] isEqualToString:@"#me"]) exec.onSuccess = @selector(exec:didLoadAvatar:);
     return exec;
@@ -126,9 +127,9 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 {
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
                             photoId, @"id",
-                            account.accessToken, @"access_token", nil];
+                            profile.accessToken, @"access_token", nil];
     RequestExecutorProxy *exec = [self postToPath:@"deletePhotos" params:[[WebParams alloc] initWithDictionary:params] json:NO];
-    if ([photoId isEqualToString:account.avatarId]) exec.onSuccess = @selector(exec:didDeleteAvatar:);
+    if ([photoId isEqualToString:profile.avatarId]) exec.onSuccess = @selector(exec:didDeleteAvatar:);
     return exec;
 }
 
@@ -152,8 +153,8 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data
 {
-    account = [UserProfile accountWithDict:[[data objectForKey:@"users"] objectAtIndex:0]];
-    account.accessToken = [[data objectForKey:@"credentials"] objectForKey:@"access_token"];
+    profile = [UserProfile accountWithDict:[[data objectForKey:@"users"] objectAtIndex:0]];
+    profile.accessToken = [[data objectForKey:@"credentials"] objectForKey:@"access_token"];
     
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     for (NSDictionary *user in [data objectForKey:@"users"]) {
@@ -161,23 +162,25 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
     }    
     
-    account.lastPhotos = [[data objectForKey:@"photos"] map:^id(NSDictionary *dict) {
+    profile.lastPhotos = [[data objectForKey:@"photos"] map:^id(NSDictionary *dict) {
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
         photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
         return photo; }];
+    
+    [Settings current].profile = profile;
 }
 
 - (void)exec:(VKRequestExecutor*)exec didLoadAvatar:(id)data
 {
     NSDictionary *user = [[data objectForKey:@"users"] objectAtIndex:0];
-    account.avatarUrl = [NSURL URLWithString:[[user objectForKey:@"photo"] objectForKey:@"photo_small"]];
-    account.avatarId = [[data objectForKey:@"photo"] objectForKey:@"id"];
+    profile.avatarUrl = [NSURL URLWithString:[[user objectForKey:@"photo"] objectForKey:@"photo_small"]];
+    profile.avatarId = [[data objectForKey:@"photo"] objectForKey:@"id"];
 }
 
 - (void)exec:(VKRequestExecutor*)exec didDeleteAvatar:(id)data
 {
-    account.avatarUrl = nil;
-    account.avatarId = nil;
+    profile.avatarUrl = nil;
+    profile.avatarId = nil;
 }
 
 - (void)exec:(VKRequestExecutor*)exec didFailWithError:(id)error
