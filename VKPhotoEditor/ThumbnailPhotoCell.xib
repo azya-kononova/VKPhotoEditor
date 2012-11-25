@@ -42,7 +42,7 @@
 							<object class="IBUILabel" id="550194573">
 								<reference key="NSNextResponder" ref="320026452"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{11, 4}, {94, 94}}</string>
+								<string key="NSFrame">{{10, 4}, {94, 94}}</string>
 								<reference key="NSSuperview" ref="320026452"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="444192413"/>
@@ -108,10 +108,9 @@
 							<object class="IBUILabel" id="720653667">
 								<reference key="NSNextResponder" ref="320026452"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{215, 4}, {94, 94}}</string>
+								<string key="NSFrame">{{216, 4}, {94, 94}}</string>
 								<reference key="NSSuperview" ref="320026452"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -135,7 +134,7 @@
 						<string key="NSFrameSize">{320, 101}</string>
 						<reference key="NSSuperview" ref="426607538"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="550194573"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:11</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -153,7 +152,12 @@
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="320026452"/>
 				<string key="NSReuseIdentifierKey">_NS:9</string>
+				<object class="NSColor" key="IBUIBackgroundColor">
+					<int key="NSColorSpace">1</int>
+					<bytes key="NSRGB">MC44MTc4NDk4NjQxIDAuODE3ODQ5ODY0MSAwLjgxNzg0OTg2NDEAA</bytes>
+				</object>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="320026452"/>
 				<real value="105" key="IBUIRowHeight"/>
 			</object>
@@ -232,9 +236,9 @@
 						<int key="objectID">2</int>
 						<reference key="object" ref="426607538"/>
 						<array class="NSMutableArray" key="children">
+							<reference ref="720653667"/>
 							<reference ref="550194573"/>
 							<reference ref="444192413"/>
-							<reference ref="720653667"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -272,13 +276,24 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">13</int>
+			<int key="maxID">15</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">ThumbnailPhotoCell</string>
 					<string key="superclassName">UITableViewCell</string>
+					<object class="NSMutableDictionary" key="outlets">
+						<string key="NS.key.0">backgroundImage</string>
+						<string key="NS.object.0">UIImageView</string>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<string key="NS.key.0">backgroundImage</string>
+						<object class="IBToOneOutletInfo" key="NS.object.0">
+							<string key="name">backgroundImage</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/ThumbnailPhotoCell.h</string>

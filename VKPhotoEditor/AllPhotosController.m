@@ -15,8 +15,9 @@
 #import "VKConnectionService.h"
 #import "ThumbnailPhotoCell.h"
 #import "GridModeButton.h"
+#import "UIColor+VKPhotoEditor.h"
 
-@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate>
+@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate>
 @end
 
 @implementation AllPhotosController {
@@ -80,13 +81,6 @@
 }
 
 #pragma mark - Internals
-
-- (void)switchTableViewMode
-{
-    isGridMode = !isGridMode;
-    self.navigationItem.rightBarButtonItem.image = [UIImage imageNamed:isGridMode ? @"Selector_PhotoViewActive.png" : @"Selector_PhotoView.png"];
-    [self reloadPullTable];
-}
 
 - (NSArray *)getPhotosForIndexPath:(NSIndexPath *)indexPath
 {
@@ -153,6 +147,8 @@
 {
     if (isGridMode) {
         ThumbnailPhotoCell *cell = [ThumbnailPhotoCell dequeOrCreateInTable:tableView];
+        cell.delegate = self;
+        cell.searchString = searchBar.text;
         [cell displayPhotos:[self getPhotosForIndexPath:indexPath]];
         
         return cell;
@@ -169,6 +165,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (isGridMode) return;
+    
     selectedPhoto = indexPath.section;
     
     if (![self isProfilePhoto]) return;
@@ -360,7 +358,15 @@
 - (void)gridModeButtonDidSwitchMode:(GridModeButton *)gridButton
 {
     isGridMode = !isGridMode;
+    tableView.backgroundColor = isGridMode ? [UIColor defaultBgColor] : [UIColor whiteColor];
     [self reloadPullTable];
+}
+
+#pragma mark - ThumbnailPhotoCellDelegate
+
+- (void)thumbnailPhotoCell:(ThumbnailPhotoCell *)cell didSelectPhoto:(VKPhoto *)photo
+{
+    NSLog(@"Tap on cell!");
 }
 
 @end

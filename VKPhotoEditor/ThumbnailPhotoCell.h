@@ -8,12 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "XIBLoaderView.h"
+#import "VKPhoto.h"
+
+@protocol ThumbnailPhotoCellDelegate;
 
 @interface ThumbnailPhotoCell : UITableViewCell<XIBLoaderViewDelegate>
 
-//TODO: search string
+@property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, assign, readonly) NSInteger itemsInRow;
+@property (nonatomic, unsafe_unretained) id<ThumbnailPhotoCellDelegate> delegate;
 
 - (void)displayPhotos:(NSArray *)photos;
 
+@end
+
+@protocol ThumbnailPhotoCellDelegate
+- (void)thumbnailPhotoCell:(ThumbnailPhotoCell *)cell didSelectPhoto:(VKPhoto *)photo;
 @end

@@ -20,6 +20,8 @@
 @property (nonatomic, strong) IBOutlet UIView *progressView;
 
 - (void)displayImage:(RemoteImage*)imaged;
+- (void)loadImage:(RemoteImage*)imaged showProgressBar:(BOOL)show;
+
 @end
 
 @protocol RemoteImageViewDelegate <NSObject>

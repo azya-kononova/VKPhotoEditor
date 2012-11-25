@@ -9,9 +9,14 @@
 #import "ThumbnailPhotoCell.h"
 #import "ThumbnailPhotoView.h"
 
+@interface ThumbnailPhotoCell ()<ThumbnailPhotoViewDelegate> 
+@end
+
 @implementation ThumbnailPhotoCell {
     NSMutableArray *photoViews;
 }
+
+@synthesize delegate;
 
 - (void)addLoadedPhotoView:(ThumbnailPhotoView *)view
 {
@@ -34,6 +39,7 @@
         
         if (i < photos.count) {
             photoView.hidden = NO;
+            photoView.delegate = self;
             [photoView displayPhoto:[photos objectAtIndex:i]];
         } else {
             photoView.hidden = YES;
@@ -43,7 +49,19 @@
 
 - (NSInteger)itemsInRow
 {
-    return 3;
+    return photoViews.count;
+}
+
+- (NSString *)searchString
+{
+    return [[photoViews lastObject] searchString];
+}
+
+- (void)setSearchString:(NSString *)searchString
+{
+    for (ThumbnailPhotoView *view in photoViews) {
+        view.searchString = searchString;
+    }
 }
 
 #pragma mark XIBLoaderViewDelegate
@@ -51,6 +69,13 @@
 - (void)xibLoaderView:(XIBLoaderView*)xibLoaderView replacedWithView:(UIView*)replacementView userParams:(NSArray*)userParams
 {
     [self addLoadedPhotoView:(ThumbnailPhotoView *)replacementView];
+}
+
+#pragma mark - ThumbnailPhotoViewDelegate
+
+- (void)thumbnailPhotoView:(ThumbnailPhotoView *)view didSelectPhoto:(VKPhoto *)photo
+{
+    [delegate thumbnailPhotoCell:self didSelectPhoto:photo];
 }
 
 @end
