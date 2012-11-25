@@ -18,6 +18,7 @@
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) IBOutlet UILabel* noPhotosLabel;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 - (void)search:(NSString*)query;
 @end

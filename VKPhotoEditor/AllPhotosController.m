@@ -37,6 +37,7 @@
 @synthesize searchBar;
 @synthesize delegate;
 @synthesize noPhotosLabel;
+@synthesize activityIndicator;
 
 - (void)viewDidLoad
 {
@@ -102,6 +103,7 @@
 
 - (void)reloadPullTable
 {
+    activityIndicator.hidden = YES;
     noPhotosLabel.hidden = searchResultsList.photos.count;
     
     [tableView reloadData];
@@ -361,7 +363,7 @@
 {
     isGridMode = !isGridMode;
     tableView.backgroundColor = isGridMode ? [UIColor defaultBgColor] : [UIColor whiteColor];
-    [self reloadPullTable];
+    [tableView reloadData];
 }
 
 #pragma mark - ThumbnailPhotoCellDelegate
