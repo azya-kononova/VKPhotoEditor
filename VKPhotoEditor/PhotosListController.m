@@ -138,6 +138,16 @@
     [navCtrl pushViewController:prof_ctrl animated:YES];
 }
 
+- (void)allPhotosController:(AllPhotosController *)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated
+{
+    [self presentModalViewController:controller withPushDirection:kCATransitionFromRight];
+}
+
+- (void)allPhotosController:(AllPhotosController *)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated
+{
+    [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
+}
+
 #pragma mark - ChoosePhotoViewDelegate
 
 - (void)choosePhotoViewDidChooseCameraRoll:(ChoosePhotoView*)view

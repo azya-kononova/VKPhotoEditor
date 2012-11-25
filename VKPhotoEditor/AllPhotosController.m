@@ -16,8 +16,9 @@
 #import "ThumbnailPhotoCell.h"
 #import "GridModeButton.h"
 #import "UIColor+VKPhotoEditor.h"
+#import "FastViewerController.h"
 
-@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate>
+@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
 @end
 
 @implementation AllPhotosController {
@@ -366,7 +367,16 @@
 
 - (void)thumbnailPhotoCell:(ThumbnailPhotoCell *)cell didSelectPhoto:(VKPhoto *)photo
 {
-    NSLog(@"Tap on cell!");
+    FastViewerController *controller = [[FastViewerController alloc] initWithPhoto:photo];
+    controller.delegate = self;
+    [delegate allPhotosController:self presenModalViewController:controller animated:YES];
+}
+
+#pragma mark - FastViewerControllerDelegate
+
+- (void)fastViewerControllerDidFinish:(FastViewerController *)controller
+{
+    [delegate allPhotosController:self dismissModalViewController:controller animated:YES];
 }
 
 @end

@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VKPhoto.h"
+
+@protocol FastViewerControllerDelegate;
 
 @interface FastViewerController : UIViewController
 
+@property (nonatomic, unsafe_unretained) id<FastViewerControllerDelegate> delegate;
+
+- (id)initWithPhoto:(VKPhoto *)photo ;
+
+@end
+
+@protocol FastViewerControllerDelegate
+- (void)fastViewerControllerDidFinish:(FastViewerController *)controller;
 @end

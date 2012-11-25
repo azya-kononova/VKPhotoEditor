@@ -7,7 +7,8 @@
 @property (nonatomic, assign, readonly) CGPoint contentOffset;
 @property (nonatomic, assign) UIEdgeInsets scrollInsets;
 @property (nonatomic, assign) BOOL shouldClip;
-
+@property (nonatomic, assign) BOOL bounces;
+ 
 - (id)initWithContentView:(UIView *)view frame:(CGRect)frame;
 - (void)resetZoom;
 

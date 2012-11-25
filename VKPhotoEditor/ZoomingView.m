@@ -127,6 +127,17 @@ static CGPoint CGFrameScale(CGRect f1, CGRect f2)
     return scroll.contentOffset;
 }
 
+
+- (BOOL)bounces
+{
+    return scroll.bounces;
+}
+
+- (void)setBounces:(BOOL)bounces
+{
+    scroll.bounces = bounces;
+}
+
 #pragma mark - ScrollView delegate
 
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
