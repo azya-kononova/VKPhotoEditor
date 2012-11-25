@@ -41,8 +41,8 @@
     
     UserProfile *profile = [[UserProfile alloc] initWithID:[[dict objectForKey:@"id"] intValue]];
     profile.login = [dict objectForKey:@"login"];
-    profile.avatarUrl = [NSURL URLWithString:[[dict objectForKey:@"photo"] objectForKey:@"photo_small"]];
     profile.avatarId = [[dict objectForKey:@"photo"] objectForKey:@"id"];
+    [profile setPhotosInfo:dict];
     
     return profile;
 }

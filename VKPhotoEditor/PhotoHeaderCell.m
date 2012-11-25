@@ -21,7 +21,7 @@
     self.accessoryType = hasPhoto ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     [nameLabel moveTo:CGPointMake(49, hasPhoto ? 5 : 13)];
     
-    [remoteImageView displayImage:photo.account.avatar];
+    [remoteImageView displayImage:photo.account.thumbnailAvatar];
     nameLabel.text = photo.account.login;
     dateLabel.text = hasPhoto ? [DataFormatter formatRelativeDate:photo.date] : nil;
 }

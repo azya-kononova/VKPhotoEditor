@@ -14,6 +14,7 @@
 @implementation Account
 @synthesize accountId;
 @synthesize login;
+@synthesize thumbnailAvatarUrl;
 @synthesize avatarUrl;
 
 - (id)initWithID:(NSInteger)_id
@@ -29,6 +30,7 @@
     if (self = [super init]) {
         DECODEINT(accountId);
         DECODEOBJECT(login);
+        DECODEOBJECT(thumbnailAvatarUrl);
         DECODEOBJECT(avatarUrl);
     }
     return self;
@@ -38,6 +40,7 @@
 {
     ENCODEINT(accountId);
     ENCODEOBJECT(login);
+    ENCODEOBJECT(thumbnailAvatarUrl);
     ENCODEOBJECT(avatarUrl);
 }
 
@@ -47,14 +50,26 @@
     
     Account *account = [[Account alloc] initWithID:[dict integerForKey:@"id"]];
     account.login = [dict objectForKey:@"login"];
-    account.avatarUrl = [NSURL URLWithString:[[dict objectForKey:@"photo"] objectForKey:@"photo_small"]];
+    [account setPhotosInfo:dict];
     return account;
+}
+
+- (void)setPhotosInfo:(NSDictionary*)dict
+{
+    self.avatarUrl = [NSURL URLWithString:[[dict objectForKey:@"photo"] objectForKey:@"photo_big"]];
+    self.thumbnailAvatarUrl = [NSURL URLWithString:[[dict objectForKey:@"photo"] objectForKey:@"photo_small"]];
 }
 
 - (RemoteImage*)avatar
 {
     return [[ImageCache shared] remoteImageForURL:avatarUrl];
 }
+
+- (RemoteImage*)thumbnailAvatar
+{
+    return [[ImageCache shared] remoteImageForURL:thumbnailAvatarUrl];
+}
+
 
 - (NSString*)description
 {

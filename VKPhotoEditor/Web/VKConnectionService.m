@@ -173,7 +173,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 - (void)exec:(VKRequestExecutor*)exec didLoadAvatar:(id)data
 {
     NSDictionary *user = [[data objectForKey:@"users"] objectAtIndex:0];
-    profile.avatarUrl = [NSURL URLWithString:[[user objectForKey:@"photo"] objectForKey:@"photo_small"]];
+    [profile setPhotosInfo:user];
     profile.avatarId = [[data objectForKey:@"photo"] objectForKey:@"id"];
     [Settings current].profile = profile;
 }
@@ -181,6 +181,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 - (void)exec:(VKRequestExecutor*)exec didDeleteAvatar:(id)data
 {
     profile.avatarUrl = nil;
+    profile.thumbnailAvatarUrl = nil;
     profile.avatarId = nil;
     [Settings current].profile = profile;
 }
