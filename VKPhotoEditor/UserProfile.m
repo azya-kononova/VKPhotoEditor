@@ -47,11 +47,6 @@
     return profile;
 }
 
-- (RemoteImage*)avatar
-{
-    return [[ImageCache shared] remoteImageForURL:self.avatarUrl];
-}
-
 - (NSString*)description
 {
     return [NSString stringWithFormat:@"<%@:account:'%@', token: '%@', photos total:%d>", NSStringFromClass(self.class), self.login, self.accessToken, lastPhotos.count];

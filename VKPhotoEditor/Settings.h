@@ -17,6 +17,7 @@
 
 - (id)initWithDefaults:(NSDictionary*)defs;
 - (NSString*)descriptionForErrorKey:(NSString*)errorKey;
+- (void)sync;
 
 + (Settings*)current;
 @end

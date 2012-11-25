@@ -16,12 +16,13 @@
 #import "VKRequestExecutor.h"
 #import "UIView+Helpers.h"
 #import "CALayer+Animations.h"
+#import "PhotoHeaderCell.h"
 
-@interface ProfileController () <UITableViewDataSource, PullTableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoHeaderViewDelegate, PhotoCellDelegate, VKRequestExecutorDelegate>
+@interface ProfileController () <UITableViewDataSource, PullTableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoCellDelegate, VKRequestExecutorDelegate>
 @end
 
 @implementation ProfileController {
-    UserProfile *account;
+    UserProfile *profile;
     UserPhotosList *photosList;
     NSMutableArray *sectionHeaders;
     RequestExecutorDelegateAdapter *adapter;
@@ -29,15 +30,15 @@
     NSInteger offset;
     VKConnectionService *service;
     NSInteger selectedPhoto;
-    BOOL isProfile;
     CGFloat uploadWidth;
+    BOOL isUploading;
 }
+
 @synthesize nameLabel;
 @synthesize delegate;
 @synthesize tableView;
-@synthesize titleView;
-@synthesize avatarButton;
-@synthesize addAvatarView;
+@synthesize headerView;
+@synthesize setPhotoButton;
 
 @synthesize uploadingContainerView;
 @synthesize uploadingView;
@@ -45,16 +46,17 @@
 @synthesize uploadInfoLabel;
 @synthesize noPhotoLabel;
 @synthesize savingIndicator;
+@synthesize avatarView;
+@synthesize headerTopView;
+@synthesize headerBottomView;
+@synthesize noAvatarImageView;
 
-- (id)initWithAccount:(UserProfile *)_account
+- (id)initWithProfile:(UserProfile *)_profile
 {
     if (self = [super init]) {
-        account = _account;
-        isProfile = [account isKindOfClass:UserProfile.class];
-        photosList = (isProfile) ? [[UserPhotosList alloc] initWithPhotos:account.lastPhotos] : [UserPhotosList new];
-        if (isProfile) {
-            [account addObserver:self forKeyPath:@"avatarUrl" options:0 context:NULL];
-        }
+        profile = _profile;
+        photosList = [[UserPhotosList alloc] initWithPhotos:profile.lastPhotos];
+        [profile addObserver:self forKeyPath:@"avatarUrl" options:0 context:NULL];
         photosList.delegate = self;
         sectionHeaders = [NSMutableArray new];
         service = [VKConnectionService shared];
@@ -66,33 +68,47 @@
 
 - (void)dealloc
 {
-    if (isProfile) [account removeObserver:self forKeyPath:@"avatarUrl"];
+    [profile removeObserver:self forKeyPath:@"avatarUrl"];
+}
+
+- (void)showAvatar:(RemoteImage*)avatar animated:(BOOL)animated;
+{
+    BOOL show = (avatar != nil);
+    avatarView.hidden = !show;
+    [avatarView displayImage:profile.avatar];
+    [tableView beginUpdates];
+    CGFloat newHeight = headerTopView.frame.size.height + headerBottomView.frame.size.height + (show ? avatarView.frame.size.height : noAvatarImageView.frame.size.height);
+    if (animated) 
+        [UIView animateWithDuration:0.8 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
+            [headerView resizeTo:CGSizeMake(headerView.frame.size.height, newHeight)];
+        } completion:^(BOOL finished) {}];
+    else
+        [headerView resizeTo:CGSizeMake(headerView.frame.size.height, newHeight)];
+    [tableView endUpdates];
+    tableView.tableHeaderView = headerView;
 }
 
 - (void)viewDidLoad
 {   
     [super viewDidLoad];
     
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    [self showAvatar:profile.avatar animated:NO];
+    
+    setPhotoButton.bgImagecaps = CGSizeMake(23, 0);
     
     uploadingView.superview.layer.cornerRadius = 6;
-    uploadingImageView.layer.cornerRadius = 8;
+    uploadingImageView.layer.cornerRadius = 17.5;
     uploadWidth = uploadingView.superview.frame.size.width;
     
-    if (isProfile) {
-        nameLabel.text = account.login;
-        self.navigationItem.titleView = titleView;
-        [self reloadAvatar];
-    } else {
-        self.navigationItem.title = account.login;
-    }
+    nameLabel.text = profile.login;
     
+    tableView.tableHeaderView = headerView;
     tableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
     tableView.pullBackgroundColor = [UIColor lightGrayColor];
     tableView.pullTextColor = [UIColor blackColor];
     
     tableView.pullTableIsRefreshing = YES;
-    [photosList loadNextPageFor:account.accountId];
+    [photosList loadNextPageFor:profile.accountId];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -111,10 +127,7 @@
 
 - (void)reloadAvatar
 {
-    BOOL hasAvatar = account.avatarUrl != nil;
-    addAvatarView.hidden = hasAvatar;
-    [nameLabel moveTo:CGPointMake(nameLabel.frame.origin.x, hasAvatar ? 12 : 3)];
-    [avatarButton displayImage:account.avatar];
+    [self showAvatar:profile.avatar animated:NO];
 }
 
 - (void)showUploading:(UIImage*)image
@@ -122,16 +135,12 @@
     BOOL show = image != nil;
     
     if (show) uploadInfoLabel.text = nil;
-    
-    [uploadingContainerView.layer fade].duration = 0.8;
-    uploadingContainerView.hidden = !show;
-    [UIView animateWithDuration:0.8 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
-         [tableView moveTo:CGPointMake(0, show ? uploadingContainerView.frame.size.height : 0)];
-    } completion:^(BOOL finished) {}];
    
+    isUploading = show;
+    if (show) [tableView reloadData];
     uploadingImageView.image = image;
-    
     [uploadingView resizeTo:CGSizeMake(0, uploadingView.frame.size.height)];
+    if (!show && tableView.contentOffset.y > tableView.tableHeaderView.frame.size.height) [tableView setContentOffset:CGPointMake(0, tableView.tableHeaderView.frame.size.height) animated:YES];
 }
 
 - (void)uploadImage:(ImageToUpload *)image
@@ -180,8 +189,7 @@
 - (void)cancelUpload
 {
     uploadPhotoExec = nil;
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self performSelector:@selector(showUploading:) withObject:nil afterDelay:1];
+    [self showUploading:nil];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 }
 
@@ -189,12 +197,12 @@
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
+    [self cancelUpload];
     VKPhoto *photo = [VKPhoto VKPhotoWithDict:[value objectForKey:@"photo"]];
     photo.account = [Account accountWithDict:[[value objectForKey:@"users"] objectAtIndex:0]];
     photo.justUploaded = YES;
     [photosList insert:photo];
     uploadInfoLabel.text = @"Done!";
-    [self cancelUpload];
 }
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
@@ -219,66 +227,53 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return photosList.photos.count;
+    return isUploading ? uploadingContainerView.frame.size.height : 0;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    return isUploading ? uploadingContainerView : nil;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return photosList.photos.count * 2;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 320;
+    return (indexPath.row % 2 == 0) ? 46 : 320;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
-    cell.delegate = self;
-    VKPhoto *photo = [photosList.photos objectAtIndex:indexPath.section];
-    [cell displayPhoto:photo];
-    return cell;
-}
-
-- (PhotoHeaderView *)dequeueHeader
-{
-    for (PhotoHeaderView *view in sectionHeaders) {
-        if (!view.superview) return view;
+    if (indexPath.row % 2 == 0) {
+        PhotoHeaderCell *cell = [PhotoHeaderCell dequeOrCreateInTable:tableView];
+        [cell displayPhoto:[photosList.photos objectAtIndex:indexPath.row / 2]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType =  UITableViewCellAccessoryNone;
+        return cell;
+    } else {
+        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+        cell.delegate = self;
+        VKPhoto *photo = [photosList.photos objectAtIndex:(indexPath.row - 1) / 2];
+        [cell displayPhoto:photo];
+        return cell;
     }
-    return nil;
-}
-
-- (NSString *)sectionHeaderTitleForSection:(NSInteger)section
-{
-    return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 46.0;
-}
-
-- (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section
-{    
-    PhotoHeaderView* headerView = [self dequeueHeader];
-    if (!headerView)
-    {
-        headerView = [PhotoHeaderView loadFromNIB];
-        headerView.delegate = self;
-        [sectionHeaders addObject:headerView];
-    }
-    [headerView displayPhoto:[photosList.photos objectAtIndex:section]];
-    return headerView;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (!isProfile) return;
+    if (indexPath.row % 2 == 0) return;
     
     selectedPhoto = indexPath.section;
     UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
@@ -319,26 +314,18 @@
     [delegate profileController:self didTapHashTag:hashTag];
 }
 
-#pragma mark - PhotoHeaderViewDelegate
-
-- (void)photoHeaderView:(PhotoHeaderView *)view didSelectAccount:(Account *)_account
-{
-    NSLog(@"Account id: %d", _account.accountId);
-}
-
 #pragma mark - PullTableViewDelegate
 
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
 {
     noPhotoLabel.hidden = YES;
     [photosList reset];
-    [photosList loadNextPageFor:account.accountId];
+    [photosList loadNextPageFor:profile.accountId];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    [photosList loadNextPageFor:account.accountId];
+    [photosList loadNextPageFor:profile.accountId];
 }
-
 
 @end

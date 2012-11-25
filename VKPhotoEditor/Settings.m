@@ -74,4 +74,9 @@
     [user synchronize];
 }
 
+- (void)sync
+{
+    [user synchronize];
+}
+
 @end

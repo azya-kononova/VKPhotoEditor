@@ -51,7 +51,7 @@
     [super viewDidLoad];
     
     service = [VKConnectionService shared];
-    profileCtrl = [[ProfileController alloc] initWithAccount:service.profile];
+    profileCtrl = [[ProfileController alloc] initWithProfile:service.profile];
     profileCtrl.delegate = self;
     
     allPhotosCtrl = [AllPhotosController new];
@@ -132,10 +132,11 @@
         tabBar.state = TabBarStateProfile;
         return;
     }
-    tabBar.state = TabBarStateUnselected;
-    ProfileController *prof_ctrl = [[ProfileController alloc] initWithAccount:(UserProfile*)account];
-    prof_ctrl.delegate = self;
-    [navCtrl pushViewController:prof_ctrl animated:YES];
+//    TODO: open account
+//    tabBar.state = TabBarStateUnselected;
+//    ProfileController *prof_ctrl = [[ProfileController alloc] initWithAccount:(UserProfile*)account];
+//    prof_ctrl.delegate = self;
+//    [navCtrl pushViewController:prof_ctrl animated:YES];
 }
 
 - (void)allPhotosController:(AllPhotosController *)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated
