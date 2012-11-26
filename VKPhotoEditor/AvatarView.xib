@@ -77,7 +77,7 @@
 								<reference key="NSSuperview" ref="523335942"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="569094707"/>
-								<int key="IBUIContentMode">4</int>
+								<int key="IBUIContentMode">2</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 							</object>
@@ -93,7 +93,6 @@
 								<int key="NSID">2</int>
 							</object>
 						</object>
-						<bool key="IBUIClipsSubviews">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
 					<object class="IBUITextView" id="396427584">
