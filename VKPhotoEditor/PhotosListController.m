@@ -20,7 +20,7 @@
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
-@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileControllerDelegate, AllPhotosControllerDelegate>
+@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileBaseControllerDelegate, AllPhotosControllerDelegate>
 @end
 
 @implementation PhotosListController {
@@ -105,20 +105,20 @@
     [choosePhotoView show:YES withExitButton:NO animated:YES];
 }
 
-#pragma mark - ProfileControllerDelegate
+#pragma mark - ProfileBaseControllerDelegate
 
-- (void)profileControllerDidOpenProfile:(ProfileController *)ctrl
+- (void)profileBaseControllerDidOpenProfile:(ProfileController *)ctrl
 {
     isAvatar = YES;
     [choosePhotoView show:YES withExitButton:YES animated:YES];
 }
 
-- (void)profileControllerDidBack:(ProfileController *)ctrl
+- (void)profileBaseControllerDidBack:(ProfileController *)ctrl
 {
     tabBar.state = TabBarStateAllPhotos;
 }
 
-- (void)profileController:(ProfileController *)ctrl didTapHashTag:(NSString *)hashTag
+- (void)profileBaseController:(ProfileController *)ctrl didTapHashTag:(NSString *)hashTag
 {
     tabBar.state = TabBarStateAllPhotos;
     [allPhotosCtrl search:hashTag];
