@@ -11,6 +11,7 @@
 #import "ImageToUpload.h"
 #import "FlexibleButton.h"
 #import "RemoteImageView.h"
+#import "TheaterView.h"
 
 @protocol ProfileControllerDelegate;
 
@@ -19,10 +20,10 @@
 @property (nonatomic, strong) IBOutlet PullTableView *tableView;
 
 // header view
+@property (nonatomic, strong) IBOutlet TheaterView *avatarTheaterView;
 @property (nonatomic, strong) IBOutlet UIView *headerView;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 @property (nonatomic, strong) IBOutlet FlexibleButton *setPhotoButton;
-@property (nonatomic, strong) IBOutlet RemoteImageView *avatarView;
 @property (nonatomic, strong) IBOutlet UIView *headerTopView;
 @property (nonatomic, strong) IBOutlet UIView *headerBottomView;
 @property (nonatomic, strong) IBOutlet UIImageView *noAvatarImageView;

@@ -174,6 +174,9 @@
 		22E1EB791615B12000B0E656 /* UIImage+Rect.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E1EB781615B12000B0E656 /* UIImage+Rect.m */; };
 		22E51F15160F4E8E00299D42 /* UIView+NIB.m in Sources */ = {isa = PBXBuildFile; fileRef = 22E51F14160F4E8E00299D42 /* UIView+NIB.m */; };
 		22F682381621D3600082E914 /* BlurFilterParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 22F682371621D3600082E914 /* BlurFilterParams.m */; };
+		444A5D761662C9D900C319D7 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444A5D751662C9D900C319D7 /* AvatarView.xib */; };
+		444A5D791662C9FB00C319D7 /* AvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 444A5D781662C9FB00C319D7 /* AvatarView.m */; };
+		449D40F71662B7F300270322 /* TheaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 449D40F61662B7F300270322 /* TheaterView.m */; };
 		44AC1B7116623E5400043552 /* VKTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AC1B7016623E5300043552 /* VKTitleLabel.m */; };
 		44AC1B741662559300043552 /* ProfilePanel.png in Resources */ = {isa = PBXBuildFile; fileRef = 44AC1B721662559300043552 /* ProfilePanel.png */; };
 		44AC1B751662559300043552 /* ProfilePanel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44AC1B731662559300043552 /* ProfilePanel@2x.png */; };
@@ -601,6 +604,11 @@
 		22E51F14160F4E8E00299D42 /* UIView+NIB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NIB.m"; sourceTree = "<group>"; };
 		22F682361621D3600082E914 /* BlurFilterParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurFilterParams.h; sourceTree = "<group>"; };
 		22F682371621D3600082E914 /* BlurFilterParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurFilterParams.m; sourceTree = "<group>"; };
+		444A5D751662C9D900C319D7 /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AvatarView.xib; sourceTree = "<group>"; };
+		444A5D771662C9FB00C319D7 /* AvatarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AvatarView.h; sourceTree = "<group>"; };
+		444A5D781662C9FB00C319D7 /* AvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarView.m; sourceTree = "<group>"; };
+		449D40F51662B7F300270322 /* TheaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheaterView.h; sourceTree = "<group>"; };
+		449D40F61662B7F300270322 /* TheaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheaterView.m; sourceTree = "<group>"; };
 		44AC1B5816622F0D00043552 /* NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoding.h; sourceTree = "<group>"; };
 		44AC1B6F16623E5300043552 /* VKTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKTitleLabel.h; sourceTree = "<group>"; };
 		44AC1B7016623E5300043552 /* VKTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKTitleLabel.m; sourceTree = "<group>"; };
@@ -1351,6 +1359,8 @@
 				8BA3D707163DC80F00CEA6AD /* ChoosePhotoView.h */,
 				8BA3D708163DC80F00CEA6AD /* ChoosePhotoView.m */,
 				8BA3D70A163DC83800CEA6AD /* ChoosePhotoView.xib */,
+				449D40F51662B7F300270322 /* TheaterView.h */,
+				449D40F61662B7F300270322 /* TheaterView.m */,
 				221C31D316104640005974C8 /* TriangleView.h */,
 				221C31D416104640005974C8 /* TriangleView.m */,
 				8B68FEB016449802008883E0 /* RightTriangleView.h */,
@@ -1402,6 +1412,9 @@
 				22D5D24816612BF600BCB7E0 /* GridModeButton.h */,
 				22D5D24916612BF600BCB7E0 /* GridModeButton.m */,
 				22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */,
+				444A5D771662C9FB00C319D7 /* AvatarView.h */,
+				444A5D781662C9FB00C319D7 /* AvatarView.m */,
+				444A5D751662C9D900C319D7 /* AvatarView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1859,6 +1872,7 @@
 				44AC1B86166292FE00043552 /* PhotoHeaderCell.xib in Resources */,
 				44AC1B891662982500043552 /* UploadHeader.png in Resources */,
 				44AC1B8A1662982500043552 /* UploadHeader@2x.png in Resources */,
+				444A5D761662C9D900C319D7 /* AvatarView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1966,6 +1980,8 @@
 				22D5D271166216D100BCB7E0 /* FastViewerController.m in Sources */,
 				44AC1B7116623E5400043552 /* VKTitleLabel.m in Sources */,
 				44AC1B84166292EA00043552 /* PhotoHeaderCell.m in Sources */,
+				449D40F71662B7F300270322 /* TheaterView.m in Sources */,
+				444A5D791662C9FB00C319D7 /* AvatarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

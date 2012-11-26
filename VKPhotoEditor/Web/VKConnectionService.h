@@ -25,7 +25,7 @@ extern NSString *VKRequestDidFailNotification;
 - (VKRequestExecutor*)login:(NSString*)login;
 - (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption;
 - (VKRequestExecutor*)deletePhoto:(NSString*)photoId;
-- (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset limit:(NSInteger)limit;
+- (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset limit:(NSInteger)limit userPic:(BOOL)userPic;
 - (VKRequestExecutor*)searchPhotos:(NSString*)query offset:(NSInteger)offset limit:(NSInteger)limit;
 - (void)logout;
 @end

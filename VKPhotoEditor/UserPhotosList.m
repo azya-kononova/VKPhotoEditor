@@ -62,12 +62,17 @@
     initialOffset = 0;
 }
 
-- (void)loadNextPageFor:(NSInteger)userId
+- (void)loadNextPageFor:(NSInteger)userId userPic:(BOOL)userPic
 {
     if (exec) return;
-    exec = [service getPhotos:userId offset:initialOffset + limit * nextPage++ limit:limit];
+    exec = [service getPhotos:userId offset:initialOffset + limit * nextPage++ limit:limit userPic:userPic];
     exec.delegate = self;
     [exec start];
+}
+
+- (void)loadNextPageFor:(NSInteger)userId
+{
+    [self loadNextPageFor:userId userPic:NO];
 }
 
 - (void)append:(NSArray*)_photos totalCount:(NSUInteger)totalCount

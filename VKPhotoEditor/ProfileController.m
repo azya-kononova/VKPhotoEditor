@@ -17,6 +17,7 @@
 #import "UIView+Helpers.h"
 #import "CALayer+Animations.h"
 #import "PhotoHeaderCell.h"
+#import "AvatarView.h"
 
 @interface ProfileController () <UITableViewDataSource, PullTableViewDelegate, PhotosListDelegate, UIActionSheetDelegate, PhotoCellDelegate, VKRequestExecutorDelegate>
 @end
@@ -24,7 +25,7 @@
 @implementation ProfileController {
     UserProfile *profile;
     UserPhotosList *photosList;
-    NSMutableArray *sectionHeaders;
+    UserPhotosList *avatarsList;
     RequestExecutorDelegateAdapter *adapter;
     VKRequestExecutor *uploadPhotoExec;
     NSInteger offset;
@@ -32,6 +33,7 @@
     NSInteger selectedPhoto;
     CGFloat uploadWidth;
     BOOL isUploading;
+    NSMutableDictionary *avatarsForIndexes;
 }
 
 @synthesize nameLabel;
@@ -39,6 +41,7 @@
 @synthesize tableView;
 @synthesize headerView;
 @synthesize setPhotoButton;
+@synthesize avatarTheaterView;
 
 @synthesize uploadingContainerView;
 @synthesize uploadingView;
@@ -46,7 +49,6 @@
 @synthesize uploadInfoLabel;
 @synthesize noPhotoLabel;
 @synthesize savingIndicator;
-@synthesize avatarView;
 @synthesize headerTopView;
 @synthesize headerBottomView;
 @synthesize noAvatarImageView;
@@ -56,12 +58,14 @@
     if (self = [super init]) {
         profile = _profile;
         photosList = [[UserPhotosList alloc] initWithPhotos:profile.lastPhotos];
+        avatarsList = [UserPhotosList new];
         [profile addObserver:self forKeyPath:@"avatarUrl" options:0 context:NULL];
         photosList.delegate = self;
-        sectionHeaders = [NSMutableArray new];
+        avatarsList.delegate = self;
         service = [VKConnectionService shared];
         adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
         selectedPhoto = -1;
+        avatarsForIndexes = [NSMutableDictionary new];
     }
     return self;
 }
@@ -73,11 +77,10 @@
 
 - (void)showAvatar:(RemoteImage*)avatar animated:(BOOL)animated;
 {
-    BOOL show = (avatar != nil);
-    avatarView.hidden = !show;
-    [avatarView displayImage:profile.avatar];
+    BOOL show = YES;
+    avatarTheaterView.hidden = !show;
     [tableView beginUpdates];
-    CGFloat newHeight = headerTopView.frame.size.height + headerBottomView.frame.size.height + (show ? avatarView.frame.size.height : noAvatarImageView.frame.size.height);
+    CGFloat newHeight = headerTopView.frame.size.height + headerBottomView.frame.size.height + (show ? avatarTheaterView.frame.size.height : noAvatarImageView.frame.size.height);
     if (animated) 
         [UIView animateWithDuration:0.8 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
             [headerView resizeTo:CGSizeMake(headerView.frame.size.height, newHeight)];
@@ -104,11 +107,13 @@
     
     tableView.tableHeaderView = headerView;
     tableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
-    tableView.pullBackgroundColor = [UIColor lightGrayColor];
+    tableView.pullBackgroundColor = [UIColor blackColor];
     tableView.pullTextColor = [UIColor blackColor];
     
     tableView.pullTableIsRefreshing = YES;
     [photosList loadNextPageFor:profile.accountId];
+    [avatarsList loadNextPageFor:profile.accountId userPic:YES];
+    [avatarTheaterView reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -177,13 +182,17 @@
 
 - (void)photosList:(UserPhotosList *)_photosList didUpdatePhotos:(NSArray *)photos
 {
-    tableView.pullLastRefreshDate = [NSDate date];
-    [self reloadPullTable];
+    if (_photosList == photosList) {
+        tableView.pullLastRefreshDate = [NSDate date];
+        [self reloadPullTable];
+    } else {
+        [avatarTheaterView reloadData];
+    }
 }
 
-- (void)photosList:(UserPhotosList *)photosList didFailToUpdate:(NSError *)error
+- (void)photosList:(UserPhotosList *)_photosList didFailToUpdate:(NSError *)error
 {
-    [self reloadPullTable];
+    (_photosList ==  photosList) ? [self reloadPullTable] :  [avatarTheaterView reloadData];
 }
 
 - (void)cancelUpload
@@ -214,7 +223,6 @@
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
 {
     [uploadingView resizeTo:CGSizeMake(uploadWidth * progress, uploadingView.frame.size.height)];
-    NSLog(@"Did upload %f", progress);
 }
 
 #pragma mark - Request Handler
@@ -224,15 +232,14 @@
     if ([ids count]) [photosList deletePhoto:[ids objectAtIndex:0]];
 }
 
-
 #pragma mark - UITableViewDataSource
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section
 {
     return isUploading ? uploadingContainerView.frame.size.height : 0;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (UIView *)tableView:(UITableView *)_tableView viewForHeaderInSection:(NSInteger)section
 {
     return isUploading ? uploadingContainerView : nil;
 }
@@ -242,12 +249,12 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
     return photosList.photos.count * 2;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return (indexPath.row % 2 == 0) ? 46 : 320;
 }
@@ -326,6 +333,22 @@
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
     [photosList loadNextPageFor:profile.accountId];
+}
+
+- (NSUInteger)numberOfItemsInTheaterView:(TheaterView*)view
+{
+    return avatarsList.photos.count;
+}
+
+- (UIView*)theaterView:(TheaterView*)view viewForItemWithIndex:(NSUInteger)index
+{
+    AvatarView *viewForIndex =  [avatarsForIndexes objectForKey:[NSNumber numberWithInteger:index]];
+    if (!viewForIndex) {
+        viewForIndex = [AvatarView loadFromNIB];
+        [viewForIndex displayPhoto:[avatarsList.photos objectAtIndex:index]];
+        [avatarsForIndexes setObject:viewForIndex forKey:[NSNumber numberWithInteger:index]];
+    }
+    return viewForIndex;
 }
 
 @end

@@ -133,9 +133,11 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     return exec;
 }
 
-- (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset limit:(NSInteger)limit
+- (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset limit:(NSInteger)limit userPic:(BOOL)userPic
 {
-    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"getPhotos?user_id=%d&offset=%d&limit=%d", userId, offset, limit]];
+    NSMutableString *path = [NSMutableString stringWithFormat:@"getPhotos?user_id=%d&offset=%d&limit=%d", userId, offset, limit];
+    if (userPic) [path appendString:@"&filter=userpic"];
+    RequestExecutorProxy *exec = [self getPath:path.copy];
     return exec;
 }
 

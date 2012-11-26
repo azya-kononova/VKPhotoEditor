@@ -20,6 +20,7 @@
 - (void)insert:(VKPhoto*)photo;
 - (void)deletePhoto:(NSString*)photoId;
 - (void)loadNextPageFor:(NSInteger)userId;
+- (void)loadNextPageFor:(NSInteger)userId userPic:(BOOL)userPic;
 
 - (id)initWithPhotos:(NSArray*)photos;
 @end
