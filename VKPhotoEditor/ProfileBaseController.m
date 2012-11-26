@@ -72,7 +72,6 @@
     photosTableView.pullBackgroundColor = [UIColor blackColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
-    photosTableView.pullTableIsRefreshing = YES;
     [photosList loadNextPageFor:profile.accountId];
     [avatarsList loadNextPageFor:profile.accountId userPic:YES];
     [avatarTheaterView reloadData];
