@@ -17,6 +17,7 @@
 #import "PhotoEditController.h"
 #import "AllPhotosController.h"
 #import "UINavigationController+Transistions.h"
+#import "UserAccountController.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
@@ -132,11 +133,10 @@
         tabBar.state = TabBarStateProfile;
         return;
     }
-//    TODO: open account
-//    tabBar.state = TabBarStateUnselected;
-//    ProfileController *prof_ctrl = [[ProfileController alloc] initWithAccount:(UserProfile*)account];
-//    prof_ctrl.delegate = self;
-//    [navCtrl pushViewController:prof_ctrl animated:YES];
+    tabBar.state = TabBarStateUnselected;
+    UserAccountController *userCtrl = [[UserAccountController alloc] initWithProfile:(UserProfile*)account];
+    userCtrl.delegate = self;
+    [navCtrl pushViewController:userCtrl animated:YES];
 }
 
 - (void)allPhotosController:(AllPhotosController *)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated

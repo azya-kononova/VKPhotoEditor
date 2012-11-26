@@ -72,8 +72,8 @@
     gridCellHeight = cell.frame.size.height;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void) viewWillAppear:(BOOL)animated {
+    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:animated];
     [super viewWillAppear:animated];
 }
 
@@ -174,7 +174,7 @@
     selectedPhoto = indexPath.section;
     
     if (indexPath.row % 2 == 0) {
-//        TODO: open profile
+        [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account]];
         return;
     }
     
