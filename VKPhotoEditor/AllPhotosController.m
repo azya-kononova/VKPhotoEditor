@@ -17,18 +17,19 @@
 #import "GridModeButton.h"
 #import "UIColor+VKPhotoEditor.h"
 #import "FastViewerController.h"
+#import "PhotoHeaderCell.h"
 
 @interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
 @end
 
 @implementation AllPhotosController {
     SearchResultsList *searchResultsList;
-    NSMutableArray *sectionHeaders;
     NSInteger selectedPhoto;
     RequestExecutorDelegateAdapter *adapter;
     
     BOOL isGridMode;
     BOOL isFastViewerOpen;
+    
     NSInteger itemsInRow;
     NSInteger gridCellHeight;
 }
@@ -44,7 +45,6 @@
     [super viewDidLoad];
     searchResultsList = [SearchResultsList new];
     searchResultsList.delegate = self;
-    sectionHeaders = [NSMutableArray new];
     
     tableView.tableHeaderView = tableHeaderView;
     
@@ -53,21 +53,15 @@
     [searchBar insertSubview:iview atIndex:1];
     
     tableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
-    tableView.pullBackgroundColor = [UIColor lightGrayColor];
+    tableView.pullBackgroundColor = [UIColor blackColor];
     tableView.pullTextColor = [UIColor blackColor];
     
-    tableView.pullTableIsRefreshing = YES;
     [searchResultsList loadNextPageFor:nil];
-    
-    [self.navigationController setNavigationBarHidden:NO];
-    self.navigationItem.title = @"All photos";
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:nil];
-    self.navigationItem.backBarButtonItem = backButton;
     
     GridModeButton *gridButton = [GridModeButton loadFromNIB];
     gridButton.delegate = self;
-    UIBarButtonItem *gridItem = [[UIBarButtonItem alloc] initWithCustomView:gridButton];
-    self.navigationItem.rightBarButtonItem = gridItem;
+    [gridButton moveTo:CGPointMake(280, 5)];
+    [tableHeaderView addSubview:gridButton];
     
     selectedPhoto = -1;
     adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
@@ -80,7 +74,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:(tableView.contentOffset.y > 0) animated:YES];
 }
 
 #pragma mark - Internals
@@ -126,25 +119,37 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return isGridMode ? 1 : searchResultsList.photos.count;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return isGridMode ? (NSInteger) ceil((double) searchResultsList.photos.count / itemsInRow) : 1;
+    return isGridMode ? (NSInteger) ceil((double) searchResultsList.photos.count / itemsInRow) : searchResultsList.photos.count * 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
+//    TODO: handle situations when users find
+    CGFloat height;
     
-    if (photo.imageURL) {
-        return isGridMode ? gridCellHeight : 320;
+    if (isGridMode)
+        height = gridCellHeight;
+    else
+        height = (indexPath.row % 2 == 0) ? 46 : 320;
+    
+    return height;
+}
+
+- (UITableViewCell*)photoOrHeaderForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row % 2 == 0) {
+        PhotoHeaderCell *cell = [PhotoHeaderCell dequeOrCreateInTable:tableView];
+        [cell displayPhoto:[searchResultsList.photos objectAtIndex:indexPath.row / 2]];
+        return cell;
+    } else {
+        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+        cell.delegate = self;
+        VKPhoto *photo = [searchResultsList.photos objectAtIndex:(indexPath.row - 1) / 2];
+        [cell displayPhoto:photo];
+        return cell;
     }
-    
-    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,13 +162,7 @@
         
         return cell;
     } else {
-        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
-        cell.delegate = self;
-        cell.searchString = searchBar.text;
-        VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.section];
-        [cell displayPhoto:photo];
-        
-        return cell;
+        return [self photoOrHeaderForRowAtIndexPath:indexPath];
     }
 }
 
@@ -172,6 +171,11 @@
     if (isGridMode) return;
     
     selectedPhoto = indexPath.section;
+    
+    if (indexPath.row % 2 == 0) {
+//        TODO: open profile
+        return;
+    }
     
     if (![self isProfilePhoto]) return;
     
@@ -184,63 +188,25 @@
     [actSheet showInView:self.view.superview];
 }
 
-- (PhotoHeaderView *)dequeueHeader
-{
-    for (PhotoHeaderView *view in sectionHeaders) {
-        if (!view.superview) return view;
-    }
-    return nil;
-}
-
-- (NSString *)sectionHeaderTitleForSection:(NSInteger)section
-{
-    return nil;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return isGridMode ? 0 : 46.0;
-}
-
-- (UIView *)tableView:(UITableView*)tableView viewForHeaderInSection:(NSInteger)section
-{
-    if (isGridMode) return nil;
-    
-    PhotoHeaderView* headerView = [self dequeueHeader];
-    if (!headerView)
-    {
-        headerView = [PhotoHeaderView loadFromNIB];
-        headerView.delegate = self;
-        [sectionHeaders addObject:headerView];
-    }
-    [headerView displayPhoto:[searchResultsList.photos objectAtIndex:section]];
-    return headerView;
-}
-
-- (void)scrollViewDidScroll:(UIScrollView*)scrollView
-{
-    BOOL findModeActive = !tableView.tableHeaderView;
-    if (!findModeActive) [self.navigationController setNavigationBarHidden:(scrollView.contentOffset.y > 0) animated:NO];
-}
-
 - (void)setFindModeActive:(BOOL)active
 {
     [tableView setContentOffset:CGPointZero animated:NO];
     
     if (active == (tableView.tableHeaderView == nil)) return;
     
-    if (active) [self.navigationController setNavigationBarHidden:YES animated:YES];
-    
     active ? [self.view addSubview:searchBar] : [tableHeaderView addSubview:searchBar];
     CGFloat dy = active ? searchBar.frame.size.height : 0;
-    tableView.frame = CGRectMake(0, dy, self.view.frame.size.width, self.view.frame.size.height - dy);
-
-     if (!active) [self.navigationController setNavigationBarHidden:NO animated:YES];
     
+    tableView.frame = CGRectMake(0, dy, self.view.frame.size.width, self.view.frame.size.height - dy);
     [tableView beginUpdates];
     tableView.tableHeaderView = active ? nil : tableHeaderView;
     [tableView endUpdates];
     
+    [UIView animateWithDuration:0.3 animations:^(void) {
+        [searchBar moveTo:CGPointMake(0, active ? 0 : 44)];
+    } completion:^(BOOL finished) {
+    }];
+
     [searchBar setShowsCancelButton:active animated:YES];
 }
 
@@ -362,7 +328,6 @@
 - (void)gridModeButtonDidSwitchMode:(GridModeButton *)gridButton
 {
     isGridMode = !isGridMode;
-    tableView.backgroundColor = isGridMode ? [UIColor defaultBgColor] : [UIColor whiteColor];
     [tableView reloadData];
 }
 
