@@ -7,8 +7,6 @@
 //
 
 #import "StartViewController.h"
-#import <AssetsLibrary/AssetsLibrary.h>
-#import "ThumbnailsView.h"
 #import "FlexibleButton.h"
 #import "UIColor+VKPhotoEditor.h"
 #import "CroppingViewController.h"
@@ -22,13 +20,13 @@
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 #import "PhotosListController.h"
-#import "ALAsset+UIImage.h"
 #import "Settings.h"
 #import "UINavigationController+Transistions.h"
 #import "ErrorMessage.h"
+#import "LibraryPhotosView.h"
 
 
-@interface StartViewController ()<ThumbnailsViewDataSource, ThumbnailsViewDelegate, VKRequestExecutorDelegate>
+@interface StartViewController ()<LibraryPhotosViewDelegate, VKRequestExecutorDelegate>
 - (IBAction)takePhoto:(id)sender;
 - (IBAction)cameraRoll:(id)sender;
 @end
@@ -36,20 +34,17 @@
 
 @implementation StartViewController {
     BOOL isPhoto;
-    NSMutableArray *assets;
-    ALAssetsLibrary *library;
-    
-    IBOutlet ThumbnailsView *gallery;
-    IBOutlet UIActivityIndicatorView *activityIndicator;
     IBOutlet FlexibleButton *takePhotoBtn;
     IBOutlet FlexibleButton *postPhotoBtn;
-    IBOutlet UILabel *noPhotoLabel;
     IBOutlet UILabel *appNameLabel;
     IBOutlet UIView *postView;
     IBOutlet FlexibleTextField *loginInputField;
     IBOutlet UIButton *postHeaderBtn;
     IBOutlet UIImageView *postImageView;
     IBOutlet UIActivityIndicatorView *loginActivity;
+    IBOutlet UIView *libraryPlaceholder;
+    
+    LibraryPhotosView *libraryPhotosView;
     
     BOOL isPostPhotoMode;
     VKRequestExecutor *exec;
@@ -67,9 +62,11 @@
     
     self.view.backgroundColor = [UIColor defaultBgColor];
     
-    postView.backgroundColor = [UIColor defaultBgColor];
+    libraryPhotosView = [LibraryPhotosView loadFromNIB];
+    libraryPhotosView.delegate = self;
+    [libraryPlaceholder addSubview:libraryPhotosView];
     
-    library = [[ALAssetsLibrary alloc] init];
+    postView.backgroundColor = [UIColor defaultBgColor];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAlbumImages) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
@@ -97,52 +94,6 @@
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)clearThumbnailsImages
-{
-    if (assets) {
-        [assets removeAllObjects];
-        assets = nil;
-        [gallery reloadData];
-    }
-}
-
-- (void)loadAlbumImages
-{
-    [self clearThumbnailsImages];
-    
-    assets = [NSMutableArray array];
-    [activityIndicator startAnimating];
-    gallery.userInteractionEnabled = NO;
-    
-    [self performSelector:@selector(loadAlbumImagesAfterDelay) withObject:nil afterDelay:0.5];
-}
-
-- (void)loadAlbumImagesAfterDelay
-{
-    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stopGroup) {
-        [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-            if (asset) {
-                [assets addObject:asset];
-            }
-            if (*stop || index == NSNotFound) {
-                [assets sortUsingComparator:^NSComparisonResult(ALAsset *obj1, ALAsset *obj2) {
-                    NSDate *first = [obj1 valueForProperty:ALAssetPropertyDate];
-                    NSDate *second = [obj2 valueForProperty:ALAssetPropertyDate];
-                    return -[first compare:second];
-                }];
-                
-                [gallery reloadData];
-                [activityIndicator stopAnimating];
-                gallery.userInteractionEnabled = YES;
-                
-                noPhotoLabel.hidden = assets.count;
-            }
-        }];
-    } failureBlock:^(NSError *error) {
-        NSLog(@"Can not get images from Photo Library.");
-    }];
 }
 
 #pragma mark - Actions
@@ -208,33 +159,17 @@
     }];
 }
 
-#pragma mark - ThumbnailsViewDataSource
-
-- (NSUInteger)numberOfItemsInThumbnailsView:(ThumbnailsView*)view
+- (void)loadAlbumImages
 {
-    return assets.count;
+    [libraryPhotosView reloadData];
 }
 
-- (UIView*)thumbnailsView:(ThumbnailsView*)view viewForItemWithIndex:(NSUInteger)index
-{
-    UIImage *image = [UIImage imageWithCGImage:[[assets objectAtIndex:index] thumbnail]];
-    
-    return [[UIImageView alloc] initWithImage:image];
-}
+#pragma mark - LibraryPhotosViewDelegate
 
-- (CGFloat)thumbnailsView:(ThumbnailsView*)view thumbnailWidthForHeight:(CGFloat)height
-{
-    return height;
-}
-
-
-#pragma mark - ThumbnailsViewDelegate
-
-- (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
+- (void)libraryPhotoView:(LibraryPhotosView *)view didTapOnImage:(UIImage *)image
 {
     isPhoto = NO;
-
-    [self cropPhoto:[[assets objectAtIndex:index] image]];
+    [self cropPhoto:image];
 }
 
 
@@ -244,9 +179,8 @@
 - (void)photoEditController:(PhotoEditController *)controller didFinishWithImage:(ImageToUpload*)image
 {
     [self.navigationController popViewControllerAnimated:YES];
-    [self clearThumbnailsImages];
-    [activityIndicator startAnimating];
-    gallery.userInteractionEnabled = NO;
+    [libraryPhotosView clear];
+    libraryPhotosView.isLoading = YES;
     imageToUpload = image;
     postImageView.image = imageToUpload.image;
     [self showPostViewHeaderLogin:NO];

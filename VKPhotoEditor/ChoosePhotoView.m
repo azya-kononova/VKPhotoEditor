@@ -8,30 +8,32 @@
 
 #import "ChoosePhotoView.h"
 #import "UIColor+VKPhotoEditor.h"
-#import <AssetsLibrary/AssetsLibrary.h>
 #import "UIView+Helpers.h"
 #import "CALayer+Animations.h"
-#import "ALAsset+UIImage.h"
+#import "LibraryPhotosView.h"
+
+@interface ChoosePhotoView ()<LibraryPhotosViewDelegate>
+@end
 
 @implementation ChoosePhotoView {
-    ALAssetsLibrary *library;
-    NSMutableArray *assets;
+    LibraryPhotosView *libraryPhotosView;
 }
+
 @synthesize overlayView;
 @synthesize bgView;
 @synthesize takePhotoButton;
 @synthesize cancelButton;
-@synthesize thumbnailsView;
-@synthesize noPhotoLabel;
-@synthesize activityView;
 @synthesize exitButton;
+@synthesize libraryPlaceholder;
 @synthesize delegate;
 
 - (void)awakeFromNib
 {
-    bgView.backgroundColor = [UIColor defaultBgColor];
+    libraryPhotosView = [LibraryPhotosView loadFromNIB];
+    libraryPhotosView.delegate = self;
+    [libraryPlaceholder addSubview:libraryPhotosView];
     
-    library = [[ALAssetsLibrary alloc] init];
+    bgView.backgroundColor = [UIColor defaultBgColor];
     
     takePhotoButton.bgImagecaps = CGSizeMake(20, 20);
     cancelButton.bgImagecaps = CGSizeMake(20, 20);
@@ -49,7 +51,7 @@
 {
     exitButton.hidden = !needExitButton;
     
-    if (show) [self loadAlbumImages];
+    if (show) [libraryPhotosView reloadData];
     
     if (animated) {
         if (show) self.hidden = NO;
@@ -107,76 +109,11 @@
     [delegate choosePhotoViewDidExit:self];
 }
 
-- (void)clearThumbnailsImages
+#pragma mark - LibraryPhotosViewDelegate
+
+- (void)libraryPhotoView:(LibraryPhotosView *)view didTapOnImage:(UIImage *)image
 {
-    if (assets) {
-        [assets removeAllObjects];
-        assets = nil;
-        [thumbnailsView reloadData];
-    }
-}
-
-- (void)loadAlbumImages
-{
-    [self clearThumbnailsImages];
-    
-    assets = [NSMutableArray array];
-    [activityView startAnimating];
-    
-    [self performSelector:@selector(loadAlbumImagesAfterDelay) withObject:nil afterDelay:0.5];
-}
-
-- (void)loadAlbumImagesAfterDelay
-{
-    [library enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stopGroup) {
-        [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
-            if (asset) {
-                [assets addObject:asset];
-            }
-            if (*stop || index == NSNotFound) {
-                [assets sortUsingComparator:^NSComparisonResult(ALAsset *obj1, ALAsset *obj2) {
-                    NSDate *first = [obj1 valueForProperty:ALAssetPropertyDate];
-                    NSDate *second = [obj2 valueForProperty:ALAssetPropertyDate];
-                    return -[first compare:second];
-                }];
-                
-                [thumbnailsView reloadData];
-                [activityView stopAnimating];
-                
-                noPhotoLabel.hidden = assets.count;
-            }
-        }];
-    } failureBlock:^(NSError *error) {
-        NSLog(@"Can not get images from Photo Library.");
-    }];
-}
-
-
-#pragma mark - ThumbnailsViewDataSource
-
-- (NSUInteger)numberOfItemsInThumbnailsView:(ThumbnailsView*)view
-{
-    return assets.count;
-}
-
-- (UIView*)thumbnailsView:(ThumbnailsView*)view viewForItemWithIndex:(NSUInteger)index
-{
-    UIImage *image = [UIImage imageWithCGImage:[[assets objectAtIndex:index] thumbnail]];
-    
-    return [[UIImageView alloc] initWithImage:image];
-}
-
-- (CGFloat)thumbnailsView:(ThumbnailsView*)view thumbnailWidthForHeight:(CGFloat)height
-{
-    return height;
-}
-
-
-#pragma mark - ThumbnailsViewDelegate
-
-- (void)thumbnailsView:(ThumbnailsView *)view didTapOnItemWithIndex:(NSUInteger)index
-{
-    [delegate choosePhotoView:self didChooseImage:[[assets objectAtIndex:index] image]];
+    [delegate choosePhotoView:self didChooseImage:image];
 }
 
 @end

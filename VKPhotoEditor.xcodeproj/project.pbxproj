@@ -160,6 +160,8 @@
 		22D5D2AE16626A3B00BCB7E0 /* Selector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2AC16626A3B00BCB7E0 /* Selector@2x.png */; };
 		22D5D2B11662774500BCB7E0 /* DarkArrow_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2AF1662773300BCB7E0 /* DarkArrow_active.png */; };
 		22D5D2B21662774500BCB7E0 /* DarkArrow_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2B01662773C00BCB7E0 /* DarkArrow_active@2x.png */; };
+		22D5D2F41664075D00BCB7E0 /* LibraryPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D5D2F31664075D00BCB7E0 /* LibraryPhotosView.m */; };
+		22D5D2F61664076C00BCB7E0 /* LibraryPhotosView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2F51664076C00BCB7E0 /* LibraryPhotosView.xib */; };
 		22D7BF58160CCC33008B5BFA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF57160CCC33008B5BFA /* UIKit.framework */; };
 		22D7BF5A160CCC33008B5BFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF59160CCC33008B5BFA /* Foundation.framework */; };
 		22D7BF5C160CCC33008B5BFA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22D7BF5B160CCC33008B5BFA /* CoreGraphics.framework */; };
@@ -582,6 +584,9 @@
 		22D5D2AC16626A3B00BCB7E0 /* Selector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Selector@2x.png"; sourceTree = "<group>"; };
 		22D5D2AF1662773300BCB7E0 /* DarkArrow_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DarkArrow_active.png; sourceTree = "<group>"; };
 		22D5D2B01662773C00BCB7E0 /* DarkArrow_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DarkArrow_active@2x.png"; sourceTree = "<group>"; };
+		22D5D2F21664075C00BCB7E0 /* LibraryPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibraryPhotosView.h; sourceTree = "<group>"; };
+		22D5D2F31664075D00BCB7E0 /* LibraryPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LibraryPhotosView.m; sourceTree = "<group>"; };
+		22D5D2F51664076C00BCB7E0 /* LibraryPhotosView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LibraryPhotosView.xib; sourceTree = "<group>"; };
 		22D7BF53160CCC33008B5BFA /* BeautyMaker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeautyMaker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22D7BF57160CCC33008B5BFA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		22D7BF59160CCC33008B5BFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1420,6 +1425,9 @@
 				444A5D771662C9FB00C319D7 /* AvatarView.h */,
 				444A5D781662C9FB00C319D7 /* AvatarView.m */,
 				444A5D751662C9D900C319D7 /* AvatarView.xib */,
+				22D5D2F21664075C00BCB7E0 /* LibraryPhotosView.h */,
+				22D5D2F31664075D00BCB7E0 /* LibraryPhotosView.m */,
+				22D5D2F51664076C00BCB7E0 /* LibraryPhotosView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -1878,6 +1886,7 @@
 				44AC1B891662982500043552 /* UploadHeader.png in Resources */,
 				44AC1B8A1662982500043552 /* UploadHeader@2x.png in Resources */,
 				444A5D761662C9D900C319D7 /* AvatarView.xib in Resources */,
+				22D5D2F61664076C00BCB7E0 /* LibraryPhotosView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1988,6 +1997,7 @@
 				449D40F71662B7F300270322 /* TheaterView.m in Sources */,
 				444A5D791662C9FB00C319D7 /* AvatarView.m in Sources */,
 				44B0F4011663F29200C8F992 /* ProfileBaseController.m in Sources */,
+				22D5D2F41664075D00BCB7E0 /* LibraryPhotosView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

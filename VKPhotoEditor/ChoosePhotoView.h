@@ -7,7 +7,6 @@
 //
 
 #import "FlexibleButton.h"
-#import "ThumbnailsView.h"
 
 @protocol  ChoosePhotoViewDelegate;
 
@@ -18,9 +17,7 @@
 @property (nonatomic, strong) IBOutlet FlexibleButton *takePhotoButton;
 @property (nonatomic, strong) IBOutlet FlexibleButton *cancelButton;
 @property (nonatomic, strong) IBOutlet UIButton *exitButton;
-@property (nonatomic, strong) IBOutlet ThumbnailsView *thumbnailsView;
-@property (nonatomic, strong) IBOutlet UILabel *noPhotoLabel;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityView;
+@property (nonatomic, strong) IBOutlet UIView *libraryPlaceholder;
 
 - (IBAction)cameraRoll;
 - (IBAction)takePhoto;
