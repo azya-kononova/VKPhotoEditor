@@ -54,6 +54,7 @@
     // Config
     UIImage *pullArrowImage;
     UIColor *pullBackgroundColor;
+    UIColor *loadBackgroundColor;
     UIColor *pullTextColor;
     NSDate *pullLastRefreshDate;
     
@@ -69,6 +70,7 @@
 /* The configurable display properties of PullTableView. Set to nil for default values */
 @property (nonatomic, retain) UIImage *pullArrowImage;
 @property (nonatomic, retain) UIColor *pullBackgroundColor;
+@property (nonatomic, retain) UIColor *loadBackgroundColor;
 @property (nonatomic, retain) UIColor *pullTextColor;
 
 /* Set to nil to hide last modified text */

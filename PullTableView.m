@@ -57,6 +57,7 @@
 - (void)dealloc {
     [pullArrowImage release];
     [pullBackgroundColor release];
+    [loadBackgroundColor release];
     [pullTextColor release];
     [pullLastRefreshDate release];
     
@@ -165,13 +166,14 @@
 
 @synthesize pullArrowImage;
 @synthesize pullBackgroundColor;
+@synthesize loadBackgroundColor;
 @synthesize pullTextColor;
 @synthesize pullLastRefreshDate;
 
 - (void)configDisplayProperties
 {
     [refreshView setBackgroundColor:self.pullBackgroundColor textColor:self.pullTextColor arrowImage:self.pullArrowImage];
-    [loadMoreView setBackgroundColor:self.pullBackgroundColor textColor:self.pullTextColor arrowImage:self.pullArrowImage];
+    [loadMoreView setBackgroundColor:self.loadBackgroundColor textColor:self.pullTextColor arrowImage:self.pullArrowImage];
 }
 
 - (void)setPullArrowImage:(UIImage *)aPullArrowImage
@@ -190,6 +192,15 @@
         pullBackgroundColor = [aColor retain];
         [self configDisplayProperties];
     } 
+}
+
+- (void)setLoadBackgroundColor:(UIColor *)aColor
+{
+    if(aColor != loadBackgroundColor) {
+        [loadBackgroundColor release];
+        loadBackgroundColor = [aColor retain];
+        [self configDisplayProperties];
+    }
 }
 
 - (void)setPullTextColor:(UIColor *)aColor

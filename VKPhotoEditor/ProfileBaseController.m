@@ -70,6 +70,7 @@
     photosTableView.tableHeaderView = headerView;
     photosTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
     photosTableView.pullBackgroundColor = [UIColor blackColor];
+    photosTableView.loadBackgroundColor = [UIColor whiteColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
     [photosList loadNextPageFor:profile.accountId];

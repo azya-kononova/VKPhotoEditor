@@ -54,6 +54,7 @@
     
     tableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
     tableView.pullBackgroundColor = [UIColor blackColor];
+    tableView.loadBackgroundColor = [UIColor whiteColor];
     tableView.pullTextColor = [UIColor blackColor];
     
     [searchResultsList loadNextPageFor:nil];
