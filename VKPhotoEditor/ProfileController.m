@@ -11,7 +11,7 @@
 #import "PhotoHeaderView.h"
 #import "VKPhoto.h"
 #import "RequestExecutorDelegateAdapter.h"
-#import "UserPhotosList.h"
+#import "UserPhotoList.h"
 #import "VKConnectionService.h"
 #import "VKRequestExecutor.h"
 #import "UIView+Helpers.h"

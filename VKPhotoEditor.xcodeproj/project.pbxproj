@@ -199,6 +199,7 @@
 		44F2A3A816641B4700677B96 /* BackBtn_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A3A616641B4700677B96 /* BackBtn_pressed@2x.png */; };
 		44F2A3A916641B4700677B96 /* BackBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A3A716641B4700677B96 /* BackBtn@2x.png */; };
 		44F2A3AB16641B9900677B96 /* BackBtn_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A3AA16641B9900677B96 /* BackBtn_pressed.png */; };
+		44F2A3BA166552F900677B96 /* PhotoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F2A3B9166552F900677B96 /* PhotoList.m */; };
 		8B0B4562164457C400F59DF5 /* grayArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B4560164457C400F59DF5 /* grayArrow.png */; };
 		8B0B4563164457C400F59DF5 /* grayArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8B0B4561164457C400F59DF5 /* grayArrow@2x.png */; };
 		8B0B45761644629000F59DF5 /* VKNavigationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 8B0B45741644629000F59DF5 /* VKNavigationBar.h */; };
@@ -350,7 +351,7 @@
 		8BBAE1521646CFFA00A9A423 /* PullTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8BBAE14A1646CFFA00A9A423 /* PullTableView.h */; };
 		8BBAE1531646CFFA00A9A423 /* PullTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BBAE14B1646CFFA00A9A423 /* PullTableView.m */; };
 		8BC0BC63163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0BC62163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m */; };
-		8BC0BC66163EF5170048CAB7 /* UserPhotosList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0BC65163EF5170048CAB7 /* UserPhotosList.m */; };
+		8BC0BC66163EF5170048CAB7 /* UserPhotoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0BC65163EF5170048CAB7 /* UserPhotoList.m */; };
 		8BC0BC6A163F174C0048CAB7 /* LoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BC0BC68163F174C0048CAB7 /* LoadingCell.m */; };
 		8BC0BC6B163F174C0048CAB7 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8BC0BC69163F174C0048CAB7 /* LoadingCell.xib */; };
 		8BCDB70716208F2300A33DEF /* UIImage+Blend.m in Sources */ = {isa = PBXBuildFile; fileRef = 8BCDB70616208F2300A33DEF /* UIImage+Blend.m */; };
@@ -644,6 +645,8 @@
 		44F2A3A616641B4700677B96 /* BackBtn_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBtn_pressed@2x.png"; sourceTree = "<group>"; };
 		44F2A3A716641B4700677B96 /* BackBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBtn@2x.png"; sourceTree = "<group>"; };
 		44F2A3AA16641B9900677B96 /* BackBtn_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackBtn_pressed.png; sourceTree = "<group>"; };
+		44F2A3B8166552F800677B96 /* PhotoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoList.h; sourceTree = "<group>"; };
+		44F2A3B9166552F900677B96 /* PhotoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoList.m; sourceTree = "<group>"; };
 		8B0B4560164457C400F59DF5 /* grayArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grayArrow.png; sourceTree = "<group>"; };
 		8B0B4561164457C400F59DF5 /* grayArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grayArrow@2x.png"; sourceTree = "<group>"; };
 		8B0B45741644629000F59DF5 /* VKNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKNavigationBar.h; sourceTree = "<group>"; };
@@ -851,8 +854,8 @@
 		8BBAE14B1646CFFA00A9A423 /* PullTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullTableView.m; sourceTree = "<group>"; };
 		8BC0BC61163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestExecutorDelegateAdapter.h; sourceTree = "<group>"; };
 		8BC0BC62163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestExecutorDelegateAdapter.m; sourceTree = "<group>"; };
-		8BC0BC64163EF5160048CAB7 /* UserPhotosList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPhotosList.h; sourceTree = "<group>"; };
-		8BC0BC65163EF5170048CAB7 /* UserPhotosList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhotosList.m; sourceTree = "<group>"; };
+		8BC0BC64163EF5160048CAB7 /* UserPhotoList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserPhotoList.h; sourceTree = "<group>"; };
+		8BC0BC65163EF5170048CAB7 /* UserPhotoList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserPhotoList.m; sourceTree = "<group>"; };
 		8BC0BC67163F174C0048CAB7 /* LoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingCell.h; sourceTree = "<group>"; };
 		8BC0BC68163F174C0048CAB7 /* LoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoadingCell.m; sourceTree = "<group>"; };
 		8BC0BC69163F174C0048CAB7 /* LoadingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
@@ -954,8 +957,10 @@
 				8B7096B7163C7F63004DA31B /* ImageCache.m */,
 				8BA3D6E6163C884900CEA6AD /* DataFormatter.h */,
 				8BA3D6E7163C884900CEA6AD /* DataFormatter.m */,
-				8BC0BC64163EF5160048CAB7 /* UserPhotosList.h */,
-				8BC0BC65163EF5170048CAB7 /* UserPhotosList.m */,
+				44F2A3B8166552F800677B96 /* PhotoList.h */,
+				44F2A3B9166552F900677B96 /* PhotoList.m */,
+				8BC0BC64163EF5160048CAB7 /* UserPhotoList.h */,
+				8BC0BC65163EF5170048CAB7 /* UserPhotoList.m */,
 				8B309D141641C2290091BB6D /* SearchResultsList.h */,
 				8B309D151641C2290091BB6D /* SearchResultsList.m */,
 				222AB9EF163FC0E8001F089C /* FiltersManager.h */,
@@ -1984,7 +1989,7 @@
 				8BA3D709163DC80F00CEA6AD /* ChoosePhotoView.m in Sources */,
 				22843694163ED940009D75C8 /* FocusSquareView.m in Sources */,
 				8BC0BC63163EEEB90048CAB7 /* RequestExecutorDelegateAdapter.m in Sources */,
-				8BC0BC66163EF5170048CAB7 /* UserPhotosList.m in Sources */,
+				8BC0BC66163EF5170048CAB7 /* UserPhotoList.m in Sources */,
 				8BC0BC6A163F174C0048CAB7 /* LoadingCell.m in Sources */,
 				8B7C09B616402C75006BCE79 /* NSArray+Helpers.m in Sources */,
 				8B7C09CF164049E5006BCE79 /* PhotoManageBaseController.m in Sources */,
@@ -2016,6 +2021,7 @@
 				44B0F4011663F29200C8F992 /* ProfileBaseController.m in Sources */,
 				22D5D2F41664075D00BCB7E0 /* LibraryPhotosView.m in Sources */,
 				44F2A39D1664130F00677B96 /* UserAccountController.m in Sources */,
+				44F2A3BA166552F900677B96 /* PhotoList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

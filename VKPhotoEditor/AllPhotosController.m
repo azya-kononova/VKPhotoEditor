@@ -19,7 +19,7 @@
 #import "FastViewerController.h"
 #import "PhotoHeaderCell.h"
 
-@interface AllPhotosController () <SearchResultsListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
+@interface AllPhotosController () <PhotoListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
 @end
 
 @implementation AllPhotosController {
@@ -107,15 +107,15 @@
 //    [tableView setCompleted:searchResultsList.completed];
 }
 
-- (void)searchResultsList:(SearchResultsList *)photosList didUpdatePhotos:(NSArray *)photos user:(Account *)user
+- (void)photoList:(PhotoList *)photoList didUpdatePhotos:(NSArray *)photos
 {
-     tableView.pullLastRefreshDate = [NSDate date];
+    tableView.pullLastRefreshDate = [NSDate date];
     [self reloadPullTable];
 }
 
-- (void)searchResultsList:(SearchResultsList *)photosList didFailToUpdate:(NSError *)error
+- (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError *)error
 {
-    [self reloadPullTable];
+      [self reloadPullTable];
 }
 
 #pragma mark - UITableViewDataSource

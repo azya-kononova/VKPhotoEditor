@@ -11,14 +11,14 @@
 #import "FlexibleButton.h"
 #import "PullTableView.h"
 #import "UserProfile.h"
-#import "UserPhotosList.h"
+#import "UserPhotoList.h"
 
 @protocol ProfileBaseControllerDelegate;
 
 @interface ProfileBaseController : UIViewController
 @property (nonatomic, strong) UserProfile *profile;
-@property (nonatomic, strong) UserPhotosList *photosList;
-@property (nonatomic, strong) UserPhotosList *avatarsList;
+@property (nonatomic, strong) UserPhotoList *photosList;
+@property (nonatomic, strong) UserPhotoList *avatarsList;
 
 @property (nonatomic, strong) IBOutlet PullTableView *photosTableView;
 @property (nonatomic, assign) id<ProfileBaseControllerDelegate> delegate;
@@ -35,6 +35,9 @@
 
 - (id)initWithProfile:(UserProfile*)profile;
 - (void)showAvatar:(RemoteImage*)avatar animated:(BOOL)animated;
+
+- (IBAction)leftOptionSelected;
+- (IBAction)rightOptionSelected;
 @end
 
 @protocol ProfileBaseControllerDelegate

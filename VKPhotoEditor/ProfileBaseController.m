@@ -15,7 +15,13 @@
 #import "PhotoHeaderCell.h"
 #import "UITableViewCell+NIB.h"
 
-@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotosListDelegate>
+typedef enum {
+    ProfilePhotosMode = 0,
+    ProfileFollowersMode = 1,
+    profileMentionsMode = 2,
+} ProfileModeState;
+
+@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate>
 @end
 
 @implementation ProfileBaseController{
@@ -24,6 +30,7 @@
     VKConnectionService *service;
     NSInteger selectedPhoto;
     NSMutableDictionary *avatarsForIndexes;
+    ProfileModeState mode;
 }
 @synthesize photosTableView;
 @synthesize delegate;
@@ -45,9 +52,10 @@
 {
     if (self = [super init]) {
         profile = _profile;
-        photosList = [profile isKindOfClass:UserProfile.class] ? [[UserPhotosList alloc] initWithPhotos:_profile.lastPhotos] : [UserPhotosList new];
+        photosList = [profile isKindOfClass:UserProfile.class] ? [[UserPhotoList alloc] initWithPhotos:_profile.lastPhotos] : [UserPhotoList new];
         photosList.delegate = self;
-        avatarsList = [UserPhotosList new];
+        avatarsList = [UserPhotoList new];
+        avatarsList.userPic = YES;
         avatarsList.delegate = self;
         avatarsForIndexes = [NSMutableDictionary new];
         service = [VKConnectionService shared];
@@ -73,8 +81,8 @@
     photosTableView.loadBackgroundColor = [UIColor whiteColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
-    [photosList loadNextPageFor:profile.accountId];
-    [avatarsList loadNextPageFor:profile.accountId userPic:YES];
+    [photosList loadPageFor:profile];
+    [avatarsList loadPageFor:profile];
     [avatarTheaterView reloadData];
 }
 
@@ -101,7 +109,7 @@
     photosTableView.tableHeaderView = headerView;
 }
 
-#pragma mark - PhotosListDelegate
+#pragma mark - PhotoListDelegate
 
 - (void)reloadPullTable
 {
@@ -111,9 +119,9 @@
     photosTableView.pullTableIsRefreshing = NO;
 }
 
-- (void)photosList:(UserPhotosList *)_photosList didUpdatePhotos:(NSArray *)photos
+- (void)photoList:(PhotoList *)photoList didUpdatePhotos:(NSArray *)photos
 {
-    if (_photosList == photosList) {
+    if (photoList == photosList) {
         photosTableView.pullLastRefreshDate = [NSDate date];
         [self reloadPullTable];
     } else {
@@ -121,9 +129,9 @@
     }
 }
 
-- (void)photosList:(UserPhotosList *)_photosList didFailToUpdate:(NSError *)error
+- (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError *)error
 {
-    (_photosList ==  photosList) ? [self reloadPullTable] :  [avatarTheaterView reloadData];
+    (photoList ==  photosList) ? [self reloadPullTable] :  [avatarTheaterView reloadData];
 }
 
 #pragma mark - Request Handler
@@ -211,12 +219,12 @@
 {
     noPhotoLabel.hidden = YES;
     [photosList reset];
-    [photosList loadNextPageFor:profile.accountId];
+    [photosList loadPageFor:profile];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    [photosList loadNextPageFor:profile.accountId];
+    [photosList loadPageFor:profile];
 }
 
 - (NSUInteger)numberOfItemsInTheaterView:(TheaterView*)view

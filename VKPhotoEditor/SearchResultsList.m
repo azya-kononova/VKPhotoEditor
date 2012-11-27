@@ -16,77 +16,36 @@
 @interface SearchResultsList () <VKRequestExecutorDelegate>
 @end
 
-@implementation SearchResultsList {
-    VKConnectionService *service;
-    NSInteger nextPage;
-    VKRequestExecutor *exec;
-}
-@synthesize photos;
-@synthesize limit;
-@synthesize completed;
-@synthesize delegate;
-@synthesize user;
+@implementation SearchResultsList
 
-- (id)init
-{
-    if (self = [super init]) {
-        service = [VKConnectionService shared];
-        limit = 20;
-    }
-    return self;
-}
-
-- (void)reset
-{
-    exec = nil;
-    nextPage = 0;
-    completed = NO;
-    photos = nil;
-}
 
 - (void)loadNextPageFor:(NSString*)query
 {
     if (exec) return;
     exec = [service searchPhotos:query offset:limit*nextPage++ limit:limit];
-    exec.delegate = self;
-    [exec start];
-}
-
-- (void)append:(NSArray*)_photos total:(NSUInteger)total;
-{    
-    if (!photos) {
-        photos = _photos.copy;
-    } else {
-        photos = [photos arrayByAddingObjectsFromArray:_photos];
-    }
-    
-    completed = _photos.count == total;
-    
-    [delegate searchResultsList:self didUpdatePhotos:photos user:nil];
+    [self loadMore];
 }
 
 - (void)deletePhoto:(NSString *)photoId
 {
     NSUInteger index;
-    VKPhoto *photoToDelete = [photos find:^BOOL(VKPhoto *photo) { return [photo.photoId isEqualToString:photoId]; } index:&index];
+    VKPhoto *photoToDelete = [self.photos find:^BOOL(VKPhoto *photo) { return [photo.photoId isEqualToString:photoId]; } index:&index];
     if (!photoToDelete) return;
-    NSMutableArray *newPhotos = photos.mutableCopy;
+    NSMutableArray *newPhotos = self.photos.mutableCopy;
     [newPhotos removeObjectAtIndex:index];
-    photos = newPhotos.copy;
-    [delegate searchResultsList:self didUpdatePhotos:photos user:user];
+    self.photos = newPhotos.copy;
+    [self.delegate photoList:self didUpdatePhotos:self.photos];
 }
 
-#pragma mark - VKRequestExecutorDelegate
-
-- (void)VKRequestExecutor:(id)executor didFinishWithObject:(id)value
+- (void)mapData:(id)data
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];
-    for (NSDictionary *account in [value objectForKey:@"users"]) {
+    for (NSDictionary *account in [data objectForKey:@"users"]) {
         Account *acc = [Account accountWithDict:account];
         [accounts setObject:acc forKey:[account objectForKey:@"id"]];
     }
     
-    NSArray *results = [value objectForKey:@"results"];
+    NSArray *results = [data objectForKey:@"results"];
     
     NSMutableArray *_photos = [results map:^id(NSDictionary *dict) {
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:[dict objectForKey:@"photo"]];
@@ -103,19 +62,8 @@
     
     exec = nil;
     
-    [self append:_photos total:[[value objectForKey:@"count"] integerValue]];
+    [self append:_photos totalCount:[[data objectForKey:@"count"] integerValue]];
 }
 
-- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
-{
-    exec = nil;
-    nextPage--;
-    [delegate searchResultsList:self didFailToUpdate:error];
-}
-
-- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
-{
-}
 @end
-
 
