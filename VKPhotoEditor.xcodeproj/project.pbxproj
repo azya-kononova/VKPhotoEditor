@@ -196,7 +196,6 @@
 		44B0F4011663F29200C8F992 /* ProfileBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44B0F4001663F29200C8F992 /* ProfileBaseController.m */; };
 		44F2A39D1664130F00677B96 /* UserAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F2A39C1664130F00677B96 /* UserAccountController.m */; };
 		44F2A39F1664133400677B96 /* UserAccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A39E1664133400677B96 /* UserAccountController.xib */; };
-		44F2A3A116641A8300677B96 /* BackBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A3A016641A8300677B96 /* BackBtn.png */; };
 		44F2A3A816641B4700677B96 /* BackBtn_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A3A616641B4700677B96 /* BackBtn_pressed@2x.png */; };
 		44F2A3A916641B4700677B96 /* BackBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A3A716641B4700677B96 /* BackBtn@2x.png */; };
 		44F2A3AB16641B9900677B96 /* BackBtn_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A3AA16641B9900677B96 /* BackBtn_pressed.png */; };
@@ -644,7 +643,6 @@
 		44F2A39B1664130F00677B96 /* UserAccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountController.h; sourceTree = "<group>"; };
 		44F2A39C1664130F00677B96 /* UserAccountController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountController.m; sourceTree = "<group>"; };
 		44F2A39E1664133400677B96 /* UserAccountController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserAccountController.xib; sourceTree = "<group>"; };
-		44F2A3A016641A8300677B96 /* BackBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BackBtn.png; path = "../../../VKPhotoEditor Design/Components/Header/BackBtn.png"; sourceTree = "<group>"; };
 		44F2A3A616641B4700677B96 /* BackBtn_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBtn_pressed@2x.png"; sourceTree = "<group>"; };
 		44F2A3A716641B4700677B96 /* BackBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BackBtn@2x.png"; sourceTree = "<group>"; };
 		44F2A3AA16641B9900677B96 /* BackBtn_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackBtn_pressed.png; sourceTree = "<group>"; };
@@ -1061,7 +1059,6 @@
 			children = (
 				22D5D2AF1662773300BCB7E0 /* DarkArrow_active.png */,
 				22D5D2B01662773C00BCB7E0 /* DarkArrow_active@2x.png */,
-				44F2A3A016641A8300677B96 /* BackBtn.png */,
 				44F2A3AA16641B9900677B96 /* BackBtn_pressed.png */,
 				44F2A3A616641B4700677B96 /* BackBtn_pressed@2x.png */,
 				44F2A3A716641B4700677B96 /* BackBtn@2x.png */,
@@ -1910,7 +1907,6 @@
 				444A5D761662C9D900C319D7 /* AvatarView.xib in Resources */,
 				22D5D2F61664076C00BCB7E0 /* LibraryPhotosView.xib in Resources */,
 				44F2A39F1664133400677B96 /* UserAccountController.xib in Resources */,
-				44F2A3A116641A8300677B96 /* BackBtn.png in Resources */,
 				44F2A3A816641B4700677B96 /* BackBtn_pressed@2x.png in Resources */,
 				44F2A3A916641B4700677B96 /* BackBtn@2x.png in Resources */,
 				44F2A3AB16641B9900677B96 /* BackBtn_pressed.png in Resources */,
