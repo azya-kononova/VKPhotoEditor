@@ -12,13 +12,27 @@
 #import "PullTableView.h"
 #import "UserProfile.h"
 #import "UserPhotoList.h"
+#import "MentionList.h"
+
+typedef enum {
+    ProfilePhotosMode = 0,
+    ProfileFollowersMode = 1,
+    ProfileMentionsMode = 2,
+} ProfileModeState;
 
 @protocol ProfileBaseControllerDelegate;
 
 @interface ProfileBaseController : UIViewController
 @property (nonatomic, strong) UserProfile *profile;
+
+@property (nonatomic, strong) PhotoList *sourceList;
 @property (nonatomic, strong) UserPhotoList *photosList;
+@property (nonatomic, strong) MentionList *mentionsList;
+@property (nonatomic, strong) UserPhotoList *followersList;
+
 @property (nonatomic, strong) UserPhotoList *avatarsList;
+
+@property (nonatomic, assign) ProfileModeState state;
 
 @property (nonatomic, strong) IBOutlet PullTableView *photosTableView;
 @property (nonatomic, assign) id<ProfileBaseControllerDelegate> delegate;

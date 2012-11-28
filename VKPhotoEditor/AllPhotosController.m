@@ -57,7 +57,7 @@
     tableView.loadBackgroundColor = [UIColor whiteColor];
     tableView.pullTextColor = [UIColor blackColor];
     
-    [searchResultsList loadNextPageFor:nil];
+    [searchResultsList loadMore];
     
     GridModeButton *gridButton = [GridModeButton loadFromNIB];
     gridButton.delegate = self;
@@ -246,10 +246,16 @@
     tableView.pullTableIsRefreshing = YES;
     [searchResultsList reset];
     [tableView reloadData];
-    [searchResultsList loadNextPageFor:searchBar.text];
+    [searchResultsList loadMore];
 }
 
 #pragma mark - UISearchBarDelegate
+
+- (void)searchPhotos
+{
+    searchResultsList.query = searchBar.text;
+    [self reload];
+}
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)_searchBar
 {
@@ -259,14 +265,14 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)_searchBar
 {
     _searchBar.text = nil;
-    [self reload];
+    [self searchPhotos];
     [self setFindModeActive:NO];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)_searchBar;
 {
     [searchBar resignFirstResponder];
-    [self reload];
+    [self searchPhotos];
     
     for (UIView *possibleButton in searchBar.subviews) {
         if ([possibleButton isKindOfClass:[UIButton class]]) {
@@ -289,12 +295,12 @@
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
 {
     [searchResultsList reset];
-    [searchResultsList loadNextPageFor:searchBar.text];
+    [searchResultsList loadMore];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    [searchResultsList loadNextPageFor:searchBar.text];
+    [searchResultsList loadMore];
 }
 
 #pragma mark - UIActionSheetDelegate

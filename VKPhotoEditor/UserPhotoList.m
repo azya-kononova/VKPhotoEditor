@@ -17,7 +17,8 @@
 @interface UserPhotoList () <VKRequestExecutorDelegate>
 @end
 
-@implementation UserPhotoList 
+@implementation UserPhotoList
+@synthesize account;
 @synthesize userPic;
 
 - (id)initWithPhotos:(NSArray*)_photos
@@ -30,11 +31,9 @@
     return self;
 }
 
-- (void)loadPageFor:(Account *)account
+- (VKRequestExecutor*)newPageExec
 {
-    if (exec) return;
-    exec = [service getPhotos:account.accountId offset:initialOffset + limit * nextPage++ limit:limit userPic:userPic];
-    [self loadMore];
+    return [service getPhotos:account.accountId offset:initialOffset + limit * nextPage++ limit:limit userPic:userPic];
 }
 
 - (void)mapData:(id)data
@@ -48,7 +47,6 @@
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
         photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
         return photo; }];
-    exec = nil;
     [self append:_photos totalCount:[[data objectForKey:@"count"] integerValue]];
 }
 

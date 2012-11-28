@@ -10,8 +10,8 @@
 #import "PhotoList.h"
 
 @interface SearchResultsList : PhotoList
+@property (nonatomic, strong) NSString *query;
 
-- (void)loadNextPageFor:(NSString*)query;
 - (void)deletePhoto:(NSString *)photoId;
 @end
 

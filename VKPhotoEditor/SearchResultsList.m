@@ -17,13 +17,11 @@
 @end
 
 @implementation SearchResultsList
+@synthesize query;
 
-
-- (void)loadNextPageFor:(NSString*)query
+- (VKRequestExecutor*)newPageExec
 {
-    if (exec) return;
-    exec = [service searchPhotos:query offset:limit*nextPage++ limit:limit];
-    [self loadMore];
+   return [service searchPhotos:query offset:limit*nextPage++ limit:limit];
 }
 
 - (void)deletePhoto:(NSString *)photoId
@@ -59,8 +57,6 @@
         photo.account = [accounts objectForKey:[_user objectForKey:@"user_id"]];
         [_photos insertObject:photo atIndex:0];
     }
-    
-    exec = nil;
     
     [self append:_photos totalCount:[[data objectForKey:@"count"] integerValue]];
 }

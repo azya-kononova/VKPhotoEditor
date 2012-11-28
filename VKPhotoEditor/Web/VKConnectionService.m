@@ -141,6 +141,15 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     return exec;
 }
 
+- (VKRequestExecutor*)getMentions:(NSInteger)userId since:(NSString*)since after:(NSString*)after limit:(NSInteger)limit
+{
+    NSMutableString *path = [NSMutableString stringWithFormat:@"getMentions?user_id=%d&limit=%d&access_token=%@", userId, limit, profile.accessToken];
+    if (since) [path appendString:[NSString stringWithFormat:@"&since=%@", since]];
+    if (after) [path appendString:[NSString stringWithFormat:@"&after=%@", after]];
+    RequestExecutorProxy *exec = [self getPath:path.copy];
+    return exec;
+}
+
 - (VKRequestExecutor*)searchPhotos:(NSString*)query offset:(NSInteger)offset limit:(NSInteger)limit
 {
     NSString *path = [NSString stringWithFormat:@"searchPhotos?offset=%d&limit=%d", offset, limit];

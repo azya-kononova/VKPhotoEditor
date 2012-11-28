@@ -13,12 +13,11 @@
 @protocol PhotosListDelegate;
 
 @interface UserPhotoList : PhotoList
-
+@property (nonatomic, strong) Account *account;
 @property (nonatomic, assign) BOOL userPic;
 
 - (id)initWithPhotos:(NSArray*)photos;
 
-- (void)loadPageFor:(Account *)account;
 - (void)insert:(VKPhoto*)photo;
 - (void)deletePhoto:(NSString*)photoId;
 @end

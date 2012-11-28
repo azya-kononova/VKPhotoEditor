@@ -15,12 +15,6 @@
 #import "PhotoHeaderCell.h"
 #import "UITableViewCell+NIB.h"
 
-typedef enum {
-    ProfilePhotosMode = 0,
-    ProfileFollowersMode = 1,
-    profileMentionsMode = 2,
-} ProfileModeState;
-
 @interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate>
 @end
 
@@ -44,9 +38,13 @@ typedef enum {
 @synthesize headerBottomView;
 @synthesize noAvatarImageView;
 @synthesize profile;
+@synthesize state;
 
+@synthesize sourceList;
 @synthesize photosList;
 @synthesize avatarsList;
+@synthesize followersList;
+@synthesize mentionsList;
 
 - (id)initWithProfile:(UserProfile *)_profile
 {
@@ -54,13 +52,22 @@ typedef enum {
         profile = _profile;
         photosList = [profile isKindOfClass:UserProfile.class] ? [[UserPhotoList alloc] initWithPhotos:_profile.lastPhotos] : [UserPhotoList new];
         photosList.delegate = self;
+        photosList.account = profile;
+        
         avatarsList = [UserPhotoList new];
-        avatarsList.userPic = YES;
         avatarsList.delegate = self;
+        avatarsList.userPic = YES;
+        avatarsList.account = profile;
+        
+        mentionsList = [MentionList new];
+        mentionsList.account = profile;
+        mentionsList.delegate = self;
+        
         avatarsForIndexes = [NSMutableDictionary new];
         service = [VKConnectionService shared];
         selectedPhoto = -1;
         adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
+        sourceList = photosList;
     }
     return self;
 }
@@ -81,10 +88,33 @@ typedef enum {
     photosTableView.loadBackgroundColor = [UIColor whiteColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
-    [photosList loadPageFor:profile];
-    [avatarsList loadPageFor:profile];
-    [avatarTheaterView reloadData];
+    [photosList loadMore];
+    [avatarsList loadMore];
 }
+
+- (void)setState:(ProfileModeState)_state
+{
+    state = _state;
+    switch (state) {
+        case ProfilePhotosMode:
+            sourceList = photosList;
+            break;
+        case ProfileFollowersMode:
+            sourceList = followersList;
+            break;
+        case ProfileMentionsMode:
+            sourceList = mentionsList;
+            break;
+        default:
+            break;
+    }
+    if (sourceList.photos.count == 0) {
+        [sourceList reset];
+        [sourceList loadMore];
+    }
+    [photosTableView reloadData];
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -109,11 +139,23 @@ typedef enum {
     photosTableView.tableHeaderView = headerView;
 }
 
+#pragma mark - Actions
+
+- (IBAction)rightOptionSelected
+{
+    self.state = ProfileMentionsMode;
+}
+
+- (IBAction)leftOptionSelected
+{
+    self.state = ProfilePhotosMode;
+}
+
 #pragma mark - PhotoListDelegate
 
 - (void)reloadPullTable
 {
-    noPhotoLabel.hidden = photosList.photos.count;
+    noPhotoLabel.hidden = sourceList.photos.count;
     [photosTableView reloadData];
     photosTableView.pullTableIsLoadingMore = NO;
     photosTableView.pullTableIsRefreshing = NO;
@@ -121,7 +163,7 @@ typedef enum {
 
 - (void)photoList:(PhotoList *)photoList didUpdatePhotos:(NSArray *)photos
 {
-    if (photoList == photosList) {
+    if (photoList == sourceList) {
         photosTableView.pullLastRefreshDate = [NSDate date];
         [self reloadPullTable];
     } else {
@@ -131,7 +173,7 @@ typedef enum {
 
 - (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError *)error
 {
-    (photoList ==  photosList) ? [self reloadPullTable] :  [avatarTheaterView reloadData];
+    (photoList ==  sourceList) ? [self reloadPullTable] :  [avatarTheaterView reloadData];
 }
 
 #pragma mark - Request Handler
@@ -145,7 +187,7 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return photosList.photos.count * 2;
+    return sourceList.photos.count * 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -157,14 +199,14 @@ typedef enum {
 {
     if (indexPath.row % 2 == 0) {
         PhotoHeaderCell *cell = [PhotoHeaderCell dequeOrCreateInTable:photosTableView];
-        [cell displayPhoto:[photosList.photos objectAtIndex:indexPath.row / 2]];
+        [cell displayPhoto:[sourceList.photos objectAtIndex:indexPath.row / 2]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType =  UITableViewCellAccessoryNone;
         return cell;
     } else {
         PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
         cell.delegate = self;
-        VKPhoto *photo = [photosList.photos objectAtIndex:(indexPath.row - 1) / 2];
+        VKPhoto *photo = [sourceList.photos objectAtIndex:(indexPath.row - 1) / 2];
         [cell displayPhoto:photo];
         return cell;
     }
@@ -190,11 +232,11 @@ typedef enum {
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0) {
-        VKPhoto *photo = [photosList.photos objectAtIndex:selectedPhoto];
+    if (buttonIndex == 0 && sourceList == photosList) {
+        VKPhoto *photo = [sourceList.photos objectAtIndex:selectedPhoto];
         [adapter start:[service deletePhoto:photo.photoId] onSuccess:@selector(exec: didDeletePhoto:) onError:@selector(exec: didFailWithError:)];
     } else if (buttonIndex == 1) {
-        VKPhoto *photo = [photosList.photos objectAtIndex:selectedPhoto];
+        VKPhoto *photo = [sourceList.photos objectAtIndex:selectedPhoto];
         if (photo.photo.image) {
             UIImageWriteToSavedPhotosAlbum( photo.photo.image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         }
@@ -218,13 +260,13 @@ typedef enum {
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
 {
     noPhotoLabel.hidden = YES;
-    [photosList reset];
-    [photosList loadPageFor:profile];
+    [sourceList reset];
+    [sourceList loadMore];
 }
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    [photosList loadPageFor:profile];
+    [sourceList loadMore];
 }
 
 - (NSUInteger)numberOfItemsInTheaterView:(TheaterView*)view

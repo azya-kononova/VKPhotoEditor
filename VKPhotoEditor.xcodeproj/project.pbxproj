@@ -179,6 +179,7 @@
 		444A5D761662C9D900C319D7 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444A5D751662C9D900C319D7 /* AvatarView.xib */; };
 		444A5D791662C9FB00C319D7 /* AvatarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 444A5D781662C9FB00C319D7 /* AvatarView.m */; };
 		449D40F71662B7F300270322 /* TheaterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 449D40F61662B7F300270322 /* TheaterView.m */; };
+		449D997916667D3D0001B521 /* MentionList.m in Sources */ = {isa = PBXBuildFile; fileRef = 449D997816667D3D0001B521 /* MentionList.m */; };
 		44AC1B7116623E5400043552 /* VKTitleLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AC1B7016623E5300043552 /* VKTitleLabel.m */; };
 		44AC1B741662559300043552 /* ProfilePanel.png in Resources */ = {isa = PBXBuildFile; fileRef = 44AC1B721662559300043552 /* ProfilePanel.png */; };
 		44AC1B751662559300043552 /* ProfilePanel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44AC1B731662559300043552 /* ProfilePanel@2x.png */; };
@@ -620,6 +621,8 @@
 		444A5D781662C9FB00C319D7 /* AvatarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AvatarView.m; sourceTree = "<group>"; };
 		449D40F51662B7F300270322 /* TheaterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheaterView.h; sourceTree = "<group>"; };
 		449D40F61662B7F300270322 /* TheaterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheaterView.m; sourceTree = "<group>"; };
+		449D997716667D3D0001B521 /* MentionList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MentionList.h; sourceTree = "<group>"; };
+		449D997816667D3D0001B521 /* MentionList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MentionList.m; sourceTree = "<group>"; };
 		44AC1B5816622F0D00043552 /* NSCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCoding.h; sourceTree = "<group>"; };
 		44AC1B6F16623E5300043552 /* VKTitleLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VKTitleLabel.h; sourceTree = "<group>"; };
 		44AC1B7016623E5300043552 /* VKTitleLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VKTitleLabel.m; sourceTree = "<group>"; };
@@ -959,6 +962,8 @@
 				8BA3D6E7163C884900CEA6AD /* DataFormatter.m */,
 				44F2A3B8166552F800677B96 /* PhotoList.h */,
 				44F2A3B9166552F900677B96 /* PhotoList.m */,
+				449D997716667D3D0001B521 /* MentionList.h */,
+				449D997816667D3D0001B521 /* MentionList.m */,
 				8BC0BC64163EF5160048CAB7 /* UserPhotoList.h */,
 				8BC0BC65163EF5170048CAB7 /* UserPhotoList.m */,
 				8B309D141641C2290091BB6D /* SearchResultsList.h */,
@@ -1349,14 +1354,14 @@
 				22855AD016119973007333D8 /* CroppingViewController.h */,
 				22855AD116119973007333D8 /* CroppingViewController.m */,
 				22D1FF0D1612047C00E66FEE /* CroppingViewController.xib */,
+				44B0F3FF1663F29200C8F992 /* ProfileBaseController.h */,
+				44B0F4001663F29200C8F992 /* ProfileBaseController.m */,
 				8B709694163C60B9004DA31B /* ProfileController.h */,
 				8B709695163C60B9004DA31B /* ProfileController.m */,
 				8B709696163C60B9004DA31B /* ProfileController.xib */,
 				44F2A39B1664130F00677B96 /* UserAccountController.h */,
 				44F2A39C1664130F00677B96 /* UserAccountController.m */,
 				44F2A39E1664133400677B96 /* UserAccountController.xib */,
-				44B0F3FF1663F29200C8F992 /* ProfileBaseController.h */,
-				44B0F4001663F29200C8F992 /* ProfileBaseController.m */,
 				8B70963A163C330F004DA31B /* PhotosListController.h */,
 				8B70963B163C330F004DA31B /* PhotosListController.m */,
 				8B70963C163C330F004DA31B /* PhotosListController.xib */,
@@ -2022,6 +2027,7 @@
 				22D5D2F41664075D00BCB7E0 /* LibraryPhotosView.m in Sources */,
 				44F2A39D1664130F00677B96 /* UserAccountController.m in Sources */,
 				44F2A3BA166552F900677B96 /* PhotoList.m in Sources */,
+				449D997916667D3D0001B521 /* MentionList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -33,8 +33,15 @@
 
 - (void)loadMore;
 {
+    if (exec) return;
+    exec = [self newPageExec];
     exec.delegate = self;
     [exec start];
+}
+
+- (VKRequestExecutor*)newPageExec
+{
+    return nil;
 }
 
 // Implement in child classes
@@ -51,6 +58,7 @@
         photos = [photos arrayByAddingObjectsFromArray:_photos];
     }
     completed = photos.count == totalCount;
+    exec = nil;
     [delegate photoList:self didUpdatePhotos:photos];
 }
 

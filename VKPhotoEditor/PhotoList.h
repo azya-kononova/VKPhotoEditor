@@ -28,6 +28,7 @@
 - (void)append:(NSArray*)photos totalCount:(NSUInteger)totalCount;
 
 - (void)mapData:(id)data;
+- (VKRequestExecutor*)newPageExec;
 @end
 
 @protocol PhotoListDelegate
