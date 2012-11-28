@@ -52,8 +52,6 @@
     IBOutlet UILabel* errorLabel;
     
     ImageToUpload *imageToUpload;
-    
-    BOOL isPostViewFrameUpdated;
 }
 
 - (void)viewDidLoad
@@ -87,8 +85,7 @@
 {
     [super viewWillAppear:animated];
     
-    if (!isPostViewFrameUpdated && ![Settings current].firstLaunch) [self showPostViewHeaderLogin:YES];
-    isPostViewFrameUpdated = YES;
+    if (![Settings current].firstLaunch) [self showPostViewHeaderLogin:YES];
 }
 
 - (void)dealloc
