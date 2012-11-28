@@ -20,7 +20,7 @@
 		<string>Query is too short</string>
 	</dict>
 	<key>serviceRootURL</key>
-	<string>https://api.airshipdock.com/</string>
+	<string>https://api.airshipdock.com/1/</string>
 	<key>firstLaunch</key>
 	<true/>
 </dict>
