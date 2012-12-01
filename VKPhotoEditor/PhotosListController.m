@@ -136,7 +136,7 @@
 
 #pragma mark - AllPhotosControllerDelegate
 
-- (void)allPhotosController:(AllPhotosController *)ctrl didSelectAccount:(Account *)account
+- (void)allPhotosController:(AllPhotosController *)ctrl didSelectAccount:(Account *)account animated:(BOOL)animated
 {
     if (account.accountId == service.profile.accountId) {
         tabBar.state = TabBarStateProfile;
@@ -145,7 +145,7 @@
     tabBar.state = TabBarStateUnselected;
     UserAccountController *userCtrl = [[UserAccountController alloc] initWithProfile:(UserProfile*)account];
     userCtrl.delegate = self;
-    [navCtrl pushViewController:userCtrl animated:YES];
+    [navCtrl pushViewController:userCtrl animated:animated];
 }
 
 - (void)allPhotosController:(AllPhotosController *)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated
@@ -155,7 +155,10 @@
 
 - (void)allPhotosController:(AllPhotosController *)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated
 {
-    [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
+    if (!animated)
+        [self dismissModalViewControllerWithPushDirection:kCATransitionFromRight];
+    else
+        [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
 }
 
 - (void)allPhotosController:(AllPhotosController *)ctrl didReplyToPhoto:(VKPhoto *)photo

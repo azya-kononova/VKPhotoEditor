@@ -20,7 +20,7 @@
 #import "PhotoHeaderCell.h"
 #import "VKPhoto.h"
 
-@interface AllPhotosController () <PhotoListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
+@interface AllPhotosController () <PhotoListDelegate, PhotoCellDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
 @end
 
 @implementation AllPhotosController {
@@ -177,7 +177,7 @@
     if (isGridMode) return;
     
     if (indexPath.row % 2 == 0) {
-        [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account]];
+        [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account] animated:YES];
         return;
     }
     
@@ -279,13 +279,6 @@
     }
 }
 
-#pragma mark - PhotoHeaderViewDelegate
-
-- (void)photoHeaderView:(PhotoHeaderView *)view didSelectAccount:(Account *)_account
-{
-    [delegate allPhotosController:self didSelectAccount:_account];
-}
-
 #pragma mark - PullTableViewDelegate
 
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
@@ -355,6 +348,13 @@
     isFastViewerOpen = NO;
 }
 
+- (void)fastViewerController:(FastViewerController *)controller didFinishWithAccount:(Account *)account
+{
+    [delegate allPhotosController:self didSelectAccount:account animated:NO];
+    [delegate allPhotosController:self dismissModalViewController:controller animated:NO];
+    isFastViewerOpen = NO;
+}
+
 #pragma mark - UILongPressGestureRecognizer
 
 -(void)handleLongPressOnTable:(UILongPressGestureRecognizer *)recognizer
@@ -369,7 +369,7 @@
         if (isGridMode) return;
         
         if (indexPath.row % 2 == 0) {
-            [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account]];
+            [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account] animated:YES];
             return;
         }
         

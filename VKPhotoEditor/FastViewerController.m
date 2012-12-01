@@ -11,11 +11,11 @@
 #import "DataFormatter.h"
 #import "ZoomingView.h"
 #import "UIColor+VKPhotoEditor.h"
+#import "UserAccountController.h"
 
 @interface FastViewerController () {
     IBOutlet UIView *backTopView;
-    IBOutlet UILabel *photoLabel;
-    IBOutlet UIImageView *arrowImageView;
+    IBOutlet UIButton *topButton;
     IBOutlet UIImageView *backBottomView;
     IBOutlet UIView *photoPlaceholder;
     IBOutlet UILabel *userNameLabel;
@@ -45,10 +45,8 @@
 {
     [super viewDidLoad];
     
-    photoLabel.font = [UIFont fontWithName:@"Lobster" size:22.0];
-    
-    backBottomView.backgroundColor = [UIColor defaultBgColor];
-    backTopView.backgroundColor = [UIColor defaultBgColor];
+    topButton.titleLabel.font = [UIFont fontWithName:@"Lobster" size:22.0];
+    self.view.backgroundColor = [UIColor defaultBgColor];
     
     userNameLabel.text = photo.account.login;
     postDateLabel.text = [DataFormatter formatRelativeDate:photo.date];
@@ -61,32 +59,16 @@
     zoomingView.bounces = NO;
     zoomingView.contentMode = UIViewContentModeScaleAspectFit;
     [photoPlaceholder addSubview:zoomingView];
-    
-    UITapGestureRecognizer *topRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(topViewGoBack:)];
-    UITapGestureRecognizer *bottomRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bottomViewGoBack:)];
-    [backBottomView addGestureRecognizer:bottomRecognizer];
-    [backTopView addGestureRecognizer:topRecognizer];
 }
 
-- (void)topViewGoBack:(UIGestureRecognizer *)recognizer
+- (IBAction)goBack
 {
-    arrowImageView.highlighted = YES;
-    backTopView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DarkInner_Pressed.png"]];
-    photoLabel.textColor = [UIColor whiteColor];
-    photoLabel.shadowColor = [UIColor blueColor];
-    [self performSelector:@selector(goBack) withObject:nil afterDelay:0.4];
+   [delegate fastViewerControllerDidFinish:self]; 
 }
 
-- (void)bottomViewGoBack:(UIGestureRecognizer *)recognizer
+- (IBAction)showProfile
 {
-    backBottomView.highlighted = YES;
-    backBottomView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"DarkInner_Pressed.png"]];
-    [self performSelector:@selector(goBack) withObject:nil afterDelay:0.4];
-}
-
-- (void)goBack
-{
-    [delegate fastViewerControllerDidFinish:self];
+    [delegate fastViewerController:self didFinishWithAccount:photo.account];
 }
 
 @end

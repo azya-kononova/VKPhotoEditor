@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "VKPhoto.h"
+#import "Account.h"
 
 @protocol FastViewerControllerDelegate;
 
@@ -15,10 +16,13 @@
 
 @property (nonatomic, unsafe_unretained) id<FastViewerControllerDelegate> delegate;
 
-- (id)initWithPhoto:(VKPhoto *)photo ;
+- (id)initWithPhoto:(VKPhoto *)photo;
+- (IBAction)goBack;
+- (IBAction)showProfile;
 
 @end
 
 @protocol FastViewerControllerDelegate
 - (void)fastViewerControllerDidFinish:(FastViewerController *)controller;
+- (void)fastViewerController:(FastViewerController *)controller didFinishWithAccount:(Account*)account;
 @end

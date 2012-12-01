@@ -25,7 +25,7 @@
 @end
 
 @protocol AllPhotosControllerDelegate
-- (void)allPhotosController:(AllPhotosController*)ctrl didSelectAccount:(Account*)account;
+- (void)allPhotosController:(AllPhotosController*)ctrl didSelectAccount:(Account*)account animated:(BOOL)animated;
 - (void)allPhotosController:(AllPhotosController*)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated;
 - (void)allPhotosController:(AllPhotosController*)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated;
 - (void)allPhotosController:(AllPhotosController*)ctrl didReplyToPhoto:(VKPhoto *)photo;
