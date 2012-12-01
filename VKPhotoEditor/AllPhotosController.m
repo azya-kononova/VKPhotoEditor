@@ -368,12 +368,12 @@
         
         if (isGridMode) return;
         
-        selectedPhoto = indexPath.section;
-        
         if (indexPath.row % 2 == 0) {
             [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account]];
             return;
         }
+        
+        selectedPhoto = (indexPath.row - 1) / 2;
         
         if (![self isProfilePhoto]) return;
         

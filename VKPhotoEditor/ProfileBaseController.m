@@ -295,7 +295,7 @@
     if (indexPath) {
         if (indexPath.row % 2 == 0) return;
         
-        selectedPhoto = indexPath.section;
+        selectedPhoto = (indexPath.row - 1) / 2;
         UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                               delegate:self
                                                      cancelButtonTitle:@"Cancel"
