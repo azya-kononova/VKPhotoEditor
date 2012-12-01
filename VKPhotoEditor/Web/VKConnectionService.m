@@ -20,6 +20,8 @@
 #import <net/if.h>
 #import <net/if_dl.h>
 
+#define SET_OBJECT_FOR_KEY_IF_NOT_NIL(obj, key, dict) if (obj) {[dict setObject:obj forKey:key];}
+
 NSString *VKErrorDomain = @"VKErrorDomain";
 NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 
@@ -112,14 +114,18 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     return exec;
 }
 
-- (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption
+- (VKRequestExecutor*)uploadPhoto:(ImageToUpload *)image
 {
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            photo, @"file",
-                            caption, @"caption",
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                            image.image, @"file",
+                            image.caption, @"caption",
                             profile.accessToken, @"access_token", nil];
+    SET_OBJECT_FOR_KEY_IF_NOT_NIL(image.replyToPhoto, @"reply_to", params);
+    SET_OBJECT_FOR_KEY_IF_NOT_NIL(image.replyToFeed, @"reply_to_feed", params);
+    
     RequestExecutorProxy *exec = [self postToPath:@"uploadPhoto" params:[[WebParams alloc] initWithDictionary:params] json:NO];
-    if (caption.length >= 3 && [[caption substringWithRange:NSMakeRange(0, 3)] isEqualToString:@"#me"]) exec.onSuccess = @selector(exec:didLoadAvatar:);
+    if (image.isAvatar) exec.onSuccess = @selector(exec:didLoadAvatar:);
+    
     return exec;
 }
 
@@ -175,7 +181,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     
     profile.lastPhotos = [[data objectForKey:@"photos"] map:^id(NSDictionary *dict) {
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
-        photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
+        photo.account = [accounts objectForKey:[dict objectForKey:@"user"]];
         return photo; }];
     
     [Settings current].profile = profile;

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "UserProfile.h"
 #import "VKRequestExecutor.h"
+#import "ImageToUpload.h"
 
 extern NSString *VKErrorDomain;
 extern NSString *VKRequestDidFailNotification;
@@ -23,7 +24,7 @@ extern NSString *VKRequestDidFailNotification;
 - (id)initWithURL:(NSURL*)url;
 
 - (VKRequestExecutor*)login:(NSString*)login;
-- (VKRequestExecutor*)uploadPhoto:(UIImage*)photo withCaption:(NSString*)caption;
+- (VKRequestExecutor*)uploadPhoto:(ImageToUpload *)image;
 - (VKRequestExecutor*)deletePhoto:(NSString*)photoId;
 - (VKRequestExecutor*)getPhotos:(NSInteger)userId offset:(NSInteger)offset limit:(NSInteger)limit userPic:(BOOL)userPic;
 - (VKRequestExecutor*)searchPhotos:(NSString*)query offset:(NSInteger)offset limit:(NSInteger)limit;

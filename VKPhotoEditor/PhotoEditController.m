@@ -45,6 +45,7 @@
     FiltersManager *manager;
     BlurView *blurView;
     CaptionTextView *captionView;
+    BOOL replyToFeed;
 }
 
 @synthesize saveButton;
@@ -64,7 +65,7 @@
 @synthesize isAvatar;
 @synthesize avatarTagLabel;
 @synthesize publishReplyButton;
-@synthesize isReplyTo;
+@synthesize replyToPhoto;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter
 {
@@ -146,7 +147,7 @@
     [self setFilterWithIndex:filterIndex];
     [self setBlurFilterWithFilter:blurFilter];
     
-    publishReplyButton.hidden = !isReplyTo;
+    publishReplyButton.hidden = !replyToPhoto;
 }
 
 - (void)setFilterWithIndex:(NSInteger)index
@@ -255,7 +256,7 @@
         }
         
         [activityView showSelf:NO];
-        [delegate photoEditController:self didFinishWithImage:[ImageToUpload imageWithImage:output caption:caption]];
+        [delegate photoEditController:self didFinishWithImage:ImageToUploadMake(output, caption, replyToPhoto.account.login, replyToPhoto.photoId, [NSNumber numberWithBool:replyToFeed])];
     });
 }
 
@@ -285,15 +286,15 @@
 - (IBAction)publishReply
 {
     publishReplyButton.selected = !publishReplyButton.selected;
-    BOOL isSelected = publishReplyButton.selected;
+    replyToFeed = publishReplyButton.selected;
     
     CGSize size = publishReplyButton.frame.size;
-    size.width = isSelected ? 250 : 43;
+    size.width = replyToFeed ? 250 : 43;
     
     [UIView animateWithDuration:0.5 animations:^(){
         [publishReplyButton resizeTo:size];
     } completion:^(BOOL finish) {
-        [publishReplyButton setTitle:isSelected ? @"All your folowers will see this reply" : @"" forState:UIControlStateNormal];
+        [publishReplyButton setTitle:replyToFeed ? @"All your folowers will see this reply" : @"" forState:UIControlStateNormal];
     }];
 }
 

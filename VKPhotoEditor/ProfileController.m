@@ -88,7 +88,7 @@
     
     [self showUploading:image.image];
     
-    uploadPhotoExec = [service uploadPhoto:image.image withCaption:image.caption];
+    uploadPhotoExec = [service uploadPhoto:image];
     uploadPhotoExec.delegate = self;
     [uploadPhotoExec start];
 

@@ -11,6 +11,11 @@
 @interface ImageToUpload : NSObject
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) NSString *caption;
+@property (nonatomic, strong) NSString *replyToUser;
+@property (nonatomic, strong) NSString *replyToPhoto;
+@property (nonatomic, assign) NSNumber *replyToFeed;
+@property (nonatomic, assign, readonly) BOOL isAvatar;
 
-+ (ImageToUpload*)imageWithImage:(UIImage*)image caption:(NSString*)caption;
+ImageToUpload *ImageToUploadMake(UIImage *image, NSString *caption, NSString *replyToUser, NSString *replyToPhoto, NSNumber *replyToFeed);
+
 @end

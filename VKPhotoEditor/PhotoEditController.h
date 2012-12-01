@@ -10,6 +10,7 @@
 #import "ThumbnailsView.h"
 #import "GPUImageView.h"
 #import "ImageToUpload.h"
+#import "VKPhoto.h"
 
 @protocol PhotoEditControllerDelegate;
 
@@ -34,7 +35,7 @@
 
 @property (nonatomic, assign) BOOL isPhoto;
 @property (nonatomic, assign) BOOL isAvatar;
-@property (nonatomic, assign) BOOL isReplyTo;
+@property (nonatomic, assign) VKPhoto *replyToPhoto;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter;
 - (IBAction)save;
