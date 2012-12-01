@@ -25,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet UIView *captionOverlayView;
 @property (nonatomic, strong) IBOutlet UIButton *blurButton;
 @property (nonatomic, strong) IBOutlet UILabel *avatarTagLabel;
+@property (nonatomic, strong) IBOutlet FlexibleButton *publishReplyButton;
 
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *leftRecognizer;
 @property (nonatomic, strong) IBOutlet UISwipeGestureRecognizer *rightRecognizer;
@@ -33,6 +34,7 @@
 
 @property (nonatomic, assign) BOOL isPhoto;
 @property (nonatomic, assign) BOOL isAvatar;
+@property (nonatomic, assign) BOOL isReplyTo;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter;
 - (IBAction)save;
@@ -43,6 +45,7 @@
 - (IBAction)selectBlur;
 - (IBAction)cancel;
 - (IBAction)retake;
+- (IBAction)publishReply;
 
 @end
 

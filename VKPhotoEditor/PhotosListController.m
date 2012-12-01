@@ -33,6 +33,7 @@
     
     ImageToUpload *imageToUpload;
     BOOL isAvatar;
+    BOOL isReplyTo;
     
     UINavigationController *navCtrl;
     AllPhotosController *allPhotosCtrl;
@@ -103,6 +104,7 @@
 - (void)VKTabBarDidTapCentral:(VKTabBar *)tabBar
 {
     isAvatar = NO;
+    isReplyTo = NO;
     [choosePhotoView show:YES withExitButton:NO animated:YES];
 }
 
@@ -128,6 +130,7 @@
 - (void)profileBaseController:(ProfileBaseController *)ctrl didReplyToPhoto:(VKPhoto *)photo
 {
     isAvatar = NO;
+    isReplyTo = YES;
     [choosePhotoView show:YES replyToPhoto:photo animated:YES];
 }
 
@@ -158,6 +161,7 @@
 - (void)allPhotosController:(AllPhotosController *)ctrl didReplyToPhoto:(VKPhoto *)photo
 {
     isAvatar = NO;
+    isReplyTo = YES;
     [choosePhotoView show:YES replyToPhoto:photo animated:YES];
 }
 
@@ -196,6 +200,7 @@
     photoEditController.delegate = self;
     photoEditController.isPhoto = self.isPhoto;
     photoEditController.isAvatar = isAvatar;
+    photoEditController.isReplyTo = isReplyTo;
     
     [self.navigationController pushViewController:photoEditController animated:NO];
 }

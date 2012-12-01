@@ -139,6 +139,10 @@
 		228597891641968600960779 /* CaptionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 228597881641968600960779 /* CaptionTextView.m */; };
 		2285978D1641AAA000960779 /* CaptionTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2285978C1641AAA000960779 /* CaptionTextView.xib */; };
 		22B4E3EE1621DF13008ECFA3 /* Filter9.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B4E3ED1621DF13008ECFA3 /* Filter9.png */; };
+		22C9DA25166A1BC90020C54B /* Publish_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C9DA21166A1BC90020C54B /* Publish_active.png */; };
+		22C9DA26166A1BC90020C54B /* Publish_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C9DA22166A1BC90020C54B /* Publish_active@2x.png */; };
+		22C9DA27166A1BC90020C54B /* Publish.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C9DA23166A1BC90020C54B /* Publish.png */; };
+		22C9DA28166A1BC90020C54B /* Publish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C9DA24166A1BC90020C54B /* Publish@2x.png */; };
 		22D1772C1618752D00B8093D /* TakePhotoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D1772A1618752D00B8093D /* TakePhotoController.m */; };
 		22D1772D1618752D00B8093D /* TakePhotoController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D1772B1618752D00B8093D /* TakePhotoController.xib */; };
 		22D177311618753D00B8093D /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D177301618753D00B8093D /* StartViewController.m */; };
@@ -563,6 +567,10 @@
 		228597881641968600960779 /* CaptionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptionTextView.m; sourceTree = "<group>"; };
 		2285978C1641AAA000960779 /* CaptionTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CaptionTextView.xib; sourceTree = "<group>"; };
 		22B4E3ED1621DF13008ECFA3 /* Filter9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter9.png; sourceTree = "<group>"; };
+		22C9DA21166A1BC90020C54B /* Publish_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Publish_active.png; sourceTree = "<group>"; };
+		22C9DA22166A1BC90020C54B /* Publish_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Publish_active@2x.png"; sourceTree = "<group>"; };
+		22C9DA23166A1BC90020C54B /* Publish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Publish.png; sourceTree = "<group>"; };
+		22C9DA24166A1BC90020C54B /* Publish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Publish@2x.png"; sourceTree = "<group>"; };
 		22D177291618752D00B8093D /* TakePhotoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TakePhotoController.h; sourceTree = "<group>"; };
 		22D1772A1618752D00B8093D /* TakePhotoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TakePhotoController.m; sourceTree = "<group>"; };
 		22D1772B1618752D00B8093D /* TakePhotoController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TakePhotoController.xib; sourceTree = "<group>"; };
@@ -1057,6 +1065,10 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22C9DA21166A1BC90020C54B /* Publish_active.png */,
+				22C9DA22166A1BC90020C54B /* Publish_active@2x.png */,
+				22C9DA23166A1BC90020C54B /* Publish.png */,
+				22C9DA24166A1BC90020C54B /* Publish@2x.png */,
 				22D5D2AF1662773300BCB7E0 /* DarkArrow_active.png */,
 				22D5D2B01662773C00BCB7E0 /* DarkArrow_active@2x.png */,
 				44F2A3AA16641B9900677B96 /* BackBtn_pressed.png */,
@@ -1910,6 +1922,10 @@
 				44F2A3A816641B4700677B96 /* BackBtn_pressed@2x.png in Resources */,
 				44F2A3A916641B4700677B96 /* BackBtn@2x.png in Resources */,
 				44F2A3AB16641B9900677B96 /* BackBtn_pressed.png in Resources */,
+				22C9DA25166A1BC90020C54B /* Publish_active.png in Resources */,
+				22C9DA26166A1BC90020C54B /* Publish_active@2x.png in Resources */,
+				22C9DA27166A1BC90020C54B /* Publish.png in Resources */,
+				22C9DA28166A1BC90020C54B /* Publish@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

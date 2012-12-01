@@ -63,6 +63,8 @@
 @synthesize isPhoto;
 @synthesize isAvatar;
 @synthesize avatarTagLabel;
+@synthesize publishReplyButton;
+@synthesize isReplyTo;
 
 - (id)initWithImage:(UIImage *)_image filterIndex:(NSInteger)_filterIndex blurFilter:(id)_blurFilter
 {
@@ -96,6 +98,7 @@
     saveButton.bgImagecaps = CGSizeMake(23, 0);
     retakeButton.bgImagecaps = CGSizeMake(23, 20);
     cancelButton.bgImagecaps = CGSizeMake(23, 20);
+    publishReplyButton.bgImagecaps = CGSizeMake(23, 20);
     [retakeButton setTitle:isPhoto ? @"Retake" : @"Select" forState:UIControlStateNormal];
     
     sourcePicture = [[GPUImagePicture alloc] initWithImage:image];
@@ -142,6 +145,8 @@
     
     [self setFilterWithIndex:filterIndex];
     [self setBlurFilterWithFilter:blurFilter];
+    
+    publishReplyButton.hidden = !isReplyTo;
 }
 
 - (void)setFilterWithIndex:(NSInteger)index
@@ -275,6 +280,21 @@
 {
     [blurView reloadData];
     [blurView show:!blurView.isShown];
+}
+
+- (IBAction)publishReply
+{
+    publishReplyButton.selected = !publishReplyButton.selected;
+    BOOL isSelected = publishReplyButton.selected;
+    
+    CGSize size = publishReplyButton.frame.size;
+    size.width = isSelected ? 250 : 43;
+    
+    [UIView animateWithDuration:0.5 animations:^(){
+        [publishReplyButton resizeTo:size];
+    } completion:^(BOOL finish) {
+        [publishReplyButton setTitle:isSelected ? @"All your folowers will see this reply" : @"" forState:UIControlStateNormal];
+    }];
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
