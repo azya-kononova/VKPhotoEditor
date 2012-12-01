@@ -130,10 +130,9 @@
 							<object class="IBUIView" id="436906296">
 								<reference key="NSNextResponder" ref="368238207"/>
 								<int key="NSvFlags">256</int>
-								<string key="NSFrame">{{0, 9}, {320, 85}}</string>
+								<string key="NSFrameSize">{320, 94}</string>
 								<reference key="NSSuperview" ref="368238207"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<object class="NSColor" key="IBUIBackgroundColor" id="873463564">
 									<int key="NSColorSpace">3</int>
@@ -205,7 +204,6 @@
 								<string key="NSFrame">{{267, 207}, {53, 45}}</string>
 								<reference key="NSSuperview" ref="368238207"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -479,20 +477,14 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="activityView">UIActivityIndicatorView</string>
 						<string key="bgView">UIView</string>
 						<string key="cancelButton">FlexibleButton</string>
 						<string key="exitButton">UIButton</string>
 						<string key="libraryPlaceholder">UIView</string>
-						<string key="noPhotoLabel">UILabel</string>
 						<string key="overlayView">UIView</string>
 						<string key="takePhotoButton">FlexibleButton</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="activityView">
-							<string key="name">activityView</string>
-							<string key="candidateClassName">UIActivityIndicatorView</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="bgView">
 							<string key="name">bgView</string>
 							<string key="candidateClassName">UIView</string>
@@ -508,10 +500,6 @@
 						<object class="IBToOneOutletInfo" key="libraryPlaceholder">
 							<string key="name">libraryPlaceholder</string>
 							<string key="candidateClassName">UIView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="noPhotoLabel">
-							<string key="name">noPhotoLabel</string>
-							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="overlayView">
 							<string key="name">overlayView</string>

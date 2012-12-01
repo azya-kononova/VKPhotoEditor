@@ -62,7 +62,8 @@
                     NSDate *second = [obj2 valueForProperty:ALAssetPropertyDate];
                     return -[first compare:second];
                 }];
-                
+
+                thumbnailsView.thumbConrnerRadius = 10;
                 [thumbnailsView reloadData];
                 [activityView stopAnimating];
                 thumbnailsView.userInteractionEnabled = YES;
