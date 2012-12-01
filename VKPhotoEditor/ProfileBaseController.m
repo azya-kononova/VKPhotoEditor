@@ -26,6 +26,7 @@
     NSInteger selectedPhoto;
     NSMutableDictionary *avatarsForIndexes;
     ProfileModeState mode;
+    BOOL notLoaded;
 }
 @synthesize photosTableView;
 @synthesize delegate;
@@ -90,11 +91,19 @@
     photosTableView.pullTextColor = [UIColor blackColor];
     
     [photosList loadMore];
-    [avatarsList loadMore];
     
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
     recognizer.minimumPressDuration = 2.0;
     [photosTableView addGestureRecognizer:recognizer];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    if (!notLoaded) {
+        [avatarsList loadMore];
+        notLoaded = YES;
+    }
 }
 
 - (void)setState:(ProfileModeState)_state
