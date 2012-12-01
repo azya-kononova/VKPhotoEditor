@@ -29,7 +29,7 @@
     NSArray *_photos = [[data objectForKey:@"feedback"] map:^id(NSDictionary *dict) {
         NSDictionary *photoInfo = [dict objectForKey:@"photo"];
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:photoInfo];
-        photo.account = [accounts objectForKey:[photoInfo objectForKey:@"user_id"]];
+        photo.account = [accounts objectForKey:[photoInfo objectForKey:@"user"]];
         return photo; }];
     [self append:_photos totalCount:0];
 }

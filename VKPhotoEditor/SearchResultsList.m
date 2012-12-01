@@ -46,15 +46,16 @@
     NSArray *results = [data objectForKey:@"results"];
     
     NSMutableArray *_photos = [results map:^id(NSDictionary *dict) {
+        NSDictionary *photoInfo = [dict objectForKey:@"photo"];
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:[dict objectForKey:@"photo"]];
-        photo.account = [accounts objectForKey:[dict objectForKey:@"user_id"]];
+        photo.account = [accounts objectForKey:[photoInfo objectForKey:@"user"]];
         return photo;
     }];
     
     NSDictionary *_user = [results find:^BOOL(NSDictionary *result) { return [[result objectForKey:@"type"] isEqualToString:@"user"]; } ];
     if (_user && ![_user objectForKey:@"photo"]) {
         VKPhoto *photo = [VKPhoto new];
-        photo.account = [accounts objectForKey:[_user objectForKey:@"user_id"]];
+        photo.account = [accounts objectForKey:[_user objectForKey:@"user"]];
         [_photos insertObject:photo atIndex:0];
     }
     
