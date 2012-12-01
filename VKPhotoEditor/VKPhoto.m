@@ -18,6 +18,8 @@
 @synthesize account;
 @synthesize justUploaded;
 @synthesize thumbnailURL;
+@synthesize replyToPhoto;
+@synthesize replyTo;
 
 - (id)initWithID:(NSString*)_id
 {
@@ -36,6 +38,7 @@
     VKPhoto *photo = [[VKPhoto alloc] initWithID:[dict objectForKey:@"id"]];
     photo.date = [NSDate dateWithTimeIntervalSince1970:[dict integerForKey:@"date"]];
     photo.caption = [dict objectForKey:@"caption"];
+    photo.replyTo = [dict objectForKey:@"reply_to"];
     // TODO: store all size info
     NSArray *sizes = [dict objectForKey:@"sizes"];
     // TODO: helpers for JK collections

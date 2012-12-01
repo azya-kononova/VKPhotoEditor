@@ -46,6 +46,10 @@
     NSArray *_photos = [[data objectForKey:@"photos"] map:^id(NSDictionary *dict) {
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:dict];
         photo.account = [accounts objectForKey:[dict objectForKey:@"user"]];
+        
+        NSDictionary *replyDict = [dict objectForKey:@"reply_to_photo"];
+        photo.replyToPhoto = [VKPhoto VKPhotoWithDict:replyDict];
+        photo.replyToPhoto.account = [accounts objectForKey:[replyDict objectForKey:@"user"]];
         return photo; }];
     [self append:_photos totalCount:[[data objectForKey:@"count"] integerValue]];
 }

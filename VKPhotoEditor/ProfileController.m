@@ -106,8 +106,21 @@
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
     [self cancelUpload];
-    VKPhoto *photo = [VKPhoto VKPhotoWithDict:[value objectForKey:@"photo"]];
-    photo.account = [Account accountWithDict:[[value objectForKey:@"users"] objectAtIndex:0]];
+    
+    NSMutableDictionary *accounts = [NSMutableDictionary new];
+    for (NSDictionary *user in [value objectForKey:@"users"]) {
+        Account *acc = [Account accountWithDict:user];
+        [accounts setObject:acc forKey:[user objectForKey:@"id"]];
+    }
+    
+    NSDictionary *photoDict = [value objectForKey:@"photo"];
+    VKPhoto *photo = [VKPhoto VKPhotoWithDict:photoDict];
+    photo.account = [accounts objectForKey:[photoDict objectForKey:@"user"]];
+    
+    NSDictionary *replyDict = [photoDict objectForKey:@"reply_to_photo"];
+    photo.replyToPhoto = [VKPhoto VKPhotoWithDict:replyDict];
+    photo.replyToPhoto.account = [accounts objectForKey:[replyDict objectForKey:@"user"]];
+    
     photo.justUploaded = YES;
     [self.photosList insert:photo];
     uploadInfoLabel.text = @"Done!";

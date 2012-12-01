@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) Account *account;
 @property (nonatomic, assign) BOOL justUploaded;
+@property (nonatomic, strong) NSString *replyTo;
+@property (nonatomic, strong) VKPhoto *replyToPhoto;
 
 @property (nonatomic, strong, readonly) RemoteImage *photo;
 @property (nonatomic, strong, readonly) RemoteImage *thumbnail;
