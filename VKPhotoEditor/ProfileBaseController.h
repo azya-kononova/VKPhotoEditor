@@ -58,4 +58,5 @@ typedef enum {
 - (void)profileBaseControllerDidOpenProfile:(ProfileBaseController*)ctrl;
 - (void)profileBaseControllerDidBack:(ProfileBaseController*)ctrl;
 - (void)profileBaseController:(ProfileBaseController*)ctrl didTapHashTag:(NSString*)hashTag;
+- (void)profileBaseController:(ProfileBaseController*)ctrl didReplyToPhoto:(VKPhoto *)photo;
 @end

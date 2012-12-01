@@ -90,6 +90,10 @@
     
     [photosList loadMore];
     [avatarsList loadMore];
+    
+    UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
+    recognizer.minimumPressDuration = 2.0;
+    [photosTableView addGestureRecognizer:recognizer];
 }
 
 - (void)setState:(ProfileModeState)_state
@@ -218,14 +222,8 @@
 {
     if (indexPath.row % 2 == 0) return;
     
-    selectedPhoto = indexPath.section;
-    UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                          delegate:self
-                                                 cancelButtonTitle:@"Cancel"
-                                            destructiveButtonTitle:@"Delete Image"
-                                                 otherButtonTitles:@"Save Image",nil];
-    actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    [actSheet showInView:self.view.superview];
+    VKPhoto *photo = [sourceList.photos objectAtIndex:(indexPath.row - 1) / 2];
+    [delegate profileBaseController:self didReplyToPhoto:photo];
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -283,6 +281,29 @@
         [avatarsForIndexes setObject:viewForIndex forKey:[NSNumber numberWithInteger:index]];
     }
     return viewForIndex;
+}
+
+#pragma mark - UILongPressGestureRecognizer
+
+-(void)handleLongPressOnTable:(UILongPressGestureRecognizer *)recognizer
+{
+    if (recognizer.state != UIGestureRecognizerStateBegan) return;
+    
+    CGPoint point = [recognizer locationInView:photosTableView];
+    NSIndexPath *indexPath = [photosTableView indexPathForRowAtPoint:point];
+    
+    if (indexPath) {
+        if (indexPath.row % 2 == 0) return;
+        
+        selectedPhoto = indexPath.section;
+        UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                              delegate:self
+                                                     cancelButtonTitle:@"Cancel"
+                                                destructiveButtonTitle:@"Delete Image"
+                                                     otherButtonTitles:@"Save Image",nil];
+        actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+        [actSheet showInView:self.view.superview];
+    }
 }
 
 @end

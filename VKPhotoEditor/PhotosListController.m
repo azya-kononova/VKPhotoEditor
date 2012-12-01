@@ -125,6 +125,12 @@
     [allPhotosCtrl search:hashTag];
 }
 
+- (void)profileBaseController:(ProfileBaseController *)ctrl didReplyToPhoto:(VKPhoto *)photo
+{
+    isAvatar = NO;
+    [choosePhotoView show:YES replyToPhoto:photo animated:YES];
+}
+
 #pragma mark - AllPhotosControllerDelegate
 
 - (void)allPhotosController:(AllPhotosController *)ctrl didSelectAccount:(Account *)account
@@ -147,6 +153,12 @@
 - (void)allPhotosController:(AllPhotosController *)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated
 {
     [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
+}
+
+- (void)allPhotosController:(AllPhotosController *)ctrl didReplyToPhoto:(VKPhoto *)photo
+{
+    isAvatar = NO;
+    [choosePhotoView show:YES replyToPhoto:photo animated:YES];
 }
 
 #pragma mark - ChoosePhotoViewDelegate

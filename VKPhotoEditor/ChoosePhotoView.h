@@ -7,6 +7,8 @@
 //
 
 #import "FlexibleButton.h"
+#import "VKPhoto.h"
+#import "RemoteImageView.h"
 
 @protocol  ChoosePhotoViewDelegate;
 
@@ -18,6 +20,11 @@
 @property (nonatomic, strong) IBOutlet FlexibleButton *cancelButton;
 @property (nonatomic, strong) IBOutlet UIButton *exitButton;
 @property (nonatomic, strong) IBOutlet UIView *libraryPlaceholder;
+@property (nonatomic, strong) IBOutlet UIView *replyView;
+@property (nonatomic, strong) IBOutlet RemoteImageView *replyImageView;
+@property (nonatomic, strong) IBOutlet UILabel *replyLabel;
+@property (nonatomic, strong) IBOutlet UIButton *cameraRollButton;
+@property (nonatomic, strong) IBOutlet UIView *bgTextureView;
 
 - (IBAction)cameraRoll;
 - (IBAction)takePhoto;
@@ -25,7 +32,9 @@
 - (IBAction)exit;
 
 - (void)show:(BOOL)show animated:(BOOL)animated;
+- (void)show:(BOOL)show replyToPhoto:(VKPhoto *)photo animated:(BOOL)animated;
 - (void)show:(BOOL)show withExitButton:(BOOL)needExitButton animated:(BOOL)animated;
+
 @end
 
 @protocol ChoosePhotoViewDelegate

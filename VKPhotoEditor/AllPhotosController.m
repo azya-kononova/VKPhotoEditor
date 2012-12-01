@@ -18,6 +18,7 @@
 #import "UIColor+VKPhotoEditor.h"
 #import "FastViewerController.h"
 #import "PhotoHeaderCell.h"
+#import "VKPhoto.h"
 
 @interface AllPhotosController () <PhotoListDelegate, PhotoCellDelegate, PhotoHeaderViewDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
 @end
@@ -70,6 +71,10 @@
     ThumbnailPhotoCell *cell = [UITableViewCell loadCellOfType:[ThumbnailPhotoCell class] fromNib:@"ThumbnailPhotoCell" withId:@"ThumbnailPhotoCell"];
     itemsInRow = cell.itemsInRow;
     gridCellHeight = cell.frame.size.height;
+    
+    UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
+    recognizer.minimumPressDuration = 2.0;
+    [tableView addGestureRecognizer:recognizer];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -171,22 +176,13 @@
 {
     if (isGridMode) return;
     
-    selectedPhoto = indexPath.section;
-    
     if (indexPath.row % 2 == 0) {
         [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account]];
         return;
     }
     
-    if (![self isProfilePhoto]) return;
-    
-    UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                          delegate:self
-                                                 cancelButtonTitle:@"Cancel"
-                                            destructiveButtonTitle:@"Delete Image"
-                                                 otherButtonTitles:@"Save Image",nil];
-    actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-    [actSheet showInView:self.view.superview];
+    VKPhoto *photo = [searchResultsList.photos objectAtIndex:(indexPath.row - 1) / 2];
+    [delegate allPhotosController:self didReplyToPhoto:photo];
 }
 
 - (void)setFindModeActive:(BOOL)active
@@ -357,6 +353,38 @@
 {
     [delegate allPhotosController:self dismissModalViewController:controller animated:YES];
     isFastViewerOpen = NO;
+}
+
+#pragma mark - UILongPressGestureRecognizer
+
+-(void)handleLongPressOnTable:(UILongPressGestureRecognizer *)recognizer
+{
+    if (recognizer.state != UIGestureRecognizerStateBegan) return;
+    
+    CGPoint point = [recognizer locationInView:tableView];
+    NSIndexPath *indexPath = [tableView indexPathForRowAtPoint:point];
+    
+    if (indexPath) {
+        
+        if (isGridMode) return;
+        
+        selectedPhoto = indexPath.section;
+        
+        if (indexPath.row % 2 == 0) {
+            [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account]];
+            return;
+        }
+        
+        if (![self isProfilePhoto]) return;
+        
+        UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                              delegate:self
+                                                     cancelButtonTitle:@"Cancel"
+                                                destructiveButtonTitle:@"Delete Image"
+                                                     otherButtonTitles:@"Save Image",nil];
+        actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+        [actSheet showInView:self.view.superview];
+    }
 }
 
 @end

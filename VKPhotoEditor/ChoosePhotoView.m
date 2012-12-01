@@ -11,6 +11,7 @@
 #import "UIView+Helpers.h"
 #import "CALayer+Animations.h"
 #import "LibraryPhotosView.h"
+#import "UIColor+VKPhotoEditor.h"
 
 @interface ChoosePhotoView ()<LibraryPhotosViewDelegate>
 @end
@@ -26,18 +27,30 @@
 @synthesize exitButton;
 @synthesize libraryPlaceholder;
 @synthesize delegate;
+@synthesize replyImageView;
+@synthesize replyLabel;
+@synthesize replyView;
+@synthesize cameraRollButton;
+@synthesize bgTextureView;
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     libraryPhotosView = [LibraryPhotosView loadFromNIB];
     libraryPhotosView.delegate = self;
     [libraryPlaceholder addSubview:libraryPhotosView];
     
-    bgView.backgroundColor = [UIColor defaultBgColor];
+    bgTextureView.backgroundColor = [UIColor defaultBgColor];
     
     takePhotoButton.bgImagecaps = CGSizeMake(20, 20);
     cancelButton.bgImagecaps = CGSizeMake(20, 20);
     takePhotoButton.hidden = ![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+    
+    replyLabel.font = [UIFont fontWithName:@"Lobster" size:22.0];
+    replyLabel.backgroundColor = [UIColor defaultBgColor];
+    replyImageView.layer.masksToBounds = YES;
+    replyImageView.layer.cornerRadius = 6;
     
     [self show:NO animated:NO];
 }
@@ -47,9 +60,16 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)show:(BOOL)show withExitButton:(BOOL)needExitButton animated:(BOOL)animated
+- (void)show:(BOOL)show withExitButton:(BOOL)needExitButton replyPhoto:(VKPhoto *)photo animated:(BOOL)animated
 {
+    BOOL isReply = photo != nil;
+    
     exitButton.hidden = !needExitButton;
+    replyView.hidden = !isReply;
+    
+    [replyImageView displayImage:photo.photo];
+    
+    [self resetCameraRollButtonWithReply:isReply];
     
     if (show) [libraryPhotosView reloadData];
     
@@ -84,7 +104,43 @@
 
 - (void)show:(BOOL)show animated:(BOOL)animated
 {
-    [self show:show withExitButton:NO animated:animated];
+    [self show:show withExitButton:NO replyPhoto:nil animated:animated];
+}
+
+- (void)show:(BOOL)show withExitButton:(BOOL)needExitButton animated:(BOOL)animated
+{
+    [self show:show withExitButton:needExitButton replyPhoto:nil animated:animated];
+}
+
+- (void)show:(BOOL)show replyToPhoto:(VKPhoto *)photo animated:(BOOL)animated
+{
+    [self show:show withExitButton:NO replyPhoto:photo animated:animated];
+}
+
+#pragma mark - reset CameraRoll Button
+
+
+- (void)resetCameraRollButtonWithReply:(BOOL)reply
+{
+    CGRect rect = libraryPlaceholder.frame;
+    
+    if (reply) {
+        cameraRollButton.titleEdgeInsets = UIEdgeInsetsMake(10, -17, 0, 0);
+        cameraRollButton.imageEdgeInsets = UIEdgeInsetsMake(14, 285, 0, 0);
+        cameraRollButton.contentVerticalAlignment = UIControlContentVerticalAlignmentTop;
+        [cameraRollButton setTitle:@"Choose your photo reply" forState:UIControlStateNormal];
+        
+        rect.origin.y = cameraRollButton.frame.origin.y + cameraRollButton.frame.size.height - rect.size.height;
+        libraryPlaceholder.frame = rect;
+    } else {
+        cameraRollButton.titleEdgeInsets = UIEdgeInsetsMake(80, -17, 0, 0);
+        cameraRollButton.imageEdgeInsets = UIEdgeInsetsMake(78, 285, 0, 0);
+        cameraRollButton.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        [cameraRollButton setTitle:@"Camera Roll" forState:UIControlStateNormal];
+        
+        rect.origin.y = cameraRollButton.frame.origin.y;
+        libraryPlaceholder.frame = rect;
+    }
 }
 
 #pragma mark - actions

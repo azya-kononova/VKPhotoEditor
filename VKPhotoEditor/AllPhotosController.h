@@ -10,6 +10,7 @@
 #import "Account.h"
 #import "PullTableView.h"
 
+@class VKPhoto;
 @protocol AllPhotosControllerDelegate;
 
 @interface AllPhotosController : UIViewController <UISearchBarDelegate>
@@ -27,4 +28,5 @@
 - (void)allPhotosController:(AllPhotosController*)ctrl didSelectAccount:(Account*)account;
 - (void)allPhotosController:(AllPhotosController*)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated;
 - (void)allPhotosController:(AllPhotosController*)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated;
+- (void)allPhotosController:(AllPhotosController*)ctrl didReplyToPhoto:(VKPhoto *)photo;
 @end
