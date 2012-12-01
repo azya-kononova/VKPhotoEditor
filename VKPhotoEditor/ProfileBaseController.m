@@ -14,6 +14,7 @@
 #import "VKConnectionService.h"
 #import "PhotoHeaderCell.h"
 #import "UITableViewCell+NIB.h"
+#import "CALayer+Animations.h"
 
 @interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate>
 @end
@@ -39,6 +40,8 @@
 @synthesize noAvatarImageView;
 @synthesize profile;
 @synthesize state;
+@synthesize avatarActivity;
+@synthesize noAvatarLabel;
 
 @synthesize sourceList;
 @synthesize photosList;
@@ -75,8 +78,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self showAvatar:profile.avatar animated:NO];
     
     centralButton.bgImagecaps = CGSizeMake(23, 0);
     
@@ -127,16 +128,32 @@
     }
 }
 
-- (void)showAvatar:(RemoteImage*)avatar animated:(BOOL)animated;
+- (void)reloadAvatarList
 {
-    BOOL show = YES;
+    avatarsForIndexes = nil;
+    [avatarsList reset];
+    [avatarsList loadMore];
+}
+
+- (void)reloadAvatarAnimated:(BOOL)animated;
+{
+    [avatarTheaterView reloadData];
+    
+    BOOL show = avatarsList.photos.count != 0;
+    [avatarActivity stopAnimating];
+    noAvatarLabel.hidden = show;
+    
+    if (show == !avatarTheaterView.hidden) return;
+    
+    [avatarTheaterView.layer fade];
     avatarTheaterView.hidden = !show;
+    
     [photosTableView beginUpdates];
     CGFloat newHeight = headerTopView.frame.size.height + headerBottomView.frame.size.height + (show ? avatarTheaterView.frame.size.height : noAvatarImageView.frame.size.height);
     if (animated)
-        [UIView animateWithDuration:0.8 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
             [headerView resizeTo:CGSizeMake(headerView.frame.size.height, newHeight)];
-        } completion:^(BOOL finished) {}];
+        } completion:^(BOOL finished) {  }];
     else
         [headerView resizeTo:CGSizeMake(headerView.frame.size.height, newHeight)];
     [photosTableView endUpdates];
@@ -171,13 +188,13 @@
         photosTableView.pullLastRefreshDate = [NSDate date];
         [self reloadPullTable];
     } else {
-        [avatarTheaterView reloadData];
+        [self reloadAvatarAnimated:YES];
     }
 }
 
 - (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError *)error
 {
-    (photoList ==  sourceList) ? [self reloadPullTable] :  [avatarTheaterView reloadData];
+    (photoList ==  sourceList) ? [self reloadPullTable] :  [self reloadAvatarAnimated:YES];
 }
 
 #pragma mark - Request Handler

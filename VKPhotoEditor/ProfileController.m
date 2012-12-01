@@ -60,13 +60,8 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if([keyPath isEqualToString:@"avatarUrl"]) {
-        [self reloadAvatar];
+        [self reloadAvatarList];
     }
-}
-
-- (void)reloadAvatar
-{
-    [self showAvatar:self.profile.avatar animated:NO];
 }
 
 - (void)showUploading:(UIImage*)image

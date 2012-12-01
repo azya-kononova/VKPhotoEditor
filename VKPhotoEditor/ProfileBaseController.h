@@ -46,9 +46,11 @@ typedef enum {
 @property (nonatomic, strong) IBOutlet UIView *headerTopView;
 @property (nonatomic, strong) IBOutlet UIView *headerBottomView;
 @property (nonatomic, strong) IBOutlet UIImageView *noAvatarImageView;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *avatarActivity;
+@property (nonatomic, strong) IBOutlet UILabel *noAvatarLabel;
 
 - (id)initWithProfile:(UserProfile*)profile;
-- (void)showAvatar:(RemoteImage*)avatar animated:(BOOL)animated;
+- (void)reloadAvatarList;
 
 - (IBAction)leftOptionSelected;
 - (IBAction)rightOptionSelected;
