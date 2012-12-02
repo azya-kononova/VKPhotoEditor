@@ -10,6 +10,12 @@
 #import "RemoteImage.h"
 #import "Account.h"
 
+typedef enum {
+    VKPhotoTypeNone = 0,
+    VKPhotoTypeReply = 1,
+    VKPhotoTypeMention = 2
+} VKPhotoType;
+
 @interface VKPhoto : NSObject
 @property (nonatomic, strong) NSString *photoId;
 @property (nonatomic, strong) NSURL *imageURL;
@@ -20,10 +26,13 @@
 @property (nonatomic, assign) BOOL justUploaded;
 @property (nonatomic, strong) NSString *replyTo;
 @property (nonatomic, strong) VKPhoto *replyToPhoto;
+@property (nonatomic, assign) VKPhotoType type;
 
 @property (nonatomic, strong, readonly) RemoteImage *photo;
 @property (nonatomic, strong, readonly) RemoteImage *thumbnail;
 @property (nonatomic, assign, readonly) BOOL isPhotoLoading;
 
 + (id)VKPhotoWithDict:(NSDictionary*)dict;
++ (VKPhotoType)photoType:(NSString *)str;
+
 @end

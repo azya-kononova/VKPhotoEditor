@@ -17,6 +17,8 @@
     struct {
         unsigned int delegateRespondsToDidScroll : 1;
     } flags;
+    
+    UITapGestureRecognizer *tapRecognizer;
 }
 @synthesize scroll = _scroll;
 @synthesize dataSource;
@@ -42,9 +44,21 @@
         _scroll.showsVerticalScrollIndicator = NO;
         _scroll.pagingEnabled = YES;
         _scroll.bounces = NO;
+        
+        tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnView)];
+        [_scroll addGestureRecognizer:tapRecognizer];
+        
         [self addSubview:_scroll];
     }
     return _scroll;
+}
+
+- (void)didTapOnView
+{
+    NSInteger index = [tapRecognizer locationInView:_scroll].x / _scroll.frame.size.width;
+    if (index > views.count - 1) return;
+    [delegate theaterView:self didTapOnItemWithIndex:index];
+    displayedItemIndex = index;
 }
 
 - (BOOL)scrollEnabled

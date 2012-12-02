@@ -20,6 +20,7 @@
 @synthesize thumbnailURL;
 @synthesize replyToPhoto;
 @synthesize replyTo;
+@synthesize type;
 
 - (id)initWithID:(NSString*)_id
 {
@@ -60,6 +61,19 @@
 - (BOOL)isPhotoLoading
 {
     return self.photo.isLoading;
+}
+
++ (VKPhotoType)photoType:(NSString *)str
+{
+    if ([str isEqualToString:@"reply"]) {
+        return VKPhotoTypeReply;
+    }
+    
+    if ([str isEqualToString:@"mention"]) {
+        return VKPhotoTypeMention;
+    }
+    
+    return VKPhotoTypeNone;
 }
 
 - (NSString*)description

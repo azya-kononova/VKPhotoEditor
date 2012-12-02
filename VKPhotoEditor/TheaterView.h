@@ -34,4 +34,5 @@
 @protocol TheaterViewDelegate <NSObject>
 @optional
 - (void)theaterView:(TheaterView*)view didScrollToItemWithIndex:(NSUInteger)index;
+- (void)theaterView:(TheaterView*)view didTapOnItemWithIndex:(NSUInteger)index;
 @end

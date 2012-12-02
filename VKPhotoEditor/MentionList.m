@@ -30,6 +30,7 @@
         NSDictionary *photoInfo = [dict objectForKey:@"photo"];
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:photoInfo];
         photo.account = [accounts objectForKey:[photoInfo objectForKey:@"user"]];
+        photo.type = [VKPhoto photoType:[photoInfo objectForKey:@"type"]];
         
         NSDictionary *replyDict = [dict objectForKey:@"reply_to_photo"];
         photo.replyToPhoto = [VKPhoto VKPhotoWithDict:replyDict];
