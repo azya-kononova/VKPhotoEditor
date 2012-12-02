@@ -50,7 +50,8 @@
         photo.replyToPhoto.account = [accounts objectForKey:[replyDict objectForKey:@"user"]];
         
         return photo; }];
-    [self append:_photos totalCount:0];
+    //It's a stub for stupid server data!!!
+    [self append:[self getPhotosChain:_photos] totalCount:0];
 }
 
 - (void)reset
@@ -58,6 +59,33 @@
     [super reset];
     since = nil;
     after = nil;
+}
+
+- (NSArray *)getPhotosChain:(NSArray *)photos
+{
+    NSMutableArray *result = [NSMutableArray arrayWithArray:photos];
+    
+    for (VKPhoto *photo in photos) {
+        [self addPhotoReplyTo:photo from:result];
+    }
+    return result;
+}
+
+- (void)addPhotoReplyTo:(VKPhoto *)reply from:(NSMutableArray *)array
+{
+    VKPhoto *removedPhoto = nil;
+    
+    for (VKPhoto *photo in array) {
+        if ([photo.photoId isEqualToString:reply.replyTo]) {
+            removedPhoto = photo;
+            break;
+        }
+    }
+    
+    if (removedPhoto) {
+        reply.replyToPhoto = removedPhoto;
+        [array removeObject:removedPhoto];
+    }
 }
 
 @end
