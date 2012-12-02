@@ -228,8 +228,8 @@
 {
     PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
     cell.delegate = self;
-    VKPhoto *photo = [sourceList.photos objectAtIndex:indexPath.row];
-    [cell displayPhoto:photo];
+    VKPhoto *photo = [sourceList.photos objectAtIndex:indexPath.row ];
+    [cell displayPhoto:photo canSelectAccount:NO];
     return cell;
 }
 
@@ -310,7 +310,6 @@
     NSIndexPath *indexPath = [photosTableView indexPathForRowAtPoint:point];
     
     if (indexPath) {
-        if (indexPath.row % 2 == 0) return;
         
         selectedPhoto = (indexPath.row - 1) / 2;
         UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil

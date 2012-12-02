@@ -24,6 +24,7 @@
 @synthesize avatarRemoteImageView;
 @synthesize dateLabel;
 @synthesize nameLabel;
+@synthesize accountButton;
 
 - (void)awakeFromNib
 {
@@ -38,6 +39,11 @@
 
 - (void)displayPhoto:(VKPhoto *)_photo
 {
+    [self displayPhoto:_photo canSelectAccount:YES];
+}
+
+- (void)displayPhoto:(VKPhoto *)_photo canSelectAccount:(BOOL)selectAccount
+{
     photo = _photo;
     BOOL hasPhoto = photo.imageURL != nil;
     
@@ -46,6 +52,7 @@
     [avatarRemoteImageView displayImage:photo.account.thumbnailAvatar];
     nameLabel.text = photo.account.login;
     dateLabel.text = hasPhoto ? [DataFormatter formatRelativeDate:photo.date] : nil;
+    accountButton.hidden = !selectAccount;
     
     [remoteImageView displayImage:photo.photo];
     if (![photo.caption isKindOfClass:[NSNull class]]) captionTextView.text = photo.caption ;

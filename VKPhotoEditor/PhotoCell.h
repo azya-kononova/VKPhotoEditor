@@ -19,6 +19,7 @@
 @property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *addedImageView;
 @property (nonatomic, strong) IBOutlet VKHighlightTextView *captionTextView;
+@property (nonatomic, strong) IBOutlet UIButton *accountButton;
 
 @property (nonatomic, strong) IBOutlet RemoteImageView *avatarRemoteImageView;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
@@ -26,6 +27,7 @@
 @property (nonatomic, copy) NSString *searchString;
 
 - (void)displayPhoto:(VKPhoto*)photo;
+- (void)displayPhoto:(VKPhoto*)photo canSelectAccount:(BOOL)selectAccount;
 @end
 
 @protocol PhotoCellDelegate <NSObject>
