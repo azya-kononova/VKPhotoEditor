@@ -12,13 +12,15 @@
 #import "DataFormatter.h"
 #import "PhotoCell.h"
 
-@interface ReplyPhotoCell ()<TheaterViewDataSource, TheaterViewDelegate>
+@interface ReplyPhotoCell ()<TheaterViewDataSource, TheaterViewDelegate, PhotoListDelegate>
 @end
 
 @implementation ReplyPhotoCell {
     VKPhoto *photo;
-    NSArray *replyPhotos;
+    NSMutableArray *replyPhotos;
     NSMutableDictionary *replyPhotoViews;
+    
+    ReplyPhotoList *repliesList;
 }
 
 @synthesize avatarImageView;
@@ -33,6 +35,8 @@
     [super awakeFromNib];
     
     replyPhotoViews = [NSMutableDictionary dictionary];
+    
+    replyPhotos = [NSMutableArray array];
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handelTap:)];
     [self addGestureRecognizer:recognizer];
@@ -49,7 +53,9 @@
     postDateLabel.text = [DataFormatter formatRelativeDate:photo.date];
     
     //TODO: load replies
-    replyPhotos = [NSArray arrayWithObjects:photo, photo.replyToPhoto, nil];
+    [replyPhotos addObject:photo];
+    [replyPhotos addObject:photo.replyToPhoto];
+    
     [theaterView reloadData];
 }
 
@@ -69,6 +75,19 @@
     if (!CGRectContainsPoint(theaterView.frame, point)) {
         [delegate replyPhotoCell:self didTapOnAccount:photo.account];
     }
+}
+
+- (void)loadRepliesForPhoto:(VKPhoto *)_photo
+{
+    if (repliesList) {
+        [repliesList reset];
+        repliesList.delegate = nil;
+        repliesList = nil;
+    }
+    
+    repliesList = [[ReplyPhotoList alloc] initWithPhotoID:_photo.replyTo];
+    repliesList.delegate = self;
+    [repliesList loadMore];
 }
 
 #pragma mark - TheaterViewDataSource
@@ -106,6 +125,22 @@
 }
 
 - (void)theaterView:(TheaterView *)view didScrollToItemWithIndex:(NSUInteger)index
+{
+    VKPhoto *_photo = [replyPhotos objectAtIndex:index];
+    if (_photo.replyTo && index == replyPhotos.count - 1) {
+        [self loadRepliesForPhoto:_photo];
+    }
+}
+
+#pragma mark - PhotoListDelegate
+
+- (void)photoList:(PhotoList*)photoList didUpdatePhotos:(NSArray*)photos
+{
+    [replyPhotos addObjectsFromArray:photos];
+    [theaterView reloadData];
+}
+
+- (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError*)error
 {
     
 }
