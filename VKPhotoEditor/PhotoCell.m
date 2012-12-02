@@ -11,6 +11,7 @@
 #import "VKHighlightTextView.h"
 #import "UITextView+Resize.h"
 #import "UIView+Helpers.h"
+#import "DataFormatter.h"
 
 @implementation PhotoCell {
     VKPhoto *photo;
@@ -20,18 +21,32 @@
 @synthesize captionTextView;
 @synthesize delegate;
 @synthesize searchString;
+@synthesize avatarRemoteImageView;
+@synthesize dateLabel;
+@synthesize nameLabel;
 
 - (void)awakeFromNib
 {
     captionTextView.font = [UIFont fontWithName:@"Lobster" size:28.0];
+    
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapInTextView:)];
     [captionTextView addGestureRecognizer:tapRecognizer];
+    
+    tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnPhoto)];
+    [remoteImageView addGestureRecognizer:tapRecognizer];
 }
 
 - (void)displayPhoto:(VKPhoto *)_photo
 {
-    self.hidden = _photo.imageURL == nil;
     photo = _photo;
+    BOOL hasPhoto = photo.imageURL != nil;
+    
+    [nameLabel moveTo:CGPointMake(49, hasPhoto ? 5 : 13)];
+    
+    [avatarRemoteImageView displayImage:photo.account.thumbnailAvatar];
+    nameLabel.text = photo.account.login;
+    dateLabel.text = hasPhoto ? [DataFormatter formatRelativeDate:photo.date] : nil;
+    
     [remoteImageView displayImage:photo.photo];
     if (![photo.caption isKindOfClass:[NSNull class]]) captionTextView.text = photo.caption ;
     [captionTextView sizeFontToFitMinSize:8 maxSize:28];
@@ -63,12 +78,21 @@
 {
     [self showSelf:NO];
 }
+#pragma mark - recognizers
+
+- (void)didTapOnPhoto
+{
+    [delegate photoCell:self didTapOnPhoto:photo];
+}
 
 - (void)didTapInTextView:(UITapGestureRecognizer *)recognizer
 {
     CGPoint location = [recognizer locationInView:captionTextView];
     NSString *hashTag = [self getWordAtPosition:location];
-    if (hashTag) [delegate photoCell:self didTapHashTag:hashTag];
+    if (hashTag)
+        [delegate photoCell:self didTapHashTag:hashTag];
+    else
+        [self didTapOnPhoto];
 }
 
 -(NSString*)getWordAtPosition:(CGPoint)pos

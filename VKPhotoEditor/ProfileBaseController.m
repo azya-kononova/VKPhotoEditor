@@ -8,11 +8,10 @@
 
 #import "ProfileBaseController.h"
 #import "PhotoCell.h"
-#import "AvatarView.h"
+#import "PhotoView.h"
 #import "UIView+Helpers.h"
 #import "RequestExecutorDelegateAdapter.h"
 #import "VKConnectionService.h"
-#import "PhotoHeaderCell.h"
 #import "UITableViewCell+NIB.h"
 #import "CALayer+Animations.h"
 
@@ -217,39 +216,21 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return sourceList.photos.count * 2;
+    return sourceList.photos.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (indexPath.row % 2 == 0) ? 46 : 320;
+    return 366;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row % 2 == 0) {
-        PhotoHeaderCell *cell = [PhotoHeaderCell dequeOrCreateInTable:photosTableView];
-        [cell displayPhoto:[sourceList.photos objectAtIndex:indexPath.row / 2]];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryType =  UITableViewCellAccessoryNone;
-        return cell;
-    } else {
-        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
-        cell.delegate = self;
-        VKPhoto *photo = [sourceList.photos objectAtIndex:(indexPath.row - 1) / 2];
-        [cell displayPhoto:photo];
-        return cell;
-    }
-}
-
-#pragma mark - UITableViewDelegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row % 2 == 0) return;
-    
-    VKPhoto *photo = [sourceList.photos objectAtIndex:(indexPath.row - 1) / 2];
-    [delegate profileBaseController:self didReplyToPhoto:photo];
+    PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+    cell.delegate = self;
+    VKPhoto *photo = [sourceList.photos objectAtIndex:indexPath.row];
+    [cell displayPhoto:photo];
+    return cell;
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -279,6 +260,16 @@
     [delegate profileBaseController:self didTapHashTag:hashTag];
 }
 
+- (void)photoCell:(PhotoCell *)photoCell didSelectAccount:(Account *)account
+{
+    
+}
+
+- (void)photoCell:(PhotoCell *)photoCell didTapOnPhoto:(VKPhoto *)photo
+{
+    [delegate profileBaseController:self didReplyToPhoto:photo];
+}
+
 #pragma mark - PullTableViewDelegate
 
 - (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
@@ -300,9 +291,9 @@
 
 - (UIView*)theaterView:(TheaterView*)view viewForItemWithIndex:(NSUInteger)index
 {
-    AvatarView *viewForIndex =  [avatarsForIndexes objectForKey:[NSNumber numberWithInteger:index]];
+    PhotoView *viewForIndex =  [avatarsForIndexes objectForKey:[NSNumber numberWithInteger:index]];
     if (!viewForIndex) {
-        viewForIndex = [AvatarView loadFromNIB];
+        viewForIndex = [PhotoView loadFromNIB];
         [viewForIndex displayPhoto:[avatarsList.photos objectAtIndex:index]];
         [avatarsForIndexes setObject:viewForIndex forKey:[NSNumber numberWithInteger:index]];
     }

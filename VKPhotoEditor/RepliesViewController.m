@@ -15,10 +15,10 @@
 #import "UIColor+VKPhotoEditor.h"
 #import "FastViewerController.h"
 #import "MentionList.h"
-#import "MentionPhotoCell.h"
 #import "ReplyPhotoCell.h"
+#import "PhotoCell.h"
 
-@interface RepliesViewController () <UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, MentionPhotoCellDelegate, ReplyPhotoCellDelegate>
+@interface RepliesViewController () <UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, ReplyPhotoCellDelegate, PhotoCellDelegate>
 @end
 
 @implementation RepliesViewController {
@@ -153,20 +153,20 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return isGridMode ? gridCellHeight : 364;
+    return isGridMode ? gridCellHeight : 366;
 }
 
-- (UITableViewCell*)mentionOrReplyForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell*)mentionOrReplyForRowAtIndexPath:(NSIndexPath *)indexPath tableView:(UITableView*)_tableView
 {
     VKPhoto *photo = [mentionList.photos objectAtIndex:indexPath.row];
     if (photo.type == VKPhotoTypeMention) {
-        MentionPhotoCell *cell = [MentionPhotoCell loadFromNIB];
+        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:_tableView];
         cell.delegate = self;
         [cell displayPhoto:[mentionList.photos objectAtIndex:indexPath.row]];
         
         return cell;
     } else if (photo.type == VKPhotoTypeReply) {
-        ReplyPhotoCell *cell = [ReplyPhotoCell loadFromNIB];
+        ReplyPhotoCell *cell = [ReplyPhotoCell dequeOrCreateInTable:_tableView];
         cell.delegate = self;
         [cell displayPhoto:[mentionList.photos objectAtIndex:indexPath.row]];
         
@@ -182,10 +182,9 @@
         ThumbnailPhotoCell *cell = [ThumbnailPhotoCell dequeOrCreateInTable:tableView];
         cell.delegate = self;
         [cell displayPhotos:[self getPhotosForIndexPath:indexPath]];
-        
         return cell;
     } else {
-        return [self mentionOrReplyForRowAtIndexPath:indexPath];
+        return [self mentionOrReplyForRowAtIndexPath:indexPath tableView:_tableView];
     }
 }
 
@@ -248,16 +247,21 @@
     isFastViewerOpen = NO;
 }
 
-#pragma mark - MentionPhotoCellDelegate
+#pragma mark - PhotoCellDelegate
 
-- (void)mentionPhotoCell:(MentionPhotoCell *)cell didTapOnAccount:(Account *)account
+- (void)photoCell:(PhotoCell *)photoCell didSelectAccount:(Account *)account
 {
     [delegate repliesViewController:self didSelectAccount:account animated:YES];
 }
 
-- (void)mentionPhotoCell:(MentionPhotoCell *)cell didTapOnPhoto:(VKPhoto *)photo
+- (void)photoCell:(PhotoCell *)photoCell didTapOnPhoto:(VKPhoto *)photo
 {
-    [delegate repliesViewController:self didReplyToPhoto:photo];
+     [delegate repliesViewController:self didReplyToPhoto:photo];
+}
+
+- (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
+{
+    
 }
 
 #pragma mark - ReplyPhotoCellDelegate

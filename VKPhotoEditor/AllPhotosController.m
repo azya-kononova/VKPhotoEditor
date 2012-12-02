@@ -17,7 +17,6 @@
 #import "GridModeButton.h"
 #import "UIColor+VKPhotoEditor.h"
 #import "FastViewerController.h"
-#import "PhotoHeaderCell.h"
 #import "VKPhoto.h"
 
 @interface AllPhotosController () <PhotoListDelegate, PhotoCellDelegate, UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
@@ -127,37 +126,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return isGridMode ? (NSInteger) ceil((double) searchResultsList.photos.count / itemsInRow) : searchResultsList.photos.count * 2;
+    return isGridMode ? (NSInteger) ceil((double) searchResultsList.photos.count / itemsInRow) : searchResultsList.photos.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 //    TODO: handle situations when users find
-    CGFloat height;
+   return isGridMode ? gridCellHeight : 366;
     
-    if (isGridMode)
-        height = gridCellHeight;
-    else
-        height = (indexPath.row % 2 == 0) ? 46 : 320;
-    
-    return height;
 }
-
-- (UITableViewCell*)photoOrHeaderForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row % 2 == 0) {
-        PhotoHeaderCell *cell = [PhotoHeaderCell dequeOrCreateInTable:tableView];
-        [cell displayPhoto:[searchResultsList.photos objectAtIndex:indexPath.row / 2]];
-        return cell;
-    } else {
-        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
-        cell.delegate = self;
-        VKPhoto *photo = [searchResultsList.photos objectAtIndex:(indexPath.row - 1) / 2];
-        [cell displayPhoto:photo];
-        return cell;
-    }
-}
-
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (isGridMode) {
@@ -165,24 +142,14 @@
         cell.delegate = self;
         cell.searchString = searchBar.text;
         [cell displayPhotos:[self getPhotosForIndexPath:indexPath]];
-        
         return cell;
     } else {
-        return [self photoOrHeaderForRowAtIndexPath:indexPath];
+        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+        cell.delegate = self;
+        VKPhoto *photo = [searchResultsList.photos objectAtIndex:indexPath.row];
+        [cell displayPhoto:photo];
+        return cell;
     }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (isGridMode) return;
-    
-    if (indexPath.row % 2 == 0) {
-        [delegate allPhotosController:self didSelectAccount:[[searchResultsList.photos objectAtIndex:indexPath.row/2] account] animated:YES];
-        return;
-    }
-    
-    VKPhoto *photo = [searchResultsList.photos objectAtIndex:(indexPath.row - 1) / 2];
-    [delegate allPhotosController:self didReplyToPhoto:photo];
 }
 
 - (void)setFindModeActive:(BOOL)active
@@ -229,13 +196,6 @@
     return account.accountId == [VKConnectionService shared].profile.accountId;
 }
 
-#pragma mark - PhotoCellDelegate
-
-- (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
-{
-    [self search:hashTag];
-}
-
 - (void)reload
 {
     noPhotosLabel.hidden = YES;
@@ -243,6 +203,23 @@
     [searchResultsList reset];
     [tableView reloadData];
     [searchResultsList loadMore];
+}
+
+#pragma mark - PhotoCellDelegate
+
+- (void)photoCell:(PhotoCell*)photoCell didTapHashTag:(NSString*)hashTag
+{
+    [self search:hashTag];
+}
+
+- (void)photoCell:(PhotoCell*)photoCell didSelectAccount:(Account*)account
+{
+    [delegate allPhotosController:self didSelectAccount:account animated:YES];
+}
+
+- (void)photoCell:(PhotoCell*)photoCell didTapOnPhoto:(VKPhoto*)photo
+{
+    [delegate allPhotosController:self didReplyToPhoto:photo];
 }
 
 #pragma mark - UISearchBarDelegate

@@ -10,7 +10,7 @@
 #import "VKHighlightTextView.h"
 #import "VKPhoto.h"
 
-@interface AvatarView : UIView
+@interface PhotoView : UIView
 @property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
 @property (nonatomic, strong) IBOutlet VKHighlightTextView *captionTextView;
 

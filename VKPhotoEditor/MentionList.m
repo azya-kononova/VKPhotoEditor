@@ -30,7 +30,7 @@
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     
     //TODO: may be check it in other way?...
-    if ([data objectForKey:@"since"] && ![[data objectForKey:@"after"] isEqualToString:AFTER_FALSE]) {
+    if ([data objectForKey:@"since"] && [data objectForKey:@"after"]) {
         since = [data objectForKey:@"since"];
         after = [data objectForKey:@"after"];
     }
@@ -51,7 +51,7 @@
         
         return photo; }];
     //It's a stub for stupid server data!!!
-    [self append:[self getPhotosChain:_photos] totalCount:0];
+    [self append:_photos totalCount:0];
 }
 
 - (void)reset

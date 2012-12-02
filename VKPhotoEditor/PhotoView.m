@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import "AvatarView.h"
+#import "PhotoView.h"
 #import "UITextView+Resize.h"
 
-@implementation AvatarView
+@implementation PhotoView
 @synthesize remoteImageView;
 @synthesize captionTextView;
 

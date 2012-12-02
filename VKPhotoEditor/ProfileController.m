@@ -16,8 +16,7 @@
 #import "VKRequestExecutor.h"
 #import "UIView+Helpers.h"
 #import "CALayer+Animations.h"
-#import "PhotoHeaderCell.h"
-#import "AvatarView.h"
+#import "PhotoView.h"
 
 @interface ProfileController () <VKRequestExecutorDelegate>
 @end

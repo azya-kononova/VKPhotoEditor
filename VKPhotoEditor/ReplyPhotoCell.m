@@ -10,7 +10,8 @@
 #import "UITextView+Resize.h"
 #import "ReplyPhotoList.h"
 #import "DataFormatter.h"
-#import "PhotoCell.h"
+#import "PhotoView.h"
+#import "UIView+Helpers.h"
 
 @interface ReplyPhotoCell ()<TheaterViewDataSource, TheaterViewDelegate, PhotoListDelegate>
 @end
@@ -48,6 +49,8 @@
 
 - (void)displayPhoto:(VKPhoto *)_photo
 {
+    if (_photo == photo) return;
+    
     self.hidden = _photo.imageURL == nil;
     photo = _photo;
     [avatarImageView displayImage:photo.account.avatar];
@@ -57,6 +60,7 @@
     postDateLabel.text = [DataFormatter formatRelativeDate:photo.date];
     
     //TODO: load replies
+    replyPhotos = [NSMutableArray new];
     [replyPhotos addObject:photo];
     [replyPhotos addObject:photo.replyToPhoto];
     
@@ -65,11 +69,11 @@
     [theaterView reloadData];
 }
 
-- (UIView *)arrowToCell:(PhotoCell *)photoCell
+- (UIView *)arrowToView:(PhotoView *)photoView
 {
     UIImageView *arrowImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"NextPhoto.png"]];
     CGRect rect = arrowImageView.frame;
-    rect.origin = CGPointMake(photoCell.bounds.size.width - rect.size.width - 10, (photoCell.bounds.size.height - rect.size.height)/2);
+    rect.origin = CGPointMake(photoView.bounds.size.width - rect.size.width - 10, (photoView.bounds.size.height - rect.size.height)/2);
     arrowImageView.frame = rect;
     
     return arrowImageView;
@@ -108,21 +112,22 @@
     if (index == replyPhotos.count) return loadingView;
     
     VKPhoto *replyPhoto = [replyPhotos objectAtIndex:index];
-    PhotoCell *photoCell = [replyPhotoViews objectForKey:[NSNumber numberWithInt:index]];
+    PhotoView *photoView = [replyPhotoViews objectForKey:[NSNumber numberWithInt:index]];
     
-    if (!photoCell) {
-        photoCell = [PhotoCell loadFromNIB];
+    if (!photoView) {
+        photoView = [PhotoView loadFromNIB];
+        [photoView resizeTo:CGSizeMake(320, 320)];
         
         if (replyPhoto.replyTo) {
-            [photoCell addSubview:[self arrowToCell:photoCell]];
+            [photoView addSubview:[self arrowToView:photoView]];
         }
         
-        [replyPhotoViews setObject:photoCell forKey:[NSNumber numberWithInt:index]];
+        [replyPhotoViews setObject:photoView forKey:[NSNumber numberWithInt:index]];
     }
     
-    [photoCell displayPhoto:replyPhoto];
+    [photoView displayPhoto:replyPhoto];
     
-    return photoCell;
+    return photoView;
 }
 
 #pragma mark - TheaterViewDelegate
