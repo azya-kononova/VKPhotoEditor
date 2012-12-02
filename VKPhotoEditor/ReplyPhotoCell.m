@@ -21,6 +21,7 @@
     NSMutableDictionary *replyPhotoViews;
     
     ReplyPhotoList *repliesList;
+    NSInteger emplyCellCount;
 }
 
 @synthesize avatarImageView;
@@ -29,6 +30,7 @@
 @synthesize postDateLabel;
 @synthesize theaterView;
 @synthesize delegate;
+@synthesize loadingView;
 
 - (void)awakeFromNib
 {
@@ -37,6 +39,8 @@
     replyPhotoViews = [NSMutableDictionary dictionary];
     
     replyPhotos = [NSMutableArray array];
+    
+    emplyCellCount = 0;
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handelTap:)];
     [self addGestureRecognizer:recognizer];
@@ -55,6 +59,8 @@
     //TODO: load replies
     [replyPhotos addObject:photo];
     [replyPhotos addObject:photo.replyToPhoto];
+    
+    emplyCellCount = [replyPhotos.lastObject replyTo] ? 1 : 0;
     
     [theaterView reloadData];
 }
@@ -94,11 +100,13 @@
 
 - (NSUInteger)numberOfItemsInTheaterView:(TheaterView*)view
 {
-    return replyPhotos.count;
+    return replyPhotos.count + emplyCellCount;
 }
 
 - (UIView*)theaterView:(TheaterView*)view viewForItemWithIndex:(NSUInteger)index
 {
+    if (index == replyPhotos.count) return loadingView;
+    
     VKPhoto *replyPhoto = [replyPhotos objectAtIndex:index];
     PhotoCell *photoCell = [replyPhotoViews objectForKey:[NSNumber numberWithInt:index]];
     
@@ -121,13 +129,15 @@
 
 - (void)theaterView:(TheaterView*)view didTapOnItemWithIndex:(NSUInteger)index
 {
+    if (index == replyPhotos.count) return;
+    
     [delegate replyPhotoCell:self didTapOnPhoto:[replyPhotos objectAtIndex:index]];
 }
 
 - (void)theaterView:(TheaterView *)view didScrollToItemWithIndex:(NSUInteger)index
 {
-    VKPhoto *_photo = [replyPhotos objectAtIndex:index];
-    if (_photo.replyTo && index == replyPhotos.count - 1) {
+    if (index == replyPhotos.count) {
+        VKPhoto *_photo = [replyPhotos objectAtIndex:index - 1];
         [self loadRepliesForPhoto:_photo];
     }
 }
@@ -137,6 +147,9 @@
 - (void)photoList:(PhotoList*)photoList didUpdatePhotos:(NSArray*)photos
 {
     [replyPhotos addObjectsFromArray:photos];
+    emplyCellCount = [replyPhotos.lastObject replyTo] ? 1 : 0;
+    [loadingView removeFromSuperview];
+    
     [theaterView reloadData];
 }
 

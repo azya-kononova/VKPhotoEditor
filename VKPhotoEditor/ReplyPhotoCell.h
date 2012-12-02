@@ -22,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *postDateLabel;
 @property (nonatomic, strong) IBOutlet TheaterView *theaterView;
+@property (nonatomic, strong) IBOutlet UIView *loadingView;
 
 - (void)displayPhoto:(VKPhoto *)_photo;
 
