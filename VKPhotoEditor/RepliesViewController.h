@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "Account.h"
 #import "PullTableView.h"
-
-@class VKPhoto;
+#import "UserProfile.h"
+#import "VKPhoto.h"
 
 @protocol RepliesViewControllerDelegate;
 
@@ -21,10 +21,12 @@
 @property (nonatomic, strong) IBOutlet UILabel* noPhotosLabel;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
 
+- (id)initWithProfile:(UserProfile *)_profile;
+
 @end
 
 @protocol RepliesViewControllerDelegate
-- (void)repliesViewController:(RepliesViewController *)controller didSelectAccount:(Account*)account;
+- (void)repliesViewController:(RepliesViewController *)controller didSelectAccount:(Account*)account animated:(BOOL)animated;;
 - (void)repliesViewController:(RepliesViewController *)controller didReplyToPhoto:(VKPhoto *)photo;
 - (void)repliesViewController:(RepliesViewController *)controller presenModalViewController:(UIViewController *)controller animated:(BOOL)animated;
 - (void)repliesViewController:(RepliesViewController *)controller dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated;

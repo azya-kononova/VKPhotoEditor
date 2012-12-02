@@ -10,4 +10,6 @@
 
 @interface ReplyPhotoList : PhotoList
 
+- (id)initWithPhotoID:(NSString *)_photoID;
+
 @end

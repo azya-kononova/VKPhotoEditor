@@ -18,10 +18,11 @@
 #import "AllPhotosController.h"
 #import "UINavigationController+Transistions.h"
 #import "UserAccountController.h"
+#import "RepliesViewController.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
-@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileBaseControllerDelegate, AllPhotosControllerDelegate>
+@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileBaseControllerDelegate, AllPhotosControllerDelegate, RepliesViewControllerDelegate>
 @end
 
 @implementation PhotosListController {
@@ -38,6 +39,7 @@
     UINavigationController *navCtrl;
     AllPhotosController *allPhotosCtrl;
     ProfileController *profileCtrl;
+    RepliesViewController *repliesCtrl;
 }
 
 - (id)initWithImageToUpload:(ImageToUpload*)image
@@ -59,7 +61,11 @@
     allPhotosCtrl = [AllPhotosController new];
     allPhotosCtrl.delegate = self;
     
+    repliesCtrl = [[RepliesViewController alloc] initWithProfile:service.profile];
+    repliesCtrl.delegate = self;
+    
     navCtrl = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
+    //navCtrl.viewControllers = [NSArray arrayWithObject:repliesCtrl];
     navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
     
     UINavigationController *navCtrl1 = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
@@ -217,6 +223,40 @@
     [profileCtrl uploadImage:image];
     
     [super photoEditController:controller didFinishWithImage:image];
+}
+
+#pragma mark - RepliesViewControllerDelegate
+
+- (void)repliesViewController:(RepliesViewController *)controller didReplyToPhoto:(VKPhoto *)photo
+{
+    isAvatar = NO;
+    replyToPhoto = photo;
+    [choosePhotoView show:YES replyToPhoto:photo animated:YES];
+}
+
+- (void)repliesViewController:(RepliesViewController *)controller didSelectAccount:(Account *)account animated:(BOOL)animated
+{
+    if (account.accountId == service.profile.accountId) {
+        tabBar.state = TabBarStateProfile;
+        return;
+    }
+    tabBar.state = TabBarStateUnselected;
+    UserAccountController *userCtrl = [[UserAccountController alloc] initWithProfile:(UserProfile*)account];
+    userCtrl.delegate = self;
+    [navCtrl pushViewController:userCtrl animated:animated];
+}
+
+- (void)repliesViewController:(RepliesViewController *)controller presenModalViewController:(UIViewController *)ctrl animated:(BOOL)animated
+{
+    [self presentModalViewController:ctrl withPushDirection:kCATransitionFromRight];
+}
+
+- (void)repliesViewController:(RepliesViewController *)controller dismissModalViewController:(UIViewController *)ctrl animated:(BOOL)animated
+{
+    if (!animated)
+        [self dismissModalViewControllerWithPushDirection:kCATransitionFromRight];
+    else
+        [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
 }
 
 @end

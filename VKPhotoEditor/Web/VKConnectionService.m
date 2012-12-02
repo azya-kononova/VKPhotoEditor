@@ -166,6 +166,13 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     return exec;
 }
 
+- (VKRequestExecutor*)getHistory:(NSString *)photoId limit:(NSInteger)limit
+{
+    NSMutableString *path = [NSMutableString stringWithFormat:@"getHistory?id=%@&limit=%d", photoId, limit];
+    RequestExecutorProxy *exec = [self getPath:path.copy];
+    return exec;
+}
+
 #pragma mark - executors handlers
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data

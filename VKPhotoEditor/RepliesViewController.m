@@ -14,12 +14,11 @@
 #import "GridModeButton.h"
 #import "UIColor+VKPhotoEditor.h"
 #import "FastViewerController.h"
-#import "VKPhoto.h"
 #import "MentionList.h"
 #import "MentionPhotoCell.h"
 #import "ReplyPhotoCell.h"
 
-@interface RepliesViewController () <UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, MentionPhotoCellDelegate>
+@interface RepliesViewController () <UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, MentionPhotoCellDelegate, ReplyPhotoCellDelegate>
 @end
 
 @implementation RepliesViewController {
@@ -33,6 +32,7 @@
     NSInteger gridCellHeight;
     
     UserProfile *profile;
+    NSArray *gridMentionList;
 }
 
 @synthesize tableView;
@@ -91,12 +91,31 @@
     
     for (int i = 0; i < itemsInRow; i++) {
         int row = itemsInRow * indexPath.row + i;
-        if (row < mentionList.photos.count) {
-            [photos addObject:[mentionList.photos objectAtIndex:row]];
+        if (row < gridMentionList.count) {
+            [photos addObject:[gridMentionList objectAtIndex:row]];
         }
     }
     
     return photos;
+}
+
+- (NSArray *)getGridPhotos
+{
+    NSMutableArray *photos = [NSMutableArray array];
+    
+    for (VKPhoto *photo in mentionList.photos) {
+        [self addPhoto:photo to:photos];
+    }
+    return photos;
+}
+
+- (void)addPhoto:(VKPhoto *)photo to:(NSMutableArray *)array
+{
+    [array addObject:photo];
+    
+    if (photo.replyToPhoto) {
+        [self addPhoto:photo.replyToPhoto to:array];
+    }
 }
 
 #pragma mark - PhotosListDelegate
@@ -105,6 +124,7 @@
 {
     activityIndicator.hidden = YES;
     noPhotosLabel.hidden = mentionList.photos.count;
+    gridMentionList = [self getGridPhotos];
     
     [tableView reloadData];
     tableView.pullTableIsLoadingMore = NO;
@@ -128,7 +148,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return isGridMode ? (NSInteger) ceil((double) mentionList.photos.count / itemsInRow) : mentionList.photos.count;
+    return isGridMode ? (NSInteger) ceil((double) gridMentionList.count / itemsInRow) : mentionList.photos.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,6 +167,7 @@
         return cell;
     } else if (photo.type == VKPhotoTypeReply) {
         ReplyPhotoCell *cell = [ReplyPhotoCell loadFromNIB];
+        cell.delegate = self;
         [cell displayPhoto:[mentionList.photos objectAtIndex:indexPath.row]];
         
         return cell;
@@ -220,14 +241,33 @@
     isFastViewerOpen = NO;
 }
 
+- (void)fastViewerController:(FastViewerController *)controller didFinishWithAccount:(Account *)account
+{
+    [delegate repliesViewController:self didSelectAccount:account animated:NO];
+    [delegate repliesViewController:self dismissModalViewController:controller animated:NO];
+    isFastViewerOpen = NO;
+}
+
 #pragma mark - MentionPhotoCellDelegate
 
 - (void)mentionPhotoCell:(MentionPhotoCell *)cell didTapOnAccount:(Account *)account
 {
-    [delegate repliesViewController:self didSelectAccount:account];
+    [delegate repliesViewController:self didSelectAccount:account animated:YES];
 }
 
 - (void)mentionPhotoCell:(MentionPhotoCell *)cell didTapOnPhoto:(VKPhoto *)photo
+{
+    [delegate repliesViewController:self didReplyToPhoto:photo];
+}
+
+#pragma mark - ReplyPhotoCellDelegate
+
+- (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnAccount:(Account *)account
+{
+    [delegate repliesViewController:self didSelectAccount:account animated:YES];
+}
+
+- (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnPhoto:(VKPhoto *)photo
 {
     [delegate repliesViewController:self didReplyToPhoto:photo];
 }

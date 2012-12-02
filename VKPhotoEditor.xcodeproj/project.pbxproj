@@ -155,6 +155,8 @@
 		22D471E8166B471300C1390B /* ReplyPhotoList.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D471E7166B471200C1390B /* ReplyPhotoList.m */; };
 		22D471EB166B4F5C00C1390B /* MentionPhotoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D471EA166B4F5C00C1390B /* MentionPhotoCell.m */; };
 		22D471ED166B4F6D00C1390B /* MentionPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D471EC166B4F6D00C1390B /* MentionPhotoCell.xib */; };
+		22D471FB166B67A100C1390B /* NextPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D471F9166B67A000C1390B /* NextPhoto.png */; };
+		22D471FC166B67A100C1390B /* NextPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D471FA166B67A000C1390B /* NextPhoto@2x.png */; };
 		22D5D2441661265B00BCB7E0 /* Selector_PhotoView.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2401661265B00BCB7E0 /* Selector_PhotoView.png */; };
 		22D5D2451661265B00BCB7E0 /* Selector_PhotoView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2411661265B00BCB7E0 /* Selector_PhotoView@2x.png */; };
 		22D5D2461661265B00BCB7E0 /* Selector_PhotoViewActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2421661265B00BCB7E0 /* Selector_PhotoViewActive.png */; };
@@ -597,6 +599,8 @@
 		22D471E9166B4F5C00C1390B /* MentionPhotoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MentionPhotoCell.h; sourceTree = "<group>"; };
 		22D471EA166B4F5C00C1390B /* MentionPhotoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MentionPhotoCell.m; sourceTree = "<group>"; };
 		22D471EC166B4F6D00C1390B /* MentionPhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MentionPhotoCell.xib; sourceTree = "<group>"; };
+		22D471F9166B67A000C1390B /* NextPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NextPhoto.png; sourceTree = "<group>"; };
+		22D471FA166B67A000C1390B /* NextPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NextPhoto@2x.png"; sourceTree = "<group>"; };
 		22D5D2401661265B00BCB7E0 /* Selector_PhotoView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selector_PhotoView.png; sourceTree = "<group>"; };
 		22D5D2411661265B00BCB7E0 /* Selector_PhotoView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Selector_PhotoView@2x.png"; sourceTree = "<group>"; };
 		22D5D2421661265B00BCB7E0 /* Selector_PhotoViewActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selector_PhotoViewActive.png; sourceTree = "<group>"; };
@@ -1091,6 +1095,8 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				22D471F9166B67A000C1390B /* NextPhoto.png */,
+				22D471FA166B67A000C1390B /* NextPhoto@2x.png */,
 				22C9DA21166A1BC90020C54B /* Publish_active.png */,
 				22C9DA22166A1BC90020C54B /* Publish_active@2x.png */,
 				22C9DA23166A1BC90020C54B /* Publish.png */,
@@ -1958,6 +1964,8 @@
 				22D471C5166A843400C1390B /* RepliesViewController.xib in Resources */,
 				22D471E5166A95CD00C1390B /* ReplyPhotoCell.xib in Resources */,
 				22D471ED166B4F6D00C1390B /* MentionPhotoCell.xib in Resources */,
+				22D471FB166B67A100C1390B /* NextPhoto.png in Resources */,
+				22D471FC166B67A100C1390B /* NextPhoto@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

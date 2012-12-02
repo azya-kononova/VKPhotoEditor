@@ -10,16 +10,24 @@
 #import "RemoteImageView.h"
 #import "VKPhoto.h"
 #import "VKHighlightTextView.h"
+#import "TheaterView.h"
+
+@protocol ReplyPhotoCellDelegate;
 
 @interface ReplyPhotoCell : UITableViewCell
 
+@property (nonatomic, unsafe_unretained) id<ReplyPhotoCellDelegate> delegate;
 @property (nonatomic, strong) IBOutlet RemoteImageView *avatarImageView;
 @property (nonatomic, strong) IBOutlet RemoteImageView *replyToImageView;
 @property (nonatomic, strong) IBOutlet UILabel *userNameLabel;
 @property (nonatomic, strong) IBOutlet UILabel *postDateLabel;
-@property (nonatomic, strong) IBOutlet UIView *placeholder;
-@property (nonatomic, strong) IBOutlet VKHighlightTextView *captionTextView;
+@property (nonatomic, strong) IBOutlet TheaterView *theaterView;
 
 - (void)displayPhoto:(VKPhoto *)_photo;
 
+@end
+
+@protocol ReplyPhotoCellDelegate
+- (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnAccount:(Account *)account;
+- (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnPhoto:(VKPhoto *)photo;
 @end

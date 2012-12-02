@@ -11,17 +11,30 @@
 #import "NSObject+Map.h"
 #import "VKPhoto.h"
 
-@implementation MentionList
+#define AFTER_FALSE @"0"
+
+@implementation MentionList {
+    NSString *since;
+    NSString *after;
+}
+
 @synthesize account;
 
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getMentions:account.accountId since:nil after:nil limit:limit];
+    return [service getMentions:account.accountId since:since after:after limit:limit];
 }
 
 - (void)mapData:(id)data
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];
+    
+    //TODO: may be check it in other way?...
+    if ([data objectForKey:@"since"] && ![[data objectForKey:@"after"] isEqualToString:AFTER_FALSE]) {
+        since = [data objectForKey:@"since"];
+        after = [data objectForKey:@"after"];
+    }
+    
     for (NSDictionary *user in [data objectForKey:@"users"]) {
         Account *acc = [user integerForKey:@"id"] == service.profile.accountId ? service.profile : [Account accountWithDict:user];
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
@@ -30,14 +43,21 @@
         NSDictionary *photoInfo = [dict objectForKey:@"photo"];
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:photoInfo];
         photo.account = [accounts objectForKey:[photoInfo objectForKey:@"user"]];
-        photo.type = [VKPhoto photoType:[photoInfo objectForKey:@"type"]];
+        photo.type = [VKPhoto photoType:[dict objectForKey:@"type"]];
         
-        NSDictionary *replyDict = [dict objectForKey:@"reply_to_photo"];
+        NSDictionary *replyDict = [photoInfo objectForKey:@"reply_to_photo"];
         photo.replyToPhoto = [VKPhoto VKPhotoWithDict:replyDict];
         photo.replyToPhoto.account = [accounts objectForKey:[replyDict objectForKey:@"user"]];
         
         return photo; }];
     [self append:_photos totalCount:0];
+}
+
+- (void)reset
+{
+    [super reset];
+    since = nil;
+    after = nil;
 }
 
 @end
