@@ -13,6 +13,7 @@
 @interface PhotoView : UIView
 @property (nonatomic, strong) IBOutlet RemoteImageView *remoteImageView;
 @property (nonatomic, strong) IBOutlet VKHighlightTextView *captionTextView;
+@property (nonatomic, strong) IBOutlet UIImageView *arrowImageView;
 
 - (void)displayPhoto:(VKPhoto *)photo;
 @end

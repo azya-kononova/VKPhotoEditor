@@ -117,16 +117,12 @@
     if (!photoView) {
         photoView = [PhotoView loadFromNIB];
         [photoView resizeTo:CGSizeMake(320, 320)];
-        
-        if (replyPhoto.replyTo) {
-            [photoView addSubview:[self arrowToView:photoView]];
-        }
-        
+
         [replyPhotoViews setObject:photoView forKey:[NSNumber numberWithInt:index]];
     }
     
     [photoView displayPhoto:replyPhoto];
-    
+    photoView.arrowImageView.hidden = !replyPhoto.replyTo;
     return photoView;
 }
 

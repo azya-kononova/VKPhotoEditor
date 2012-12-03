@@ -12,10 +12,13 @@
 @implementation PhotoView
 @synthesize remoteImageView;
 @synthesize captionTextView;
+@synthesize arrowImageView;
 
 - (void)awakeFromNib
 {
     captionTextView.font = [UIFont fontWithName:@"Lobster" size:28.0];
+    
+    arrowImageView.hidden = YES;
 }
 
 - (void)displayPhoto:(VKPhoto *)photo
