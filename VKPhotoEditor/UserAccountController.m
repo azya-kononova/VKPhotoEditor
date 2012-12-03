@@ -64,4 +64,11 @@
     followButton.selected = followedByMe;
 }
 
+#pragma mark - UserHeaderViewDelegate
+
+- (void)userMenuViewDidTapAction:(UserMenuView *)view
+{
+//    TODO: Block / unblock user
+}
+
 @end

@@ -25,6 +25,8 @@
     NSMutableDictionary *avatarsForIndexes;
     BOOL avatarsLoaded;
     BOOL infoLoaded;
+    UserMenuView *userMenuView;
+    BOOL isProfile;
 }
 @synthesize photosTableView;
 @synthesize delegate;
@@ -42,7 +44,8 @@
 {
     if (self = [super init]) {
         profile = _profile;
-        photosList = [profile isKindOfClass:UserProfile.class] ? [[UserPhotoList alloc] initWithPhotos:_profile.lastPhotos] : [UserPhotoList new];
+        isProfile = [profile isKindOfClass:UserProfile.class];
+        photosList = isProfile ? [[UserPhotoList alloc] initWithPhotos:_profile.lastPhotos] : [UserPhotoList new];
         photosList.delegate = self;
         photosList.account = profile;
         
@@ -80,6 +83,12 @@
     profileHeaderView.avatarTheaterView.dataSource = self;
     profileHeaderView.state = ProfileHeaderViewStateHeader;
     [self.view addSubview:profileHeaderView];
+    
+    userMenuView = [UserMenuView loadFromNIB];
+    userMenuView.delegate = self;
+    [userMenuView.actionButton setTitle:isProfile ? @"Logout" : @"Block user" forState:UIControlStateNormal];
+    [self.view addSubview:userMenuView];
+    [userMenuView moveTo:CGPointMake(0, 44)];
     
     photosTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
     photosTableView.pullBackgroundColor = [UIColor blackColor];
@@ -128,7 +137,27 @@
     [avatarsList loadMore];
 }
 
+#pragma mark - UserMenuViewDelegate
+
+- (void)userMenuViewDidTapAction:(UserMenuView *)view
+{
+   // Override in subclus
+}
+
+- (void)userMenuViewDidCancel:(UserMenuView *)view
+{
+    profileHeaderView.userMenuButton.selected = NO;
+    [userMenuView show:NO];
+    photosTableView.scrollEnabled = YES;
+}
+
 #pragma mark - ProfileHeaderViewDelegate
+
+- (void)profileHeaderView:(ProfileHeaderView *)view didOpenUserMenu:(BOOL)open
+{
+    [userMenuView show:open];
+    photosTableView.scrollEnabled = !open;
+}
 
 - (void)profileHeaderViewDidTapButton:(ProfileHeaderView *)view
 {

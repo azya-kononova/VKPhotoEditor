@@ -79,7 +79,14 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
-#pragma mark - profileHeaderViewDelegate
+#pragma mark - UserHeaderViewDelegate
+
+- (void)userMenuViewDidTapAction:(UserMenuView *)view
+{
+    [self.delegate profileBaseControllerDidLogout:self];
+}
+
+#pragma mark - ProfileHeaderViewDelegate
 
 - (void)profileHeaderViewDidTapButton:(ProfileHeaderView *)view
 {

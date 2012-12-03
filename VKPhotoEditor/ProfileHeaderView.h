@@ -45,10 +45,12 @@ typedef enum {
 @property (nonatomic, strong) IBOutlet UILabel *mentionsLabelCount;
 @property (nonatomic, strong) IBOutlet UIView *headerCentralView;
 @property (nonatomic, strong) IBOutlet UIButton *backButton;
+@property (nonatomic, strong) IBOutlet UIButton *userMenuButton;
 
 - (IBAction)changeMode:(UIButton*)sender;
 - (IBAction)centerAction;
 - (IBAction)back;
+- (IBAction)showUserMenu:(UIButton*)sender;
 
 @end
 
@@ -56,4 +58,5 @@ typedef enum {
 - (void)profileHeaderView:(ProfileHeaderView*)view didChangeMode:(ProfileHeaderViewMode)mode;
 - (void)profileHeaderViewDidTapButton:(ProfileHeaderView*)view;
 - (void)profileHeaderViewDidBack:(ProfileHeaderView*)view;
+- (void)profileHeaderView:(ProfileHeaderView*)view didOpenUserMenu:(BOOL)open;
 @end;

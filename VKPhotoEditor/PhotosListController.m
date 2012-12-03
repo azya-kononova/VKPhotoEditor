@@ -116,14 +116,16 @@
 
 #pragma mark - ProfileBaseControllerDelegate
 
+- (void)profileBaseControllerDidLogout:(ProfileBaseController *)ctrl
+{
+    [service logout];
+    [self.navigationController popToRootViewControllerTransition:UIViewAnimationTransitionFlipFromRight];
+}
+
 - (void)profileBaseControllerWantLoadAvatar:(ProfileBaseController *)ctrl
 {
     isAvatar = YES;
     [choosePhotoView show:YES withExitButton:NO animated:YES];
-}
-
-- (void)profileBaseControllerDidOpenProfile:(ProfileController *)ctrl
-{
 }
 
 - (void)profileBaseControllerDidBack:(ProfileController *)ctrl

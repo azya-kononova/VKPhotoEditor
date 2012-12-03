@@ -15,10 +15,11 @@
 #import "MentionList.h"
 #import "RequestExecutorDelegateAdapter.h"
 #import "ProfileHeaderView.h"
+#import "UserMenuView.h"
 
 @protocol ProfileBaseControllerDelegate;
 
-@interface ProfileBaseController : UIViewController <ProfileHeaderViewDelegate> {
+@interface ProfileBaseController : UIViewController <ProfileHeaderViewDelegate, UserMenuViewDelegate> {
     BOOL followedByMe;
     RequestExecutorDelegateAdapter *adapter;
     VKConnectionService *service;
@@ -46,9 +47,9 @@
 @end
 
 @protocol ProfileBaseControllerDelegate
-- (void)profileBaseControllerDidOpenProfile:(ProfileBaseController*)ctrl;
 - (void)profileBaseControllerDidBack:(ProfileBaseController*)ctrl;
 - (void)profileBaseController:(ProfileBaseController*)ctrl didTapHashTag:(NSString*)hashTag;
 - (void)profileBaseController:(ProfileBaseController*)ctrl didReplyToPhoto:(VKPhoto *)photo;
 - (void)profileBaseControllerWantLoadAvatar:(ProfileBaseController*)ctrl;
+- (void)profileBaseControllerDidLogout:(ProfileBaseController*)ctrl;
 @end

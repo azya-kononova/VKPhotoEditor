@@ -25,13 +25,21 @@
 @synthesize mode;
 @synthesize state;
 @synthesize delegate;
+@synthesize userMenuButton;
 
 - (void)awakeFromNib
 {
     centralButton.bgImagecaps = CGSizeMake(23, 0);
+    [userMenuButton setImage:[UIImage imageNamed:@"HeaderArrow_active.png"] forState:UIControlStateSelected | UIControlStateHighlighted ];
 }
 
 #pragma mark - actions
+
+- (IBAction)showUserMenu:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    [delegate profileHeaderView:self didOpenUserMenu:sender.selected];
+}
 
 - (IBAction)back
 {
