@@ -65,8 +65,8 @@
     repliesCtrl.delegate = self;
     
     navCtrl = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
-    navCtrl.viewControllers = [NSArray arrayWithObject:repliesCtrl];
-//    navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
+//    navCtrl.viewControllers = [NSArray arrayWithObject:repliesCtrl];
+    navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
     
     UINavigationController *navCtrl1 = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
     navCtrl1.viewControllers = [NSArray arrayWithObject:profileCtrl];

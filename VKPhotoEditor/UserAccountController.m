@@ -7,8 +7,13 @@
 //
 
 #import "UserAccountController.h"
+#import "VKRequestExecutor.h"
+#import "NSArray+Helpers.h"
+#import "UIView+Helpers.h"
 
-@interface UserAccountController ()
+@interface UserAccountController () {
+    
+}
 @end
 
 @implementation UserAccountController
@@ -25,13 +30,36 @@
 {
     [super viewDidLoad];
     backButton.bgImagecaps = CGSizeMake(15, 0);
+    [self.centralButton setBackgroundImage:[UIImage imageNamed:@"FollowBtn_pressed.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [self.centralButton setTitle:@"Following" forState:UIControlStateSelected | UIControlStateHighlighted];
 }
 
 #pragma mark - actions
 
+- (IBAction)followAccount:(id)sender
+{
+    VKRequestExecutor *exec = self.centralButton.selected ?
+            [service unfollowUser:self.profile.accountId]  : [service followUser:self.profile.accountId] ;
+    [adapter start:exec onSuccess:nil onError:@selector(exec:didFailFollowUser:) ];
+    self.centralButton.selected = !self.centralButton.selected;
+}
+
 - (IBAction)back:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark - executor handlers
+
+- (void)exec:(VKRequestExecutor*)exec didFailFollowUser:(id)data
+{
+    self.centralButton.selected = !self.centralButton.selected;
+}
+
+- (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data
+{
+    [super exec:exec didGetUser:data];
+    self.centralButton.selected = followedByMe;
 }
 
 @end

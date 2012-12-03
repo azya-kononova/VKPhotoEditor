@@ -10,26 +10,26 @@
 #import "PhotoCell.h"
 #import "PhotoView.h"
 #import "UIView+Helpers.h"
-#import "RequestExecutorDelegateAdapter.h"
 #import "VKConnectionService.h"
 #import "UITableViewCell+NIB.h"
 #import "CALayer+Animations.h"
+#import "NSArray+Helpers.h"
 
 @interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate>
 @end
 
 @implementation ProfileBaseController{
     UserProfile *profile;
-    RequestExecutorDelegateAdapter *adapter;
-    VKConnectionService *service;
     NSInteger selectedPhoto;
     NSMutableDictionary *avatarsForIndexes;
     ProfileModeState mode;
-    BOOL notLoaded;
+    BOOL avatarsLoaded;
+    BOOL infoLoaded;
 }
 @synthesize photosTableView;
 @synthesize delegate;
 @synthesize noPhotoLabel;
+@synthesize loadingView;
 
 @synthesize avatarTheaterView;
 @synthesize headerView;
@@ -48,6 +48,9 @@
 @synthesize avatarsList;
 @synthesize followersList;
 @synthesize mentionsList;
+@synthesize photosLabelCount;
+@synthesize mentionsLabelCount;
+@synthesize followersLabelCount;
 
 - (id)initWithProfile:(UserProfile *)_profile
 {
@@ -69,6 +72,7 @@
         avatarsForIndexes = [NSMutableDictionary new];
         service = [VKConnectionService shared];
         selectedPhoto = -1;
+        
         adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
         sourceList = photosList;
     }
@@ -83,25 +87,33 @@
     
     nameLabel.text = profile.login;
     
-    photosTableView.tableHeaderView = headerView;
+    photosTableView.tableHeaderView = headerTopView;
     photosTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
     photosTableView.pullBackgroundColor = [UIColor blackColor];
     photosTableView.loadBackgroundColor = [UIColor whiteColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
     [photosList loadMore];
+    [avatarsList loadMore];
     
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
     recognizer.minimumPressDuration = 2.0;
     [photosTableView addGestureRecognizer:recognizer];
+    
+//    [adapter start:[service getUser:self.profile.accountId] onSuccess:@selector(exec:didGetUser:) onError:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
-    if (!notLoaded) {
-        [avatarsList loadMore];
-        notLoaded = YES;
+    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
+        [delegate profileBaseControllerDidBack:self];
+    }
+}
+
+- (void)showContent
+{
+    if (infoLoaded && avatarsLoaded) {
+        loadingView.hidden = YES;
     }
 }
 
@@ -128,14 +140,6 @@
     [photosTableView reloadData];
 }
 
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
-        [delegate profileBaseControllerDidBack:self];
-    }
-}
-
 - (void)reloadAvatarList
 {
     avatarsForIndexes = nil;
@@ -143,9 +147,18 @@
     [avatarsList loadMore];
 }
 
-- (void)reloadAvatarAnimated:(BOOL)animated;
+- (void)reloadAvatar;
 {
     [avatarTheaterView reloadData];
+    
+    photosTableView.tableHeaderView = nil;
+    [headerTopView removeFromSuperview];
+    [headerView addSubview:headerTopView];
+    
+    if (followedByMe) {
+        photosTableView.tableHeaderView = headerBottomView;
+        return;
+    }
     
     BOOL show = avatarsList.photos.count != 0;
     [avatarActivity stopAnimating];
@@ -155,16 +168,9 @@
     
     [avatarTheaterView.layer fade];
     avatarTheaterView.hidden = !show;
-    
-    [photosTableView beginUpdates];
     CGFloat newHeight = headerTopView.frame.size.height + headerBottomView.frame.size.height + (show ? avatarTheaterView.frame.size.height : noAvatarImageView.frame.size.height);
-    if (animated)
-        [UIView animateWithDuration:0.3 delay:0 options: UIViewAnimationCurveEaseOut animations:^{
-            [headerView resizeTo:CGSizeMake(headerView.frame.size.height, newHeight)];
-        } completion:^(BOOL finished) {  }];
-    else
-        [headerView resizeTo:CGSizeMake(headerView.frame.size.height, newHeight)];
-    [photosTableView endUpdates];
+    [headerView resizeTo:CGSizeMake(headerView.frame.size.width, newHeight)];
+    
     photosTableView.tableHeaderView = headerView;
 }
 
@@ -196,13 +202,17 @@
         photosTableView.pullLastRefreshDate = [NSDate date];
         [self reloadPullTable];
     } else {
-        [self reloadAvatarAnimated:YES];
+        [self reloadAvatar];
+        if (!avatarsLoaded) {
+            avatarsLoaded = YES;
+            [self showContent];
+        } 
     }
 }
 
 - (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError *)error
 {
-    (photoList ==  sourceList) ? [self reloadPullTable] :  [self reloadAvatarAnimated:YES];
+    (photoList ==  sourceList) ? [self reloadPullTable] : [self reloadAvatar];
 }
 
 #pragma mark - Request Handler
@@ -210,6 +220,22 @@
 - (void)exec:(VKRequestExecutor*)exec didDeletePhoto:(id)ids
 {
     if ([ids count]) [photosList deletePhoto:[ids objectAtIndex:0]];
+}
+
+- (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data
+{
+    NSDictionary *userInfo = [[data objectForKey:@"users_info"] objectAtIndex:0];
+    photosLabelCount.text = [[userInfo objectForKey:@"photos_count"] stringValue];
+    mentionsLabelCount.text = [[userInfo objectForKey:@"mentions_count"] stringValue];
+    followersLabelCount.text = [[userInfo objectForKey:@"followers_count"] stringValue];
+    
+    NSArray *connections = [userInfo objectForKey:@"connections"];
+    followedByMe = [connections find:^BOOL (NSString* string) { return [string isEqualToString:@"following"]; }] != nil;
+    
+    if (!infoLoaded) {
+        infoLoaded = YES;
+        [self showContent];
+    }
 }
 
 #pragma mark - UITableViewDataSource

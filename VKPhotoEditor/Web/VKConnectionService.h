@@ -30,5 +30,9 @@ extern NSString *VKRequestDidFailNotification;
 - (VKRequestExecutor*)searchPhotos:(NSString*)query offset:(NSInteger)offset limit:(NSInteger)limit;
 - (VKRequestExecutor*)getMentions:(NSInteger)userId since:(NSString*)since after:(NSString*)after limit:(NSInteger)limit;
 - (VKRequestExecutor*)getHistory:(NSString*)photoId limit:(NSInteger)limit;
+- (VKRequestExecutor*)followUser:(NSInteger)userId;
+- (VKRequestExecutor*)unfollowUser:(NSInteger)userId;
+- (VKRequestExecutor*)getUsers:(NSArray*)users;
+- (VKRequestExecutor*)getUser:(NSInteger)userId;
 - (void)logout;
 @end

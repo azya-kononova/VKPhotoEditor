@@ -23,9 +23,6 @@
 @end
 
 @protocol RequestExecutorDelegateAdapterDelegate
-
 - (void)adapter:(RequestExecutorDelegateAdapter*)adapter didStartRequest:(VKRequestExecutor*)executor;
-
 - (void)adapterDidCompleteAll:(RequestExecutorDelegateAdapter*)adapter;
-
 @end

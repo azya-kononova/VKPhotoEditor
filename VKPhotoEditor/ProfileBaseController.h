@@ -13,6 +13,7 @@
 #import "UserProfile.h"
 #import "UserPhotoList.h"
 #import "MentionList.h"
+#import "RequestExecutorDelegateAdapter.h"
 
 typedef enum {
     ProfilePhotosMode = 0,
@@ -22,9 +23,15 @@ typedef enum {
 
 @protocol ProfileBaseControllerDelegate;
 
-@interface ProfileBaseController : UIViewController
+@interface ProfileBaseController : UIViewController {
+    BOOL followedByMe;
+    RequestExecutorDelegateAdapter *adapter;
+    VKConnectionService *service;
+}
+
 @property (nonatomic, strong) UserProfile *profile;
 
+@property (nonatomic, strong) IBOutlet UIView *loadingView;
 @property (nonatomic, strong) PhotoList *sourceList;
 @property (nonatomic, strong) UserPhotoList *photosList;
 @property (nonatomic, strong) MentionList *mentionsList;
@@ -48,9 +55,14 @@ typedef enum {
 @property (nonatomic, strong) IBOutlet UIImageView *noAvatarImageView;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *avatarActivity;
 @property (nonatomic, strong) IBOutlet UILabel *noAvatarLabel;
+@property (nonatomic, strong) IBOutlet UILabel *photosLabelCount;
+@property (nonatomic, strong) IBOutlet UILabel *followersLabelCount;
+@property (nonatomic, strong) IBOutlet UILabel *mentionsLabelCount;
 
 - (id)initWithProfile:(UserProfile*)profile;
 - (void)reloadAvatarList;
+
+- (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data;
 
 - (IBAction)leftOptionSelected;
 - (IBAction)rightOptionSelected;

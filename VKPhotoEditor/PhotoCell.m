@@ -85,6 +85,12 @@
 {
     [self showSelf:NO];
 }
+
+- (IBAction)openAccount
+{
+    [delegate photoCell:self didSelectAccount:photo.account];
+}
+
 #pragma mark - recognizers
 
 - (void)didTapOnPhoto

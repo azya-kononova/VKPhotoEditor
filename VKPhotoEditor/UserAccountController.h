@@ -11,5 +11,6 @@
 @interface UserAccountController : ProfileBaseController
 @property (nonatomic, strong) IBOutlet FlexibleButton *backButton;
 
+- (IBAction)followAccount:(id)sender;
 - (IBAction)back:(id)sender;
 @end

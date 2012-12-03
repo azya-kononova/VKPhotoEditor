@@ -173,6 +173,29 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     return exec;
 }
 
+- (VKRequestExecutor*)followUser:(NSInteger)userId
+{
+    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"followUser?user_id=%d&access_token=%@", userId, profile.accessToken]];
+    return exec;
+}
+
+- (VKRequestExecutor*)unfollowUser:(NSInteger)userId
+{
+    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"unfollowUser?user_id=%d&access_token=%@", userId, profile.accessToken]];
+    return exec;
+}
+
+- (VKRequestExecutor*)getUsers:(NSArray *)users
+{
+    NSString *path = [NSString stringWithFormat:@"getUsers?access_token=%@&id=%@", profile.accessToken,[[users valueForKey:@"description"] componentsJoinedByString:@""]];
+    return  [self getPath:path];
+}
+
+- (VKRequestExecutor*)getUser:(NSInteger)userId
+{
+    return [self getUsers:[NSArray arrayWithObject:[NSNumber numberWithInt:userId]]];
+}
+
 #pragma mark - executors handlers
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data

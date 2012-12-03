@@ -28,6 +28,8 @@
 
 - (void)displayPhoto:(VKPhoto*)photo;
 - (void)displayPhoto:(VKPhoto*)photo canSelectAccount:(BOOL)selectAccount;
+
+- (IBAction)openAccount;
 @end
 
 @protocol PhotoCellDelegate <NSObject>

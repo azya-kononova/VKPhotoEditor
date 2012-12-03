@@ -207,6 +207,12 @@
 		44EBC3BD166BC64A001EA593 /* LoginHeader_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3B9166BC649001EA593 /* LoginHeader_pressed@2x.png */; };
 		44EBC3BE166BC64A001EA593 /* LoginHeader.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3BA166BC64A001EA593 /* LoginHeader.png */; };
 		44EBC3BF166BC64A001EA593 /* LoginHeader@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3BB166BC64A001EA593 /* LoginHeader@2x.png */; };
+		44EBC3C6166BDEF9001EA593 /* FollowBtn_Following.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3C0166BDEF2001EA593 /* FollowBtn_Following.png */; };
+		44EBC3C7166BDEF9001EA593 /* FollowBtn_Following@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3C1166BDEF3001EA593 /* FollowBtn_Following@2x.png */; };
+		44EBC3C8166BDEF9001EA593 /* FollowBtn_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3C2166BDEF4001EA593 /* FollowBtn_pressed.png */; };
+		44EBC3C9166BDEF9001EA593 /* FollowBtn_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3C3166BDEF6001EA593 /* FollowBtn_pressed@2x.png */; };
+		44EBC3CA166BDEF9001EA593 /* FollowBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3C4166BDEF6001EA593 /* FollowBtn.png */; };
+		44EBC3CB166BDEF9001EA593 /* FollowBtn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44EBC3C5166BDEF8001EA593 /* FollowBtn@2x.png */; };
 		44F2A39D1664130F00677B96 /* UserAccountController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F2A39C1664130F00677B96 /* UserAccountController.m */; };
 		44F2A39F1664133400677B96 /* UserAccountController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A39E1664133400677B96 /* UserAccountController.xib */; };
 		44F2A3A816641B4700677B96 /* BackBtn_pressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44F2A3A616641B4700677B96 /* BackBtn_pressed@2x.png */; };
@@ -668,6 +674,12 @@
 		44EBC3B9166BC649001EA593 /* LoginHeader_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginHeader_pressed@2x.png"; sourceTree = "<group>"; };
 		44EBC3BA166BC64A001EA593 /* LoginHeader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginHeader.png; sourceTree = "<group>"; };
 		44EBC3BB166BC64A001EA593 /* LoginHeader@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginHeader@2x.png"; sourceTree = "<group>"; };
+		44EBC3C0166BDEF2001EA593 /* FollowBtn_Following.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FollowBtn_Following.png; sourceTree = "<group>"; };
+		44EBC3C1166BDEF3001EA593 /* FollowBtn_Following@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FollowBtn_Following@2x.png"; sourceTree = "<group>"; };
+		44EBC3C2166BDEF4001EA593 /* FollowBtn_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FollowBtn_pressed.png; sourceTree = "<group>"; };
+		44EBC3C3166BDEF6001EA593 /* FollowBtn_pressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FollowBtn_pressed@2x.png"; sourceTree = "<group>"; };
+		44EBC3C4166BDEF6001EA593 /* FollowBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FollowBtn.png; sourceTree = "<group>"; };
+		44EBC3C5166BDEF8001EA593 /* FollowBtn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "FollowBtn@2x.png"; sourceTree = "<group>"; };
 		44F2A39B1664130F00677B96 /* UserAccountController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountController.h; sourceTree = "<group>"; };
 		44F2A39C1664130F00677B96 /* UserAccountController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountController.m; sourceTree = "<group>"; };
 		44F2A39E1664133400677B96 /* UserAccountController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserAccountController.xib; sourceTree = "<group>"; };
@@ -1087,6 +1099,12 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44EBC3C0166BDEF2001EA593 /* FollowBtn_Following.png */,
+				44EBC3C1166BDEF3001EA593 /* FollowBtn_Following@2x.png */,
+				44EBC3C2166BDEF4001EA593 /* FollowBtn_pressed.png */,
+				44EBC3C3166BDEF6001EA593 /* FollowBtn_pressed@2x.png */,
+				44EBC3C4166BDEF6001EA593 /* FollowBtn.png */,
+				44EBC3C5166BDEF8001EA593 /* FollowBtn@2x.png */,
 				22D471F9166B67A000C1390B /* NextPhoto.png */,
 				22D471FA166B67A000C1390B /* NextPhoto@2x.png */,
 				22C9DA21166A1BC90020C54B /* Publish_active.png */,
@@ -1964,6 +1982,12 @@
 				44EBC3BD166BC64A001EA593 /* LoginHeader_pressed@2x.png in Resources */,
 				44EBC3BE166BC64A001EA593 /* LoginHeader.png in Resources */,
 				44EBC3BF166BC64A001EA593 /* LoginHeader@2x.png in Resources */,
+				44EBC3C6166BDEF9001EA593 /* FollowBtn_Following.png in Resources */,
+				44EBC3C7166BDEF9001EA593 /* FollowBtn_Following@2x.png in Resources */,
+				44EBC3C8166BDEF9001EA593 /* FollowBtn_pressed.png in Resources */,
+				44EBC3C9166BDEF9001EA593 /* FollowBtn_pressed@2x.png in Resources */,
+				44EBC3CA166BDEF9001EA593 /* FollowBtn.png in Resources */,
+				44EBC3CB166BDEF9001EA593 /* FollowBtn@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
