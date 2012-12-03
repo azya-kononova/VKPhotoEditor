@@ -83,7 +83,7 @@
     
     photosTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
     photosTableView.pullBackgroundColor = [UIColor blackColor];
-    photosTableView.loadBackgroundColor = [UIColor whiteColor];
+    photosTableView.loadBackgroundColor = [UIColor clearColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
     [photosList loadMore];
@@ -218,6 +218,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    tableView.backgroundColor = sourceList.photos.count ? [UIColor whiteColor] : [UIColor defaultBgColor];
     return sourceList.photos.count;
 }
 
