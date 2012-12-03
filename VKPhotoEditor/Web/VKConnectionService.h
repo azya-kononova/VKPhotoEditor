@@ -13,6 +13,7 @@
 
 extern NSString *VKErrorDomain;
 extern NSString *VKRequestDidFailNotification;
+extern NSString *VKRequestDidUpdateAvatarNotification;
 
 @interface VKConnectionService : NSObject
 
@@ -34,5 +35,6 @@ extern NSString *VKRequestDidFailNotification;
 - (VKRequestExecutor*)unfollowUser:(NSInteger)userId;
 - (VKRequestExecutor*)getUsers:(NSArray*)users;
 - (VKRequestExecutor*)getUser:(NSInteger)userId;
+- (VKRequestExecutor*)updateUserPic:(NSString*)pictureId;
 - (void)logout;
 @end

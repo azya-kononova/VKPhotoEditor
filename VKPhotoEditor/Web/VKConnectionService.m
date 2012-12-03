@@ -24,6 +24,7 @@
 
 NSString *VKErrorDomain = @"VKErrorDomain";
 NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
+NSString *VKRequestDidUpdateAvatarNotification = @"VKRequestDidUpdateAvatar";
 
 @implementation VKConnectionService
 @synthesize rootURL;
@@ -196,6 +197,13 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     return [self getUsers:[NSArray arrayWithObject:[NSNumber numberWithInt:userId]]];
 }
 
+- (VKRequestExecutor*)updateUserPic:(NSString*)pictureId
+{
+    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"updateUserpic?id=%@&access_token=%@", pictureId, profile.accessToken]];
+    exec.onSuccess = @selector(exec:didUpdateAvatar:);
+    return exec;
+}
+
 #pragma mark - executors handlers
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data
@@ -220,12 +228,18 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     [Settings current].profile = profile;
 }
 
-- (void)exec:(VKRequestExecutor*)exec didLoadAvatar:(id)data
+- (void)exec:(VKRequestExecutor*)exec didUpdateAvatar:(id)data
 {
     NSDictionary *user = [[data objectForKey:@"users"] objectAtIndex:0];
     [profile setPhotosInfo:user];
     profile.avatarId = [[data objectForKey:@"photo"] objectForKey:@"id"];
     [Settings current].profile = profile;
+}
+
+- (void)exec:(VKRequestExecutor*)exec didLoadAvatar:(id)data
+{
+    [self exec:exec didUpdateAvatar:data];
+    [[NSNotificationCenter defaultCenter] postNotificationName:VKRequestDidUpdateAvatarNotification object:self userInfo:nil];
 }
 
 - (void)exec:(VKRequestExecutor*)exec didDeleteAvatar:(id)data
@@ -234,6 +248,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
     profile.thumbnailAvatarUrl = nil;
     profile.avatarId = nil;
     [Settings current].profile = profile;
+    [[NSNotificationCenter defaultCenter] postNotificationName:VKRequestDidUpdateAvatarNotification object:self userInfo:nil];
 }
 
 - (void)exec:(VKRequestExecutor*)exec didFailWithError:(id)error

@@ -36,15 +36,10 @@
 - (id)initWithProfile:(UserProfile *)_profile
 {
     if (self = [super initWithProfile:_profile]) {
-        [self.profile addObserver:self forKeyPath:@"avatarUrl" options:0 context:NULL];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAvatarList) name:VKRequestDidUpdateAvatarNotification object:nil];
         service = [VKConnectionService shared];
     }
     return self;
-}
-
-- (void)dealloc
-{
-    [self.profile removeObserver:self forKeyPath:@"avatarUrl"];
 }
 
 - (void)viewDidLoad
@@ -56,13 +51,6 @@
     uploadingView.superview.layer.cornerRadius = 6;
     uploadingImageView.layer.cornerRadius = 17.5;
     uploadWidth = uploadingView.superview.frame.size.width;
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if([keyPath isEqualToString:@"avatarUrl"]) {
-        [self reloadAvatarList];
-    }
 }
 
 - (void)showUploading:(UIImage*)image
@@ -91,6 +79,15 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
+#pragma mark - profileHeaderViewDelegate
+
+- (void)profileHeaderViewDidTapButton:(ProfileHeaderView *)view
+{
+    VKPhoto *selectedPhoto = [self.avatarsList.photos objectAtIndex:self.profileHeaderView.avatarTheaterView.displayedItemIndex];
+    VKRequestExecutor *exec = [service updateUserPic:selectedPhoto.photoId];
+    [adapter start:exec onSuccess:@selector(VKRequestExecutor:didUpdatePhoto:) onError:nil];
+}
+
 #pragma mark - actions
 
 - (IBAction)openProfile
@@ -99,13 +96,18 @@
 
 #pragma mark - VKRequestExecutorDelegate
 
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didUpdatePhoto:(id)value
+{
+    [self.photosTableView reloadData];
+}
+
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
     [self cancelUpload];
     
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     for (NSDictionary *user in [value objectForKey:@"users"]) {
-        Account *acc = [Account accountWithDict:user];
+        Account *acc = [[user objectForKey:@"id"] intValue] == self.profile.accountId ? self.profile : [Account accountWithDict:user];
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
     }
     
