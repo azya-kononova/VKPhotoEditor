@@ -83,6 +83,10 @@
 
 - (void)profileHeaderViewDidTapButton:(ProfileHeaderView *)view
 {
+    if (!self.avatarsList.photos.count) {
+        [self.delegate profileBaseControllerWantLoadAvatar:self];
+        return;
+    }
     VKPhoto *selectedPhoto = [self.avatarsList.photos objectAtIndex:self.profileHeaderView.avatarTheaterView.displayedItemIndex];
     VKRequestExecutor *exec = [service updateUserPic:selectedPhoto.photoId];
     [adapter start:exec onSuccess:@selector(VKRequestExecutor:didUpdatePhoto:) onError:nil];

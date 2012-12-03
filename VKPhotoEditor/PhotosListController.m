@@ -116,10 +116,14 @@
 
 #pragma mark - ProfileBaseControllerDelegate
 
-- (void)profileBaseControllerDidOpenProfile:(ProfileController *)ctrl
+- (void)profileBaseControllerWantLoadAvatar:(ProfileBaseController *)ctrl
 {
     isAvatar = YES;
-    [choosePhotoView show:YES withExitButton:YES animated:YES];
+    [choosePhotoView show:YES withExitButton:NO animated:YES];
+}
+
+- (void)profileBaseControllerDidOpenProfile:(ProfileController *)ctrl
+{
 }
 
 - (void)profileBaseControllerDidBack:(ProfileController *)ctrl
