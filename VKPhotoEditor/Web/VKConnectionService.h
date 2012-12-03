@@ -19,6 +19,7 @@ extern NSString *VKRequestDidUpdateAvatarNotification;
 
 @property (nonatomic, strong, readonly) NSURL *rootURL;
 @property (nonatomic, strong, readonly) UserProfile *profile;
+@property (nonatomic, strong) NSString *since;
 
 + (VKConnectionService*)shared;
 

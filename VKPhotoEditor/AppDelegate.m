@@ -11,9 +11,11 @@
 #import "StartViewController.h"
 #import "InformationView.h"
 #import "UIViewController+StatusBar.h"
+#import "RepliesUpdate.h"
 
 @implementation AppDelegate {
     InformationView *informationView;
+    RepliesUpdate *repliesUpdate;
 }
 
 @synthesize window, navigationController, connectionService, settings, imageCache;
@@ -30,6 +32,10 @@
     settings = [[Settings alloc] initWithDefaults:dict];
     connectionService = [[VKConnectionService alloc] initWithURL:settings.serviceRootURL];
     imageCache = [ImageCache new];
+    
+    //TODO: start it in other place
+    repliesUpdate = [RepliesUpdate new];
+    [repliesUpdate start];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:VKRequestDidFailNotification object:connectionService];
     

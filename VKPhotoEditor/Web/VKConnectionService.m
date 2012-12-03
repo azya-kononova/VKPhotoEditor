@@ -29,6 +29,7 @@ NSString *VKRequestDidUpdateAvatarNotification = @"VKRequestDidUpdateAvatar";
 @implementation VKConnectionService
 @synthesize rootURL;
 @synthesize profile;
+@synthesize since;
 
 + (VKConnectionService*)shared
 {

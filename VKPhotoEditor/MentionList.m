@@ -28,8 +28,6 @@
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     
-    after = [[data objectForKey:@"after"] stringValue];
-    
     for (NSDictionary *user in [data objectForKey:@"users"]) {
         Account *acc = [user integerForKey:@"id"] == service.profile.accountId ? service.profile : [Account accountWithDict:user];
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
@@ -48,7 +46,10 @@
     //It's a stub for stupid server data!!!
     [self append:_photos totalCount:0];
     
-    completed = [after isEqualToString:@"0"];
+    service.since = [data objectForKey:@"since"];
+    after = [data objectForKey:@"after"];
+    
+    completed = ![[data objectForKey:@"after"] isKindOfClass:[NSString class]];
 }
 
 - (void)reset
