@@ -37,12 +37,6 @@
     totalProgressWidth = progressView.frame.size.width;
     progressView.layer.cornerRadius = 6;
     placeholderView.layer.cornerRadius = 6;
-    
-    self.layer.masksToBounds = NO;
-    self.layer.shadowOffset = CGSizeMake(-2, -2);
-    self.layer.shadowRadius = 1.3;
-    self.layer.shadowOpacity = 0.5;
-    self.layer.shadowPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, self.bounds.size.width + 4, self.bounds.size.height + 4)].CGPath;
 }
 
 - (void)didTap:(UITapGestureRecognizer *)recognizer
@@ -71,7 +65,6 @@
     [remoteImageView displayImage:photo.thumbnail];
     
     if (![photo.caption isKindOfClass:[NSNull class]]) captionTextView.text = photo.caption;
-    [captionTextView sizeFontToFitMinSize:8 maxSize:12];
     captionTextView.searchString = searchString;
     [captionTextView setNeedsDisplay];
     
