@@ -207,7 +207,11 @@
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    [mentionList loadMore];
+    if (!mentionList.completed) {
+        [mentionList loadMore];
+    } else {
+        [self performSelector:@selector(reloadPullTable) withObject:nil afterDelay:0.2];
+    }
 }
 
 

@@ -14,7 +14,6 @@
 #define AFTER_FALSE @"0"
 
 @implementation MentionList {
-    NSString *since;
     NSString *after;
 }
 
@@ -22,18 +21,14 @@
 
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getMentions:account.accountId since:since after:after limit:limit];
+    return [service getMentions:account.accountId since:nil after:after limit:limit];
 }
 
 - (void)mapData:(id)data
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     
-    //TODO: may be check it in other way?...
-    if ([data objectForKey:@"since"] && [data objectForKey:@"after"]) {
-        since = [data objectForKey:@"since"];
-        after = [data objectForKey:@"after"];
-    }
+    after = [[data objectForKey:@"after"] stringValue];
     
     for (NSDictionary *user in [data objectForKey:@"users"]) {
         Account *acc = [user integerForKey:@"id"] == service.profile.accountId ? service.profile : [Account accountWithDict:user];
@@ -52,12 +47,13 @@
         return photo; }];
     //It's a stub for stupid server data!!!
     [self append:_photos totalCount:0];
+    
+    completed = [after isEqualToString:@"0"];
 }
 
 - (void)reset
 {
     [super reset];
-    since = nil;
     after = nil;
 }
 

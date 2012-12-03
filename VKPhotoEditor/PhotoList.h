@@ -17,6 +17,8 @@
     NSInteger nextPage;
     VKRequestExecutor *exec;
     NSInteger limit;
+    @protected
+    BOOL completed;
 }
 
 @property (nonatomic, assign) id<PhotoListDelegate> delegate;
