@@ -14,6 +14,7 @@
 #import "UITableViewCell+NIB.h"
 #import "CALayer+Animations.h"
 #import "NSArray+Helpers.h"
+#import "UIColor+VKPhotoEditor.h"
 
 @interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate, TheaterViewDataSource, TheaterViewDelegate>
 @end
@@ -67,6 +68,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    loadingView.backgroundColor = [UIColor defaultBgColor];
             
     photosTableView.hidden = YES;
     
@@ -103,9 +106,10 @@
 - (void)showContent
 {
     if (!(infoLoaded && avatarsLoaded)) return;
-    
-    loadingView.hidden = YES;
+
     photosTableView.hidden = NO;
+    loadingView.hidden = YES;
+    
     [profileHeaderView removeFromSuperview];
     
     if (followedByMe) {
