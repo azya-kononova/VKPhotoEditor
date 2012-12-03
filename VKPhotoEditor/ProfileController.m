@@ -51,6 +51,8 @@
 {   
     [super viewDidLoad];
     
+    self.profileHeaderView.backButton.hidden = YES;
+    
     uploadingView.superview.layer.cornerRadius = 6;
     uploadingImageView.layer.cornerRadius = 17.5;
     uploadWidth = uploadingView.superview.frame.size.width;

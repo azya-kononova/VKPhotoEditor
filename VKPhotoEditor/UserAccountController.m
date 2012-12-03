@@ -12,12 +12,11 @@
 #import "UIView+Helpers.h"
 
 @interface UserAccountController () {
-    
+    UIButton *followButton;
 }
 @end
 
 @implementation UserAccountController
-@synthesize backButton;
 
 - (id)initWithProfile:(UserProfile *)_profile
 {
@@ -29,19 +28,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    backButton.bgImagecaps = CGSizeMake(15, 0);
-    [self.centralButton setBackgroundImage:[UIImage imageNamed:@"FollowBtn_pressed.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
-    [self.centralButton setTitle:@"Following" forState:UIControlStateSelected | UIControlStateHighlighted];
+    
+    followButton = self.profileHeaderView.centralButton;
+//    backButton.bgImagecaps = CGSizeMake(15, 0);
+    [followButton setBackgroundImage:[UIImage imageNamed:@"FollowBtn_pressed.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
+    [followButton setTitle:@"Following" forState:UIControlStateSelected | UIControlStateHighlighted];
+    [followButton setTitle:@"Follow" forState:UIControlStateNormal];
 }
 
 #pragma mark - actions
 
-- (IBAction)followAccount:(id)sender
+- (void)profileHeaderViewDidTapButton:(ProfileHeaderView *)view
 {
-    VKRequestExecutor *exec = self.centralButton.selected ?
-            [service unfollowUser:self.profile.accountId]  : [service followUser:self.profile.accountId] ;
+    VKRequestExecutor *exec = self.profileHeaderView.centralButton.selected ?
+    [service unfollowUser:self.profile.accountId]  : [service followUser:self.profile.accountId] ;
     [adapter start:exec onSuccess:nil onError:@selector(exec:didFailFollowUser:) ];
-    self.centralButton.selected = !self.centralButton.selected;
+    self.profileHeaderView.centralButton.selected = !self.profileHeaderView.centralButton.selected;
 }
 
 - (IBAction)back:(id)sender
@@ -53,13 +55,13 @@
 
 - (void)exec:(VKRequestExecutor*)exec didFailFollowUser:(id)data
 {
-    self.centralButton.selected = !self.centralButton.selected;
+    followButton.selected = !followButton.selected;
 }
 
 - (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data
 {
     [super exec:exec didGetUser:data];
-    self.centralButton.selected = followedByMe;
+    followButton.selected = followedByMe;
 }
 
 @end

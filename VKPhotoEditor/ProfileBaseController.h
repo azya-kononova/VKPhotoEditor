@@ -14,16 +14,11 @@
 #import "UserPhotoList.h"
 #import "MentionList.h"
 #import "RequestExecutorDelegateAdapter.h"
-
-typedef enum {
-    ProfilePhotosMode = 0,
-    ProfileFollowersMode = 1,
-    ProfileMentionsMode = 2,
-} ProfileModeState;
+#import "ProfileHeaderView.h"
 
 @protocol ProfileBaseControllerDelegate;
 
-@interface ProfileBaseController : UIViewController {
+@interface ProfileBaseController : UIViewController <ProfileHeaderViewDelegate> {
     BOOL followedByMe;
     RequestExecutorDelegateAdapter *adapter;
     VKConnectionService *service;
@@ -39,33 +34,15 @@ typedef enum {
 
 @property (nonatomic, strong) UserPhotoList *avatarsList;
 
-@property (nonatomic, assign) ProfileModeState state;
-
+@property (nonatomic, strong) ProfileHeaderView *profileHeaderView;
 @property (nonatomic, strong) IBOutlet PullTableView *photosTableView;
 @property (nonatomic, assign) id<ProfileBaseControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UILabel *noPhotoLabel;
-
-// header view
-@property (nonatomic, strong) IBOutlet TheaterView *avatarTheaterView;
-@property (nonatomic, strong) IBOutlet UIView *headerView;
-@property (nonatomic, strong) IBOutlet UILabel *nameLabel;
-@property (nonatomic, strong) IBOutlet FlexibleButton *centralButton;
-@property (nonatomic, strong) IBOutlet UIView *headerTopView;
-@property (nonatomic, strong) IBOutlet UIView *headerBottomView;
-@property (nonatomic, strong) IBOutlet UIImageView *noAvatarImageView;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *avatarActivity;
-@property (nonatomic, strong) IBOutlet UILabel *noAvatarLabel;
-@property (nonatomic, strong) IBOutlet UILabel *photosLabelCount;
-@property (nonatomic, strong) IBOutlet UILabel *followersLabelCount;
-@property (nonatomic, strong) IBOutlet UILabel *mentionsLabelCount;
 
 - (id)initWithProfile:(UserProfile*)profile;
 - (void)reloadAvatarList;
 
 - (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data;
-
-- (IBAction)leftOptionSelected;
-- (IBAction)rightOptionSelected;
 @end
 
 @protocol ProfileBaseControllerDelegate

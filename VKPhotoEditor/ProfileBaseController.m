@@ -15,14 +15,13 @@
 #import "CALayer+Animations.h"
 #import "NSArray+Helpers.h"
 
-@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate>
+@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate, TheaterViewDataSource, TheaterViewDelegate>
 @end
 
 @implementation ProfileBaseController{
     UserProfile *profile;
     NSInteger selectedPhoto;
     NSMutableDictionary *avatarsForIndexes;
-    ProfileModeState mode;
     BOOL avatarsLoaded;
     BOOL infoLoaded;
 }
@@ -30,27 +29,13 @@
 @synthesize delegate;
 @synthesize noPhotoLabel;
 @synthesize loadingView;
-
-@synthesize avatarTheaterView;
-@synthesize headerView;
-@synthesize nameLabel;
-@synthesize centralButton;
-@synthesize headerTopView;
-@synthesize headerBottomView;
-@synthesize noAvatarImageView;
 @synthesize profile;
-@synthesize state;
-@synthesize avatarActivity;
-@synthesize noAvatarLabel;
-
 @synthesize sourceList;
 @synthesize photosList;
 @synthesize avatarsList;
 @synthesize followersList;
 @synthesize mentionsList;
-@synthesize photosLabelCount;
-@synthesize mentionsLabelCount;
-@synthesize followersLabelCount;
+@synthesize profileHeaderView;
 
 - (id)initWithProfile:(UserProfile *)_profile
 {
@@ -82,12 +67,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+            
+    photosTableView.hidden = YES;
     
-    centralButton.bgImagecaps = CGSizeMake(23, 0);
+    profileHeaderView = [ProfileHeaderView loadFromNIB];
+    profileHeaderView.delegate = self;
+    profileHeaderView.nameLabel.text = profile.login;
+    profileHeaderView.avatarTheaterView.delegate = self;
+    profileHeaderView.avatarTheaterView.dataSource = self;
+    profileHeaderView.state = ProfileHeaderViewStateHeader;
+    [self.view addSubview:profileHeaderView];
     
-    nameLabel.text = profile.login;
-    
-    photosTableView.tableHeaderView = headerTopView;
     photosTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
     photosTableView.pullBackgroundColor = [UIColor blackColor];
     photosTableView.loadBackgroundColor = [UIColor whiteColor];
@@ -100,7 +90,7 @@
     recognizer.minimumPressDuration = 2.0;
     [photosTableView addGestureRecognizer:recognizer];
     
-//    [adapter start:[service getUser:self.profile.accountId] onSuccess:@selector(exec:didGetUser:) onError:nil];
+    [adapter start:[service getUser:self.profile.accountId] onSuccess:@selector(exec:didGetUser:) onError:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -112,22 +102,45 @@
 
 - (void)showContent
 {
-    if (infoLoaded && avatarsLoaded) {
-        loadingView.hidden = YES;
+    if (!(infoLoaded && avatarsLoaded)) return;
+    
+    loadingView.hidden = YES;
+    photosTableView.hidden = NO;
+    [profileHeaderView removeFromSuperview];
+    
+    if (followedByMe) {
+        profileHeaderView.state = ProfileHeaderViewStateFollowing;
+    } else {
+        profileHeaderView.state = avatarsList.photos.count ? ProfileHeaderViewStateFull :  ProfileHeaderViewStateCompact;
     }
+    
+    photosTableView.tableHeaderView = profileHeaderView;
 }
 
-- (void)setState:(ProfileModeState)_state
+- (void)reloadAvatarList
 {
-    state = _state;
-    switch (state) {
-        case ProfilePhotosMode:
+    avatarsForIndexes = nil;
+    [avatarsList reset];
+    [avatarsList loadMore];
+}
+
+#pragma mark - ProfileHeaderViewDelegate
+
+- (void)profileHeaderViewDidTapButton:(ProfileHeaderView *)view
+{
+    // Override in subcluss
+}
+
+- (void)profileHeaderView:(ProfileHeaderView *)view didChangeMode:(ProfileHeaderViewMode)mode
+{
+    switch (mode) {
+        case ProfileHeaderViewPhotosMode:
             sourceList = photosList;
             break;
-        case ProfileFollowersMode:
+        case ProfileHeaderViewFollowersMode:
             sourceList = followersList;
             break;
-        case ProfileMentionsMode:
+        case ProfileHeaderViewsMentiosMode:
             sourceList = mentionsList;
             break;
         default:
@@ -140,50 +153,9 @@
     [photosTableView reloadData];
 }
 
-- (void)reloadAvatarList
+- (void)profileHeaderViewDidBack:(ProfileHeaderView *)view
 {
-    avatarsForIndexes = nil;
-    [avatarsList reset];
-    [avatarsList loadMore];
-}
-
-- (void)reloadAvatar;
-{
-    [avatarTheaterView reloadData];
-    
-    photosTableView.tableHeaderView = nil;
-    [headerTopView removeFromSuperview];
-    [headerView addSubview:headerTopView];
-    
-    if (followedByMe) {
-        photosTableView.tableHeaderView = headerBottomView;
-        return;
-    }
-    
-    BOOL show = avatarsList.photos.count != 0;
-    [avatarActivity stopAnimating];
-    noAvatarLabel.hidden = show;
-    
-    if (show == !avatarTheaterView.hidden) return;
-    
-    [avatarTheaterView.layer fade];
-    avatarTheaterView.hidden = !show;
-    CGFloat newHeight = headerTopView.frame.size.height + headerBottomView.frame.size.height + (show ? avatarTheaterView.frame.size.height : noAvatarImageView.frame.size.height);
-    [headerView resizeTo:CGSizeMake(headerView.frame.size.width, newHeight)];
-    
-    photosTableView.tableHeaderView = headerView;
-}
-
-#pragma mark - Actions
-
-- (IBAction)rightOptionSelected
-{
-    self.state = ProfileMentionsMode;
-}
-
-- (IBAction)leftOptionSelected
-{
-    self.state = ProfilePhotosMode;
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - PhotoListDelegate
@@ -202,7 +174,7 @@
         photosTableView.pullLastRefreshDate = [NSDate date];
         [self reloadPullTable];
     } else {
-        [self reloadAvatar];
+        [profileHeaderView.avatarTheaterView reloadData];
         if (!avatarsLoaded) {
             avatarsLoaded = YES;
             [self showContent];
@@ -212,7 +184,7 @@
 
 - (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError *)error
 {
-    (photoList ==  sourceList) ? [self reloadPullTable] : [self reloadAvatar];
+    (photoList ==  sourceList) ? [self reloadPullTable] : [profileHeaderView.avatarTheaterView reloadData];
 }
 
 #pragma mark - Request Handler
@@ -225,9 +197,9 @@
 - (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data
 {
     NSDictionary *userInfo = [[data objectForKey:@"users_info"] objectAtIndex:0];
-    photosLabelCount.text = [[userInfo objectForKey:@"photos_count"] stringValue];
-    mentionsLabelCount.text = [[userInfo objectForKey:@"mentions_count"] stringValue];
-    followersLabelCount.text = [[userInfo objectForKey:@"followers_count"] stringValue];
+    profileHeaderView.photosLabelCount.text = [[userInfo objectForKey:@"photos_count"] stringValue];
+    profileHeaderView.mentionsLabelCount.text = [[userInfo objectForKey:@"mentions_count"] stringValue];
+    profileHeaderView.followersLabelCount.text = [[userInfo objectForKey:@"followers_count"] stringValue];
     
     NSArray *connections = [userInfo objectForKey:@"connections"];
     followedByMe = [connections find:^BOOL (NSString* string) { return [string isEqualToString:@"following"]; }] != nil;
