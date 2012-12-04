@@ -10,6 +10,7 @@
 
 #define UPDATE_REPLIES_LIST @"UpdateRepliesList"
 
-@interface RepliesUpdate : NSObject
+@interface RepliesUpdateLoader : NSObject
 - (void)start;
+- (void)stop;
 @end

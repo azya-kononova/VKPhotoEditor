@@ -11,11 +11,11 @@
 #import "StartViewController.h"
 #import "InformationView.h"
 #import "UIViewController+StatusBar.h"
-#import "RepliesUpdate.h"
+#import "RepliesUpdateLoader.h"
 
 @implementation AppDelegate {
     InformationView *informationView;
-    RepliesUpdate *repliesUpdate;
+    RepliesUpdateLoader *repliesUpdateLoader;
 }
 
 @synthesize window, navigationController, connectionService, settings, imageCache;
@@ -33,11 +33,15 @@
     connectionService = [[VKConnectionService alloc] initWithURL:settings.serviceRootURL];
     imageCache = [ImageCache new];
     
-    //TODO: start it in other place
-    repliesUpdate = [RepliesUpdate new];
-    [repliesUpdate start];
+    repliesUpdateLoader = [RepliesUpdateLoader new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:VKRequestDidFailNotification object:connectionService];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyUpdates) name:VKRequestDidLogin object:connectionService];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyUpdates) name:VKRequestDidLogout object:connectionService];
+    
+    if (connectionService.profile.accessToken) {
+        [self startReplyUpdates];
+    }
     
     self.navigationController.navigationBar.hidden = YES;
     navigationController.viewControllers = connectionService.profile.accessToken ? [NSArray arrayWithObjects: [StartViewController new], [PhotosListController new], nil] : [NSArray arrayWithObject:[StartViewController new]];
@@ -82,6 +86,16 @@
 {
     NSError *error = [n.userInfo objectForKey:@"Error"];
     [informationView showMessage:error.localizedDescription];
+}
+
+- (void)startReplyUpdates
+{
+    [repliesUpdateLoader start];
+}
+
+- (void)stopReplyUpdates
+{
+    [repliesUpdateLoader stop];
 }
 
 #pragma mark - UINavigationControllerDelegate

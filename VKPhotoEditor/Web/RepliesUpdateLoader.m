@@ -6,10 +6,10 @@
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import "RepliesUpdate.h"
+#import "RepliesUpdateLoader.h"
 #import "MentionList.h"
 
-#define TIME_INTERVAL 60
+#define TIME_INTERVAL 30
 
 @interface RepliesUpdateList : MentionList
 @end
@@ -23,10 +23,10 @@
 
 @end
 
-@interface RepliesUpdate ()<PhotoListDelegate>
+@interface RepliesUpdateLoader ()<PhotoListDelegate>
 
 @end
-@implementation RepliesUpdate {
+@implementation RepliesUpdateLoader {
     RepliesUpdateList *mentionList;
     NSTimer *timer;
 }
@@ -48,15 +48,21 @@
     timer = [NSTimer scheduledTimerWithTimeInterval:TIME_INTERVAL target:mentionList selector:@selector(loadMore) userInfo:nil repeats:YES];
 }
 
-- (void)dealloc
+- (void)stop
 {
     [timer invalidate];
     timer = nil;
 }
 
+- (void)dealloc
+{
+    [self stop];
+}
+
 - (void)photoList:(PhotoList *)photoList didUpdatePhotos:(NSArray *)photos
 {
     if (photos.count) {
+        NSLog(@"Update photos: %d", photos.count);
         [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_REPLIES_LIST object:[NSNumber numberWithInt:photos.count] userInfo:nil];
     }
 }

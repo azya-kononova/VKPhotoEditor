@@ -14,6 +14,8 @@
 extern NSString *VKErrorDomain;
 extern NSString *VKRequestDidFailNotification;
 extern NSString *VKRequestDidUpdateAvatarNotification;
+extern NSString *VKRequestDidLogin;
+extern NSString *VKRequestDidLogout;
 
 @interface VKConnectionService : NSObject
 

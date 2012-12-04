@@ -25,6 +25,8 @@
 NSString *VKErrorDomain = @"VKErrorDomain";
 NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 NSString *VKRequestDidUpdateAvatarNotification = @"VKRequestDidUpdateAvatar";
+NSString *VKRequestDidLogin = @"VKRequestDidLogin";
+NSString *VKRequestDidLogout = @"VKRequestDidLogout";
 
 @implementation VKConnectionService
 @synthesize rootURL;
@@ -104,6 +106,8 @@ NSString *VKRequestDidUpdateAvatarNotification = @"VKRequestDidUpdateAvatar";
 - (void)logout
 {
     [Settings current].profile = nil;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:VKRequestDidLogout object:self];
 }
 
 #pragma mark - api methods
@@ -149,11 +153,11 @@ NSString *VKRequestDidUpdateAvatarNotification = @"VKRequestDidUpdateAvatar";
     return exec;
 }
 
-- (VKRequestExecutor*)getMentions:(NSInteger)userId since:(NSString*)since after:(NSString*)after limit:(NSInteger)limit
+- (VKRequestExecutor*)getMentions:(NSInteger)userId since:(NSString*)_since after:(NSString*)_after limit:(NSInteger)limit
 {
     NSMutableString *path = [NSMutableString stringWithFormat:@"getMentions?user_id=%d&limit=%d&access_token=%@", userId, limit, profile.accessToken];
-    if (since) [path appendString:[NSString stringWithFormat:@"&since=%@", since]];
-    if (after) [path appendString:[NSString stringWithFormat:@"&after=%@", after]];
+    if (_since) [path appendString:[NSString stringWithFormat:@"&since=%@", _since]];
+    if (_after) [path appendString:[NSString stringWithFormat:@"&after=%@", _after]];
     RequestExecutorProxy *exec = [self getPath:path.copy];
     return exec;
 }
@@ -227,6 +231,8 @@ NSString *VKRequestDidUpdateAvatarNotification = @"VKRequestDidUpdateAvatar";
         return photo; }];
     
     [Settings current].profile = profile;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:VKRequestDidLogin object:self];
 }
 
 - (void)exec:(VKRequestExecutor*)exec didUpdateAvatar:(id)data
