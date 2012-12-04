@@ -231,6 +231,7 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
         return photo; }];
     
     [Settings current].profile = profile;
+    since = [Settings current].since;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:VKRequestDidLogin object:self];
 }

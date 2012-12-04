@@ -9,7 +9,9 @@
 #import "RepliesUpdateLoader.h"
 #import "MentionList.h"
 
-#define TIME_INTERVAL 30
+#define TIME_INTERVAL 60
+
+NSString *VKUpdateRepliesBadge = @"VKUpdateRepliesBadge";
 
 @interface RepliesUpdateList : MentionList
 @end
@@ -45,6 +47,8 @@
 
 - (void)start
 {
+    [mentionList loadMore];
+    
     timer = [NSTimer scheduledTimerWithTimeInterval:TIME_INTERVAL target:mentionList selector:@selector(loadMore) userInfo:nil repeats:YES];
 }
 
@@ -61,9 +65,9 @@
 
 - (void)photoList:(PhotoList *)photoList didUpdatePhotos:(NSArray *)photos
 {
-    if (photos.count) {
-        NSLog(@"Update photos: %d", photos.count);
-        [[NSNotificationCenter defaultCenter] postNotificationName:UPDATE_REPLIES_LIST object:[NSNumber numberWithInt:photos.count] userInfo:nil];
+    NSLog(@"Update photos: %d", mentionList.mentionsCount);
+    if (mentionList.mentionsCount) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:VKUpdateRepliesBadge object:[NSNumber numberWithInt:mentionList.mentionsCount] userInfo:nil];
     }
 }
 

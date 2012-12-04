@@ -10,4 +10,6 @@
 
 @interface MentionList : PhotoList
 @property (nonatomic, strong) Account *account;
+@property (nonatomic, assign, readonly) NSInteger mentionsCount;
+- (void)saveSinceValue;
 @end

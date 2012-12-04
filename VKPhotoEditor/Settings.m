@@ -14,6 +14,7 @@
 #define ERRORS_DESCRIPTIONS_KEY @"errorsDescriptions"
 #define FIRST_LAUNCH_KEY @"firstLaunch"
 #define PROFILE_KEY @"profile"
+#define REPLY_SINCE @"replySince"
 
 @interface NSUserDefaults (Def)
 - (id)objectForKey:(NSString*)name withDef:(NSDictionary*)def map:(MapBlock)map;
@@ -76,6 +77,17 @@
 
 - (void)sync
 {
+    [user synchronize];
+}
+
+- (NSString *)since
+{
+    return [user objectForKey:REPLY_SINCE];
+}
+
+- (void)setSince:(NSString *)since
+{
+    [user setObject:since forKey:REPLY_SINCE];
     [user synchronize];
 }
 

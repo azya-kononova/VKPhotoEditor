@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) UserProfile *profile;
 @property (nonatomic, assign) BOOL firstLaunch;
+@property (nonatomic, strong) NSString *since;
 
 - (id)initWithDefaults:(NSDictionary*)defs;
 - (NSString*)descriptionForErrorKey:(NSString*)errorKey;

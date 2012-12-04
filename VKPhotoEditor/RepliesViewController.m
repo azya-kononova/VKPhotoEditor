@@ -17,6 +17,7 @@
 #import "MentionList.h"
 #import "ReplyPhotoCell.h"
 #import "PhotoCell.h"
+#import "RepliesUpdateLoader.h"
 
 @interface RepliesViewController () <UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, ReplyPhotoCellDelegate, PhotoCellDelegate>
 @end
@@ -64,8 +65,6 @@
     tableView.loadBackgroundColor = [UIColor whiteColor];
     tableView.pullTextColor = [UIColor blackColor];
     
-    [mentionList loadMore];
-    
     GridModeButton *gridButton = [GridModeButton loadFromNIB];
     gridButton.delegate = self;
     [gridButton moveTo:CGPointMake(280, 5)];
@@ -81,6 +80,10 @@
 - (void) viewWillAppear:(BOOL)animated {
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:animated];
     [super viewWillAppear:animated];
+    
+    //Send -1 for reset badge
+    [[NSNotificationCenter defaultCenter] postNotificationName:VKUpdateRepliesBadge object:[NSNumber numberWithInt:-1]];
+    [mentionList loadMore];
 }
 
 #pragma mark - Internals
@@ -137,6 +140,7 @@
 {
     tableView.pullLastRefreshDate = [NSDate date];
     [self reloadPullTable];
+    [mentionList saveSinceValue];
 }
 
 - (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError *)error

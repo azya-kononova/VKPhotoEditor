@@ -40,6 +40,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyUpdates) name:VKRequestDidLogout object:connectionService];
     
     if (connectionService.profile.accessToken) {
+        connectionService.since = [Settings current].since;
         [self startReplyUpdates];
     }
     

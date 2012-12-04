@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FlexibleButton.h"
 
 typedef enum {
     TabBarStateUnselected = -1,
@@ -22,6 +23,7 @@ typedef enum {
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *buttons;
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *titles;
 @property (nonatomic, strong) IBOutlet UIImageView *backgroundView;
+@property (nonatomic, strong) IBOutlet FlexibleButton *replyBadge;
 
 @property (nonatomic, assign) TabBarState state;
 

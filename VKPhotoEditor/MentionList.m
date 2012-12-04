@@ -10,14 +10,13 @@
 #import "NSDictionary+Helpers.h"
 #import "NSObject+Map.h"
 #import "VKPhoto.h"
-
-#define AFTER_FALSE @"0"
+#import "Settings.h"
 
 @implementation MentionList {
     NSString *after;
 }
 
-@synthesize account;
+@synthesize account, mentionsCount;
 
 - (VKRequestExecutor*)newPageExec
 {
@@ -43,13 +42,16 @@
         photo.replyToPhoto.account = [accounts objectForKey:[replyDict objectForKey:@"user"]];
         
         return photo; }];
-    //It's a stub for stupid server data!!!
+    
+    mentionsCount = _photos.count;
+    
     [self append:_photos totalCount:0];
     
     service.since = [data objectForKey:@"since"];
     after = [data objectForKey:@"after"];
     
     completed = ![[data objectForKey:@"after"] isKindOfClass:[NSString class]];
+    
 }
 
 - (void)reset
@@ -58,6 +60,12 @@
     after = nil;
 }
 
+- (void)saveSinceValue
+{
+    [Settings current].since = service.since;
+}
+
+//It's a stub for stupid server data!!!
 - (NSArray *)getPhotosChain:(NSArray *)photos
 {
     NSMutableArray *result = [NSMutableArray arrayWithArray:photos];

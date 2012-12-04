@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define UPDATE_REPLIES_LIST @"UpdateRepliesList"
+extern NSString *VKUpdateRepliesBadge;
 
 @interface RepliesUpdateLoader : NSObject
 - (void)start;
