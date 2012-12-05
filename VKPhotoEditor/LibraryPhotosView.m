@@ -27,6 +27,7 @@
 - (void)awakeFromNib
 {
     library = [[ALAssetsLibrary alloc] init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadData) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)clear
@@ -88,6 +89,11 @@
     } else {
         [activityView stopAnimating];
     }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - ThumbnailsViewDataSource

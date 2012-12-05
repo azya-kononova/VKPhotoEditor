@@ -65,7 +65,6 @@
     [libraryPlaceholder addSubview:libraryPhotosView];
     
     postView.backgroundColor = [UIColor defaultBgColor];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadAlbumImages) name:UIApplicationDidBecomeActiveNotification object:nil];
     
     takePhotoBtn.bgImagecaps = CGSizeMake(20, 20);
     postPhotoBtn.bgImagecaps = CGSizeMake(20, 20);
@@ -86,11 +85,6 @@
     [super viewWillAppear:animated];
     
     if (![Settings current].firstLaunch) [self showPostViewHeaderLogin:YES];
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Actions
