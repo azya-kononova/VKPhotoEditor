@@ -18,12 +18,15 @@
 #import "AllPhotosController.h"
 #import "UINavigationController+Transistions.h"
 #import "UserAccountController.h"
+#import "ListManagerBaseController.h"
 #import "RepliesViewController.h"
 #import "VKViewController.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
-@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileBaseControllerDelegate, AllPhotosControllerDelegate, RepliesViewControllerDelegate, VKRequestExecutorDelegate>
+
+@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileBaseControllerDelegate, ListManagerBaseControllerDelegate, VKRequestExecutorDelegate>
+
 @end
 
 @implementation PhotosListController {
@@ -68,8 +71,8 @@
     repliesCtrl.delegate = self;
     
     navCtrl = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
-//    navCtrl.viewControllers = [NSArray arrayWithObject:repliesCtrl];
-    navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
+    navCtrl.viewControllers = [NSArray arrayWithObject:repliesCtrl];
+    //navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
     
     UINavigationController *navCtrl1 = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
     navCtrl1.viewControllers = [NSArray arrayWithObject:profileCtrl];
@@ -202,40 +205,6 @@
     [choosePhotoView show:YES replyToPhoto:photo animated:YES];
 }
 
-#pragma mark - AllPhotosControllerDelegate
-
-- (void)allPhotosController:(AllPhotosController *)ctrl didSelectAccount:(Account *)account animated:(BOOL)animated
-{
-    if (account.accountId == service.profile.accountId) {
-        tabBar.state = TabBarStateProfile;
-        return;
-    }
-    tabBar.state = TabBarStateUnselected;
-    UserAccountController *userCtrl = [[UserAccountController alloc] initWithProfile:(UserProfile*)account];
-    userCtrl.delegate = self;
-    [navCtrl pushViewController:userCtrl animated:animated];
-}
-
-- (void)allPhotosController:(AllPhotosController *)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated
-{
-    [self presentModalViewController:controller withPushDirection:kCATransitionFromRight];
-}
-
-- (void)allPhotosController:(AllPhotosController *)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated
-{
-    if (!animated)
-        [self dismissModalViewControllerWithPushDirection:kCATransitionFromRight];
-    else
-        [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
-}
-
-- (void)allPhotosController:(AllPhotosController *)ctrl didReplyToPhoto:(VKPhoto *)photo
-{
-    isAvatar = NO;
-    replyToPhoto = photo;
-    [choosePhotoView show:YES replyToPhoto:photo animated:YES];
-}
-
 #pragma mark - ChoosePhotoViewDelegate
 
 - (void)choosePhotoViewDidChooseCameraRoll:(ChoosePhotoView*)view
@@ -287,16 +256,16 @@
     [super photoEditController:controller didFinishWithImage:image];
 }
 
-#pragma mark - RepliesViewControllerDelegate
+#pragma mark - ListManagerBaseControllerDelegate
 
-- (void)repliesViewController:(RepliesViewController *)controller didReplyToPhoto:(VKPhoto *)photo
+- (void)listBaseController:(ListManagerBaseController *)ctrl didReplyToPhoto:(VKPhoto *)photo
 {
     isAvatar = NO;
     replyToPhoto = photo;
     [choosePhotoView show:YES replyToPhoto:photo animated:YES];
 }
 
-- (void)repliesViewController:(RepliesViewController *)controller didSelectAccount:(Account *)account animated:(BOOL)animated
+- (void)listBaseController:(ListManagerBaseController *)ctrl didSelectAccount:(Account *)account animated:(BOOL)animated
 {
     if (account.accountId == service.profile.accountId) {
         tabBar.state = TabBarStateProfile;
@@ -308,12 +277,12 @@
     [navCtrl pushViewController:userCtrl animated:animated];
 }
 
-- (void)repliesViewController:(RepliesViewController *)controller presenModalViewController:(UIViewController *)ctrl animated:(BOOL)animated
+- (void)listBaseController:(ListManagerBaseController *)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated
 {
-    [self presentModalViewController:ctrl withPushDirection:kCATransitionFromRight];
+    [self presentModalViewController:controller withPushDirection:kCATransitionFromRight];
 }
 
-- (void)repliesViewController:(RepliesViewController *)controller dismissModalViewController:(UIViewController *)ctrl animated:(BOOL)animated
+- (void)listBaseController:(ListManagerBaseController *)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated
 {
     if (!animated)
         [self dismissModalViewControllerWithPushDirection:kCATransitionFromRight];

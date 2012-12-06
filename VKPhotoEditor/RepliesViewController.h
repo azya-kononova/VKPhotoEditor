@@ -7,28 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Account.h"
-#import "PullTableView.h"
-#import "UserProfile.h"
-#import "VKPhoto.h"
+#import "ListManagerBaseController.h"
 
-@protocol RepliesViewControllerDelegate;
-
-@interface RepliesViewController : UIViewController
-@property (nonatomic, unsafe_unretained) id<RepliesViewControllerDelegate> delegate;
-@property (nonatomic, strong) IBOutlet PullTableView *tableView;
-@property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
-@property (nonatomic, strong) IBOutlet UILabel* noPhotosLabel;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+@interface RepliesViewController : ListManagerBaseController
 
 - (id)initWithProfile:(UserProfile *)_profile;
 
-@end
-
-@protocol RepliesViewControllerDelegate
-- (void)repliesViewController:(RepliesViewController *)controller didSelectAccount:(Account*)account animated:(BOOL)animated;;
-- (void)repliesViewController:(RepliesViewController *)controller didReplyToPhoto:(VKPhoto *)photo;
-- (void)repliesViewController:(RepliesViewController *)controller presenModalViewController:(UIViewController *)controller animated:(BOOL)animated;
-- (void)repliesViewController:(RepliesViewController *)controller dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated;
 @end
 

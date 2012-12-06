@@ -141,6 +141,7 @@
 		22B4E3EE1621DF13008ECFA3 /* Filter9.png in Resources */ = {isa = PBXBuildFile; fileRef = 22B4E3ED1621DF13008ECFA3 /* Filter9.png */; };
 		22C56906166E89CF004986EB /* Notify.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C56904166E89CF004986EB /* Notify.png */; };
 		22C56907166E89CF004986EB /* Notify@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C56905166E89CF004986EB /* Notify@2x.png */; };
+		22C5694E1671365A004986EB /* ListManagerBaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22C5694D16713659004986EB /* ListManagerBaseController.m */; };
 		22C9DA25166A1BC90020C54B /* Publish_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C9DA21166A1BC90020C54B /* Publish_active.png */; };
 		22C9DA26166A1BC90020C54B /* Publish_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C9DA22166A1BC90020C54B /* Publish_active@2x.png */; };
 		22C9DA27166A1BC90020C54B /* Publish.png in Resources */ = {isa = PBXBuildFile; fileRef = 22C9DA23166A1BC90020C54B /* Publish.png */; };
@@ -621,6 +622,8 @@
 		22B4E3ED1621DF13008ECFA3 /* Filter9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Filter9.png; sourceTree = "<group>"; };
 		22C56904166E89CF004986EB /* Notify.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Notify.png; sourceTree = "<group>"; };
 		22C56905166E89CF004986EB /* Notify@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Notify@2x.png"; sourceTree = "<group>"; };
+		22C5694C16713659004986EB /* ListManagerBaseController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListManagerBaseController.h; sourceTree = "<group>"; };
+		22C5694D16713659004986EB /* ListManagerBaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListManagerBaseController.m; sourceTree = "<group>"; };
 		22C9DA21166A1BC90020C54B /* Publish_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Publish_active.png; sourceTree = "<group>"; };
 		22C9DA22166A1BC90020C54B /* Publish_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Publish_active@2x.png"; sourceTree = "<group>"; };
 		22C9DA23166A1BC90020C54B /* Publish.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Publish.png; sourceTree = "<group>"; };
@@ -1536,6 +1539,8 @@
 				22D471C3166A843300C1390B /* RepliesViewController.xib */,
 				44D354EF16713815007E2CDB /* VKViewController.h */,
 				44D354F016713815007E2CDB /* VKViewController.m */,
+				22C5694C16713659004986EB /* ListManagerBaseController.h */,
+				22C5694D16713659004986EB /* ListManagerBaseController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -2266,6 +2271,7 @@
 				44D354EE167127F0007E2CDB /* VKTableView.m in Sources */,
 				44D354F116713815007E2CDB /* VKViewController.m in Sources */,
 				44D354F416713877007E2CDB /* UploadingView.m in Sources */,
+				22C5694E1671365A004986EB /* ListManagerBaseController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

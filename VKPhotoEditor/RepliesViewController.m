@@ -8,48 +8,27 @@
 
 #import "RepliesViewController.h"
 #import "UIView+Helpers.h"
-#import "RequestExecutorDelegateAdapter.h"
 #import "VKConnectionService.h"
-#import "ThumbnailPhotoCell.h"
-#import "GridModeButton.h"
 #import "UIColor+VKPhotoEditor.h"
-#import "FastViewerController.h"
 #import "MentionList.h"
 #import "ReplyPhotoCell.h"
-#import "PhotoCell.h"
 #import "RepliesUpdateLoader.h"
 
-@interface RepliesViewController () <UIActionSheetDelegate, GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, ReplyPhotoCellDelegate, PhotoCellDelegate>
+@interface RepliesViewController () <ReplyPhotoCellDelegate>
 @end
 
 @implementation RepliesViewController {
-    MentionList *mentionList;
-    RequestExecutorDelegateAdapter *adapter;
-    
-    BOOL isGridMode;
-    BOOL isFastViewerOpen;
-    
-    NSInteger itemsInRow;
-    NSInteger gridCellHeight;
-    
     UserProfile *profile;
-    NSArray *gridMentionList;
 }
-
-@synthesize tableView;
-@synthesize tableHeaderView;
-@synthesize noPhotosLabel;
-@synthesize activityIndicator;
-@synthesize delegate;
 
 - (id)initWithProfile:(UserProfile *)_profile
 {
     self = [super init];
     if (self) {
         profile = _profile;
-        mentionList = [MentionList new];
-        mentionList.delegate = self;
-        mentionList.account = profile;
+        photoList = [MentionList new];
+        photoList.delegate = self;
+        ((MentionList *)photoList).account = profile;
     }
     return self;
 }
@@ -57,56 +36,24 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    tableView.tableHeaderView = tableHeaderView;
-    
-    tableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
-    tableView.pullBackgroundColor = [UIColor blackColor];
-    tableView.loadBackgroundColor = [UIColor whiteColor];
-    tableView.pullTextColor = [UIColor blackColor];
-    
-    GridModeButton *gridButton = [GridModeButton loadFromNIB];
-    gridButton.delegate = self;
-    [gridButton moveTo:CGPointMake(280, 5)];
-    [tableHeaderView addSubview:gridButton];
-    
-    adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
-    
-    ThumbnailPhotoCell *cell = [UITableViewCell loadCellOfType:[ThumbnailPhotoCell class] fromNib:@"ThumbnailPhotoCell" withId:@"ThumbnailPhotoCell"];
-    itemsInRow = cell.itemsInRow;
-    gridCellHeight = cell.frame.size.height;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:animated];
     [super viewWillAppear:animated];
     
     //Send -1 for reset badge
     [[NSNotificationCenter defaultCenter] postNotificationName:VKUpdateRepliesBadge object:[NSNumber numberWithInt:-1]];
-    [mentionList loadMore];
+    [photoList loadMore];
 }
 
 #pragma mark - Internals
 
-- (NSArray *)getPhotosForIndexPath:(NSIndexPath *)indexPath
-{
-    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:itemsInRow];
-    
-    for (int i = 0; i < itemsInRow; i++) {
-        int row = itemsInRow * indexPath.row + i;
-        if (row < gridMentionList.count) {
-            [photos addObject:[gridMentionList objectAtIndex:row]];
-        }
-    }
-    
-    return photos;
-}
 
-- (NSArray *)getGridPhotos
+- (NSArray *)gridPhotoList
 {
     NSMutableArray *photos = [NSMutableArray array];
     
-    for (VKPhoto *photo in mentionList.photos) {
+    for (VKPhoto *photo in photoList.photos) {
         [self addPhoto:photo to:photos];
     }
     return photos;
@@ -123,37 +70,16 @@
 
 #pragma mark - PhotosListDelegate
 
-- (void)reloadPullTable
+
+- (void)photoList:(PhotoList *)_photoList didUpdatePhotos:(NSArray *)photos
 {
-    activityIndicator.hidden = YES;
-    noPhotosLabel.hidden = mentionList.photos.count;
-    gridMentionList = [self getGridPhotos];
-    
-    [tableView reloadData];
-    tableView.pullTableIsLoadingMore = NO;
-    tableView.pullTableIsRefreshing = NO;
-    
-    //    [tableView setCompleted:searchResultsList.completed];
+    [super photoList:_photoList didUpdatePhotos:photos];
+    [(MentionList *)photoList saveSinceValue];
 }
 
-- (void)photoList:(PhotoList *)photoList didUpdatePhotos:(NSArray *)photos
-{
-    tableView.pullLastRefreshDate = [NSDate date];
-    [self reloadPullTable];
-    [mentionList saveSinceValue];
-}
-
-- (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError *)error
-{
-    [self reloadPullTable];
-}
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return isGridMode ? (NSInteger) ceil((double) gridMentionList.count / itemsInRow) : mentionList.photos.count;
-}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -162,17 +88,17 @@
 
 - (UITableViewCell*)mentionOrReplyForRowAtIndexPath:(NSIndexPath *)indexPath tableView:(UITableView*)_tableView
 {
-    VKPhoto *photo = [mentionList.photos objectAtIndex:indexPath.row];
+    VKPhoto *photo = [photoList.photos objectAtIndex:indexPath.row];
     if (photo.type == VKPhotoTypeMention) {
         PhotoCell *cell = [PhotoCell dequeOrCreateInTable:_tableView];
         cell.delegate = self;
-        [cell displayPhoto:[mentionList.photos objectAtIndex:indexPath.row]];
+        [cell displayPhoto:[photoList.photos objectAtIndex:indexPath.row]];
         
         return cell;
     } else if (photo.type == VKPhotoTypeReply) {
         ReplyPhotoCell *cell = [ReplyPhotoCell dequeOrCreateInTable:_tableView];
         cell.delegate = self;
-        [cell displayPhoto:[mentionList.photos objectAtIndex:indexPath.row]];
+        [cell displayPhoto:[photoList.photos objectAtIndex:indexPath.row]];
         
         return cell;
     }
@@ -182,106 +108,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (isGridMode) {
-        ThumbnailPhotoCell *cell = [ThumbnailPhotoCell dequeOrCreateInTable:tableView];
-        cell.delegate = self;
-        [cell displayPhotos:[self getPhotosForIndexPath:indexPath]];
-        return cell;
-    } else {
-        return [self mentionOrReplyForRowAtIndexPath:indexPath tableView:_tableView];
-    }
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (isGridMode) return;
-    
-    VKPhoto *photo = [mentionList.photos objectAtIndex:indexPath.row];
-    [delegate repliesViewController:self didReplyToPhoto:photo];
+    UITableViewCell *cell = [super tableView:_tableView cellForRowAtIndexPath:indexPath];
+    return cell ? cell : [self mentionOrReplyForRowAtIndexPath:indexPath tableView:_tableView];
 }
 
 
 #pragma mark - PullTableViewDelegate
 
-- (void)pullTableViewDidTriggerRefresh:(PullTableView *)pullTableView
-{
-    [mentionList reset];
-    [mentionList loadMore];
-}
 
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
-    if (!mentionList.completed) {
-        [mentionList loadMore];
+    if (!photoList.completed) {
+        [super pullTableViewDidTriggerLoadMore:pullTableView];
     } else {
         [self performSelector:@selector(reloadPullTable) withObject:nil afterDelay:0.2];
     }
 }
 
 
-#pragma mark - GridModeButtonDelegate
-
-- (void)gridModeButtonDidSwitchMode:(GridModeButton *)gridButton
-{
-    isGridMode = !isGridMode;
-    [tableView reloadData];
-}
-
-#pragma mark - ThumbnailPhotoCellDelegate
-
-- (void)thumbnailPhotoCell:(ThumbnailPhotoCell *)cell didSelectPhoto:(VKPhoto *)photo
-{
-    if (!isFastViewerOpen) {
-        isFastViewerOpen = YES;
-        
-        FastViewerController *controller = [[FastViewerController alloc] initWithPhoto:photo];
-        controller.delegate = self;
-        [delegate repliesViewController:self presenModalViewController:controller animated:YES];
-    }
-}
-
-#pragma mark - FastViewerControllerDelegate
-
-- (void)fastViewerControllerDidFinish:(FastViewerController *)controller
-{
-    [delegate repliesViewController:self dismissModalViewController:controller animated:YES];
-    isFastViewerOpen = NO;
-}
-
-- (void)fastViewerController:(FastViewerController *)controller didFinishWithAccount:(Account *)account
-{
-    [delegate repliesViewController:self didSelectAccount:account animated:NO];
-    [delegate repliesViewController:self dismissModalViewController:controller animated:NO];
-    isFastViewerOpen = NO;
-}
-
-#pragma mark - PhotoCellDelegate
-
-- (void)photoCell:(PhotoCell *)photoCell didSelectAccount:(Account *)account
-{
-    [delegate repliesViewController:self didSelectAccount:account animated:YES];
-}
-
-- (void)photoCell:(PhotoCell *)photoCell didTapOnPhoto:(VKPhoto *)photo
-{
-     [delegate repliesViewController:self didReplyToPhoto:photo];
-}
-
-- (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
-{
-    
-}
-
 #pragma mark - ReplyPhotoCellDelegate
 
 - (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnAccount:(Account *)account
 {
-    [delegate repliesViewController:self didSelectAccount:account animated:YES];
+    [self.delegate listBaseController:self didSelectAccount:account animated:YES];
 }
 
 - (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnPhoto:(VKPhoto *)photo
 {
-    [delegate repliesViewController:self didReplyToPhoto:photo];
+    [self.delegate listBaseController:self didReplyToPhoto:photo];
 }
 
 @end
