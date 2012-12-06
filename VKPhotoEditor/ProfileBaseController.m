@@ -28,7 +28,6 @@
     UserMenuView *userMenuView;
     BOOL isProfile;
 }
-@synthesize photosTableView;
 @synthesize delegate;
 @synthesize noPhotoLabel;
 @synthesize loadingView;
@@ -126,7 +125,7 @@
     } else {
         profileHeaderView.state = avatarsList.photos.count ? ProfileHeaderViewStateFull :  ProfileHeaderViewStateCompact;
     }
-    
+        
     photosTableView.tableHeaderView = profileHeaderView;
 }
 

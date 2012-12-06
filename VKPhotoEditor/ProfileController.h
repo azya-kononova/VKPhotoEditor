@@ -14,13 +14,6 @@
 
 @interface ProfileController : ProfileBaseController
 
-// upload view
-@property (nonatomic, strong) IBOutlet UIView *uploadingContainerView;
-@property (nonatomic, strong) IBOutlet UIView *uploadingView;
-@property (nonatomic, strong) IBOutlet UIImageView *uploadingImageView;
-@property (nonatomic, strong) IBOutlet UILabel *uploadInfoLabel;
-
 - (id)initWithProfile:(UserProfile*)profile;
-- (void)uploadImage:(ImageToUpload*)image;
 @end
 

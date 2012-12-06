@@ -19,16 +19,17 @@
 #import "UINavigationController+Transistions.h"
 #import "UserAccountController.h"
 #import "RepliesViewController.h"
+#import "VKViewController.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
-@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileBaseControllerDelegate, AllPhotosControllerDelegate, RepliesViewControllerDelegate>
+@interface PhotosListController () <VKTabBarDelegate, ChoosePhotoViewDelegate, ProfileBaseControllerDelegate, AllPhotosControllerDelegate, RepliesViewControllerDelegate, VKRequestExecutorDelegate>
 @end
 
 @implementation PhotosListController {
     VKTabBar *tabBar;
     NSArray *controllers;
-    VKRequestExecutor *exec;
+    VKRequestExecutor *uploadExec;
     VKConnectionService *service;
     ChoosePhotoView *choosePhotoView;
     
@@ -40,6 +41,8 @@
     AllPhotosController *allPhotosCtrl;
     ProfileController *profileCtrl;
     RepliesViewController *repliesCtrl;
+    
+    VKViewController *activeUploadCtrl;
 }
 
 - (id)initWithImageToUpload:(ImageToUpload*)image
@@ -86,7 +89,60 @@
     [self.view addSubview:choosePhotoView];
     choosePhotoView.delegate = self;
     
-    if (imageToUpload) [profileCtrl uploadImage:imageToUpload];
+    // TODO: set active controller (where need to display progress!)
+    
+    activeUploadCtrl = profileCtrl;
+    
+    if (imageToUpload) [self uploadImage:imageToUpload];
+}
+
+- (void)uploadImage:(ImageToUpload *)image
+{
+    if (uploadExec) return;
+    
+    [activeUploadCtrl showUploading:image.image];
+    
+    uploadExec = [service uploadPhoto:image];
+    uploadExec.delegate = self;
+    [uploadExec start];
+    
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+}
+
+#pragma mark -VKRequestExecutorDelegate
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
+{
+    uploadExec = nil;
+    [activeUploadCtrl cancelUpload:YES];
+    
+    NSMutableDictionary *accounts = [NSMutableDictionary new];
+    for (NSDictionary *user in [value objectForKey:@"users"]) {
+        Account *acc = [[user objectForKey:@"id"] intValue] == service.profile.accountId ? service.profile : [Account accountWithDict:user];
+        [accounts setObject:acc forKey:[user objectForKey:@"id"]];
+    }
+    
+    NSDictionary *photoDict = [value objectForKey:@"photo"];
+    VKPhoto *photo = [VKPhoto VKPhotoWithDict:photoDict];
+    photo.account = [accounts objectForKey:[photoDict objectForKey:@"user"]];
+    
+    NSDictionary *replyDict = [photoDict objectForKey:@"reply_to_photo"];
+    photo.replyToPhoto = [VKPhoto VKPhotoWithDict:replyDict];
+    photo.replyToPhoto.account = [accounts objectForKey:[replyDict objectForKey:@"user"]];
+    
+    photo.justUploaded = YES;
+    [profileCtrl.photosList insert:photo];
+}
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
+{
+    [activeUploadCtrl displayProgress:progress];
+}
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
+{
+    uploadExec = nil;
+    [activeUploadCtrl cancelUpload:NO];
 }
 
 #pragma mark - VKTabBarDelegate
@@ -226,7 +282,7 @@
 {
     [choosePhotoView show:NO animated:NO];
     [self.navigationController popViewControllerAnimated:YES];
-    [profileCtrl uploadImage:image];
+    [self uploadImage:image];
     
     [super photoEditController:controller didFinishWithImage:image];
 }

@@ -16,10 +16,12 @@
 #import "RequestExecutorDelegateAdapter.h"
 #import "ProfileHeaderView.h"
 #import "UserMenuView.h"
+#import "VKTableView.h"
+#import "VKViewController.h"
 
 @protocol ProfileBaseControllerDelegate;
 
-@interface ProfileBaseController : UIViewController <ProfileHeaderViewDelegate, UserMenuViewDelegate> {
+@interface ProfileBaseController : VKViewController <ProfileHeaderViewDelegate, UserMenuViewDelegate> {
     BOOL followedByMe;
     RequestExecutorDelegateAdapter *adapter;
     VKConnectionService *service;
@@ -36,7 +38,6 @@
 @property (nonatomic, strong) UserPhotoList *avatarsList;
 
 @property (nonatomic, strong) ProfileHeaderView *profileHeaderView;
-@property (nonatomic, strong) IBOutlet PullTableView *photosTableView;
 @property (nonatomic, assign) id<ProfileBaseControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UILabel *noPhotoLabel;
 

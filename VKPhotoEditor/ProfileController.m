@@ -18,20 +18,13 @@
 #import "CALayer+Animations.h"
 #import "PhotoView.h"
 
-@interface ProfileController () <VKRequestExecutorDelegate>
+@interface ProfileController ()
 @end
 
 @implementation ProfileController {
-    VKRequestExecutor *uploadPhotoExec;
     VKConnectionService *service;
     CGFloat uploadWidth;
-    BOOL isUploading;
 }
-
-@synthesize uploadingContainerView;
-@synthesize uploadingView;
-@synthesize uploadingImageView;
-@synthesize uploadInfoLabel;
 
 - (id)initWithProfile:(UserProfile *)_profile
 {
@@ -47,36 +40,6 @@
     [super viewDidLoad];
     
     self.profileHeaderView.backButton.hidden = YES;
-    
-    uploadingView.superview.layer.cornerRadius = 6;
-    uploadingImageView.layer.cornerRadius = 17.5;
-    uploadWidth = uploadingView.superview.frame.size.width;
-}
-
-- (void)showUploading:(UIImage*)image
-{
-    BOOL show = image != nil;
-    
-    if (show) uploadInfoLabel.text = nil;
-   
-    isUploading = show;
-    if (show) [self.photosTableView reloadData];
-    uploadingImageView.image = image;
-    [uploadingView resizeTo:CGSizeMake(0, uploadingView.frame.size.height)];
-    if (!show && self.photosTableView.contentOffset.y > self.photosTableView.tableHeaderView.frame.size.height) [self.photosTableView setContentOffset:CGPointMake(0, self.photosTableView.tableHeaderView.frame.size.height) animated:YES];
-}
-
-- (void)uploadImage:(ImageToUpload *)image
-{
-    if (uploadPhotoExec) return;
-    
-    [self showUploading:image.image];
-    
-    uploadPhotoExec = [service uploadPhoto:image];
-    uploadPhotoExec.delegate = self;
-    [uploadPhotoExec start];
-
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
 #pragma mark - UserHeaderViewDelegate
@@ -109,48 +72,7 @@
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didUpdatePhoto:(id)value
 {
-    [self.photosTableView reloadData];
-}
-
-- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
-{
-    [self cancelUpload];
-    
-    NSMutableDictionary *accounts = [NSMutableDictionary new];
-    for (NSDictionary *user in [value objectForKey:@"users"]) {
-        Account *acc = [[user objectForKey:@"id"] intValue] == self.profile.accountId ? self.profile : [Account accountWithDict:user];
-        [accounts setObject:acc forKey:[user objectForKey:@"id"]];
-    }
-    
-    NSDictionary *photoDict = [value objectForKey:@"photo"];
-    VKPhoto *photo = [VKPhoto VKPhotoWithDict:photoDict];
-    photo.account = [accounts objectForKey:[photoDict objectForKey:@"user"]];
-    
-    NSDictionary *replyDict = [photoDict objectForKey:@"reply_to_photo"];
-    photo.replyToPhoto = [VKPhoto VKPhotoWithDict:replyDict];
-    photo.replyToPhoto.account = [accounts objectForKey:[replyDict objectForKey:@"user"]];
-    
-    photo.justUploaded = YES;
-    [self.photosList insert:photo];
-    uploadInfoLabel.text = @"Done!";
-}
-
-- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
-{
-    uploadInfoLabel.text = @"Failed";
-    [self cancelUpload];
-}
-
-- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
-{
-    [uploadingView resizeTo:CGSizeMake(uploadWidth * progress, uploadingView.frame.size.height)];
-}
-
-- (void)cancelUpload
-{
-    uploadPhotoExec = nil;
-    [self showUploading:nil];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [photosTableView reloadData];
 }
 
 #pragma mark - Request Handler
@@ -161,15 +83,15 @@
 }
 
 #pragma mark - UITableViewDataSource
-
-- (CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section
-{
-    return isUploading ? uploadingContainerView.frame.size.height : 0;
-}
-
-- (UIView *)tableView:(UITableView *)_tableView viewForHeaderInSection:(NSInteger)section
-{
-    return isUploading ? uploadingContainerView : nil;
-}
+//
+//- (CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section
+//{
+//    return isUploading ? uploadingContainerView.frame.size.height : 0;
+//}
+//
+//- (UIView *)tableView:(UITableView *)_tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    return isUploading ? uploadingContainerView : nil;
+//}
 
 @end

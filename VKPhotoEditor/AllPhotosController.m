@@ -74,6 +74,10 @@
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
     recognizer.minimumPressDuration = 2.0;
     [tableView addGestureRecognizer:recognizer];
+    
+    UIView *test = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
+    test.backgroundColor = [UIColor redColor];
+    [self.tableView addSubview:test];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
