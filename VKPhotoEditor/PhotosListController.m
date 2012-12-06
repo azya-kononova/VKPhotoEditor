@@ -21,6 +21,7 @@
 #import "ListManagerBaseController.h"
 #import "RepliesViewController.h"
 #import "VKViewController.h"
+#import "NewsViewController.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
@@ -44,8 +45,8 @@
     AllPhotosController *allPhotosCtrl;
     ProfileController *profileCtrl;
     RepliesViewController *repliesCtrl;
-    
     VKViewController *activeUploadCtrl;
+    NewsViewController *newsfeedCtrl;
 }
 
 - (id)initWithImageToUpload:(ImageToUpload*)image
@@ -70,9 +71,13 @@
     repliesCtrl = [[RepliesViewController alloc] initWithProfile:service.profile];
     repliesCtrl.delegate = self;
     
+    newsfeedCtrl = [NewsViewController new];
+    newsfeedCtrl.delegate = self;
+    
     navCtrl = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
-    navCtrl.viewControllers = [NSArray arrayWithObject:repliesCtrl];
-    //navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
+    //navCtrl.viewControllers = [NSArray arrayWithObject:newsfeedCtrl];
+    //navCtrl.viewControllers = [NSArray arrayWithObject:repliesCtrl];
+    navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
     
     UINavigationController *navCtrl1 = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
     navCtrl1.viewControllers = [NSArray arrayWithObject:profileCtrl];

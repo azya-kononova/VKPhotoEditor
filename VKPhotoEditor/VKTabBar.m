@@ -8,7 +8,7 @@
 
 #import "VKTabBar.h"
 #import "UIColor+VKPhotoEditor.h"
-#import "RepliesUpdateLoader.h"
+#import "PhotoUpdatesLoader.h"
 #import "UIView+Helpers.h"
 
 #define REPLY_BADGE_OFFSET 14
@@ -30,7 +30,9 @@
     replyBadge.bgImagecaps = CGSizeMake(13, 10);
     initBadgeSize = replyBadge.frame.size;
     
+    //TODO: use two different badges for that
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReplyBadge:) name:VKUpdateRepliesBadge object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReplyBadge:) name:VKUpdateNewsfeedBadge object:nil];
 }
 
 - (void)setState:(TabBarState)state

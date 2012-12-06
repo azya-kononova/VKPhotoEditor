@@ -11,11 +11,11 @@
 #import "StartViewController.h"
 #import "InformationView.h"
 #import "UIViewController+StatusBar.h"
-#import "RepliesUpdateLoader.h"
+#import "PhotoUpdatesLoader.h"
 
 @implementation AppDelegate {
     InformationView *informationView;
-    RepliesUpdateLoader *repliesUpdateLoader;
+    PhotoUpdatesLoader *repliesUpdateLoader;
 }
 
 @synthesize window, navigationController, connectionService, settings, imageCache;
@@ -33,14 +33,15 @@
     connectionService = [[VKConnectionService alloc] initWithURL:settings.serviceRootURL];
     imageCache = [ImageCache new];
     
-    repliesUpdateLoader = [RepliesUpdateLoader new];
+    repliesUpdateLoader = [PhotoUpdatesLoader new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:VKRequestDidFailNotification object:connectionService];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyUpdates) name:VKRequestDidLogin object:connectionService];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyUpdates) name:VKRequestDidLogout object:connectionService];
     
     if (connectionService.profile.accessToken) {
-        connectionService.since = [Settings current].since;
+        connectionService.replySince = [Settings current].replySince;
+        connectionService.newsfeedSince = [Settings current].newsfeedSince;
         [self startReplyUpdates];
     }
     

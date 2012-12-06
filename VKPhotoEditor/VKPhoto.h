@@ -13,7 +13,8 @@
 typedef enum {
     VKPhotoTypeNone = 0,
     VKPhotoTypeReply = 1,
-    VKPhotoTypeMention = 2
+    VKPhotoTypeMention = 2,
+    VKPhotoTypePhoto = 3
 } VKPhotoType;
 
 @interface VKPhoto : NSObject

@@ -15,6 +15,7 @@
 #define FIRST_LAUNCH_KEY @"firstLaunch"
 #define PROFILE_KEY @"profile"
 #define REPLY_SINCE @"replySince"
+#define NEWSFEED_SINCE @"newsfeedSince"
 
 @interface NSUserDefaults (Def)
 - (id)objectForKey:(NSString*)name withDef:(NSDictionary*)def map:(MapBlock)map;
@@ -80,14 +81,26 @@
     [user synchronize];
 }
 
-- (NSString *)since
+- (NSString *)replySince
 {
     return [user objectForKey:REPLY_SINCE];
 }
 
-- (void)setSince:(NSString *)since
+- (void)setReplySince:(NSString *)since
 {
     [user setObject:since forKey:REPLY_SINCE];
+    [user synchronize];
+}
+
+
+- (NSString *)newsfeedSince
+{
+    return [user objectForKey:NEWSFEED_SINCE];
+}
+
+- (void)setNewsfeedSince:(NSString *)since
+{
+    [user setObject:since forKey:NEWSFEED_SINCE];
     [user synchronize];
 }
 

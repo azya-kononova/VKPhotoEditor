@@ -21,7 +21,8 @@ extern NSString *VKRequestDidLogout;
 
 @property (nonatomic, strong, readonly) NSURL *rootURL;
 @property (nonatomic, strong, readonly) UserProfile *profile;
-@property (nonatomic, strong) NSString *since;
+@property (nonatomic, strong) NSString *replySince;
+@property (nonatomic, strong) NSString *newsfeedSince;
 
 + (VKConnectionService*)shared;
 
@@ -39,5 +40,6 @@ extern NSString *VKRequestDidLogout;
 - (VKRequestExecutor*)getUsers:(NSArray*)users;
 - (VKRequestExecutor*)getUser:(NSInteger)userId;
 - (VKRequestExecutor*)updateUserPic:(NSString*)pictureId;
+- (VKRequestExecutor*)getNewsfeedSince:(NSString*)since after:(NSString*)after limit:(NSInteger)limit;
 - (void)logout;
 @end

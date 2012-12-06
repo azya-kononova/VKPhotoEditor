@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 
 extern NSString *VKUpdateRepliesBadge;
+extern NSString *VKUpdateNewsfeedBadge;
 
-@interface RepliesUpdateLoader : NSObject
+@interface PhotoUpdatesLoader : NSObject
 - (void)start;
 - (void)stop;
 @end

@@ -31,7 +31,8 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
 @implementation VKConnectionService
 @synthesize rootURL;
 @synthesize profile;
-@synthesize since;
+@synthesize replySince;
+@synthesize newsfeedSince;
 
 + (VKConnectionService*)shared
 {
@@ -209,6 +210,15 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
     return exec;
 }
 
+- (VKRequestExecutor*)getNewsfeedSince:(NSString *)_since after:(NSString *)_after limit:(NSInteger)limit
+{
+    NSMutableString *path = [NSMutableString stringWithFormat:@"getNewsfeed?limit=%d&access_token=%@", limit, profile.accessToken];
+    if (_since) [path appendString:[NSString stringWithFormat:@"&since=%@", _since]];
+    if (_after) [path appendString:[NSString stringWithFormat:@"&after=%@", _after]];
+    RequestExecutorProxy *exec = [self getPath:path.copy];
+    return exec;
+}
+
 #pragma mark - executors handlers
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data
@@ -231,7 +241,8 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
         return photo; }];
     
     [Settings current].profile = profile;
-    since = [Settings current].since;
+    replySince = [Settings current].replySince;
+    newsfeedSince = [Settings current].newsfeedSince;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:VKRequestDidLogin object:self];
 }

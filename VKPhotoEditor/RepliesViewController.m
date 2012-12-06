@@ -12,7 +12,7 @@
 #import "UIColor+VKPhotoEditor.h"
 #import "MentionList.h"
 #import "ReplyPhotoCell.h"
-#import "RepliesUpdateLoader.h"
+#import "PhotoUpdatesLoader.h"
 
 @interface RepliesViewController () <ReplyPhotoCellDelegate>
 @end
@@ -89,7 +89,7 @@
 - (UITableViewCell*)mentionOrReplyForRowAtIndexPath:(NSIndexPath *)indexPath tableView:(UITableView*)_tableView
 {
     VKPhoto *photo = [photoList.photos objectAtIndex:indexPath.row];
-    if (photo.type == VKPhotoTypeMention) {
+    if (photo.type == VKPhotoTypeMention || photo.type == VKPhotoTypePhoto) {
         PhotoCell *cell = [PhotoCell dequeOrCreateInTable:_tableView];
         cell.delegate = self;
         [cell displayPhoto:[photoList.photos objectAtIndex:indexPath.row]];

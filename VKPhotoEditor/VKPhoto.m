@@ -73,6 +73,9 @@
         return VKPhotoTypeMention;
     }
     
+    if ([str isEqualToString:@"photo"]) {
+        return VKPhotoTypePhoto;
+    }
     return VKPhotoTypeNone;
 }
 

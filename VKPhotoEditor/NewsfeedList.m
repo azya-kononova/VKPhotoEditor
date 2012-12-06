@@ -1,26 +1,26 @@
 //
-//  MentionList.m
+//  NewsfeedList.m
 //  VKPhotoEditor
 //
-//  Created by Kate on 11/28/12.
+//  Created by asya on 12/7/12.
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import "MentionList.h"
+#import "NewsfeedList.h"
+#import "VKPhoto.h"
 #import "NSDictionary+Helpers.h"
 #import "NSObject+Map.h"
-#import "VKPhoto.h"
 #import "Settings.h"
 
-@implementation MentionList {
+@implementation NewsfeedList {
     NSString *after;
 }
 
-@synthesize account, mentionsCount;
+@synthesize newsfeedCount;
 
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getMentions:account.accountId since:nil after:after limit:limit];
+    return [service getNewsfeedSince:nil after:after limit:limit];
 }
 
 - (void)mapData:(id)data
@@ -31,7 +31,7 @@
         Account *acc = [user integerForKey:@"id"] == service.profile.accountId ? service.profile : [Account accountWithDict:user];
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
     }
-    NSArray *_photos = [[data objectForKey:@"feedback"] map:^id(NSDictionary *dict) {
+    NSArray *_photos = [[data objectForKey:@"news"] map:^id(NSDictionary *dict) {
         NSDictionary *photoInfo = [dict objectForKey:@"photo"];
         VKPhoto *photo = [VKPhoto VKPhotoWithDict:photoInfo];
         photo.account = [accounts objectForKey:[photoInfo objectForKey:@"user"]];
@@ -43,54 +43,20 @@
         
         return photo; }];
     
-    mentionsCount = _photos.count;
+    newsfeedCount = _photos.count;
     
     [self append:_photos totalCount:0];
     
-    service.replySince = [data objectForKey:@"since"];
+    service.newsfeedSince = [data objectForKey:@"since"];
     after = [data objectForKey:@"after"];
     
     completed = ![after isKindOfClass:[NSString class]];
     
 }
 
-- (void)reset
-{
-    [super reset];
-    after = nil;
-}
-
 - (void)saveSinceValue
 {
-    [Settings current].replySince = service.replySince;
-}
-
-//It's a stub for stupid server data!!!
-- (NSArray *)getPhotosChain:(NSArray *)photos
-{
-    NSMutableArray *result = [NSMutableArray arrayWithArray:photos];
-    
-    for (VKPhoto *photo in photos) {
-        [self addPhotoReplyTo:photo from:result];
-    }
-    return result;
-}
-
-- (void)addPhotoReplyTo:(VKPhoto *)reply from:(NSMutableArray *)array
-{
-    VKPhoto *removedPhoto = nil;
-    
-    for (VKPhoto *photo in array) {
-        if ([photo.photoId isEqualToString:reply.replyTo]) {
-            removedPhoto = photo;
-            break;
-        }
-    }
-    
-    if (removedPhoto) {
-        reply.replyToPhoto = removedPhoto;
-        [array removeObject:removedPhoto];
-    }
+    [Settings current].newsfeedSince = service.newsfeedSince;
 }
 
 @end
