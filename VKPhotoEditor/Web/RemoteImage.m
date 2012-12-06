@@ -18,6 +18,7 @@
 @synthesize isLoad;
 @synthesize progress;
 @synthesize isLoading;
+@synthesize image;
 
 + (RemoteImage*)remoteImageWithURL:(NSURL*)url
 {
@@ -46,14 +47,6 @@
         imageData = UIImagePNGRepresentation(image);
     }
     return imageData;
-}
-
-- (UIImage*)image
-{
-	if (!image && imageData) {
-		image = [[UIImage alloc] initWithData:imageData];
-	}
-	return image;
 }
 
 - (void)startLoading
@@ -106,7 +99,14 @@
 {
 	imageData = connectionData;
 	[self stopLoading];
-    self.isLoad = YES;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIImage *img = [[UIImage alloc] initWithData:imageData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            image = img;
+            self.isLoad = YES;
+        });
+    });
     
 	[delegate remoteImageDidFinishLoading:self];
 }

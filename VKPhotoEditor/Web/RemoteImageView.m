@@ -38,12 +38,12 @@
 
 - (void)_displayImage:(UIImage*)_image
 {
-    BOOL animated = !imageView.image;
-    
-    if (animated) {
-        [self.layer fade].duration = 0.75;
-        [imageView.layer fade].duration = 0.75;
-    }
+//    BOOL animated = !imageView.image;
+//
+//    if (animated) {
+//        [self.layer fade].duration = 0.75;
+//        [imageView.layer fade].duration = 0.75;
+//    }
     
     self.placeholder.hidden = _image != nil;
     
@@ -53,10 +53,6 @@
     if (isCircular) {
         self.layer.masksToBounds = YES;
         self.layer.cornerRadius = self.frame.size.width / 2;
-    }
-    
-    if (_image && [delegate respondsToSelector:@selector(remoteImageView:didLoadImage:)]) {
-        [delegate remoteImageView:self didLoadImage:_image];
     }
 }
 
@@ -93,6 +89,9 @@
     }
     if([keyPath isEqualToString:@"isLoad"]) {
         [self _displayImage:image.image];
+        if (image.image && [delegate respondsToSelector:@selector(remoteImageView:didLoadImage:)]) {
+            [delegate remoteImageView:self didLoadImage:image.image];
+        }
     }
 }
 
