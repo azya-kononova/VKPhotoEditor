@@ -9,7 +9,9 @@
 #import "ProfileHeaderView.h"
 #import "UIView+Helpers.h"
 
-@implementation ProfileHeaderView
+@implementation ProfileHeaderView {
+    UIView *hiddenModeView;
+}
 @synthesize avatarTheaterView;
 @synthesize nameLabel;
 @synthesize centralButton;
@@ -26,11 +28,16 @@
 @synthesize state;
 @synthesize delegate;
 @synthesize userMenuButton;
+@synthesize photosView;
+@synthesize followersView;
+@synthesize mentionsView;
 
 - (void)awakeFromNib
 {
     centralButton.bgImagecaps = CGSizeMake(23, 0);
     [userMenuButton setImage:[UIImage imageNamed:@"HeaderArrow_active.png"] forState:UIControlStateSelected | UIControlStateHighlighted ];
+    hiddenModeView = photosView;
+    hiddenModeView.hidden = YES;
 }
 
 #pragma mark - actions
@@ -54,6 +61,12 @@
 - (IBAction)changeMode:(UIButton*)sender
 {
     self.mode = sender.tag;
+    
+    UIView *containerView = sender.superview;
+    [hiddenModeView moveTo:CGPointMake(containerView.frame.origin.x, containerView.frame.origin.y)];
+    containerView.hidden = YES;
+    hiddenModeView.hidden = NO;
+    hiddenModeView = containerView;
 }
 
 - (void)setMode:(ProfileHeaderViewMode)_mode
