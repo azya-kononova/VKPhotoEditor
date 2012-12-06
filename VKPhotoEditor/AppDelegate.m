@@ -50,9 +50,23 @@
     informationView = [InformationView loadFromNIB];
     [self.window addSubview:informationView];
     [self.window bringSubviewToFront:informationView];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
 
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+{
+    const char *data = [deviceToken bytes];
+    NSMutableString *newToken = [NSMutableString string];
+    for (int i = 0; i < [deviceToken length]; i++) {
+        [newToken appendFormat:@"%02.2hhX", data[i]];
+    }
+    
+   	NSLog(@"My token is: %@", newToken);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
