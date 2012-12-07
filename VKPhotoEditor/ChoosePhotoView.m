@@ -73,33 +73,18 @@
     
     if (show) [libraryPhotosView reloadData];
     
+    if (show) self.hidden = NO;
+   
     if (animated) {
-        if (show) self.hidden = NO;
-        [overlayView.layer fade];
-        
-        CATransition *transition = [CATransition new];
-        transition.type = kCATransitionPush;
-        transition.subtype = show ? kCATransitionFromTop : kCATransitionFromBottom;
-        transition.duration = 0.4;
-        transition.delegate = self;
-        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-        [transition setValue:[NSNumber numberWithBool:show] forKey:@"PhotoViewShow"];
-        [bgView.layer addAnimation:transition forKey:@"Transition"];
-        
+        [UIView animateWithDuration:0.7 delay:0 options: UIViewAnimationCurveEaseIn animations:^(void) {
+            overlayView.hidden = !show;
+            [bgView moveTo:CGPointMake(0, show ? self.frame.size.height - bgView.frame.size.height : self.frame.size.height)];
+        } completion:^(BOOL finished){ if (!show) self.hidden = YES; }];
     } else {
-        self.hidden = !show;
-    }
-    
-    overlayView.hidden = !show;
-    [bgView moveTo:CGPointMake(0, show ? self.frame.size.height - bgView.frame.size.height : self.frame.size.height)];
-}
-
-#pragma mark - CAAnimationDelegate
-
-- (void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
-{
-    BOOL show = [[theAnimation valueForKey:@"PhotoViewShow"] intValue];
-    if (!show) self.hidden = YES;
+        overlayView.hidden = !show;
+        [bgView moveTo:CGPointMake(0, show ? self.frame.size.height - bgView.frame.size.height : self.frame.size.height)];
+        self.hidden = YES;
+    }    
 }
 
 - (void)show:(BOOL)show animated:(BOOL)animated
