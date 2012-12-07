@@ -134,6 +134,7 @@
 {
     uploadExec = nil;
     [activeUploadCtrl cancelUpload:YES];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     for (NSDictionary *user in [value objectForKey:@"users"]) {
