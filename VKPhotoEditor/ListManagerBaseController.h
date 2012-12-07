@@ -44,4 +44,5 @@
 - (void)listBaseController:(ListManagerBaseController*)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated;
 - (void)listBaseController:(ListManagerBaseController*)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated;
 - (void)listBaseController:(ListManagerBaseController*)ctrl didReplyToPhoto:(VKPhoto *)photo;
+- (void)listBaseController:(ListManagerBaseController*)ctrl didSelectHashTag:(NSString *)tag;
 @end

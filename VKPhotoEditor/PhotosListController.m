@@ -271,6 +271,12 @@
 
 #pragma mark - ListManagerBaseControllerDelegate
 
+- (void)listBaseController:(ListManagerBaseController *)ctrl didSelectHashTag:(NSString *)tag
+{
+    tabBar.state = TabBarStateExplore;
+    [allPhotosCtrl search:tag];
+}
+
 - (void)listBaseController:(ListManagerBaseController *)ctrl didReplyToPhoto:(VKPhoto *)photo
 {
     isAvatar = NO;
