@@ -17,6 +17,10 @@
     [super setTableHeaderView:tableHeaderView];
     [self sendSubviewToBack:tableHeaderView];
     [uploadingView moveTo:CGPointMake(0,self.tableHeaderView.frame.size.height)];
+    
+    for (UIView* sv in self.subviews) {
+        NSLog(@"%@", sv);
+    }
 }
 
 - (void)setUploadingView:(UploadingView *)_uploadingView

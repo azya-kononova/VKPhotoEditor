@@ -15,10 +15,12 @@
 #import "GridModeButton.h"
 #import "FastViewerController.h"
 #import "PhotoCell.h"
+#import "VKViewController.h"
+#import "VKTableView.h"
 
 @protocol ListManagerBaseControllerDelegate;
 
-@interface ListManagerBaseController : UIViewController <GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, PhotoCellDelegate, PullTableViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ListManagerBaseController : VKViewController <GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, PhotoCellDelegate, PullTableViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     PhotoList *photoList;
     NSInteger itemsInRow;
     NSInteger gridCellHeight;
@@ -28,7 +30,6 @@
 }
 
 @property (nonatomic, unsafe_unretained) id<ListManagerBaseControllerDelegate> delegate;
-@property (nonatomic, strong) IBOutlet PullTableView *tableView;
 @property (nonatomic, strong) IBOutlet UIView *tableHeaderView;
 @property (nonatomic, strong) IBOutlet UILabel* noPhotosLabel;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;

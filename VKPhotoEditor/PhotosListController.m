@@ -97,16 +97,15 @@
     [self.view addSubview:choosePhotoView];
     choosePhotoView.delegate = self;
     
-    // TODO: set active controller (where need to display progress!)
-    
-    activeUploadCtrl = profileCtrl;
-    
     if (imageToUpload) [self uploadImage:imageToUpload];
 }
 
 - (void)uploadImage:(ImageToUpload *)image
 {
     if (uploadExec) return;
+    
+    UINavigationController *nav = [controllers objectAtIndex:tabBar.state];
+    activeUploadCtrl = (VKViewController*)nav.topViewController;
     
     [activeUploadCtrl showUploading:image.image];
     
@@ -117,7 +116,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
-#pragma mark -VKRequestExecutorDelegate
+#pragma mark VKRequestExecutorDelegate
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {

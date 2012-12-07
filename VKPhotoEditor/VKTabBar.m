@@ -23,6 +23,7 @@
 @synthesize delegate;
 @synthesize backgroundView;
 @synthesize replyBadge;
+@synthesize state;
 
 - (void)awakeFromNib
 {
@@ -35,8 +36,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReplyBadge:) name:VKUpdateNewsfeedBadge object:nil];
 }
 
-- (void)setState:(TabBarState)state
+- (void)setState:(TabBarState)_state
 {
+//    if (state == _state) return;
+    
+    state = _state;
+    
     for (UIButton *button in buttons) {
         button.selected = (button.tag == state);
     }

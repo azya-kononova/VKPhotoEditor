@@ -13,7 +13,6 @@
 
 @implementation ListManagerBaseController
 
-@synthesize tableView;
 @synthesize tableHeaderView;
 @synthesize noPhotosLabel;
 @synthesize activityIndicator;
@@ -25,12 +24,12 @@
 {
     [super viewDidLoad];
     
-    tableView.tableHeaderView = tableHeaderView;
+    photosTableView.tableHeaderView = tableHeaderView;
     
-    tableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
-    tableView.pullBackgroundColor = [UIColor blackColor];
-    tableView.loadBackgroundColor = [UIColor whiteColor];
-    tableView.pullTextColor = [UIColor blackColor];
+    photosTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
+    photosTableView.pullBackgroundColor = [UIColor blackColor];
+    photosTableView.loadBackgroundColor = [UIColor whiteColor];
+    photosTableView.pullTextColor = [UIColor blackColor];
     
     GridModeButton *gridButton = [GridModeButton loadFromNIB];
     gridButton.delegate = self;
@@ -43,7 +42,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:animated];
+    [photosTableView deselectRowAtIndexPath:[photosTableView indexPathForSelectedRow] animated:animated];
     [super viewWillAppear:animated];
 }
 
@@ -63,7 +62,6 @@
     return photos;
 }
 
-
 #pragma mark - PhotosListDelegate
 
 - (void)reloadPullTable
@@ -71,16 +69,16 @@
     activityIndicator.hidden = YES;
     noPhotosLabel.hidden = photoList.photos.count;
     
-    [tableView reloadData];
-    tableView.pullTableIsLoadingMore = NO;
-    tableView.pullTableIsRefreshing = NO;
+    [photosTableView reloadData];
+    photosTableView.pullTableIsLoadingMore = NO;
+    photosTableView.pullTableIsRefreshing = NO;
     
     //    [tableView setCompleted:searchResultsList.completed];
 }
 
 - (void)photoList:(PhotoList *)_photoList didUpdatePhotos:(NSArray *)photos
 {
-    tableView.pullLastRefreshDate = [NSDate date];
+    photosTableView.pullLastRefreshDate = [NSDate date];
     [self reloadPullTable];
 }
 
@@ -101,10 +99,10 @@
     return 0;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (isGridMode) {
-        ThumbnailPhotoCell *cell = [ThumbnailPhotoCell dequeOrCreateInTable:tableView];
+        ThumbnailPhotoCell *cell = [ThumbnailPhotoCell dequeOrCreateInTable:photosTableView];
         cell.delegate = self;
         [cell displayPhotos:[self getPhotosForIndexPath:indexPath]];
         return cell;
@@ -141,7 +139,7 @@
 - (void)gridModeButtonDidSwitchMode:(GridModeButton *)gridButton
 {
     isGridMode = !isGridMode;
-    [tableView reloadData];
+    [photosTableView reloadData];
 }
 
 #pragma mark - ThumbnailPhotoCellDelegate

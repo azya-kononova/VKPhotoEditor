@@ -42,11 +42,7 @@
     
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
     recognizer.minimumPressDuration = 2.0;
-    [self.tableView  addGestureRecognizer:recognizer];
-    
-    UIView *test = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 200)];
-    test.backgroundColor = [UIColor redColor];
-    [self.tableView addSubview:test];
+    [photosTableView addGestureRecognizer:recognizer];
 }
 
 
@@ -72,7 +68,7 @@
     
     if (cell) return cell;
     
-    PhotoCell *photoCell = [PhotoCell dequeOrCreateInTable:self.tableView];
+    PhotoCell *photoCell = [PhotoCell dequeOrCreateInTable:photosTableView];
     photoCell.delegate = self;
     VKPhoto *photo = [photoList.photos objectAtIndex:indexPath.row];
     [photoCell displayPhoto:photo];
@@ -82,17 +78,17 @@
 
 - (void)setFindModeActive:(BOOL)active
 {
-    [self.tableView setContentOffset:CGPointZero animated:NO];
+    [photosTableView setContentOffset:CGPointZero animated:NO];
     
-    if (active == (self.tableView.tableHeaderView == nil)) return;
+    if (active == (photosTableView.tableHeaderView == nil)) return;
     
     active ? [self.view addSubview:searchBar] : [self.tableHeaderView addSubview:searchBar];
     CGFloat dy = active ? searchBar.frame.size.height : 0;
     
-    self.tableView.frame = CGRectMake(0, dy, self.view.frame.size.width, self.view.frame.size.height - dy);
-    [self.tableView beginUpdates];
-    self.tableView.tableHeaderView = active ? nil : self.tableHeaderView;
-    [self.tableView endUpdates];
+    photosTableView.frame = CGRectMake(0, dy, self.view.frame.size.width, self.view.frame.size.height - dy);
+    [photosTableView beginUpdates];
+    photosTableView.tableHeaderView = active ? nil : self.tableHeaderView;
+    [photosTableView endUpdates];
     
     [UIView animateWithDuration:0.3 animations:^(void) {
         [searchBar moveTo:CGPointMake(0, active ? 0 : 44)];
@@ -127,9 +123,9 @@
 - (void)reload
 {
     self.noPhotosLabel.hidden = YES;
-    self.tableView.pullTableIsRefreshing = YES;
+    photosTableView.pullTableIsRefreshing = YES;
     [photoList reset];
-    [self.tableView reloadData];
+    [photosTableView reloadData];
     [photoList loadMore];
 }
 
@@ -209,8 +205,8 @@
 {
     if (recognizer.state != UIGestureRecognizerStateBegan) return;
     
-    CGPoint point = [recognizer locationInView:self.tableView];
-    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:point];
+    CGPoint point = [recognizer locationInView:photosTableView];
+    NSIndexPath *indexPath = [photosTableView indexPathForRowAtPoint:point];
     
     if (indexPath) {
         
