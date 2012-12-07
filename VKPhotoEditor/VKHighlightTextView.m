@@ -118,7 +118,7 @@ static CGFloat MARGIN = 8;
     self.delegate = (internalDelegate=[[RegexHighlightViewDelegate alloc] init]);
     highlightTheme = [NSDictionary dictionaryWithObjectsAndKeys:
                       [UIColor colorWithRed:149.0/255 green:200.0/255 blue:255.0/255 alpha:1],kVKHighlightViewTypeHashTag,
-                      [UIColor colorWithRed:186.0/255 green:85.0/255 blue:211.0/255 alpha:1],kVKHighlightViewTypeMentionTag, nil];
+                      [UIColor colorWithRed:149.0/255 green:200.0/255 blue:255.0/255 alpha:1],kVKHighlightViewTypeMentionTag, nil];
     definitions = [NSDictionary dictionaryWithObjectsAndKeys:
                    @"\\s*#\\w+", kVKHighlightViewTypeHashTag,
                    @"\\s*@\\w+", kVKHighlightViewTypeMentionTag,nil];
