@@ -123,7 +123,6 @@
 - (void)reload
 {
     self.noPhotosLabel.hidden = YES;
-    photosTableView.pullTableIsRefreshing = YES;
     [photoList reset];
     [photosTableView reloadData];
     [photoList loadMore];
@@ -169,7 +168,6 @@
         }
     }
 }
-
 
 #pragma mark - UIActionSheetDelegate
 
