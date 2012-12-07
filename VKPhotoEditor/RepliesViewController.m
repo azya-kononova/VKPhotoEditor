@@ -51,7 +51,10 @@
 
 - (NSArray *)gridPhotoList
 {
+//    TODO: Every time generate new array??
+    
     NSMutableArray *photos = [NSMutableArray array];
+    NSLog(@"New array");
     
     for (VKPhoto *photo in photoList.photos) {
         [self addPhoto:photo to:photos];
