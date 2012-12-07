@@ -25,6 +25,8 @@
 @synthesize dateLabel;
 @synthesize nameLabel;
 @synthesize accountButton;
+@synthesize progressBgImage;
+@synthesize progressImage;
 
 - (void)awakeFromNib
 {
@@ -35,6 +37,9 @@
     
     tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapOnPhoto)];
     [remoteImageView addGestureRecognizer:tapRecognizer];
+    
+    progressBgImage.image = [[UIImage imageNamed:@"Uploading_2.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
+    progressImage.image = [[UIImage imageNamed:@"UploadingProgress_2.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
 }
 
 - (void)displayPhoto:(VKPhoto *)_photo

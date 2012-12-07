@@ -26,6 +26,9 @@
 @property (nonatomic, strong) IBOutlet UILabel *dateLabel;
 @property (nonatomic, copy) NSString *searchString;
 
+@property (nonatomic, strong) IBOutlet UIImageView *progressBgImage;
+@property (nonatomic, strong) IBOutlet UIImageView *progressImage;
+
 - (void)displayPhoto:(VKPhoto*)photo;
 - (void)displayPhoto:(VKPhoto*)photo canSelectAccount:(BOOL)selectAccount;
 
