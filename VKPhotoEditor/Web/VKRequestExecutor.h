@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern const NSString* VKRequestExecutorErrorDomain;
+extern NSString* VKRequestExecutorErrorDomain;
 
 @protocol VKRequestExecutorDelegate;
 

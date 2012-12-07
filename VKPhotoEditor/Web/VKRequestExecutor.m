@@ -19,6 +19,8 @@
 - (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite;
 @end
 
+NSString *VKRequestExecutorErrorDomain = @"VKError";
+
 @interface NSURLConnectionHandlerProxy : NSObject <RequestExecutor_NSURLConnectionHandler>
 @property (nonatomic, assign) id<RequestExecutor_NSURLConnectionHandler> delegate;
 @end
@@ -87,7 +89,7 @@
                           description ? description : message, NSLocalizedDescriptionKey,
                           reason, NSLocalizedFailureReasonErrorKey,
                           nil];
-    return [NSError errorWithDomain:VKErrorDomain code:code userInfo:info];
+    return [NSError errorWithDomain:VKRequestExecutorErrorDomain code:code userInfo:info];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)_data

@@ -11,8 +11,10 @@
 
 typedef enum {
     TabBarStateUnselected = -1,
-    TabBarStateProfile = 0,
-    TabBarStateAllPhotos = 1
+    TabBarStateHome = 0,
+    TabBarStateExplore = 1,
+    TabBarStateReply = 2,
+    TabBarStateProfile = 3,
 } TabBarState;
 
 @protocol VKTabBarDelegate;
@@ -22,10 +24,15 @@ typedef enum {
 
 @property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *buttons;
 @property (nonatomic, strong) IBOutletCollection(UILabel) NSArray *titles;
-@property (nonatomic, strong) IBOutlet UIImageView *backgroundView;
+@property (nonatomic, strong) IBOutletCollection(UIView) NSArray *tabViews;
+@property (nonatomic, strong) IBOutlet UIView *backgroundView;
 @property (nonatomic, strong) IBOutlet FlexibleButton *replyBadge;
+@property (nonatomic, strong) IBOutlet FlexibleButton *newsBadge;
 
 @property (nonatomic, assign) TabBarState state;
+@property (nonatomic, assign) BOOL extended;
+
+- (void)setExtended:(BOOL)extended animated:(BOOL)animated;
 
 - (IBAction)didSelect:(UIButton*)sender;
 - (IBAction)central;

@@ -115,7 +115,6 @@
 
 #pragma mark - PullTableViewDelegate
 
-
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
     if (!photoList.completed) {
@@ -124,7 +123,6 @@
         [self performSelector:@selector(reloadPullTable) withObject:nil afterDelay:0.2];
     }
 }
-
 
 #pragma mark - ReplyPhotoCellDelegate
 

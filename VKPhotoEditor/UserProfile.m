@@ -18,12 +18,14 @@
 @synthesize lastPhotos;
 @synthesize accessToken;
 @synthesize avatarId;
+@synthesize hasExtendedMenu;
 
 - (void)encodeWithCoder:(NSCoder *)coder
 {
     [super encodeWithCoder:coder];
     ENCODEOBJECT(accessToken);
     ENCODEOBJECT(avatarId);
+    ENCODEBOOL(hasExtendedMenu);
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -31,6 +33,7 @@
     if (self = [super initWithCoder:decoder]) {
         DECODEOBJECT(accessToken);
         DECODEOBJECT(avatarId);
+        DECODEBOOL(hasExtendedMenu);
     }
     return self;
 }

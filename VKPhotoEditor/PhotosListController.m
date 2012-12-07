@@ -41,7 +41,6 @@
     BOOL isAvatar;
     VKPhoto *replyToPhoto;
     
-    UINavigationController *navCtrl;
     AllPhotosController *allPhotosCtrl;
     ProfileController *profileCtrl;
     RepliesViewController *repliesCtrl;
@@ -62,6 +61,9 @@
     [super viewDidLoad];
     
     service = [VKConnectionService shared];
+    
+    [service.profile addObserver:self forKeyPath:@"hasExtendedMenu" options:0 context:NULL];
+    
     profileCtrl = [[ProfileController alloc] initWithProfile:service.profile];
     profileCtrl.delegate = self;
     
@@ -74,21 +76,25 @@
     newsfeedCtrl = [NewsViewController new];
     newsfeedCtrl.delegate = self;
     
-    navCtrl = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
-    //navCtrl.viewControllers = [NSArray arrayWithObject:newsfeedCtrl];
-    //navCtrl.viewControllers = [NSArray arrayWithObject:repliesCtrl];
-    navCtrl.viewControllers = [NSArray arrayWithObject:allPhotosCtrl];
+    UINavigationController *profileNavCtrl = [[UINavigationController alloc] initWithRootViewController:profileCtrl];
+    UINavigationController *exploreNavCtrl = [[UINavigationController alloc] initWithRootViewController:allPhotosCtrl];
+    UINavigationController *repliesNavCtrl = [[UINavigationController alloc] initWithRootViewController:repliesCtrl];
+    UINavigationController *homeNavCtrl = [[UINavigationController alloc] initWithRootViewController:newsfeedCtrl];
     
-    UINavigationController *navCtrl1 = [[[NSBundle mainBundle] loadNibNamed:@"VKNavigationController" owner:self options:nil] objectAtIndex:0];
-    navCtrl1.viewControllers = [NSArray arrayWithObject:profileCtrl];
+    profileNavCtrl.navigationBarHidden = YES;
+    exploreNavCtrl.navigationBarHidden = YES;
+    repliesNavCtrl.navigationBarHidden = YES;
+    homeNavCtrl.navigationBarHidden = YES;
     
     [profileCtrl view];
     
-    controllers =  [NSArray arrayWithObjects:navCtrl1, navCtrl, nil];
+    controllers =  [NSArray arrayWithObjects:homeNavCtrl, exploreNavCtrl, repliesNavCtrl, profileNavCtrl, nil];
     
     tabBar = [VKTabBar loadFromNIB];
     [tabBar moveBy:CGPointMake(0, self.view.frame.size.height - tabBar.frame.size.height)];
     [self.view addSubview:tabBar];
+    
+    tabBar.extended = service.profile.hasExtendedMenu;
     
     tabBar.delegate = self;
     tabBar.state = TabBarStateProfile;
@@ -98,6 +104,12 @@
     choosePhotoView.delegate = self;
     
     if (imageToUpload) [self uploadImage:imageToUpload];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
+    if([keyPath isEqualToString:@"hasExtendedMenu"]) {
+        [tabBar setExtended:service.profile.hasExtendedMenu animated:YES];
+    }
 }
 
 - (void)uploadImage:(ImageToUpload *)image
@@ -155,11 +167,7 @@
 #pragma mark - VKTabBarDelegate
 
 - (void)VKTabBar:(VKTabBar *)_tabBar didSelectIndex:(NSInteger)index
-{
-    if (navCtrl.viewControllers.count == 2) {
-        [navCtrl popToRootViewControllerAnimated:YES];
-    }
-    
+{    
     UIView* currentView = [self.view viewWithTag:SELECTED_VIEW_CONTROLLER_TAG];
     [currentView removeFromSuperview];
     
@@ -193,12 +201,12 @@
 
 - (void)profileBaseControllerDidBack:(ProfileController *)ctrl
 {
-    tabBar.state = TabBarStateAllPhotos;
+    tabBar.state = TabBarStateExplore;
 }
 
 - (void)profileBaseController:(ProfileController *)ctrl didTapHashTag:(NSString *)hashTag
 {
-    tabBar.state = TabBarStateAllPhotos;
+    tabBar.state = TabBarStateExplore;
     [allPhotosCtrl search:hashTag];
 }
 
@@ -278,7 +286,7 @@
     tabBar.state = TabBarStateUnselected;
     UserAccountController *userCtrl = [[UserAccountController alloc] initWithProfile:(UserProfile*)account];
     userCtrl.delegate = self;
-    [navCtrl pushViewController:userCtrl animated:animated];
+    [ctrl.navigationController pushViewController:userCtrl animated:animated];
 }
 
 - (void)listBaseController:(ListManagerBaseController *)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated

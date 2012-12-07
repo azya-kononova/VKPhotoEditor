@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSString *accessToken;
 @property (nonatomic, strong) NSString *avatarId;
 @property (nonatomic, strong) NSArray *lastPhotos;
+@property (nonatomic, assign) BOOL hasExtendedMenu;
 
 + (id)accountWithDict:(NSDictionary*)dict;
 @end

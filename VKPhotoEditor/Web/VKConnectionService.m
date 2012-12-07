@@ -183,6 +183,7 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
 - (VKRequestExecutor*)followUser:(NSInteger)userId
 {
     RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"followUser?user_id=%d&access_token=%@", userId, profile.accessToken]];
+    exec.onSuccess = @selector(exec:didFollowUser:);
     return exec;
 }
 
@@ -200,7 +201,10 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
 
 - (VKRequestExecutor*)getUser:(NSInteger)userId
 {
-    return [self getUsers:[NSArray arrayWithObject:[NSNumber numberWithInt:userId]]];
+    RequestExecutorProxy *exec = (RequestExecutorProxy*)[self getUsers:[NSArray arrayWithObject:[NSNumber numberWithInt:userId]]];
+    if (userId == profile.accountId)
+        exec.onSuccess = @selector(exec:didLoadProfileInfo:);
+    return exec;
 }
 
 - (VKRequestExecutor*)updateUserPic:(NSString*)pictureId
@@ -220,6 +224,24 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
 }
 
 #pragma mark - executors handlers
+
+- (void)exec:(VKRequestExecutor*)exec didLoadProfileInfo:(id)data
+{
+    if (profile.hasExtendedMenu) return;
+    
+    NSDictionary *userInfo = [[data objectForKey:@"users_info"] objectAtIndex:0];
+    
+    profile.hasExtendedMenu = [[userInfo objectForKey:@"following_count"] integerValue];
+    [Settings current].profile = profile;
+}
+
+- (void)exec:(VKRequestExecutor*)exec didFollowUser:(id)data
+{
+    if (profile.hasExtendedMenu) return;
+    
+    profile.hasExtendedMenu = YES;
+    [Settings current].profile = profile;
+}
 
 - (void)exec:(VKRequestExecutor*)exec didLogin:(id)data
 {
