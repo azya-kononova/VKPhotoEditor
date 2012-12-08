@@ -59,4 +59,10 @@
     [Settings current].newsfeedSince = service.newsfeedSince;
 }
 
+- (void)reset
+{
+    [super reset];
+    after = nil;
+}
+
 @end
