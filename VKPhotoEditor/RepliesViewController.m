@@ -19,6 +19,7 @@
 
 @implementation RepliesViewController {
     UserProfile *profile;
+    NSArray *gridMentionList;
 }
 
 - (id)initWithProfile:(UserProfile *)_profile
@@ -51,10 +52,12 @@
 
 - (NSArray *)gridPhotoList
 {
-//    TODO: Every time generate new array??
-    
+    return gridMentionList;
+}
+
+- (NSArray *)getGridMentionList
+{
     NSMutableArray *photos = [NSMutableArray array];
-    NSLog(@"New array");
     
     for (VKPhoto *photo in photoList.photos) {
         [self addPhoto:photo to:photos];
@@ -78,8 +81,14 @@
 {
     [super photoList:_photoList didUpdatePhotos:photos];
     [(MentionList *)photoList saveSinceValue];
+    gridMentionList = [self getGridMentionList];
 }
 
+- (void)photoList:(PhotoList *)_photoList didFailToUpdate:(NSError *)error
+{
+    [super photoList:_photoList didFailToUpdate:error];
+    gridMentionList = [self getGridMentionList];
+}
 
 #pragma mark - UITableViewDataSource
 
