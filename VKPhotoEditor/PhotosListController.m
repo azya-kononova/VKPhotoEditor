@@ -202,7 +202,7 @@
 
 - (void)profileBaseControllerDidBack:(ProfileController *)ctrl
 {
-    tabBar.state = TabBarStateExplore;
+    [[controllers objectAtIndex:tabBar.state] popViewControllerAnimated:YES];
 }
 
 - (void)profileBaseController:(ProfileController *)ctrl didTapHashTag:(NSString *)hashTag
@@ -290,7 +290,6 @@
         tabBar.state = TabBarStateProfile;
         return;
     }
-    tabBar.state = TabBarStateUnselected;
     UserAccountController *userCtrl = [[UserAccountController alloc] initWithProfile:(UserProfile*)account];
     userCtrl.delegate = self;
     [ctrl.navigationController pushViewController:userCtrl animated:animated];
