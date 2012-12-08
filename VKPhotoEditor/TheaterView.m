@@ -16,6 +16,7 @@
     NSMutableArray *views;
     struct {
         unsigned int delegateRespondsToDidScroll : 1;
+        unsigned int delegateRespondsToDidTap : 1;
     } flags;
     
     UITapGestureRecognizer *tapRecognizer;
@@ -30,6 +31,7 @@
 {
     delegate = _delegate;
     flags.delegateRespondsToDidScroll = [delegate respondsToSelector:@selector(theaterView:didScrollToItemWithIndex:)];
+    flags.delegateRespondsToDidTap = [delegate respondsToSelector:@selector(theaterView:didTapOnItemWithIndex:)];
 }
 
 - (UIScrollView*)scroll
@@ -57,7 +59,9 @@
 {
     NSInteger index = [tapRecognizer locationInView:_scroll].x / _scroll.frame.size.width;
     if (index > views.count - 1) return;
-    [delegate theaterView:self didTapOnItemWithIndex:index];
+    if (flags.delegateRespondsToDidTap) {
+        [delegate theaterView:self didTapOnItemWithIndex:index];
+    }
     displayedItemIndex = index;
 }
 
