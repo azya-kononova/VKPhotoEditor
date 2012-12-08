@@ -24,8 +24,8 @@
 @synthesize captionTextView;
 @synthesize searchString;
 @synthesize delegate;
-@synthesize placeholderView;
-@synthesize progressView;
+@synthesize progressBgImage;
+@synthesize progressImage;
 
 - (void)awakeFromNib
 {
@@ -34,9 +34,12 @@
     
     captionTextView.font = [UIFont fontWithName:@"Lobster" size:12.0];
     
-    totalProgressWidth = progressView.frame.size.width;
-    progressView.layer.cornerRadius = 6;
-    placeholderView.layer.cornerRadius = 6;
+    totalProgressWidth = progressBgImage.frame.size.width;
+    
+    progressBgImage.image = [[UIImage imageNamed:@"Uploading_1.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
+    progressImage.image = [[UIImage imageNamed:@"UploadingProgress_1.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
+    progressBgImage.layer.cornerRadius = 6;
+    progressImage.layer.cornerRadius = 6;
 }
 
 - (void)didTap:(UITapGestureRecognizer *)recognizer
@@ -49,7 +52,7 @@
     [largePhotoImage addObserver:self forKeyPath:@"progress" options:0 context:NULL];
     
     [largePhotoImage startLoading];
-    placeholderView.hidden = !photo.isPhotoLoading;
+    [self hideProgressView:!photo.isPhotoLoading];
     [self setProgress:largePhotoImage.image ? 1.0 : 0.0];
     
     if (largePhotoImage.image) {
@@ -68,12 +71,18 @@
     captionTextView.searchString = searchString;
     [captionTextView setNeedsDisplay];
     
-    placeholderView.hidden = !photo.isPhotoLoading;
+    [self hideProgressView:!photo.isPhotoLoading];
 }
 
 - (void)setProgress:(float)progress
 {
-    [progressView resizeTo:CGSizeMake(totalProgressWidth * progress, progressView.frame.size.height)];
+    [progressImage resizeTo:CGSizeMake(totalProgressWidth * progress, progressImage.frame.size.height)];
+}
+
+- (void)hideProgressView:(BOOL)hide
+{
+    progressImage.hidden = hide;
+    progressBgImage.hidden = hide;
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -98,7 +107,7 @@
 
 - (void)remoteImageDidFinishLoading:(RemoteImage *)remoteImage
 {
-    placeholderView.hidden = !photo.isPhotoLoading;
+    [self hideProgressView:!photo.isPhotoLoading];
     [delegate thumbnailPhotoView:self didSelectPhoto:photo];
 }
 
