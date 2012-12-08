@@ -63,4 +63,5 @@ typedef enum {
 - (void)profileHeaderViewDidTapButton:(ProfileHeaderView*)view;
 - (void)profileHeaderViewDidBack:(ProfileHeaderView*)view;
 - (void)profileHeaderView:(ProfileHeaderView*)view didOpenUserMenu:(BOOL)open;
+- (void)profileHeaderViewDidSwitchGridMode:(ProfileHeaderView*)view;
 @end;

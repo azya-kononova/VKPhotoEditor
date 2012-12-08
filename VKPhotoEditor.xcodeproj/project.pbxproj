@@ -48,6 +48,7 @@
 		222ABA03164036CD001F089C /* blur_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 222ABA01164036CD001F089C /* blur_bg.png */; };
 		222ABA04164036CD001F089C /* blur_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 222ABA02164036CD001F089C /* blur_bg@2x.png */; };
 		224C084D1620832300F10A85 /* UIImage+GPUOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */; };
+		225694D21673795700EEA840 /* GridModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 225694D11673795700EEA840 /* GridModes.m */; };
 		2269DF64165AA8CA00FF7833 /* ErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2269DF63165AA8CA00FF7833 /* ErrorMessage.m */; };
 		2269E0871661089700FF7833 /* XIBLoaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2269E0861661089700FF7833 /* XIBLoaderView.m */; };
 		2269E089166108DD00FF7833 /* ThumbnailPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2269E088166108DD00FF7833 /* ThumbnailPhotoCell.xib */; };
@@ -545,6 +546,8 @@
 		222ABA02164036CD001F089C /* blur_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blur_bg@2x.png"; sourceTree = "<group>"; };
 		224C084B1620832200F10A85 /* UIImage+GPUOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GPUOrientation.h"; sourceTree = "<group>"; };
 		224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GPUOrientation.m"; sourceTree = "<group>"; };
+		225694D01673795700EEA840 /* GridModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridModes.h; sourceTree = "<group>"; };
+		225694D11673795700EEA840 /* GridModes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridModes.m; sourceTree = "<group>"; };
 		2269DF62165AA8C900FF7833 /* ErrorMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorMessage.h; sourceTree = "<group>"; };
 		2269DF63165AA8CA00FF7833 /* ErrorMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorMessage.m; sourceTree = "<group>"; };
 		2269E0851661089700FF7833 /* XIBLoaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XIBLoaderView.h; sourceTree = "<group>"; };
@@ -1150,6 +1153,8 @@
 				22D471E7166B471200C1390B /* ReplyPhotoList.m */,
 				226A00F7167154F1002CE6D2 /* NewsfeedList.h */,
 				226A00F8167154F1002CE6D2 /* NewsfeedList.m */,
+				225694D01673795700EEA840 /* GridModes.h */,
+				225694D11673795700EEA840 /* GridModes.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -2376,6 +2381,7 @@
 				22C5694E1671365A004986EB /* ListManagerBaseController.m in Sources */,
 				226A00F516715408002CE6D2 /* NewsViewController.m in Sources */,
 				226A00F9167154F1002CE6D2 /* NewsfeedList.m in Sources */,
+				225694D21673795700EEA840 /* GridModes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -53,4 +53,6 @@
 - (void)profileBaseController:(ProfileBaseController*)ctrl didReplyToPhoto:(VKPhoto *)photo;
 - (void)profileBaseControllerWantLoadAvatar:(ProfileBaseController*)ctrl;
 - (void)profileBaseControllerDidLogout:(ProfileBaseController*)ctrl;
+- (void)profileBaseController:(ProfileBaseController*)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated;
+- (void)profileBaseController:(ProfileBaseController*)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated;
 @end

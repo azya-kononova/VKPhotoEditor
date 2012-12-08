@@ -218,6 +218,19 @@
     [choosePhotoView show:YES replyToPhoto:photo animated:YES];
 }
 
+- (void)profileBaseController:(ProfileBaseController *)ctrl presenModalViewController:(UIViewController *)controller animated:(BOOL)animated
+{
+    [self presentModalViewController:controller withPushDirection:kCATransitionFromRight];
+}
+
+- (void)profileBaseController:(ProfileBaseController *)ctrl dismissModalViewController:(UIViewController *)controller animated:(BOOL)animated
+{
+    if (!animated)
+        [self dismissModalViewControllerWithPushDirection:kCATransitionFromRight];
+    else
+        [self dismissModalViewControllerWithPushDirection:kCATransitionFromLeft];
+}
+
 #pragma mark - ChoosePhotoViewDelegate
 
 - (void)choosePhotoViewDidChooseCameraRoll:(ChoosePhotoView*)view

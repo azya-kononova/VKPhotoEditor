@@ -15,8 +15,15 @@
 #import "CALayer+Animations.h"
 #import "NSArray+Helpers.h"
 #import "UIColor+VKPhotoEditor.h"
+#import "ThumbnailPhotoCell.h"
+#import "FastViewerController.h"
+#import "GridModes.h"
 
-@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate, TheaterViewDataSource, TheaterViewDelegate>
+#define MENTIONS_GRID_MODE @"MentionsGridMode"
+#define FOLLOWERS_GRID_MODE @"FollowersGridMode"
+#define PHOTOS_GRID_MODE @"PhotosGridMode"
+
+@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate, TheaterViewDataSource, TheaterViewDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
 @end
 
 @implementation ProfileBaseController{
@@ -27,7 +34,12 @@
     BOOL infoLoaded;
     UserMenuView *userMenuView;
     BOOL isProfile;
+    NSInteger itemsInRow;
+    NSInteger gridCellHeight;
+    BOOL isFastViewerOpen;
+    GridModes *gridModes;
 }
+
 @synthesize delegate;
 @synthesize noPhotoLabel;
 @synthesize loadingView;
@@ -63,6 +75,10 @@
         
         adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
         sourceList = photosList;
+        
+        gridModes = [GridModes new];
+        [self setDefaultGridModes];
+        [gridModes setCurrentModeKey:PHOTOS_GRID_MODE];
     }
     return self;
 }
@@ -94,6 +110,10 @@
     photosTableView.loadBackgroundColor = [UIColor clearColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
+    ThumbnailPhotoCell *cell = [UITableViewCell loadCellOfType:[ThumbnailPhotoCell class] fromNib:@"ThumbnailPhotoCell" withId:@"ThumbnailPhotoCell"];
+    itemsInRow = cell.itemsInRow;
+    gridCellHeight = cell.frame.size.height;
+    
     [photosList loadMore];
     [avatarsList loadMore];
     
@@ -109,6 +129,27 @@
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         [delegate profileBaseControllerDidBack:self];
     }
+}
+
+- (void)setDefaultGridModes
+{
+    [gridModes setMode:NO forKey:PHOTOS_GRID_MODE];
+    [gridModes setMode:NO forKey:MENTIONS_GRID_MODE];
+    [gridModes setMode:YES forKey:FOLLOWERS_GRID_MODE];
+}
+
+- (NSArray *)getPhotosForIndexPath:(NSIndexPath *)indexPath
+{
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:itemsInRow];
+    
+    for (int i = 0; i < itemsInRow; i++) {
+        int row = itemsInRow * indexPath.row + i;
+        if (row < sourceList.photos.count) {
+            [photos addObject:[sourceList.photos objectAtIndex:row]];
+        }
+    }
+    
+    return photos;
 }
 
 - (void)showContent
@@ -168,12 +209,15 @@
     switch (mode) {
         case ProfileHeaderViewPhotosMode:
             sourceList = photosList;
+            [gridModes setCurrentModeKey:PHOTOS_GRID_MODE];
             break;
         case ProfileHeaderViewFollowersMode:
             sourceList = followersList;
+            [gridModes setCurrentModeKey:FOLLOWERS_GRID_MODE];
             break;
         case ProfileHeaderViewsMentiosMode:
             sourceList = mentionsList;
+            [gridModes setCurrentModeKey:MENTIONS_GRID_MODE];
             break;
         default:
             break;
@@ -188,6 +232,12 @@
 - (void)profileHeaderViewDidBack:(ProfileHeaderView *)view
 {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)profileHeaderViewDidSwitchGridMode:(ProfileHeaderView *)view
+{
+    [gridModes switchCurrentModeValue];
+    [photosTableView reloadData];
 }
 
 #pragma mark - PhotoListDelegate
@@ -247,21 +297,28 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     tableView.backgroundColor = sourceList.photos.count ? [UIColor whiteColor] : [UIColor defaultBgColor];
-    return sourceList.photos.count;
+    return gridModes.isGridMode ? (NSInteger) ceil((double) sourceList.photos.count / itemsInRow) : sourceList.photos.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 366;
+    return gridModes.isGridMode ? gridCellHeight : 366;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
-    cell.delegate = self;
-    VKPhoto *photo = [sourceList.photos objectAtIndex:indexPath.row ];
-    [cell displayPhoto:photo canSelectAccount:NO];
-    return cell;
+    if (gridModes.isGridMode) {
+        ThumbnailPhotoCell *cell = [ThumbnailPhotoCell dequeOrCreateInTable:photosTableView];
+        cell.delegate = self;
+        [cell displayPhotos:[self getPhotosForIndexPath:indexPath]];
+        return cell;
+    } else {
+        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+        cell.delegate = self;
+        VKPhoto *photo = [sourceList.photos objectAtIndex:indexPath.row ];
+        [cell displayPhoto:photo canSelectAccount:NO];
+        return cell;
+    }
 }
 
 #pragma mark - UIActionSheetDelegate
@@ -352,5 +409,28 @@
         [actSheet showInView:self.view.superview];
     }
 }
+
+#pragma mark - ThumbnailPhotoCellDelegate
+
+- (void)thumbnailPhotoCell:(ThumbnailPhotoCell *)cell didSelectPhoto:(VKPhoto *)photo
+{
+    if (!isFastViewerOpen) {
+        isFastViewerOpen = YES;
+        
+        FastViewerController *controller = [[FastViewerController alloc] initWithPhoto:photo];
+        controller.delegate = self;
+        [delegate profileBaseController:self presenModalViewController:controller animated:YES];
+    }
+}
+
+#pragma mark - FastViewerControllerDelegate
+
+- (void)fastViewerControllerDidFinish:(FastViewerController *)controller
+{
+    [delegate profileBaseController:self dismissModalViewController:controller animated:YES];
+    isFastViewerOpen = NO;
+}
+
+- (void)fastViewerController:(FastViewerController *)controller didFinishWithAccount:(Account *)account {}
 
 @end
