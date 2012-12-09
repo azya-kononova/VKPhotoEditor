@@ -45,6 +45,7 @@
 
 - (id)initWithProfile:(UserProfile*)profile;
 - (void)reloadAvatarList;
+- (void)updateInfo;
 
 - (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data;
 @end

@@ -27,6 +27,7 @@ NSString *VKRequestDidFailNotification = @"VKRequestDidFail";
 NSString *VKRequestDidUpdateAvatarNotification = @"VKRequestDidUpdateAvatar";
 NSString *VKRequestDidLogin = @"VKRequestDidLogin";
 NSString *VKRequestDidLogout = @"VKRequestDidLogout";
+NSString *VKRequestDidInfoUpdateNotification = @"VKRequestDidInfoUpdate";
 
 @implementation VKConnectionService
 @synthesize rootURL;

@@ -128,8 +128,12 @@
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
     recognizer.minimumPressDuration = 2.0;
     [photosTableView addGestureRecognizer:recognizer];
-    
-    [adapter start:[service getUser:self.profile.accountId] onSuccess:@selector(exec:didGetUser:) onError:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updateInfo];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -137,6 +141,11 @@
     if ([self.navigationController.viewControllers indexOfObject:self] == NSNotFound) {
         [delegate profileBaseControllerDidBack:self];
     }
+}
+
+- (void)updateInfo
+{
+    [adapter start:[service getUser:self.profile.accountId] onSuccess:@selector(exec:didGetUser:) onError:nil];
 }
 
 - (void)setDefaultGridModes

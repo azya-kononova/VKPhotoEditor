@@ -11,6 +11,7 @@
 #import "VKRequestExecutor.h"
 #import "ImageToUpload.h"
 
+extern NSString *VKRequestDidInfoUpdateNotification;
 extern NSString *VKRequestDidFailNotification;
 extern NSString *VKRequestDidUpdateAvatarNotification;
 extern NSString *VKRequestDidLogin;

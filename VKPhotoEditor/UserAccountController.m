@@ -45,7 +45,7 @@
         return;
     }
     VKRequestExecutor *exec = followButton.selected ? [service unfollowUser:self.profile.accountId]  : [service followUser:self.profile.accountId] ;
-    [adapter start:exec onSuccess:nil onError:@selector(exec:didFailFollowUser:) ];
+    [adapter start:exec onSuccess:@selector(exec:didFollowUser:) onError:@selector(exec:didFailFollowUser:) ];
     self.profileHeaderView.centralButton.selected = !self.profileHeaderView.centralButton.selected;
     followedByMe = !followedByMe;
 }
@@ -71,6 +71,11 @@
 }
 
 #pragma mark - executor handlers
+
+- (void)exec:(VKRequestExecutor *)exec didFollowUser:(id)data
+{
+    [self updateInfo];
+}
 
 - (void)exec:(VKRequestExecutor*)exec didFailFollowUser:(id)data
 {
