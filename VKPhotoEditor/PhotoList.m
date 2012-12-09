@@ -13,12 +13,13 @@
 @synthesize completed;
 @synthesize photos;
 @synthesize sectionsInfo;
+@synthesize limit;
 
 - (id)init
 {
     if (self = [super init]) {
         service = [VKConnectionService shared];
-        limit = 20;
+        limit = 24;
         sectionsInfo = [NSMutableDictionary new];
     }
     return self;
@@ -27,10 +28,8 @@
 - (void)reset
 {
     exec = nil;
-    nextPage = 0;
     completed = NO;
     photos = nil;
-    initialOffset = 0;
     sectionsInfo = [NSMutableDictionary new];
 }
 
@@ -81,7 +80,6 @@
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
 {
     exec = nil;
-    nextPage--;
     [delegate photoList:self didFailToUpdate:error];
 }
 

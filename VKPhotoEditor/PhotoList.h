@@ -12,11 +12,8 @@
 @protocol PhotoListDelegate;
 
 @interface PhotoList : NSObject <VKRequestExecutorDelegate> {
-    NSInteger initialOffset;
     VKConnectionService *service;
-    NSInteger nextPage;
     VKRequestExecutor *exec;
-    NSInteger limit;
     @protected
     BOOL completed;
 }
@@ -25,6 +22,7 @@
 @property (nonatomic, assign, readonly) BOOL completed;
 @property (nonatomic, strong) NSArray *photos;
 @property (nonatomic, strong) NSMutableDictionary *sectionsInfo;
+@property (nonatomic, assign) NSInteger limit;
 
 - (void)reset;
 - (void)loadMore;

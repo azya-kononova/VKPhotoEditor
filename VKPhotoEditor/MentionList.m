@@ -20,7 +20,7 @@
 
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getMentions:account.accountId since:nil after:after limit:limit];
+    return [service getMentions:account.accountId since:nil after:after limit:self.limit];
 }
 
 - (void)mapData:(id)data

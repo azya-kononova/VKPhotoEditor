@@ -22,7 +22,7 @@ NSString *VKHideRepliesBadge = @"VKHideRepliesBadge";
 
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getMentions:service.profile.accountId since:service.replySince after:nil limit:limit];
+    return [service getMentions:service.profile.accountId since:service.replySince after:nil limit:self.limit];
 }
 
 @end

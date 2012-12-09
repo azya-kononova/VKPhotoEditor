@@ -75,6 +75,8 @@
     dateLabel.text = hasPhoto ? [DataFormatter formatRelativeDate:photo.date] : nil;
     accountButton.hidden = !selectAccount;
     
+    remoteImageView.hidden = !hasPhoto;
+    
     [remoteImageView displayImage:photo.photo];
     if (![photo.caption isKindOfClass:[NSNull class]]) captionTextView.text = photo.caption ;
     [captionTextView sizeFontToFitMinSize:8 maxSize:28];

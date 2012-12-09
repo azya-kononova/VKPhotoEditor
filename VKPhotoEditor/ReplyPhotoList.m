@@ -26,7 +26,7 @@
 
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getHistory:photoID limit:limit];
+    return [service getHistory:photoID limit:self.limit];
 }
 
 - (void)mapData:(id)data

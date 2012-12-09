@@ -58,10 +58,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    TODO: handle situations when users find
-   return isGridMode ? gridCellHeight : 366;
-    
+    if (isGridMode)
+        return gridCellHeight;
+    else {
+        VKPhoto *photo = [photoList.photos objectAtIndex:indexPath.row];
+        return photo.imageURL ? 366 : 46;
+    }
+    return 0;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [super tableView:_tableView cellForRowAtIndexPath:indexPath];

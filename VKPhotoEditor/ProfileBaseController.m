@@ -21,12 +21,13 @@
 #import "FollowingView.h"
 #import "ThumbnailAvatarCell.h"
 #import "UserAccountController.h"
+#import "ReplyPhotoCell.h"
 
 #define MENTIONS_GRID_MODE @"MentionsGridMode"
 #define FOLLOWERS_GRID_MODE @"FollowersGridMode"
 #define PHOTOS_GRID_MODE @"PhotosGridMode"
 
-@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate, TheaterViewDataSource, TheaterViewDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, ThumbnailAvatarCellDelegate>
+@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate, TheaterViewDataSource, TheaterViewDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, ThumbnailAvatarCellDelegate, ReplyPhotoCellDelegate>
 @end
 
 @implementation ProfileBaseController{
@@ -366,11 +367,19 @@
         [cell displayPhotos:[self getPhotosForIndex:indexPath.row total:offset + [sourceList numberOfItemsInSection:indexPath.section] offset:offset]];
         return cell;
     } else {
-        PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
-        cell.delegate = self;
-        id item = [sourceList.photos objectAtIndex:(offset + indexPath.row)];
-        (profileHeaderView.mode != ProfileHeaderViewFollowersMode) ? [cell displayPhoto:item canSelectAccount:NO] : [cell displayAccount:item];
-        return cell;
+        VKPhoto* item = [sourceList.photos objectAtIndex:(offset + indexPath.row)];
+        if (profileHeaderView.mode == ProfileHeaderViewFollowersMode || item.type != VKPhotoTypeReply) {
+            PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
+            cell.delegate = self;
+            (profileHeaderView.mode != ProfileHeaderViewFollowersMode) ? [cell displayPhoto:item canSelectAccount:NO] : [cell displayAccount:(Account*)item];
+            return cell;
+        } else  {
+            ReplyPhotoCell *cell = [ReplyPhotoCell dequeOrCreateInTable:photosTableView];
+            cell.delegate = self;
+            [cell displayPhoto:item];
+            return cell;
+        }
+        return nil;
     }
 }
 
@@ -394,6 +403,18 @@
 {
 }
 
+#pragma mark - ReplyPhotoCellDelegate
+
+- (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnAccount:(Account *)account
+{
+    [self.navigationController pushViewController:[[UserAccountController alloc] initWithProfile:(UserProfile*)account]  animated:YES];
+}
+
+- (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnPhoto:(VKPhoto *)photo
+{
+    [delegate profileBaseController:self didReplyToPhoto:photo];
+}
+
 #pragma mark - PhotoCellDelegate
 
 - (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
@@ -403,7 +424,7 @@
 
 - (void)photoCell:(PhotoCell *)photoCell didSelectAccount:(Account *)account
 {
-    
+    [self.navigationController pushViewController:[[UserAccountController alloc] initWithProfile:(UserProfile*)account]  animated:YES];
 }
 
 - (void)photoCell:(PhotoCell *)photoCell didTapOnPhoto:(VKPhoto *)photo

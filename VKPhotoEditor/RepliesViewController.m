@@ -123,13 +123,13 @@
     if (photo.type == VKPhotoTypeMention || photo.type == VKPhotoTypePhoto) {
         PhotoCell *cell = [PhotoCell dequeOrCreateInTable:_tableView];
         cell.delegate = self;
-        [cell displayPhoto:[photoList.photos objectAtIndex:indexPath.row]];
+        [cell displayPhoto:photo];
         
         return cell;
     } else if (photo.type == VKPhotoTypeReply) {
         ReplyPhotoCell *cell = [ReplyPhotoCell dequeOrCreateInTable:_tableView];
         cell.delegate = self;
-        [cell displayPhoto:[photoList.photos objectAtIndex:indexPath.row]];
+        [cell displayPhoto:photo];
         
         return cell;
     }

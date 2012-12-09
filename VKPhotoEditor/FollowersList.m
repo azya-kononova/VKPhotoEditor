@@ -16,9 +16,17 @@ NSString *FollowersFilterFollower = @"follower";
 @synthesize account;
 @synthesize filter;
 
+- (id)init
+{
+    if (self = [super init]) {
+        self.limit = 100;
+    }
+    return self;
+}
+
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getFollowers:account.accountId offset:limit * nextPage++ limit:limit filter:nil];
+    return [service getFollowers:account.accountId offset:self.photos.count limit:self.limit filter:nil];
 }
 
 - (void)mapData:(id)data

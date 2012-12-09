@@ -21,7 +21,7 @@
 
 - (VKRequestExecutor*)newPageExec
 {
-   return [service searchPhotos:query offset:limit*nextPage++ limit:limit];
+   return [service searchPhotos:query offset:self.photos.count limit:self.limit];
 }
 
 - (void)deletePhoto:(NSString *)photoId
@@ -47,7 +47,7 @@
     
     NSMutableArray *_photos = [results map:^id(NSDictionary *dict) {
         NSDictionary *photoInfo = [dict objectForKey:@"photo"];
-        VKPhoto *photo = [VKPhoto VKPhotoWithDict:[dict objectForKey:@"photo"]];
+        VKPhoto *photo = [VKPhoto VKPhotoWithDict:photoInfo];
         photo.account = [accounts objectForKey:[photoInfo objectForKey:@"user"]];
         
         NSDictionary *replyDict = [dict objectForKey:@"reply_to_photo"];

@@ -20,7 +20,7 @@
 
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getNewsfeedSince:nil after:after limit:limit];
+    return [service getNewsfeedSince:nil after:after limit:self.limit];
 }
 
 - (void)mapData:(id)data

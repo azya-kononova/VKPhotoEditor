@@ -25,7 +25,6 @@
 {
     if (self = [super init]) {
         self.photos = [_photos copy];
-        initialOffset = self.photos.count;
 
     }
     return self;
@@ -33,7 +32,7 @@
 
 - (VKRequestExecutor*)newPageExec
 {
-    return [service getPhotos:account.accountId offset:initialOffset + limit * nextPage++ limit:limit userPic:userPic];
+    return [service getPhotos:account.accountId offset:self.photos.count limit:self.limit userPic:userPic];
 }
 
 - (void)mapData:(id)data
@@ -56,7 +55,6 @@
 
 - (void)insert:(VKPhoto*)photo
 {
-    initialOffset++;
     self.photos = [[NSArray arrayWithObject:photo] arrayByAddingObjectsFromArray:self.photos];
     [self.delegate photoList:self didUpdatePhotos:self.photos];
 }
@@ -69,7 +67,6 @@
     NSMutableArray *newPhotos = self.photos.mutableCopy;
     [newPhotos removeObjectAtIndex:index];
     self.photos = newPhotos.copy;
-    initialOffset--;
     [self.delegate photoList:self didUpdatePhotos:self.photos];
 }
 
