@@ -12,7 +12,6 @@
 #import "PullTableView.h"
 #import "PhotoList.h"
 #import "ThumbnailPhotoCell.h"
-#import "GridModeButton.h"
 #import "FastViewerController.h"
 #import "PhotoCell.h"
 #import "VKViewController.h"
@@ -20,7 +19,7 @@
 
 @protocol ListManagerBaseControllerDelegate;
 
-@interface ListManagerBaseController : VKViewController <GridModeButtonDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, PhotoCellDelegate, PullTableViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ListManagerBaseController : VKViewController <ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, PhotoCellDelegate, PullTableViewDelegate, UITableViewDataSource, UITableViewDelegate> {
     PhotoList *photoList;
     NSInteger itemsInRow;
     NSInteger gridCellHeight;
@@ -36,6 +35,7 @@
 @property (nonatomic, strong, readonly) NSArray *gridPhotoList;
 
 - (NSArray *)getPhotosForIndexPath:(NSIndexPath *)indexPath;
+- (IBAction)changeGridMode:(UIButton*)sender;
 
 @end
 

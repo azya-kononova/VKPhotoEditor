@@ -167,8 +167,6 @@
 		22D5D2451661265B00BCB7E0 /* Selector_PhotoView@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2411661265B00BCB7E0 /* Selector_PhotoView@2x.png */; };
 		22D5D2461661265B00BCB7E0 /* Selector_PhotoViewActive.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2421661265B00BCB7E0 /* Selector_PhotoViewActive.png */; };
 		22D5D2471661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2431661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png */; };
-		22D5D24A16612BF600BCB7E0 /* GridModeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D5D24916612BF600BCB7E0 /* GridModeButton.m */; };
-		22D5D24C16612C0900BCB7E0 /* GridModeButton.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */; };
 		22D5D271166216D100BCB7E0 /* FastViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22D5D26F166216D100BCB7E0 /* FastViewerController.m */; };
 		22D5D272166216D100BCB7E0 /* FastViewerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D270166216D100BCB7E0 /* FastViewerController.xib */; };
 		22D5D28B1662239D00BCB7E0 /* DarkArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 22D5D2891662239D00BCB7E0 /* DarkArrow.png */; };
@@ -695,9 +693,6 @@
 		22D5D2411661265B00BCB7E0 /* Selector_PhotoView@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Selector_PhotoView@2x.png"; sourceTree = "<group>"; };
 		22D5D2421661265B00BCB7E0 /* Selector_PhotoViewActive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Selector_PhotoViewActive.png; sourceTree = "<group>"; };
 		22D5D2431661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Selector_PhotoViewActive@2x.png"; sourceTree = "<group>"; };
-		22D5D24816612BF600BCB7E0 /* GridModeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridModeButton.h; sourceTree = "<group>"; };
-		22D5D24916612BF600BCB7E0 /* GridModeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridModeButton.m; sourceTree = "<group>"; };
-		22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GridModeButton.xib; sourceTree = "<group>"; };
 		22D5D26E166216D100BCB7E0 /* FastViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastViewerController.h; sourceTree = "<group>"; };
 		22D5D26F166216D100BCB7E0 /* FastViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastViewerController.m; sourceTree = "<group>"; };
 		22D5D270166216D100BCB7E0 /* FastViewerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FastViewerController.xib; sourceTree = "<group>"; };
@@ -1720,9 +1715,6 @@
 				44157E1F16740F6700A56930 /* ThumbnailAvatarView.h */,
 				44157E2016740F6700A56930 /* ThumbnailAvatarView.m */,
 				44157E2216740F9500A56930 /* ThumbnailAvatarView.xib */,
-				22D5D24816612BF600BCB7E0 /* GridModeButton.h */,
-				22D5D24916612BF600BCB7E0 /* GridModeButton.m */,
-				22D5D24B16612C0900BCB7E0 /* GridModeButton.xib */,
 				444A5D771662C9FB00C319D7 /* PhotoView.h */,
 				444A5D781662C9FB00C319D7 /* PhotoView.m */,
 				444A5D751662C9D900C319D7 /* PhotoView.xib */,
@@ -2202,7 +2194,6 @@
 				22D5D2451661265B00BCB7E0 /* Selector_PhotoView@2x.png in Resources */,
 				22D5D2461661265B00BCB7E0 /* Selector_PhotoViewActive.png in Resources */,
 				22D5D2471661265B00BCB7E0 /* Selector_PhotoViewActive@2x.png in Resources */,
-				22D5D24C16612C0900BCB7E0 /* GridModeButton.xib in Resources */,
 				22D5D272166216D100BCB7E0 /* FastViewerController.xib in Resources */,
 				22D5D28B1662239D00BCB7E0 /* DarkArrow.png in Resources */,
 				22D5D28C1662239D00BCB7E0 /* DarkArrow@2x.png in Resources */,
@@ -2409,7 +2400,6 @@
 				2269E0871661089700FF7833 /* XIBLoaderView.m in Sources */,
 				2269E08C166108FA00FF7833 /* ThumbnailPhotoCell.m in Sources */,
 				2269E08F1661092000FF7833 /* ThumbnailPhotoView.m in Sources */,
-				22D5D24A16612BF600BCB7E0 /* GridModeButton.m in Sources */,
 				22D5D271166216D100BCB7E0 /* FastViewerController.m in Sources */,
 				44AC1B7116623E5400043552 /* VKTitleLabel.m in Sources */,
 				449D40F71662B7F300270322 /* TheaterView.m in Sources */,

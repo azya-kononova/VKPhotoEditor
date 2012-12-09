@@ -50,11 +50,13 @@ typedef enum {
 @property (nonatomic, strong) IBOutlet UIView *mentionsView;
 @property (nonatomic, strong) IBOutlet UIView *followersView;
 @property (nonatomic, strong) IBOutlet UIView *photosView;
+@property (nonatomic, strong) IBOutlet UIButton *gridButton;
 
 - (IBAction)changeMode:(UIButton*)sender;
 - (IBAction)centerAction;
 - (IBAction)back;
 - (IBAction)showUserMenu:(UIButton*)sender;
+- (IBAction)changeGridMode:(UIButton*)sender;
 
 @end
 

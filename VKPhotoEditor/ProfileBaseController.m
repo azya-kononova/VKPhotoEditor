@@ -215,6 +215,9 @@
         default:
             break;
     }
+    
+    profileHeaderView.gridButton.selected = gridModes.isGridMode;
+    
     if (sourceList.photos.count == 0) {
         [sourceList reset];
         [sourceList loadMore];

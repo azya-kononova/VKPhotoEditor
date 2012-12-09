@@ -8,10 +8,6 @@
 
 #import "ProfileHeaderView.h"
 #import "UIView+Helpers.h"
-#import "GridModeButton.h"
-
-@interface ProfileHeaderView ()<GridModeButtonDelegate>
-@end
 
 @implementation ProfileHeaderView {
     UIView *hiddenModeView;
@@ -35,6 +31,7 @@
 @synthesize photosView;
 @synthesize followersView;
 @synthesize mentionsView;
+@synthesize gridButton;
 
 - (void)awakeFromNib
 {
@@ -42,14 +39,15 @@
     [userMenuButton setImage:[UIImage imageNamed:@"HeaderArrow_active.png"] forState:UIControlStateSelected | UIControlStateHighlighted ];
     hiddenModeView = photosView;
     hiddenModeView.hidden = YES;
-    
-    GridModeButton *gridButton = [GridModeButton loadFromNIB];
-    gridButton.delegate = self;
-    [gridButton moveTo:CGPointMake(280, 5)];
-    [headerTopView addSubview:gridButton];
 }
 
 #pragma mark - actions
+
+- (IBAction)changeGridMode:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    [delegate profileHeaderViewDidSwitchGridMode:self];
+}
 
 - (IBAction)showUserMenu:(UIButton *)sender
 {
@@ -135,14 +133,6 @@
     }
     
     [self resizeTo:CGSizeMake(320, lastView.frame.origin.y + lastView.frame.size.height)];
-}
-
-
-#pragma mark - GridModeButtonDelegate
-
-- (void)gridModeButtonDidSwitchMode:(GridModeButton *)gridButton
-{
-    [delegate profileHeaderViewDidSwitchGridMode:self];
 }
 
 @end

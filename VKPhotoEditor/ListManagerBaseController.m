@@ -19,7 +19,6 @@
 @synthesize delegate;
 @synthesize gridPhotoList;
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -31,11 +30,6 @@
     photosTableView.loadBackgroundColor = [UIColor whiteColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
-    GridModeButton *gridButton = [GridModeButton loadFromNIB];
-    gridButton.delegate = self;
-    [gridButton moveTo:CGPointMake(280, 5)];
-    [tableHeaderView addSubview:gridButton];
-    
     ThumbnailPhotoCell *cell = [UITableViewCell loadCellOfType:[ThumbnailPhotoCell class] fromNib:@"ThumbnailPhotoCell" withId:@"ThumbnailPhotoCell"];
     itemsInRow = cell.itemsInRow;
     gridCellHeight = cell.frame.size.height;
@@ -44,6 +38,15 @@
 - (void) viewWillAppear:(BOOL)animated {
     [photosTableView deselectRowAtIndexPath:[photosTableView indexPathForSelectedRow] animated:animated];
     [super viewWillAppear:animated];
+}
+
+#pragma mark - actions
+
+- (IBAction)changeGridMode:(UIButton *)sender
+{
+    sender.selected = !sender.selected;
+    isGridMode = !isGridMode;
+    [photosTableView reloadData];
 }
 
 #pragma mark - Internals
@@ -132,15 +135,6 @@
 - (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
 {
     [photoList loadMore];
-}
-
-
-#pragma mark - GridModeButtonDelegate
-
-- (void)gridModeButtonDidSwitchMode:(GridModeButton *)gridButton
-{
-    isGridMode = !isGridMode;
-    [photosTableView reloadData];
 }
 
 #pragma mark - ThumbnailPhotoCellDelegate
