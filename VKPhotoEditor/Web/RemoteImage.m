@@ -105,10 +105,10 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             image = img;
             self.isLoad = YES;
+            [delegate remoteImageDidFinishLoading:self];
         });
     });
     
-	[delegate remoteImageDidFinishLoading:self];
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error

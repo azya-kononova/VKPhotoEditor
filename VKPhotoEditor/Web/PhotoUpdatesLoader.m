@@ -10,7 +10,7 @@
 #import "MentionList.h"
 #import "NewsfeedList.h"
 
-#define TIME_INTERVAL 10
+#define TIME_INTERVAL 60
 
 NSString *VKUpdateRepliesBadge = @"VKUpdateRepliesBadge";
 NSString *VKHideRepliesBadge = @"VKHideRepliesBadge";
