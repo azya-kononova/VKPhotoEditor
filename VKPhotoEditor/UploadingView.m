@@ -9,13 +9,14 @@
 #import "UploadingView.h"
 #import "UIView+Helpers.h"
 
+NSString *UploadingViewCancelUploadNotification = @"UploadingViewCancelUploadNotification";
+
 @implementation UploadingView {
     CGFloat uploadWidth;
 }
 @synthesize uploadingProgressView;
 @synthesize uploadingBgView;
 @synthesize uploadingImageView;
-@synthesize uploadInfoLabel;
 
 - (void)awakeFromNib
 {
@@ -26,11 +27,7 @@
 }
 
 - (void)showUploading:(UIImage*)image
-{
-    BOOL show = image != nil;
-    
-    if (show) uploadInfoLabel.text = nil;
-    
+{ 
     uploadingImageView.image = image;
     [uploadingProgressView resizeTo:CGSizeMake(0, uploadingProgressView.frame.size.height)];
 }
@@ -45,4 +42,8 @@
     [self showUploading:nil];
 }
 
+- (IBAction)stopLoading
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:UploadingViewCancelUploadNotification object:self];
+}
 @end

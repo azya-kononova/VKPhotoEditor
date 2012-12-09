@@ -22,6 +22,7 @@
 #import "RepliesViewController.h"
 #import "VKViewController.h"
 #import "NewsViewController.h"
+#import "UploadingView.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
@@ -59,6 +60,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelUpload) name:UploadingViewCancelUploadNotification object:nil];
     
     service = [VKConnectionService shared];
     
@@ -128,13 +131,19 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
+- (void)cancelUpload
+{
+    [uploadExec stop];
+    uploadExec = nil;
+    [activeUploadCtrl cancelUpload:YES];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+}
+
 #pragma mark VKRequestExecutorDelegate
 
 - (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
 {
-    uploadExec = nil;
-    [activeUploadCtrl cancelUpload:YES];
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [self cancelUpload];
     
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     for (NSDictionary *user in [value objectForKey:@"users"]) {

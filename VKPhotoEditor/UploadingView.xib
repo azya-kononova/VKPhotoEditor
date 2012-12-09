@@ -100,7 +100,6 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{280, 0}, {40, 35}}</string>
 						<reference key="NSSuperview" ref="969247456"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -181,6 +180,15 @@
 						<reference key="destination" ref="782254013"/>
 					</object>
 					<int key="connectionID">39</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">stopLoading</string>
+						<reference key="source" ref="724839299"/>
+						<reference key="destination" ref="969247456"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">42</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -268,7 +276,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">41</int>
+			<int key="maxID">42</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
