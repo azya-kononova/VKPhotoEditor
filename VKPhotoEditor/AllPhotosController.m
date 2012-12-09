@@ -210,12 +210,7 @@
         
         if (isGridMode) return;
         
-        if (indexPath.row % 2 == 0) {
-            [self.delegate listBaseController:self didSelectAccount:[[photoList.photos objectAtIndex:indexPath.row/2] account] animated:YES];
-            return;
-        }
-        
-        selectedPhoto = (indexPath.row - 1) / 2;
+        selectedPhoto = indexPath.row;
         
         if (![self isProfilePhoto]) return;
         
