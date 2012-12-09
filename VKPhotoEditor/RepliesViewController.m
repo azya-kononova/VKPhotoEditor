@@ -15,7 +15,7 @@
 #import "PhotoUpdatesLoader.h"
 #import "AppDelegate.h"
 
-@interface RepliesViewController () <ReplyPhotoCellDelegate>
+@interface RepliesViewController () <ReplyPhotoCellDelegate, UINavigationControllerDelegate>
 @end
 
 @implementation RepliesViewController {
@@ -38,6 +38,12 @@
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.navigationController.delegate = self;
+}
+
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -47,7 +53,14 @@
     [super viewWillAppear:animated];
     
     if (isBadgeUsed) [[NSNotificationCenter defaultCenter] postNotificationName:VKHideRepliesBadge object:nil];
-    [self pullTableViewDidTriggerRefresh:nil];
+}
+
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if ([viewController isEqual:self]) {
+        [self pullTableViewDidTriggerRefresh:nil];
+    }
 }
 
 #pragma mark - Internals
