@@ -30,20 +30,24 @@
     [super viewDidLoad];
     
     followButton = self.profileHeaderView.centralButton;
-//    backButton.bgImagecaps = CGSizeMake(15, 0);
+    [self.userMenuView.actionButton setTitle:@"Block user" forState:UIControlStateNormal];
     [followButton setBackgroundImage:[UIImage imageNamed:@"FollowBtn_pressed.png"] forState:UIControlStateSelected | UIControlStateHighlighted];
-    [followButton setTitle:@"Following" forState:UIControlStateSelected | UIControlStateHighlighted];
     [followButton setTitle:@"Follow" forState:UIControlStateNormal];
+    [followButton setTitle:@"Following" forState:UIControlStateSelected | UIControlStateHighlighted];
 }
 
 #pragma mark - actions
 
 - (void)profileHeaderViewDidTapButton:(ProfileHeaderView *)view
 {
-    VKRequestExecutor *exec = self.profileHeaderView.centralButton.selected ?
-    [service unfollowUser:self.profile.accountId]  : [service followUser:self.profile.accountId] ;
+    if (blocked) {
+        [adapter start:[service unblockUser:self.profile.accountId] onSuccess:@selector(exec:didUnblockUser:) onError:nil];
+        return;
+    }
+    VKRequestExecutor *exec = followButton.selected ? [service unfollowUser:self.profile.accountId]  : [service followUser:self.profile.accountId] ;
     [adapter start:exec onSuccess:nil onError:@selector(exec:didFailFollowUser:) ];
     self.profileHeaderView.centralButton.selected = !self.profileHeaderView.centralButton.selected;
+    followedByMe = !followedByMe;
 }
 
 - (IBAction)back:(id)sender
@@ -51,24 +55,44 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma mark - executor handlers
-
-- (void)exec:(VKRequestExecutor*)exec didFailFollowUser:(id)data
+- (void)setBlockedState:(BOOL)_blocked
 {
-    followButton.selected = !followButton.selected;
-}
-
-- (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data
-{
-    [super exec:exec didGetUser:data];
-    followButton.selected = followedByMe;
+    blocked = _blocked;
+    self.profileHeaderView.blockButton.hidden = !blocked;
+    followButton.hidden = !self.profileHeaderView.blockButton.hidden;
 }
 
 #pragma mark - UserHeaderViewDelegate
 
 - (void)userMenuViewDidTapAction:(UserMenuView *)view
 {
-//    TODO: Block / unblock user
+    [adapter start:[service blockUser:self.profile.accountId] onSuccess:@selector(exec:didBlockUser:) onError:nil];
+    [super userMenuViewDidCancel:view];
+}
+
+#pragma mark - executor handlers
+
+- (void)exec:(VKRequestExecutor*)exec didFailFollowUser:(id)data
+{
+    followButton.selected = !followButton.selected;
+    followedByMe = !followedByMe;
+}
+
+- (void)exec:(VKRequestExecutor*)exec didGetUser:(id)data
+{
+    [super exec:exec didGetUser:data];
+    followButton.selected = followedByMe;
+    [self setBlockedState:blocked];
+}
+
+- (void)exec:(VKRequestExecutor*)exec didBlockUser:(id)data
+{
+    [self setBlockedState:YES];
+}
+
+- (void)exec:(VKRequestExecutor *)exec didUnblockUser:(id)data
+{
+    [self setBlockedState:NO];
 }
 
 @end

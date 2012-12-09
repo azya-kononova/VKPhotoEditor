@@ -35,7 +35,6 @@
     NSMutableDictionary *avatarsForIndexes;
     BOOL avatarsLoaded;
     BOOL infoLoaded;
-    UserMenuView *userMenuView;
     BOOL isProfile;
     NSInteger itemsInRow;
     NSInteger gridCellHeight;
@@ -53,6 +52,7 @@
 @synthesize followersList;
 @synthesize mentionsList;
 @synthesize profileHeaderView;
+@synthesize userMenuView;
 
 - (id)initWithProfile:(UserProfile *)_profile
 {
@@ -281,6 +281,9 @@
     
     NSArray *connections = [userInfo objectForKey:@"connections"];
     followedByMe = [connections find:^BOOL (NSString* string) { return [string isEqualToString:@"following"]; }] != nil;
+    blocked = [[userInfo objectForKey:@"blocked"] boolValue];
+    
+//    NSLog(@"%@ %d %d -- %d", [userInfo objectForKey:@"blocked"], [[userInfo objectForKey:@"blocked"] intValue], [[userInfo objectForKey:@"blocked"] boolValue],isBlocked);
     
     if (!infoLoaded) {
         infoLoaded = YES;

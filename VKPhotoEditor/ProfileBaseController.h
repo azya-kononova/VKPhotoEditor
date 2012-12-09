@@ -23,6 +23,7 @@
 
 @interface ProfileBaseController : VKViewController <ProfileHeaderViewDelegate, UserMenuViewDelegate> {
     BOOL followedByMe;
+    BOOL blocked;
     RequestExecutorDelegateAdapter *adapter;
     VKConnectionService *service;
 }
@@ -40,6 +41,7 @@
 @property (nonatomic, strong) ProfileHeaderView *profileHeaderView;
 @property (nonatomic, assign) id<ProfileBaseControllerDelegate> delegate;
 @property (nonatomic, strong) IBOutlet UILabel *noPhotoLabel;
+@property (nonatomic, strong) UserMenuView *userMenuView;
 
 - (id)initWithProfile:(UserProfile*)profile;
 - (void)reloadAvatarList;

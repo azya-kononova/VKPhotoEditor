@@ -32,10 +32,12 @@
 @synthesize followersView;
 @synthesize mentionsView;
 @synthesize gridButton;
+@synthesize blockButton;
 
 - (void)awakeFromNib
 {
     centralButton.bgImagecaps = CGSizeMake(23, 0);
+    blockButton.bgImagecaps = CGSizeMake(23, 0);
     [userMenuButton setImage:[UIImage imageNamed:@"HeaderArrow_active.png"] forState:UIControlStateSelected | UIControlStateHighlighted ];
     hiddenModeView = photosView;
     hiddenModeView.hidden = YES;

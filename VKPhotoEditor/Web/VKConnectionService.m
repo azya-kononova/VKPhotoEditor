@@ -228,6 +228,16 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
     return [self getPath:path];
 }
 
+- (VKRequestExecutor*)blockUser:(NSInteger)userId
+{
+    return [self getPath:[NSString stringWithFormat:@"blockUser?id=%d&access_token=%@", userId, profile.accessToken]];
+}
+
+- (VKRequestExecutor*)unblockUser:(NSInteger)userId
+{
+    return [self getPath:[NSString stringWithFormat:@"unblockUser?id=%d&access_token=%@", userId, profile.accessToken]];
+}
+
 #pragma mark - executors handlers
 
 - (void)exec:(VKRequestExecutor*)exec didLoadProfileInfo:(id)data
