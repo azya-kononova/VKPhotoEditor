@@ -37,8 +37,7 @@
 	EGOPullState _state;
     
 	UILabel *_statusLabel;
-	CALayer *_arrowImage;
-	UIActivityIndicatorView *_activityView;
+	UIImageView *_activityView;
     
     // Set this to Yes when egoRefreshTableHeaderDidTriggerRefresh delegate is called and No with egoRefreshScrollViewDataSourceDidFinishedLoading
     BOOL isLoading;
@@ -50,6 +49,7 @@
 - (void)egoRefreshScrollViewDidScroll:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDidEndDragging:(UIScrollView *)scrollView;
 - (void)egoRefreshScrollViewDataSourceDidFinishedLoading:(UIScrollView *)scrollView;
+- (void)egoRefreshScrollViewWillBeginDragging:(UIScrollView *)scrollView;
 - (void)startAnimatingWithScrollView:(UIScrollView *) scrollView;
 - (void)setBackgroundColor:(UIColor *)backgroundColor textColor:(UIColor *) textColor arrowImage:(UIImage *) arrowImage;
 

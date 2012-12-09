@@ -25,9 +25,9 @@
     
     photosTableView.tableHeaderView = tableHeaderView;
     
-    photosTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
+    photosTableView.pullArrowImage = [UIImage imageNamed:@"PullDown.png"];
     photosTableView.pullBackgroundColor = [UIColor blackColor];
-    photosTableView.loadBackgroundColor = [UIColor whiteColor];
+    photosTableView.loadBackgroundColor = [UIColor defaultBgColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
     ThumbnailPhotoCell *cell = [UITableViewCell loadCellOfType:[ThumbnailPhotoCell class] fromNib:@"ThumbnailPhotoCell" withId:@"ThumbnailPhotoCell"];

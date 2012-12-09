@@ -52,8 +52,8 @@ typedef enum{
     
 	UILabel *_lastUpdatedLabel;
 	UILabel *_statusLabel;
-	CALayer *_arrowImage;
-	UIActivityIndicatorView *_activityView;
+	UIImageView *_activityView;
+    CALayer *_arrowImage;
     
     // Set this to Yes when egoRefreshTableHeaderDidTriggerRefresh delegate is called and No with egoRefreshScrollViewDataSourceDidFinishedLoading
     BOOL isLoading;

@@ -42,6 +42,7 @@
         isLoading = NO;
         
         CGFloat midY = frame.size.height - PULL_AREA_HEIGTH/2;
+        CGFloat midX = frame.size.width/2;
         
         /* Config Last Updated Label */
 		UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0.0f, midY, self.frame.size.width, 20.0f)];
@@ -63,23 +64,19 @@
 		[self addSubview:label];
 		_statusLabel=label;
 		
-        /* Config Arrow Image */
-		CALayer *layer = [[CALayer alloc] init];
-		layer.frame = CGRectMake(25.0f,midY - 35, 30.0f, 55.0f);
-		layer.contentsGravity = kCAGravityResizeAspect;
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 40000
-		if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
-			layer.contentsScale = [[UIScreen mainScreen] scale];
-		}
-#endif
-		[[self layer] addSublayer:layer];
-		_arrowImage=layer;
-		
         /* Config activity indicator */
-		UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:DEFAULT_ACTIVITY_INDICATOR_STYLE];
-		view.frame = CGRectMake(25.0f,midY - 8, 20.0f, 20.0f);
-		[self addSubview:view];
-		_activityView = view;		
+		_activityView = [[[UIImageView alloc] initWithFrame:CGRectMake(midX - 10, midY - 8, 20.0f, 20.0f)] autorelease];
+		[self addSubview:_activityView];
+        _activityView.animationImages = [NSArray arrayWithObjects:
+                                         [UIImage imageNamed:@"1"],[UIImage imageNamed:@"2"],[UIImage imageNamed:@"3"],
+                                         [UIImage imageNamed:@"4"],[UIImage imageNamed:@"5"],[UIImage imageNamed:@"6"],
+                                         [UIImage imageNamed:@"7"],[UIImage imageNamed:@"8"],[UIImage imageNamed:@"9"],
+                                         [UIImage imageNamed:@"10"],[UIImage imageNamed:@"11"],[UIImage imageNamed:@"12"],
+                                         [UIImage imageNamed:@"13"],[UIImage imageNamed:@"14"],[UIImage imageNamed:@"15"],
+                                         [UIImage imageNamed:@"16"],[UIImage imageNamed:@"17"],[UIImage imageNamed:@"18"],
+                                         [UIImage imageNamed:@"19"],[UIImage imageNamed:@"20"],[UIImage imageNamed:@"21"],
+                                         [UIImage imageNamed:@"22"],[UIImage imageNamed:@"23"],[UIImage imageNamed:@"24"],nil];
+        _activityView.animationDuration = 0.5;
 		
 		[self setState:EGOOPullNormal];
         
@@ -160,11 +157,9 @@
 	
 	switch (aState) {
 		case EGOOPullPulling:
-			
-			_statusLabel.text = NSLocalizedStringFromTable(@"Release to refresh...",@"PullTableViewLan", @"Release to refresh status");
 			[CATransaction begin];
 			[CATransaction setAnimationDuration:FLIP_ANIMATION_DURATION];
-			_arrowImage.transform = CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
+			_activityView.layer.transform = CATransform3DMakeRotation((M_PI / 180.0) * 180.0f, 0.0f, 0.0f, 1.0f);
 			[CATransaction commit];
 			
 			break;
@@ -173,29 +168,21 @@
 			if (_state == EGOOPullPulling) {
 				[CATransaction begin];
 				[CATransaction setAnimationDuration:FLIP_ANIMATION_DURATION];
-				_arrowImage.transform = CATransform3DIdentity;
+				_activityView.layer.transform = CATransform3DIdentity;
 				[CATransaction commit];
 			}
-			
-			_statusLabel.text = NSLocalizedStringFromTable(@"Pull down to refresh...",@"PullTableViewLan", @"Pull down to refresh status");
 			[_activityView stopAnimating];
 			[CATransaction begin];
 			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
-			_arrowImage.hidden = NO;
-			_arrowImage.transform = CATransform3DIdentity;
+			_activityView.layer.transform = CATransform3DIdentity;
 			[CATransaction commit];
 			
 			[self refreshLastUpdatedDate];
 			
 			break;
 		case EGOOPullLoading:
-			
-			_statusLabel.text = NSLocalizedStringFromTable(@"Loading...",@"PullTableViewLan", @"Loading Status");
+            _activityView.alpha = 1;
 			[_activityView startAnimating];
-			[CATransaction begin];
-			[CATransaction setValue:(id)kCFBooleanTrue forKey:kCATransactionDisableActions]; 
-			_arrowImage.hidden = YES;
-			[CATransaction commit];
 			
 			break;
 		default:
@@ -219,7 +206,7 @@
     _lastUpdatedLabel.shadowColor = [_lastUpdatedLabel.textColor colorWithAlphaComponent:0.1f];
     _statusLabel.shadowColor = [_statusLabel.textColor colorWithAlphaComponent:0.1f];
     
-    _arrowImage.contents = (id)(arrowImage? arrowImage.CGImage : DEFAULT_ARROW_IMAGE.CGImage);
+    _activityView.image = arrowImage ? arrowImage : DEFAULT_ARROW_IMAGE;
 }
 
 
@@ -251,11 +238,15 @@
 		}
 		
 	}
+    if (scrollView.contentOffset.y < 0 && _activityView.alpha < 1) {
+        _activityView.alpha += 0.02;
+    }
 	
 }
 
 - (void)startAnimatingWithScrollView:(UIScrollView *) scrollView {
     isLoading = YES;
+    _activityView.alpha = 0;
     
     [self setState:EGOOPullLoading];
     [UIView beginAnimations:nil context:NULL];
@@ -298,6 +289,7 @@
 
 - (void)egoRefreshScrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+    _activityView.alpha = 0;
     [self refreshLastUpdatedDate];
 }
 
@@ -308,9 +300,7 @@
 - (void)dealloc {
 	
 	_delegate=nil;
-	[_activityView release];
 	[_statusLabel release];
-	[_arrowImage release];
 	[_lastUpdatedLabel release];
     [super dealloc];
 }

@@ -252,6 +252,7 @@
 - (void) scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
     [refreshView egoRefreshScrollViewWillBeginDragging:scrollView];
+    [loadMoreView egoRefreshScrollViewWillBeginDragging:scrollView];
     
     // Also forward the message to the real delegate
     if ([delegateInterceptor.receiver

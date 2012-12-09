@@ -113,9 +113,9 @@
     [self.view addSubview:userMenuView];
     [userMenuView moveTo:CGPointMake(0, 44)];
     
-    photosTableView.pullArrowImage = [UIImage imageNamed:@"grayArrow"];
+    photosTableView.pullArrowImage = [UIImage imageNamed:@"PullDown.png"];
     photosTableView.pullBackgroundColor = [UIColor blackColor];
-    photosTableView.loadBackgroundColor = [UIColor clearColor];
+    photosTableView.loadBackgroundColor = [UIColor defaultBgColor];
     photosTableView.pullTextColor = [UIColor blackColor];
     
     ThumbnailPhotoCell *cell = [UITableViewCell loadCellOfType:[ThumbnailPhotoCell class] fromNib:@"ThumbnailPhotoCell" withId:@"ThumbnailPhotoCell"];
