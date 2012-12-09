@@ -43,5 +43,6 @@ extern NSString *VKRequestDidLogout;
 - (VKRequestExecutor*)getFollowers:(NSInteger)accountId offset:(NSInteger)offset limit:(NSInteger)limit filter:(NSString*)filter;
 - (VKRequestExecutor*)blockUser:(NSInteger)userId;
 - (VKRequestExecutor*)unblockUser:(NSInteger)userId;
+- (VKRequestExecutor*)registerDevice:(NSString*)token sandbox:(BOOL)sanbox;
 - (void)logout;
 @end

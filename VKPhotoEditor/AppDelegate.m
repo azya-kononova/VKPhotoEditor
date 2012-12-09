@@ -12,10 +12,16 @@
 #import "InformationView.h"
 #import "UIViewController+StatusBar.h"
 #import "PhotoUpdatesLoader.h"
+#import "VKRequestExecutor.h"
+
+@interface AppDelegate () <VKRequestExecutorDelegate>
+@end
 
 @implementation AppDelegate {
     InformationView *informationView;
     PhotoUpdatesLoader *updatesLoader;
+    NSMutableString *newToken;
+    VKRequestExecutor *exec;
 }
 
 @synthesize window, navigationController, connectionService, settings, imageCache;
@@ -36,7 +42,7 @@
     updatesLoader = [PhotoUpdatesLoader new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:VKRequestDidFailNotification object:connectionService];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyUpdates) name:VKRequestDidLogin object:connectionService];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLogin) name:VKRequestDidLogin object:connectionService];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopReplyUpdates) name:VKRequestDidLogout object:connectionService];
     
     if (connectionService.profile.accessToken) {
@@ -61,7 +67,7 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     const char *data = [deviceToken bytes];
-    NSMutableString *newToken = [NSMutableString string];
+    newToken = [NSMutableString string];
     for (int i = 0; i < [deviceToken length]; i++) {
         [newToken appendFormat:@"%02.2hhX", data[i]];
     }
@@ -69,32 +75,33 @@
    	NSLog(@"My token is: %@", newToken);
 }
 
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"Fail to register for push: %@", error.localizedDescription);
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [settings setFirstLaunch:NO];
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
+- (void)didLogin
 {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    if (![newToken isEqualToString:settings.deviceToken]) {
+        BOOL sandbox = 0;
+#if DEBUG
+        sandbox = 1;
+#endif
+        exec = [connectionService registerDevice:newToken sandbox:sandbox];
+        exec.delegate = self;
+        [exec start];
+    }
+    
+    [self startReplyUpdates];
 }
 
 - (void)requestDidFail:(NSNotification*)n;
@@ -111,6 +118,23 @@
 - (void)stopReplyUpdates
 {
     [updatesLoader stop];
+}
+
+#pragma mark - VKRequestExecutorDelegate
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFinishWithObject:(id)value
+{
+    settings.deviceToken = value ? newToken : nil;
+}
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didFailedWithError:(NSError *)error
+{
+    newToken = nil;
+}
+
+- (void)VKRequestExecutor:(VKRequestExecutor *)executor didAlreadyUpload:(float)progress
+{
+    
 }
 
 #pragma mark - UINavigationControllerDelegate

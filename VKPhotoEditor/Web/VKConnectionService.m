@@ -115,7 +115,7 @@ NSString *VKRequestDidInfoUpdateNotification = @"VKRequestDidInfoUpdate";
 
 - (VKRequestExecutor*)login:(NSString*)login
 {
-    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"login?login=%@&password=%@", login, [[self getMacAddress] md5]]];
+    RequestExecutorProxy *exec = [self getPath:[NSString stringWithFormat:@"login?login=%@&password=%@&api_id=43&api_hash=cd488c7ad3e2dce4e3", login, [[self getMacAddress] md5]]];
     exec.onError = nil;
     exec.onSuccess = @selector(exec:didLogin:);
     return exec;
@@ -237,6 +237,11 @@ NSString *VKRequestDidInfoUpdateNotification = @"VKRequestDidInfoUpdate";
 - (VKRequestExecutor*)unblockUser:(NSInteger)userId
 {
     return [self getPath:[NSString stringWithFormat:@"unblockUser?id=%d&access_token=%@", userId, profile.accessToken]];
+}
+
+- (VKRequestExecutor*)registerDevice:(NSString*)token sandbox:(BOOL)sanbox
+{
+    return [self getPath:[NSString stringWithFormat:@"registerDevice?token=%@&access_token=%@&token_type=apns&app_sandbox=%d", token, profile.accessToken, sanbox]];
 }
 
 #pragma mark - executors handlers

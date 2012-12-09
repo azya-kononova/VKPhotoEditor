@@ -15,6 +15,7 @@
 #define FIRST_LAUNCH_KEY @"firstLaunch"
 #define PROFILE_KEY @"profile"
 #define REPLY_SINCE @"replySince"
+#define DEVICE_TOKEN_KEY @"deviceToken"
 
 @interface NSUserDefaults (Def)
 - (id)objectForKey:(NSString*)name withDef:(NSDictionary*)def map:(MapBlock)map;
@@ -88,6 +89,17 @@
 - (void)setReplySince:(NSString *)since
 {
     [user setObject:since forKey:REPLY_SINCE];
+    [user synchronize];
+}
+
+- (NSString*)deviceToken
+{
+   return [user objectForKey:DEVICE_TOKEN_KEY];
+}
+
+- (void)setDeviceToken:(NSString *)deviceToken
+{
+    [user setObject:deviceToken forKey:DEVICE_TOKEN_KEY];
     [user synchronize];
 }
 
