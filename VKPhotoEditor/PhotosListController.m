@@ -206,6 +206,7 @@
 - (void)profileBaseControllerWantLoadAvatar:(ProfileBaseController *)ctrl
 {
     isAvatar = YES;
+    replyToPhoto = nil;
     [choosePhotoView show:YES withExitButton:NO animated:YES];
 }
 
