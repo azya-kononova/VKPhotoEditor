@@ -94,7 +94,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    tableView.backgroundColor = photoList.photos.count ? [UIColor whiteColor] : [UIColor defaultBgColor];
+    tableView.backgroundColor = photoList.photos.count && isGridMode ? [UIColor whiteColor] : [UIColor defaultBgColor];
     return isGridMode ? (NSInteger) ceil((double) self.gridPhotoList.count / itemsInRow) : photoList.photos.count;
 }
 
