@@ -146,6 +146,18 @@
     [gridModes setMode:YES forKey:FOLLOWERS_GRID_MODE];
 }
 
+- (void)updateHeader
+{
+    
+    if (followedByMe) {
+        profileHeaderView.state = ProfileHeaderViewStateFollowing;
+    } else {
+        profileHeaderView.state = avatarsList.photos.count ? ProfileHeaderViewStateFull :  ProfileHeaderViewStateCompact;
+    }
+    
+    photosTableView.tableHeaderView = profileHeaderView;
+}
+
 - (void)showContent
 {
     if (!(infoLoaded && avatarsLoaded)) return;
@@ -154,14 +166,7 @@
     loadingView.hidden = YES;
     
     [profileHeaderView removeFromSuperview];
-    
-    if (followedByMe) {
-        profileHeaderView.state = ProfileHeaderViewStateFollowing;
-    } else {
-        profileHeaderView.state = avatarsList.photos.count ? ProfileHeaderViewStateFull :  ProfileHeaderViewStateCompact;
-    }
-        
-    photosTableView.tableHeaderView = profileHeaderView;
+    [self updateHeader];
 }
 
 - (void)reloadAvatarList
@@ -252,12 +257,15 @@
     if (photoList == sourceList) {
         photosTableView.pullLastRefreshDate = [NSDate date];
         [self reloadPullTable];
+        return;
+    }
+    
+    [profileHeaderView.avatarTheaterView reloadData];
+    if (!avatarsLoaded) {
+        avatarsLoaded = YES;
+        [self showContent];
     } else {
-        [profileHeaderView.avatarTheaterView reloadData];
-        if (!avatarsLoaded) {
-            avatarsLoaded = YES;
-            [self showContent];
-        } 
+        [self updateHeader];
     }
 }
 
