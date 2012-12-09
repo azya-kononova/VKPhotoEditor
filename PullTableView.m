@@ -60,9 +60,9 @@
     [loadBackgroundColor release];
     [pullTextColor release];
     [pullLastRefreshDate release];
+    [footer release];
     
     [refreshView release];
-    [loadMoreView release];
     [delegateInterceptor release];
     delegateInterceptor = nil;
     [super dealloc];
@@ -89,13 +89,27 @@
     [self addSubview:refreshView];
     
     /* Load more view init */
-    loadMoreView = [[LoadMoreTableFooterView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, self.bounds.size.height)];
+    loadMoreView = [[[LoadMoreTableFooterView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height, self.bounds.size.width, self.bounds.size.height)] autorelease];
     loadMoreView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     loadMoreView.delegate = self;
     [self addSubview:loadMoreView];
     
 }
 
+- (void)setCompleted:(BOOL)_completed
+{
+    if (completed == _completed) return;
+    
+    completed = _completed;
+    if (completed) {
+        footer = [loadMoreView retain];
+        [loadMoreView removeFromSuperview];
+        loadMoreView = nil;
+    } else {
+        loadMoreView = footer;
+        [self addSubview:loadMoreView];
+    }
+}
 
 # pragma mark - View changes
 
@@ -107,10 +121,6 @@
     CGRect loadMoreFrame = loadMoreView.frame;
     loadMoreFrame.origin.y = self.contentSize.height + visibleTableDiffBoundsHeight;
     loadMoreView.frame = loadMoreFrame;
-    
-    
-    
-    
 }
 
 #pragma mark - Preserving the original behaviour

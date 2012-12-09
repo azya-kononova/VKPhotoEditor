@@ -44,6 +44,7 @@
     
     EGORefreshTableHeaderView *refreshView;
     LoadMoreTableFooterView *loadMoreView;
+    LoadMoreTableFooterView *footer;
     
     // Since we use the contentInsets to manipulate the view we need to store the the content insets originally specified.
     UIEdgeInsets realContentInsets;
@@ -64,7 +65,7 @@
     
     // Delegate
     id<PullTableViewDelegate> pullDelegate;
-    
+    BOOL completed;
 }
 
 /* The configurable display properties of PullTableView. Set to nil for default values */
@@ -83,5 +84,7 @@
 
 /* Delegate */
 @property (nonatomic, assign) IBOutlet id<PullTableViewDelegate> pullDelegate;
+
+- (void)setCompleted:(BOOL)completed;
 
 @end

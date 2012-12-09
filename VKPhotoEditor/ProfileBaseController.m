@@ -265,6 +265,7 @@
 {
     if (photoList == sourceList) {
         photosTableView.pullLastRefreshDate = [NSDate date];
+        [photosTableView setCompleted:photosList.completed];
         [self reloadPullTable];
         return;
     }

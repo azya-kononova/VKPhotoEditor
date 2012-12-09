@@ -48,10 +48,11 @@
     newsfeedCount = _photos.count;
     
     [self append:_photos totalCount:0];
-    
-    
-    completed = ![after isKindOfClass:[NSString class]];
-    
+}
+
+- (BOOL)completed
+{
+    return after && ![after isKindOfClass:[NSString class]];
 }
 
 - (void)reset

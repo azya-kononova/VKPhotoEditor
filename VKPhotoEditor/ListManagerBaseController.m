@@ -76,7 +76,7 @@
     photosTableView.pullTableIsLoadingMore = NO;
     photosTableView.pullTableIsRefreshing = NO;
     
-    //    [tableView setCompleted:searchResultsList.completed];
+    [photosTableView setCompleted:photoList.completed];
 }
 
 - (void)photoList:(PhotoList *)_photoList didUpdatePhotos:(NSArray *)photos

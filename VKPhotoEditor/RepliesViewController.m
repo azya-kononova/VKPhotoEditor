@@ -143,18 +143,6 @@
     return cell ? cell : [self mentionOrReplyForRowAtIndexPath:indexPath tableView:_tableView];
 }
 
-
-#pragma mark - PullTableViewDelegate
-
-- (void)pullTableViewDidTriggerLoadMore:(PullTableView *)pullTableView
-{
-    if (!photoList.completed) {
-        [super pullTableViewDidTriggerLoadMore:pullTableView];
-    } else {
-        [self performSelector:@selector(reloadPullTable) withObject:nil afterDelay:0.2];
-    }
-}
-
 #pragma mark - ReplyPhotoCellDelegate
 
 - (void)replyPhotoCell:(ReplyPhotoCell *)cell didTapOnAccount:(Account *)account
