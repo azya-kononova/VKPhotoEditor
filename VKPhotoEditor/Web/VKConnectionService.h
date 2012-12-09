@@ -40,5 +40,6 @@ extern NSString *VKRequestDidLogout;
 - (VKRequestExecutor*)getUser:(NSInteger)userId;
 - (VKRequestExecutor*)updateUserPic:(NSString*)pictureId;
 - (VKRequestExecutor*)getNewsfeedSince:(NSString*)since after:(NSString*)after limit:(NSInteger)limit;
+- (VKRequestExecutor*)getFollowers:(NSInteger)accountId offset:(NSInteger)offset limit:(NSInteger)limit filter:(NSString*)filter;
 - (void)logout;
 @end

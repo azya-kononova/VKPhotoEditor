@@ -18,12 +18,15 @@
 #import "ThumbnailPhotoCell.h"
 #import "FastViewerController.h"
 #import "GridModes.h"
+#import "FollowingView.h"
+#import "ThumbnailAvatarCell.h"
+#import "UserAccountController.h"
 
 #define MENTIONS_GRID_MODE @"MentionsGridMode"
 #define FOLLOWERS_GRID_MODE @"FollowersGridMode"
 #define PHOTOS_GRID_MODE @"PhotosGridMode"
 
-@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate, TheaterViewDataSource, TheaterViewDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate>
+@interface ProfileBaseController () <PhotoCellDelegate, UIActionSheetDelegate, PhotoListDelegate, TheaterViewDataSource, TheaterViewDelegate, ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, ThumbnailAvatarCellDelegate>
 @end
 
 @implementation ProfileBaseController{
@@ -68,6 +71,10 @@
         mentionsList = [MentionList new];
         mentionsList.account = profile;
         mentionsList.delegate = self;
+        
+        followersList = [FollowersList new];
+        followersList.account = profile;
+        followersList.delegate = self;
         
         avatarsForIndexes = [NSMutableDictionary new];
         service = [VKConnectionService shared];
@@ -136,20 +143,6 @@
     [gridModes setMode:NO forKey:PHOTOS_GRID_MODE];
     [gridModes setMode:NO forKey:MENTIONS_GRID_MODE];
     [gridModes setMode:YES forKey:FOLLOWERS_GRID_MODE];
-}
-
-- (NSArray *)getPhotosForIndexPath:(NSIndexPath *)indexPath
-{
-    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:itemsInRow];
-    
-    for (int i = 0; i < itemsInRow; i++) {
-        int row = itemsInRow * indexPath.row + i;
-        if (row < sourceList.photos.count) {
-            [photos addObject:[sourceList.photos objectAtIndex:row]];
-        }
-    }
-    
-    return photos;
 }
 
 - (void)showContent
@@ -292,12 +285,60 @@
     }
 }
 
+- (NSString*)followerTitleForSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return @"followed back";
+        case 1:
+            return [NSString stringWithFormat:@"followed by %@", profile.login];
+        case 2:
+            return [NSString stringWithFormat:@"following %@", profile.login];
+    }
+    return nil;
+}
+
+- (NSArray *)getPhotosForIndex:(NSInteger)index total:(NSInteger)total offset:(NSInteger)offset;
+{
+    NSMutableArray *photos = [NSMutableArray arrayWithCapacity:itemsInRow];
+    
+    for (int i = 0; i < itemsInRow; i++) {
+        int row = itemsInRow * index + i + offset;
+        if (row < total) {
+            [photos addObject:[sourceList.photos objectAtIndex:row]];
+        }
+    }
+    return photos;
+}
+
 #pragma mark - UITableViewDataSource
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (profileHeaderView.mode != ProfileHeaderViewFollowersMode)
+        return nil;
+    
+    FollowingView *view = [FollowingView loadFromNIB];
+    view.countLabel.text = [NSString stringWithFormat:@"%d",[sourceList numberOfItemsInSection:section]];
+    view.titleLabel.text = [self followerTitleForSection:section];
+    return view;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return (profileHeaderView.mode == ProfileHeaderViewFollowersMode) ? 35 : 0;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return (profileHeaderView.mode == ProfileHeaderViewFollowersMode) ? 3 : 1;
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     tableView.backgroundColor = sourceList.photos.count ? [UIColor whiteColor] : [UIColor defaultBgColor];
-    return gridModes.isGridMode ? (NSInteger) ceil((double) sourceList.photos.count / itemsInRow) : sourceList.photos.count;
+    NSInteger count = [sourceList numberOfItemsInSection:section];
+    return gridModes.isGridMode ? (NSInteger) ceil((double) count / itemsInRow) : count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -307,16 +348,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSInteger offset = 0;
+    if (profileHeaderView.mode == ProfileHeaderViewFollowersMode) {
+        for (int i = 0; i < indexPath.section; i++) {
+            offset += [sourceList numberOfItemsInSection:i];
+        }
+    }
     if (gridModes.isGridMode) {
-        ThumbnailPhotoCell *cell = [ThumbnailPhotoCell dequeOrCreateInTable:photosTableView];
+        ThumbnailPhotoCell *cell = (profileHeaderView.mode == ProfileHeaderViewFollowersMode) ? [ThumbnailAvatarCell dequeOrCreateInTable:photosTableView] : [ThumbnailPhotoCell dequeOrCreateInTable:photosTableView];
         cell.delegate = self;
-        [cell displayPhotos:[self getPhotosForIndexPath:indexPath]];
+        [cell displayPhotos:[self getPhotosForIndex:indexPath.row total:offset + [sourceList numberOfItemsInSection:indexPath.section] offset:offset]];
         return cell;
     } else {
         PhotoCell *cell = [PhotoCell dequeOrCreateInTable:tableView];
         cell.delegate = self;
-        VKPhoto *photo = [sourceList.photos objectAtIndex:indexPath.row ];
-        [cell displayPhoto:photo canSelectAccount:NO];
+        id item = [sourceList.photos objectAtIndex:(offset + indexPath.row)];
+        (profileHeaderView.mode != ProfileHeaderViewFollowersMode) ? [cell displayPhoto:item canSelectAccount:NO] : [cell displayAccount:item];
         return cell;
     }
 }
@@ -421,6 +468,14 @@
         controller.delegate = self;
         [delegate profileBaseController:self presenModalViewController:controller animated:YES];
     }
+}
+
+#pragma mark - ThumbnailAvatarCellDelegate
+
+- (void)thumbnailAvatarCell:(ThumbnailAvatarCell *)cell didSelectAccount:(Account *)account
+{
+    UserAccountController *ctrl = [[UserAccountController alloc] initWithProfile:(UserProfile*)account];
+    [self.navigationController pushViewController:ctrl animated:YES];
 }
 
 #pragma mark - FastViewerControllerDelegate

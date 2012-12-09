@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 GirlsWhoDeveloping. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "TheaterView.h"
 #import "FlexibleButton.h"
 #import "PullTableView.h"
@@ -18,6 +17,7 @@
 #import "UserMenuView.h"
 #import "VKTableView.h"
 #import "VKViewController.h"
+#import "FollowersList.h"
 
 @protocol ProfileBaseControllerDelegate;
 
@@ -33,7 +33,7 @@
 @property (nonatomic, strong) PhotoList *sourceList;
 @property (nonatomic, strong) UserPhotoList *photosList;
 @property (nonatomic, strong) MentionList *mentionsList;
-@property (nonatomic, strong) UserPhotoList *followersList;
+@property (nonatomic, strong) FollowersList *followersList;
 
 @property (nonatomic, strong) UserPhotoList *avatarsList;
 

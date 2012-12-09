@@ -12,12 +12,14 @@
 @synthesize delegate;
 @synthesize completed;
 @synthesize photos;
+@synthesize sectionsInfo;
 
 - (id)init
 {
     if (self = [super init]) {
         service = [VKConnectionService shared];
         limit = 20;
+        sectionsInfo = [NSMutableDictionary new];
     }
     return self;
 }
@@ -29,6 +31,7 @@
     completed = NO;
     photos = nil;
     initialOffset = 0;
+    sectionsInfo = [NSMutableDictionary new];
 }
 
 - (void)loadMore;
@@ -37,6 +40,12 @@
     exec = [self newPageExec];
     exec.delegate = self;
     [exec start];
+}
+
+- (NSInteger)numberOfItemsInSection:(NSInteger)section
+{
+    NSNumber *number = [sectionsInfo objectForKey:[NSNumber numberWithInt:section]];
+    return number ? number.integerValue : photos.count;
 }
 
 - (VKRequestExecutor*)newPageExec

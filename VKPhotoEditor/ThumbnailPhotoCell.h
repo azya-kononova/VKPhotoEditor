@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSString *searchString;
 @property (nonatomic, assign, readonly) NSInteger itemsInRow;
 @property (nonatomic, unsafe_unretained) id<ThumbnailPhotoCellDelegate> delegate;
+@property (nonatomic, strong) NSMutableArray *photoViews;
 
 - (void)displayPhotos:(NSArray *)photos;
 

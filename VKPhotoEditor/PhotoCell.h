@@ -30,6 +30,7 @@
 @property (nonatomic, strong) IBOutlet UIImageView *progressImage;
 
 - (void)displayPhoto:(VKPhoto*)photo;
+- (void)displayAccount:(Account*)account;
 - (void)displayPhoto:(VKPhoto*)photo canSelectAccount:(BOOL)selectAccount;
 
 - (IBAction)openAccount;

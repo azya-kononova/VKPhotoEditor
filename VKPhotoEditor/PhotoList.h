@@ -24,6 +24,7 @@
 @property (nonatomic, assign) id<PhotoListDelegate> delegate;
 @property (nonatomic, assign, readonly) BOOL completed;
 @property (nonatomic, strong) NSArray *photos;
+@property (nonatomic, strong) NSMutableDictionary *sectionsInfo;
 
 - (void)reset;
 - (void)loadMore;
@@ -31,6 +32,8 @@
 
 - (void)mapData:(id)data;
 - (VKRequestExecutor*)newPageExec;
+
+- (NSInteger)numberOfItemsInSection:(NSInteger)section;
 @end
 
 @protocol PhotoListDelegate

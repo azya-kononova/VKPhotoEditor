@@ -12,20 +12,18 @@
 @interface ThumbnailPhotoCell ()<ThumbnailPhotoViewDelegate> 
 @end
 
-@implementation ThumbnailPhotoCell {
-    NSMutableArray *photoViews;
-}
-
+@implementation ThumbnailPhotoCell
 @synthesize delegate;
+@synthesize photoViews;
 
-- (void)addLoadedPhotoView:(ThumbnailPhotoView *)view
+- (void)addLoadedPhotoView:(UIView *)view
 {
     if (!photoViews) {
         photoViews = [NSMutableArray new];
     }
     
     [photoViews addObject:view];
-    [photoViews sortUsingComparator:(NSComparator) ^(ThumbnailPhotoView *v1, ThumbnailPhotoView *v2) {
+    [photoViews sortUsingComparator:(NSComparator) ^(UIView *v1, UIView *v2) {
         NSUInteger t1 = v1.tag;
         NSUInteger t2 = v2.tag;
         return t1 == t2 ? NSOrderedSame : (t1 < t2 ? NSOrderedAscending : NSOrderedDescending);
@@ -68,7 +66,7 @@
 
 - (void)xibLoaderView:(XIBLoaderView*)xibLoaderView replacedWithView:(UIView*)replacementView userParams:(NSArray*)userParams
 {
-    [self addLoadedPhotoView:(ThumbnailPhotoView *)replacementView];
+    [self addLoadedPhotoView:replacementView];
 }
 
 #pragma mark - ThumbnailPhotoViewDelegate

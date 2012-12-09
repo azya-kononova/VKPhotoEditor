@@ -10,6 +10,7 @@
 #import "RemoteImageView.h"
 #import "VKPhoto.h"
 #import "VKHighlightTextView.h"
+#import "Account.h"
 
 @protocol ThumbnailPhotoViewDelegate;
 

@@ -223,6 +223,12 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
     return exec;
 }
 
+- (VKRequestExecutor*)getFollowers:(NSInteger)accountId offset:(NSInteger)offset limit:(NSInteger)limit filter:(NSString*)filter
+{
+     NSString *path = [NSString stringWithFormat:@"getFollowers?offset=%d&limit=%d&user_id=%d", offset, limit, accountId];
+    return [self getPath:path];
+}
+
 #pragma mark - executors handlers
 
 - (void)exec:(VKRequestExecutor*)exec didLoadProfileInfo:(id)data

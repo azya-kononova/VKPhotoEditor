@@ -42,6 +42,22 @@
     progressImage.image = [[UIImage imageNamed:@"UploadingProgress_2.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
 }
 
+- (void)displayAccount:(Account *)account
+{
+    BOOL hasPhoto = NO;
+    
+    [nameLabel moveTo:CGPointMake(49, hasPhoto ? 5 : 13)];
+    
+    [avatarRemoteImageView displayImage:account.thumbnailAvatar];
+    nameLabel.text = account.login;
+    dateLabel.text = hasPhoto ? [DataFormatter formatRelativeDate:photo.date] : nil;
+    accountButton.hidden = NO;
+    
+    [remoteImageView displayImage:account.avatar];
+    captionTextView.text = account.login;
+     [captionTextView setNeedsDisplay];
+}
+
 - (void)displayPhoto:(VKPhoto *)_photo
 {
     [self displayPhoto:_photo canSelectAccount:YES];
