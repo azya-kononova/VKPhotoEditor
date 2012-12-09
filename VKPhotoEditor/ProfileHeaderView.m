@@ -135,4 +135,14 @@
     [self resizeTo:CGSizeMake(320, lastView.frame.origin.y + lastView.frame.size.height)];
 }
 
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    CGSize size = [nameLabel sizeThatFits:CGSizeMake(320, 44)];
+    size.width += 5;
+    [nameLabel resizeTo:size];
+    [nameLabel moveTo:CGPointMake(round((320 - nameLabel.frame.size.width)/2), 5)];
+    [userMenuButton moveTo:CGPointMake(nameLabel.frame.size.width + nameLabel.frame.origin.x - 5, 0)];
+}
+
 @end
