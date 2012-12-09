@@ -100,8 +100,10 @@
     [delegate VKTabBarDidTapCentral:self];
 }
 
-- (void)updateBadge:(FlexibleButton*)badge value:(NSInteger)value
+- (void)updateBadge:(FlexibleButton*)badge value:(NSInteger)value tabBarState:(TabBarState)currentState;
 {
+    if (self.state == currentState && value > 0) return;
+    
     NSInteger count = value < 0 ? 0 : badge.titleLabel.text.integerValue + value;
     
     NSString *badgeTitle = [NSString stringWithFormat:@"%d", count];
@@ -117,12 +119,12 @@
 
 - (void)updateReplyBadge:(NSNotification *)notification
 {
-    [self updateBadge:replyBadge value:[notification.object integerValue]];
+    [self updateBadge:replyBadge value:[notification.object integerValue] tabBarState:TabBarStateReply];
 }
 
 - (void)updateNewsBadge:(NSNotification *)notification
 {
-    [self updateBadge:newsBadge value:[notification.object integerValue]];
+    [self updateBadge:newsBadge value:[notification.object integerValue] tabBarState:TabBarStateHome];
 }
 
 - (void)dealloc
