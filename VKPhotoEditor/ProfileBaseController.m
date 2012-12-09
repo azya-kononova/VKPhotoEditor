@@ -417,11 +417,6 @@
 
 #pragma mark - PhotoCellDelegate
 
-- (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
-{
-    [delegate profileBaseController:self didTapHashTag:hashTag];
-}
-
 - (void)photoCell:(PhotoCell *)photoCell didSelectAccount:(Account *)account
 {
     [self.navigationController pushViewController:[[UserAccountController alloc] initWithProfile:(UserProfile*)account]  animated:YES];

@@ -177,11 +177,4 @@
     [delegate listBaseController:self didReplyToPhoto:photo];
 }
 
-#pragma mark - PhotoCellDelegate
-
-- (void)photoCell:(PhotoCell *)photoCell didTapHashTag:(NSString *)hashTag
-{
-    [self.delegate listBaseController:self didSelectHashTag:hashTag];
-}
-
 @end

@@ -12,6 +12,8 @@
 #import "VKHighlightTextView.h"
 #import "Account.h"
 
+extern NSString *PhotoCelDidTapHashTagNotification;
+
 @protocol PhotoCellDelegate;
 
 @interface PhotoCell : UITableViewCell
@@ -37,7 +39,6 @@
 @end
 
 @protocol PhotoCellDelegate <NSObject>
-- (void)photoCell:(PhotoCell*)photoCell didTapHashTag:(NSString*)hashTag;
 - (void)photoCell:(PhotoCell*)photoCell didTapOnPhoto:(VKPhoto*)photo;
 - (void)photoCell:(PhotoCell*)photoCell didSelectAccount:(Account*)account;
 @end

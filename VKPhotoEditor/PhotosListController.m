@@ -23,6 +23,7 @@
 #import "VKViewController.h"
 #import "NewsViewController.h"
 #import "UploadingView.h"
+#import "PhotoCell.h"
 
 #define SELECTED_VIEW_CONTROLLER_TAG 98456345
 
@@ -62,6 +63,7 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelUpload) name:UploadingViewCancelUploadNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(search:) name:PhotoCelDidTapHashTagNotification object:nil];
     
     service = [VKConnectionService shared];
     
@@ -113,6 +115,14 @@
     if([keyPath isEqualToString:@"hasExtendedMenu"]) {
         [tabBar setExtended:service.profile.hasExtendedMenu animated:YES];
     }
+}
+
+- (void)search:(NSNotification*)n
+{
+    if (tabBar.state != TabBarStateExplore)
+        tabBar.state = TabBarStateExplore;
+    [allPhotosCtrl view];
+    [allPhotosCtrl search:n.object];
 }
 
 - (void)uploadImage:(ImageToUpload *)image
@@ -213,12 +223,6 @@
 - (void)profileBaseControllerDidBack:(ProfileController *)ctrl
 {
     [[controllers objectAtIndex:tabBar.state] popViewControllerAnimated:YES];
-}
-
-- (void)profileBaseController:(ProfileController *)ctrl didTapHashTag:(NSString *)hashTag
-{
-    tabBar.state = TabBarStateExplore;
-    [allPhotosCtrl search:hashTag];
 }
 
 - (void)profileBaseController:(ProfileBaseController *)ctrl didReplyToPhoto:(VKPhoto *)photo

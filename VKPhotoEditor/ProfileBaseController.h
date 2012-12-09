@@ -51,7 +51,6 @@
 
 @protocol ProfileBaseControllerDelegate
 - (void)profileBaseControllerDidBack:(ProfileBaseController*)ctrl;
-- (void)profileBaseController:(ProfileBaseController*)ctrl didTapHashTag:(NSString*)hashTag;
 - (void)profileBaseController:(ProfileBaseController*)ctrl didReplyToPhoto:(VKPhoto *)photo;
 - (void)profileBaseControllerWantLoadAvatar:(ProfileBaseController*)ctrl;
 - (void)profileBaseControllerDidLogout:(ProfileBaseController*)ctrl;

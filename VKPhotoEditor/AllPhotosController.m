@@ -107,8 +107,7 @@
 {
     [self setFindModeActive:YES];
     searchBar.text = query;
-    
-    [self reload];
+    [self searchPhotos];
     
     for (UIView *possibleButton in searchBar.subviews) {
         if ([possibleButton isKindOfClass:[UIButton class]]) {
@@ -134,11 +133,6 @@
 }
 
 #pragma mark - PhotoCellDelegate
-
-- (void)photoCell:(PhotoCell*)photoCell didTapHashTag:(NSString*)hashTag
-{
-    [self search:hashTag];
-}
 
 #pragma mark - UISearchBarDelegate
 

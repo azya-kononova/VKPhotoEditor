@@ -13,6 +13,8 @@
 #import "UIView+Helpers.h"
 #import "DataFormatter.h"
 
+NSString *PhotoCelDidTapHashTagNotification = @"PhotoCelDidTapHashTagNotification";
+
 @implementation PhotoCell {
     VKPhoto *photo;
 }
@@ -126,7 +128,7 @@
     CGPoint location = [recognizer locationInView:captionTextView];
     NSString *hashTag = [self getWordAtPosition:location];
     if (hashTag)
-        [delegate photoCell:self didTapHashTag:hashTag];
+        [[NSNotificationCenter defaultCenter] postNotificationName:PhotoCelDidTapHashTagNotification object:hashTag];
     else
         [self didTapOnPhoto];
 }
