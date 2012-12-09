@@ -33,6 +33,14 @@
     ThumbnailPhotoCell *cell = [UITableViewCell loadCellOfType:[ThumbnailPhotoCell class] fromNib:@"ThumbnailPhotoCell" withId:@"ThumbnailPhotoCell"];
     itemsInRow = cell.itemsInRow;
     gridCellHeight = cell.frame.size.height;
+    
+    UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
+    recognizer.minimumPressDuration = 1.5;
+    [photosTableView addGestureRecognizer:recognizer];
+    
+    selectedPhoto = -1;
+    
+    adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -175,6 +183,65 @@
 - (void)photoCell:(PhotoCell *)photoCell didTapOnPhoto:(VKPhoto *)photo
 {
     [delegate listBaseController:self didReplyToPhoto:photo];
+}
+
+#pragma mark - UILongPressGestureRecognizer
+
+-(void)handleLongPressOnTable:(UILongPressGestureRecognizer *)recognizer
+{
+    if (recognizer.state != UIGestureRecognizerStateBegan) return;
+    
+    CGPoint point = [recognizer locationInView:photosTableView];
+    NSIndexPath *indexPath = [photosTableView indexPathForRowAtPoint:point];
+    
+    if (indexPath) {
+        
+        if (isGridMode) return;
+        
+        selectedPhoto = indexPath.row;
+        
+        UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                              delegate:self
+                                                     cancelButtonTitle:@"Cancel"
+                                                destructiveButtonTitle:[self isProfilePhoto] ? @"Delete Image" : nil
+                                                     otherButtonTitles:@"Save Image",nil];
+        
+        actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+        [actSheet showInView:self.view.superview];
+    }
+}
+
+- (BOOL)isProfilePhoto
+{
+    Account *account = [[photoList.photos objectAtIndex:selectedPhoto] account];
+    return account.accountId == [VKConnectionService shared].profile.accountId;
+}
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Delete Image"]) {
+        VKPhoto *photo = [photoList.photos objectAtIndex:selectedPhoto];
+        [adapter start:[[VKConnectionService shared] deletePhoto:photo.photoId] onSuccess:@selector(exec: didDeletePhoto:) onError:nil];
+    } else if ([[actionSheet buttonTitleAtIndex:buttonIndex] isEqualToString:@"Save Image"]) {
+        VKPhoto *photo = [photoList.photos objectAtIndex:selectedPhoto];
+        if (photo.photo.image) {
+            UIImageWriteToSavedPhotosAlbum(photo.photo.image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        }
+    }
+    selectedPhoto = -1;
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+}
+
+#pragma mark - Request Handler
+
+- (void)exec:(VKRequestExecutor*)exec didDeletePhoto:(id)ids
+{
+    if ([ids count]) [photoList deletePhoto:[ids objectAtIndex:0]];
 }
 
 @end

@@ -11,8 +11,6 @@
 
 @interface SearchResultsList : PhotoList
 @property (nonatomic, strong) NSString *query;
-
-- (void)deletePhoto:(NSString *)photoId;
 @end
 
 

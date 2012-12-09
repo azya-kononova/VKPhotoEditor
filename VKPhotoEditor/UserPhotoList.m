@@ -59,15 +59,4 @@
     [self.delegate photoList:self didUpdatePhotos:self.photos];
 }
 
-- (void)deletePhoto:(NSString *)photoId
-{
-    NSUInteger index;
-    VKPhoto *photoToDelete = [self.photos find:^BOOL(VKPhoto *photo) { return [photo.photoId isEqualToString:photoId]; } index:&index];
-    if (!photoToDelete) return;
-    NSMutableArray *newPhotos = self.photos.mutableCopy;
-    [newPhotos removeObjectAtIndex:index];
-    self.photos = newPhotos.copy;
-    [self.delegate photoList:self didUpdatePhotos:self.photos];
-}
-
 @end

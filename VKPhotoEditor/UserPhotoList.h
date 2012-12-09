@@ -19,5 +19,4 @@
 - (id)initWithPhotos:(NSArray*)photos;
 
 - (void)insert:(VKPhoto*)photo;
-- (void)deletePhoto:(NSString*)photoId;
 @end

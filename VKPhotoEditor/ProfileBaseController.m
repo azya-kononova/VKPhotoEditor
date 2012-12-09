@@ -126,7 +126,7 @@
     [avatarsList loadMore];
     
     UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
-    recognizer.minimumPressDuration = 2.0;
+    recognizer.minimumPressDuration = 1.5;
     [photosTableView addGestureRecognizer:recognizer];
 }
 

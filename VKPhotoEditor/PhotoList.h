@@ -32,6 +32,9 @@
 - (VKRequestExecutor*)newPageExec;
 
 - (NSInteger)numberOfItemsInSection:(NSInteger)section;
+
+- (void)deletePhoto:(NSString *)photoId;
+
 @end
 
 @protocol PhotoListDelegate

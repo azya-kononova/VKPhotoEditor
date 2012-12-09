@@ -7,6 +7,8 @@
 //
 
 #import "PhotoList.h"
+#import "VKPhoto.h"
+#import "NSArray+Helpers.h"
 
 @implementation PhotoList
 @synthesize delegate;
@@ -68,6 +70,17 @@
     completed = photos.count == totalCount;
     exec = nil;
     [delegate photoList:self didUpdatePhotos:photos];
+}
+
+- (void)deletePhoto:(NSString *)photoId
+{
+    NSUInteger index;
+    VKPhoto *photoToDelete = [self.photos find:^BOOL(VKPhoto *photo) { return [photo.photoId isEqualToString:photoId]; } index:&index];
+    if (!photoToDelete) return;
+    NSMutableArray *newPhotos = self.photos.mutableCopy;
+    [newPhotos removeObjectAtIndex:index];
+    self.photos = newPhotos.copy;
+    [self.delegate photoList:self didUpdatePhotos:self.photos];
 }
 
 #pragma mark - VKRequestExecutorDelegate

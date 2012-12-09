@@ -24,17 +24,6 @@
    return [service searchPhotos:query offset:self.photos.count limit:self.limit];
 }
 
-- (void)deletePhoto:(NSString *)photoId
-{
-    NSUInteger index;
-    VKPhoto *photoToDelete = [self.photos find:^BOOL(VKPhoto *photo) { return [photo.photoId isEqualToString:photoId]; } index:&index];
-    if (!photoToDelete) return;
-    NSMutableArray *newPhotos = self.photos.mutableCopy;
-    [newPhotos removeObjectAtIndex:index];
-    self.photos = newPhotos.copy;
-    [self.delegate photoList:self didUpdatePhotos:self.photos];
-}
-
 - (void)mapData:(id)data
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];

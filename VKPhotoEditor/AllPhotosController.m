@@ -10,7 +10,6 @@
 #import "SearchResultsList.h"
 #import "PhotoCell.h"
 #import "UIView+Helpers.h"
-#import "RequestExecutorDelegateAdapter.h"
 #import "VKConnectionService.h"
 #import "UIColor+VKPhotoEditor.h"
 
@@ -18,8 +17,6 @@
 @end
 
 @implementation AllPhotosController {
-    NSInteger selectedPhoto;
-    RequestExecutorDelegateAdapter *adapter;
 }
 
 @synthesize searchBar;
@@ -36,13 +33,6 @@
     [searchBar insertSubview:iview atIndex:1];
 
     [photoList loadMore];
-    
-    selectedPhoto = -1;
-    adapter = [[RequestExecutorDelegateAdapter alloc] initWithTarget:self];
-    
-    UILongPressGestureRecognizer *recognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressOnTable:)];
-    recognizer.minimumPressDuration = 2.0;
-    [photosTableView addGestureRecognizer:recognizer];
 }
 
 
@@ -118,12 +108,6 @@
     }
 }
 
-- (BOOL)isProfilePhoto
-{
-    Account *account = [[photoList.photos objectAtIndex:selectedPhoto] account];
-    return account.accountId == [VKConnectionService shared].profile.accountId;
-}
-
 - (void)reload
 {
     self.noPhotosLabel.hidden = YES;
@@ -165,61 +149,6 @@
             cancelButton.enabled = YES;
             break;
         }
-    }
-}
-
-#pragma mark - UIActionSheetDelegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 0) {
-        VKPhoto *photo = [photoList.photos objectAtIndex:selectedPhoto];
-        [adapter start:[[VKConnectionService shared] deletePhoto:photo.photoId] onSuccess:@selector(exec: didDeletePhoto:) onError:@selector(exec: didFailWithError:)];
-    } else if (buttonIndex == 1) {
-        VKPhoto *photo = [photoList.photos objectAtIndex:selectedPhoto];
-        if (photo.photo.image) {
-            UIImageWriteToSavedPhotosAlbum(photo.photo.image , self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
-        }
-    }
-    selectedPhoto = -1;
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-}
-
-#pragma mark - Request Handler
-
-- (void)exec:(VKRequestExecutor*)exec didDeletePhoto:(id)ids
-{
-    if ([ids count]) [(SearchResultsList *)photoList deletePhoto:[ids objectAtIndex:0]];
-}
-
-
-#pragma mark - UILongPressGestureRecognizer
-
--(void)handleLongPressOnTable:(UILongPressGestureRecognizer *)recognizer
-{
-    if (recognizer.state != UIGestureRecognizerStateBegan) return;
-    
-    CGPoint point = [recognizer locationInView:photosTableView];
-    NSIndexPath *indexPath = [photosTableView indexPathForRowAtPoint:point];
-    
-    if (indexPath) {
-        
-        if (isGridMode) return;
-        
-        selectedPhoto = indexPath.row;
-        
-        if (![self isProfilePhoto]) return;
-        
-        UIActionSheet *actSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                              delegate:self
-                                                     cancelButtonTitle:@"Cancel"
-                                                destructiveButtonTitle:@"Delete Image"
-                                                     otherButtonTitles:@"Save Image",nil];
-        actSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
-        [actSheet showInView:self.view.superview];
     }
 }
 

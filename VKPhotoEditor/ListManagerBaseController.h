@@ -16,13 +16,16 @@
 #import "PhotoCell.h"
 #import "VKViewController.h"
 #import "VKTableView.h"
+#import "RequestExecutorDelegateAdapter.h"
 
 @protocol ListManagerBaseControllerDelegate;
 
-@interface ListManagerBaseController : VKViewController <ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, PhotoCellDelegate, PullTableViewDelegate, UITableViewDataSource, UITableViewDelegate> {
+@interface ListManagerBaseController : VKViewController <ThumbnailPhotoCellDelegate, FastViewerControllerDelegate, PhotoListDelegate, PhotoCellDelegate, PullTableViewDelegate, UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate> {
+    RequestExecutorDelegateAdapter *adapter;
     PhotoList *photoList;
     NSInteger itemsInRow;
     NSInteger gridCellHeight;
+    NSInteger selectedPhoto;
     
     BOOL isGridMode;
     BOOL isFastViewerOpen;
