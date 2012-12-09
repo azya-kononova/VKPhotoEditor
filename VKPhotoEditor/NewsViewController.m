@@ -19,22 +19,8 @@
     
     photoList = [NewsfeedList new];
     photoList.delegate = self;
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
     
-    //Send -1 for reset badge
-    [[NSNotificationCenter defaultCenter] postNotificationName:VKUpdateNewsfeedBadge object:[NSNumber numberWithInt:-1]];
-    [photoList loadMore];
+    isBadgeUsed = NO;
 }
 
-#pragma mark - PhotosListDelegate
-
-
-- (void)photoList:(PhotoList *)_photoList didUpdatePhotos:(NSArray *)photos
-{
-    [super photoList:_photoList didUpdatePhotos:photos];
-    [(NewsfeedList *)photoList saveSinceValue];
-}
 @end

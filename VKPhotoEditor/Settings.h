@@ -15,7 +15,6 @@
 @property (nonatomic, strong) UserProfile *profile;
 @property (nonatomic, assign) BOOL firstLaunch;
 @property (nonatomic, strong) NSString *replySince;
-@property (nonatomic, strong) NSString *newsfeedSince;
 
 - (id)initWithDefaults:(NSDictionary*)defs;
 - (NSString*)descriptionForErrorKey:(NSString*)errorKey;

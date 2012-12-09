@@ -27,6 +27,9 @@
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     
+    service.replySince = [data objectForKey:@"since"];
+    after = [data objectForKey:@"after"];
+    
     for (NSDictionary *user in [data objectForKey:@"users"]) {
         Account *acc = [user integerForKey:@"id"] == service.profile.accountId ? service.profile : [Account accountWithDict:user];
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
@@ -46,9 +49,6 @@
     mentionsCount = _photos.count;
     
     [self append:_photos totalCount:0];
-    
-    service.replySince = [data objectForKey:@"since"];
-    after = [data objectForKey:@"after"];
     
     completed = ![after isKindOfClass:[NSString class]];
     

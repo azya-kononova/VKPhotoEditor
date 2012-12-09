@@ -21,7 +21,6 @@ extern NSString *VKRequestDidLogout;
 @property (nonatomic, strong, readonly) NSURL *rootURL;
 @property (nonatomic, strong, readonly) UserProfile *profile;
 @property (nonatomic, strong) NSString *replySince;
-@property (nonatomic, strong) NSString *newsfeedSince;
 
 + (VKConnectionService*)shared;
 

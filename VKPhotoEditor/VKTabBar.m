@@ -28,7 +28,6 @@
 @synthesize state;
 @synthesize extended;
 @synthesize tabViews;
-@synthesize newsBadge;
 
 - (void)awakeFromNib
 {
@@ -37,7 +36,7 @@
     initBadgeSize = replyBadge.frame.size;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateReplyBadge:) name:VKUpdateRepliesBadge object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateNewsBadge:) name:VKUpdateNewsfeedBadge object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideReplyBadge) name:VKHideRepliesBadge object:nil];
     
     tabsOriginsExended = [NSArray arrayWithObjects:
                    [NSValue valueWithCGPoint:CGPointMake(0, 1)],
@@ -100,10 +99,8 @@
     [delegate VKTabBarDidTapCentral:self];
 }
 
-- (void)updateBadge:(FlexibleButton*)badge value:(NSInteger)value tabBarState:(TabBarState)currentState;
+- (void)updateBadge:(FlexibleButton*)badge value:(NSInteger)value
 {
-    if (self.state == currentState && value > 0) return;
-    
     NSInteger count = value < 0 ? 0 : badge.titleLabel.text.integerValue + value;
     
     NSString *badgeTitle = [NSString stringWithFormat:@"%d", count];
@@ -119,12 +116,15 @@
 
 - (void)updateReplyBadge:(NSNotification *)notification
 {
-    [self updateBadge:replyBadge value:[notification.object integerValue] tabBarState:TabBarStateReply];
+    if (state == TabBarStateReply) return;
+    [self updateBadge:replyBadge value:[notification.object integerValue]];
 }
 
-- (void)updateNewsBadge:(NSNotification *)notification
+- (void)hideReplyBadge
 {
-    [self updateBadge:newsBadge value:[notification.object integerValue] tabBarState:TabBarStateHome];
+    replyBadge.hidden = YES;
+    NSString *badgeTitle = [NSString stringWithFormat:@"%d", 0];
+    [replyBadge setTitle:badgeTitle forState:UIControlStateNormal];
 }
 
 - (void)dealloc

@@ -27,6 +27,8 @@
 {
     NSMutableDictionary *accounts = [NSMutableDictionary new];
     
+    after = [data objectForKey:@"after"];
+    
     for (NSDictionary *user in [data objectForKey:@"users"]) {
         Account *acc = [user integerForKey:@"id"] == service.profile.accountId ? service.profile : [Account accountWithDict:user];
         [accounts setObject:acc forKey:[user objectForKey:@"id"]];
@@ -47,16 +49,9 @@
     
     [self append:_photos totalCount:0];
     
-    service.newsfeedSince = [data objectForKey:@"since"];
-    after = [data objectForKey:@"after"];
     
     completed = ![after isKindOfClass:[NSString class]];
     
-}
-
-- (void)saveSinceValue
-{
-    [Settings current].newsfeedSince = service.newsfeedSince;
 }
 
 - (void)reset

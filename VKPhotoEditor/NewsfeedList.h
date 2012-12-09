@@ -10,5 +10,4 @@
 
 @interface NewsfeedList : PhotoList
 @property (nonatomic, assign, readonly) NSInteger newsfeedCount;
-- (void)saveSinceValue;
 @end

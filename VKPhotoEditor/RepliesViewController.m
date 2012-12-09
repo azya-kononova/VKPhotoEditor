@@ -13,6 +13,7 @@
 #import "MentionList.h"
 #import "ReplyPhotoCell.h"
 #import "PhotoUpdatesLoader.h"
+#import "AppDelegate.h"
 
 @interface RepliesViewController () <ReplyPhotoCellDelegate>
 @end
@@ -30,20 +31,22 @@
         photoList = [MentionList new];
         photoList.delegate = self;
         ((MentionList *)photoList).account = profile;
+        
+        isBadgeUsed = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pullTableViewDidTriggerRefresh:) name:VKUpdateRepliesBadge object:nil];
     }
     return self;
 }
 
-- (void)viewDidLoad
+- (void)dealloc
 {
-    [super viewDidLoad];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    //Send -1 for reset badge
-    [[NSNotificationCenter defaultCenter] postNotificationName:VKUpdateRepliesBadge object:[NSNumber numberWithInt:-1]];
+    if (isBadgeUsed) [[NSNotificationCenter defaultCenter] postNotificationName:VKHideRepliesBadge object:nil];
     [photoList loadMore];
 }
 
@@ -80,8 +83,11 @@
 - (void)photoList:(PhotoList *)_photoList didUpdatePhotos:(NSArray *)photos
 {
     [super photoList:_photoList didUpdatePhotos:photos];
-    [(MentionList *)photoList saveSinceValue];
     gridMentionList = [self getGridMentionList];
+    
+    if ([photoList respondsToSelector:@selector(saveSinceValue)]) {
+        [(MentionList *)photoList saveSinceValue];
+    }
 }
 
 - (void)photoList:(PhotoList *)_photoList didFailToUpdate:(NSError *)error

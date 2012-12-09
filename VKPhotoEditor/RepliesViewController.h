@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ListManagerBaseController.h"
 
-@interface RepliesViewController : ListManagerBaseController
+@interface RepliesViewController : ListManagerBaseController {
+    BOOL isBadgeUsed;
+}
 
 - (id)initWithProfile:(UserProfile *)_profile;
 

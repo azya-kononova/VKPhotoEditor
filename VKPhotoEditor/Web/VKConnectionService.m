@@ -32,7 +32,6 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
 @synthesize rootURL;
 @synthesize profile;
 @synthesize replySince;
-@synthesize newsfeedSince;
 
 + (VKConnectionService*)shared
 {
@@ -270,7 +269,6 @@ NSString *VKRequestDidLogout = @"VKRequestDidLogout";
     
     [Settings current].profile = profile;
     replySince = [Settings current].replySince;
-    newsfeedSince = [Settings current].newsfeedSince;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:VKRequestDidLogin object:self];
 }

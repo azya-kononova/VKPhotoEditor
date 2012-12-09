@@ -15,7 +15,7 @@
 
 @implementation AppDelegate {
     InformationView *informationView;
-    PhotoUpdatesLoader *repliesUpdateLoader;
+    PhotoUpdatesLoader *updatesLoader;
 }
 
 @synthesize window, navigationController, connectionService, settings, imageCache;
@@ -33,7 +33,7 @@
     connectionService = [[VKConnectionService alloc] initWithURL:settings.serviceRootURL];
     imageCache = [ImageCache new];
     
-    repliesUpdateLoader = [PhotoUpdatesLoader new];
+    updatesLoader = [PhotoUpdatesLoader new];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestDidFail:) name:VKRequestDidFailNotification object:connectionService];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startReplyUpdates) name:VKRequestDidLogin object:connectionService];
@@ -41,7 +41,6 @@
     
     if (connectionService.profile.accessToken) {
         connectionService.replySince = [Settings current].replySince;
-        connectionService.newsfeedSince = [Settings current].newsfeedSince;
         [self startReplyUpdates];
     }
     
@@ -106,12 +105,12 @@
 
 - (void)startReplyUpdates
 {
-    [repliesUpdateLoader start];
+    [updatesLoader start];
 }
 
 - (void)stopReplyUpdates
 {
-    [repliesUpdateLoader stop];
+    [updatesLoader stop];
 }
 
 #pragma mark - UINavigationControllerDelegate
