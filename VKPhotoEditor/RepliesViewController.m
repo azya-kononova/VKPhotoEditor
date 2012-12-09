@@ -47,7 +47,7 @@
     [super viewWillAppear:animated];
     
     if (isBadgeUsed) [[NSNotificationCenter defaultCenter] postNotificationName:VKHideRepliesBadge object:nil];
-    [photoList loadMore];
+    [self pullTableViewDidTriggerRefresh:nil];
 }
 
 #pragma mark - Internals
