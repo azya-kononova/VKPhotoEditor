@@ -12,8 +12,9 @@
 #import "DataFormatter.h"
 #import "PhotoView.h"
 #import "UIView+Helpers.h"
+#import "HighlightedButton.h"
 
-@interface ReplyPhotoCell ()<TheaterViewDataSource, TheaterViewDelegate, PhotoListDelegate>
+@interface ReplyPhotoCell ()<TheaterViewDataSource, TheaterViewDelegate, PhotoListDelegate, HighlightedButtonDelegate>
 @end
 
 @implementation ReplyPhotoCell {
@@ -42,9 +43,6 @@
     replyPhotos = [NSMutableArray array];
     
     emplyCellCount = 0;
-    
-    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handelTap:)];
-    [self addGestureRecognizer:recognizer];
 }
 
 - (void)displayPhoto:(VKPhoto *)_photo
@@ -79,14 +77,6 @@
     return arrowImageView;
 }
 
-- (void)handelTap:(UITapGestureRecognizer *)recognizer
-{
-    CGPoint point = [recognizer locationInView:self];
-    if (!CGRectContainsPoint(theaterView.frame, point)) {
-        [delegate replyPhotoCell:self didTapOnAccount:photo.account];
-    }
-}
-
 - (void)loadRepliesForPhoto:(VKPhoto *)_photo
 {
     if (repliesList) {
@@ -98,6 +88,11 @@
     repliesList = [[ReplyPhotoList alloc] initWithPhotoID:_photo.replyTo];
     repliesList.delegate = self;
     [repliesList loadMore];
+}
+
+ -(IBAction)selectAccount
+{
+    [delegate replyPhotoCell:self didTapOnAccount:photo.account];
 }
 
 #pragma mark - TheaterViewDataSource
@@ -157,6 +152,15 @@
 - (void)photoList:(PhotoList *)photoList didFailToUpdate:(NSError*)error
 {
     
+}
+
+
+#pragma mark - HighlightedButtonDelegate
+
+- (void)highlightedButton:(HighlightedButton *)button didBecameHighlighted:(BOOL)highlighted
+{
+    userNameLabel.highlighted = highlighted;
+    postDateLabel.highlighted = highlighted;
 }
 
 @end

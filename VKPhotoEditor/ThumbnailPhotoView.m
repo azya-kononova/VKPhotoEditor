@@ -32,12 +32,12 @@
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
     [self addGestureRecognizer:recognizer];
     
-    captionTextView.font = [UIFont fontWithName:@"Lobster" size:12.0];
+    captionTextView.font = [UIFont fontWithName:@"Lobster" size:13.0];
     
     totalProgressWidth = progressBgImage.frame.size.width;
     
-    progressBgImage.image = [[UIImage imageNamed:@"Uploading_1.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
-    progressImage.image = [[UIImage imageNamed:@"UploadingProgress_1.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
+    progressBgImage.image = [[UIImage imageNamed:@"Uploading_3.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
+    progressImage.image = [[UIImage imageNamed:@"UploadingProgress_3.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
     progressBgImage.layer.cornerRadius = 6;
     progressImage.layer.cornerRadius = 6;
 }

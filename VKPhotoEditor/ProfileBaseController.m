@@ -67,6 +67,7 @@
         avatarsList = [UserPhotoList new];
         avatarsList.delegate = self;
         avatarsList.userPic = YES;
+        avatarsList.limit = 100;
         avatarsList.account = profile;
         
         mentionsList = [MentionList new];
@@ -442,6 +443,9 @@
 
 - (void)photoCell:(PhotoCell *)photoCell didTapOnPhoto:(VKPhoto *)photo
 {
+    if (profileHeaderView.mode == ProfileHeaderViewFollowersMode) {
+        return;
+    }
     [delegate profileBaseController:self didReplyToPhoto:photo];
 }
 
@@ -479,7 +483,7 @@
 
 -(void)handleLongPressOnTable:(UILongPressGestureRecognizer *)recognizer
 {
-    if (recognizer.state != UIGestureRecognizerStateBegan) return;
+    if (recognizer.state != UIGestureRecognizerStateBegan || profileHeaderView.mode != ProfileHeaderViewPhotosMode) return;
     
     CGPoint point = [recognizer locationInView:photosTableView];
     NSIndexPath *indexPath = [photosTableView indexPathForRowAtPoint:point];

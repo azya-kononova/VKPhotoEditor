@@ -33,7 +33,7 @@
         ((MentionList *)photoList).account = profile;
         
         isBadgeUsed = YES;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pullTableViewDidTriggerRefresh:) name:VKUpdateRepliesBadge object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadDataIfNeed) name:VKUpdateRepliesBadge object:nil];
     }
     return self;
 }
@@ -60,6 +60,13 @@
 {
     if ([viewController isEqual:self]) {
         [self pullTableViewDidTriggerRefresh:nil];
+    }
+}
+
+- (void)reloadDataIfNeed
+{
+    if ([self.navigationController.visibleViewController isEqual:self]) {
+        [self pullTableViewDidTriggerLoadMore:nil];
     }
 }
 

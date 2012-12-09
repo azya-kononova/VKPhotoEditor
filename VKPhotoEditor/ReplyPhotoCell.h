@@ -25,6 +25,7 @@
 @property (nonatomic, strong) IBOutlet UIView *loadingView;
 
 - (void)displayPhoto:(VKPhoto *)_photo;
+- (IBAction)selectAccount;
 
 @end
 

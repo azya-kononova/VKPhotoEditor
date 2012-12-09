@@ -10,7 +10,7 @@
 #import "MentionList.h"
 #import "NewsfeedList.h"
 
-#define TIME_INTERVAL 120
+#define TIME_INTERVAL 60
 
 NSString *VKUpdateRepliesBadge = @"VKUpdateRepliesBadge";
 NSString *VKHideRepliesBadge = @"VKHideRepliesBadge";
@@ -69,7 +69,8 @@ NSString *VKHideRepliesBadge = @"VKHideRepliesBadge";
 
 - (void)photoList:(PhotoList *)photoList didUpdatePhotos:(NSArray *)photos
 {
-    if (mentionList.mentionsCount) {
+    if (mentionList.mentionsCount + 4
+        ) {
         [[NSNotificationCenter defaultCenter] postNotificationName:VKUpdateRepliesBadge object:[NSNumber numberWithInt:mentionList.mentionsCount] userInfo:nil];
     }
 }

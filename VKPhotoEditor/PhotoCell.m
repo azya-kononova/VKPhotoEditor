@@ -12,11 +12,16 @@
 #import "UITextView+Resize.h"
 #import "UIView+Helpers.h"
 #import "DataFormatter.h"
+#import "HighlightedButton.h"
 
 NSString *PhotoCelDidTapHashTagNotification = @"PhotoCelDidTapHashTagNotification";
 
+@interface PhotoCell () <HighlightedButtonDelegate>
+@end
+
 @implementation PhotoCell {
     VKPhoto *photo;
+    Account *account;
 }
 @synthesize remoteImageView;
 @synthesize addedImageView;
@@ -44,9 +49,11 @@ NSString *PhotoCelDidTapHashTagNotification = @"PhotoCelDidTapHashTagNotificatio
     progressImage.image = [[UIImage imageNamed:@"UploadingProgress_2.png"] stretchableImageWithLeftCapWidth:6 topCapHeight:6];
 }
 
-- (void)displayAccount:(Account *)account
+- (void)displayAccount:(Account *)_account
 {
     BOOL hasPhoto = NO;
+    
+    account = _account;
     
     [nameLabel moveTo:CGPointMake(49, hasPhoto ? 5 : 13)];
     
@@ -69,6 +76,8 @@ NSString *PhotoCelDidTapHashTagNotification = @"PhotoCelDidTapHashTagNotificatio
 {
     photo = _photo;
     BOOL hasPhoto = photo.imageURL != nil;
+    
+    account = photo.account;
     
     [nameLabel moveTo:CGPointMake(49, hasPhoto ? 5 : 13)];
     
@@ -113,7 +122,7 @@ NSString *PhotoCelDidTapHashTagNotification = @"PhotoCelDidTapHashTagNotificatio
 
 - (IBAction)openAccount
 {
-    [delegate photoCell:self didSelectAccount:photo.account];
+    [delegate photoCell:self didSelectAccount:account];
 }
 
 #pragma mark - recognizers
@@ -160,6 +169,14 @@ NSString *PhotoCelDidTapHashTagNotification = @"PhotoCelDidTapHashTagNotificatio
         [self showAdded];
         photo.justUploaded = NO;
     }
+}
+
+#pragma mark - HighlightedButtonDelegate
+
+- (void)highlightedButton:(HighlightedButton *)button didBecameHighlighted:(BOOL)highlighted
+{
+    nameLabel.highlighted = highlighted;
+    dateLabel.highlighted = highlighted;
 }
 
 @end

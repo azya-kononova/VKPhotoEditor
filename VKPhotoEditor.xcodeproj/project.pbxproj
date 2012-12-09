@@ -50,6 +50,14 @@
 		223AE2C61674DCE100FA3495 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2C51674DCE100FA3495 /* Default.png */; };
 		223AE2C81674DCE500FA3495 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2C71674DCE500FA3495 /* Default@2x.png */; };
 		223AE2CA1674DCEB00FA3495 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2C91674DCEB00FA3495 /* Default-568h@2x.png */; };
+		223AE2CD1674E29200FA3495 /* PhotoReplyMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2CB1674E29200FA3495 /* PhotoReplyMask.png */; };
+		223AE2CE1674E29200FA3495 /* PhotoReplyMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2CC1674E29200FA3495 /* PhotoReplyMask@2x.png */; };
+		223AE2D11674E32B00FA3495 /* PostPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2CF1674E32B00FA3495 /* PostPhoto.png */; };
+		223AE2D21674E32B00FA3495 /* PostPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2D01674E32B00FA3495 /* PostPhoto@2x.png */; };
+		223AE2D71674ED1000FA3495 /* Uploading_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2D31674ED1000FA3495 /* Uploading_3.png */; };
+		223AE2D81674ED1000FA3495 /* Uploading_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2D41674ED1000FA3495 /* Uploading_3@2x.png */; };
+		223AE2D91674ED1000FA3495 /* UploadingProgress_3.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2D51674ED1000FA3495 /* UploadingProgress_3.png */; };
+		223AE2DA1674ED1000FA3495 /* UploadingProgress_3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 223AE2D61674ED1000FA3495 /* UploadingProgress_3@2x.png */; };
 		224C084D1620832300F10A85 /* UIImage+GPUOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */; };
 		225694D21673795700EEA840 /* GridModes.m in Sources */ = {isa = PBXBuildFile; fileRef = 225694D11673795700EEA840 /* GridModes.m */; };
 		2269DF64165AA8CA00FF7833 /* ErrorMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 2269DF63165AA8CA00FF7833 /* ErrorMessage.m */; };
@@ -590,6 +598,14 @@
 		223AE2C51674DCE100FA3495 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = ../Default.png; sourceTree = "<group>"; };
 		223AE2C71674DCE500FA3495 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "../Default@2x.png"; sourceTree = "<group>"; };
 		223AE2C91674DCEB00FA3495 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../Default-568h@2x.png"; sourceTree = "<group>"; };
+		223AE2CB1674E29200FA3495 /* PhotoReplyMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoReplyMask.png; sourceTree = "<group>"; };
+		223AE2CC1674E29200FA3495 /* PhotoReplyMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoReplyMask@2x.png"; sourceTree = "<group>"; };
+		223AE2CF1674E32B00FA3495 /* PostPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostPhoto.png; sourceTree = "<group>"; };
+		223AE2D01674E32B00FA3495 /* PostPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PostPhoto@2x.png"; sourceTree = "<group>"; };
+		223AE2D31674ED1000FA3495 /* Uploading_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Uploading_3.png; sourceTree = "<group>"; };
+		223AE2D41674ED1000FA3495 /* Uploading_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Uploading_3@2x.png"; sourceTree = "<group>"; };
+		223AE2D51674ED1000FA3495 /* UploadingProgress_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UploadingProgress_3.png; sourceTree = "<group>"; };
+		223AE2D61674ED1000FA3495 /* UploadingProgress_3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UploadingProgress_3@2x.png"; sourceTree = "<group>"; };
 		224C084B1620832200F10A85 /* UIImage+GPUOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GPUOrientation.h"; sourceTree = "<group>"; };
 		224C084C1620832300F10A85 /* UIImage+GPUOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GPUOrientation.m"; sourceTree = "<group>"; };
 		225694D01673795700EEA840 /* GridModes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridModes.h; sourceTree = "<group>"; };
@@ -1331,6 +1347,10 @@
 		226E7504160EFF0F00531350 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				223AE2D31674ED1000FA3495 /* Uploading_3.png */,
+				223AE2D41674ED1000FA3495 /* Uploading_3@2x.png */,
+				223AE2D51674ED1000FA3495 /* UploadingProgress_3.png */,
+				223AE2D61674ED1000FA3495 /* UploadingProgress_3@2x.png */,
 				22E3EEC51674A8A9003785FE /* 1.png */,
 				22E3EEC61674A8A9003785FE /* 2.png */,
 				22E3EEC71674A8A9003785FE /* 3.png */,
@@ -1589,6 +1609,10 @@
 				44AC1B771662568E00043552 /* AvatarBackground@2x.png */,
 				226E7542160F011500531350 /* ShootBtn_Pressed.png */,
 				226E7543160F011500531350 /* ShootBtn.png */,
+				223AE2CB1674E29200FA3495 /* PhotoReplyMask.png */,
+				223AE2CC1674E29200FA3495 /* PhotoReplyMask@2x.png */,
+				223AE2CF1674E32B00FA3495 /* PostPhoto.png */,
+				223AE2D01674E32B00FA3495 /* PostPhoto@2x.png */,
 				226E7505160EFF0F00531350 /* Basic.png */,
 				226E7506160EFF0F00531350 /* Filter1.png */,
 				226E7507160EFF0F00531350 /* Filter2.png */,
@@ -2429,6 +2453,14 @@
 				223AE2C61674DCE100FA3495 /* Default.png in Resources */,
 				223AE2C81674DCE500FA3495 /* Default@2x.png in Resources */,
 				223AE2CA1674DCEB00FA3495 /* Default-568h@2x.png in Resources */,
+				223AE2CD1674E29200FA3495 /* PhotoReplyMask.png in Resources */,
+				223AE2CE1674E29200FA3495 /* PhotoReplyMask@2x.png in Resources */,
+				223AE2D11674E32B00FA3495 /* PostPhoto.png in Resources */,
+				223AE2D21674E32B00FA3495 /* PostPhoto@2x.png in Resources */,
+				223AE2D71674ED1000FA3495 /* Uploading_3.png in Resources */,
+				223AE2D81674ED1000FA3495 /* Uploading_3@2x.png in Resources */,
+				223AE2D91674ED1000FA3495 /* UploadingProgress_3.png in Resources */,
+				223AE2DA1674ED1000FA3495 /* UploadingProgress_3@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
